@@ -6,16 +6,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BodyGuard.Presentation.WebUI", "src\BodyGuard.Presentation.WebUI\BodyGuard.Presentation.WebUI.csproj", "{EA14BED8-DEAE-4275-89A8-30577D9BA06D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{DC99325F-66FD-4C0F-A545-227D38A65360}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BodyGuard.Domain.Entities", "src\BodyGuard.Domain.Entities\BodyGuard.Domain.Entities.csproj", "{9E2362C5-840D-47B8-A55D-27511C10D969}"
+EndProject
 Global
 	GlobalSection(NestedProjects) = preSolution
 		{B26AC839-BDFA-4947-AB12-370E81C23882} = {95C8D354-16EC-4087-9C37-86B7A2E07E6D}
 		{EA14BED8-DEAE-4275-89A8-30577D9BA06D} = {B26AC839-BDFA-4947-AB12-370E81C23882}
+		{DC99325F-66FD-4C0F-A545-227D38A65360} = {95C8D354-16EC-4087-9C37-86B7A2E07E6D}
+		{9E2362C5-840D-47B8-A55D-27511C10D969} = {DC99325F-66FD-4C0F-A545-227D38A65360}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{EA14BED8-DEAE-4275-89A8-30577D9BA06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EA14BED8-DEAE-4275-89A8-30577D9BA06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA14BED8-DEAE-4275-89A8-30577D9BA06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA14BED8-DEAE-4275-89A8-30577D9BA06D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E2362C5-840D-47B8-A55D-27511C10D969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E2362C5-840D-47B8-A55D-27511C10D969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E2362C5-840D-47B8-A55D-27511C10D969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E2362C5-840D-47B8-A55D-27511C10D969}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
