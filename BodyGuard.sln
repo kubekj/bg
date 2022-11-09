@@ -4,11 +4,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{95C8D354-16E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{B26AC839-BDFA-4947-AB12-370E81C23882}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BodyGuard.Presentation.WebUI", "src\BodyGuard.Presentation.WebUI\BodyGuard.Presentation.WebUI.csproj", "{EA14BED8-DEAE-4275-89A8-30577D9BA06D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BodyGuard.WebUI", "src\BodyGuard.WebUI\BodyGuard.WebUI.csproj", "{EA14BED8-DEAE-4275-89A8-30577D9BA06D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{DC99325F-66FD-4C0F-A545-227D38A65360}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DC99325F-66FD-4C0F-A545-227D38A65360}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BodyGuard.Domain.Entities", "src\BodyGuard.Domain.Entities\BodyGuard.Domain.Entities.csproj", "{9E2362C5-840D-47B8-A55D-27511C10D969}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BodyGuard.Domain", "src\BodyGuard.Domain\BodyGuard.Domain.csproj", "{9E2362C5-840D-47B8-A55D-27511C10D969}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{151C5080-F228-436F-AB91-F33D9ECBDB6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BodyGuard.Application", "src\BodyGuard.Application\BodyGuard.Application.csproj", "{B0BB485D-284D-452C-A5C6-0A4EA51BD83A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BodyGuard.Persistence", "src\BodyGuard.Persistence\BodyGuard.Persistence.csproj", "{275C5EFF-4109-4CAB-A627-9A920CEA8A91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{435D1C07-9E4E-425D-B459-99E84A90EB19}"
 EndProject
 Global
 	GlobalSection(NestedProjects) = preSolution
@@ -16,6 +24,9 @@ Global
 		{EA14BED8-DEAE-4275-89A8-30577D9BA06D} = {B26AC839-BDFA-4947-AB12-370E81C23882}
 		{DC99325F-66FD-4C0F-A545-227D38A65360} = {95C8D354-16EC-4087-9C37-86B7A2E07E6D}
 		{9E2362C5-840D-47B8-A55D-27511C10D969} = {DC99325F-66FD-4C0F-A545-227D38A65360}
+		{151C5080-F228-436F-AB91-F33D9ECBDB6B} = {95C8D354-16EC-4087-9C37-86B7A2E07E6D}
+		{B0BB485D-284D-452C-A5C6-0A4EA51BD83A} = {DC99325F-66FD-4C0F-A545-227D38A65360}
+		{275C5EFF-4109-4CAB-A627-9A920CEA8A91} = {151C5080-F228-436F-AB91-F33D9ECBDB6B}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{EA14BED8-DEAE-4275-89A8-30577D9BA06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -26,6 +37,14 @@ Global
 		{9E2362C5-840D-47B8-A55D-27511C10D969}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E2362C5-840D-47B8-A55D-27511C10D969}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E2362C5-840D-47B8-A55D-27511C10D969}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0BB485D-284D-452C-A5C6-0A4EA51BD83A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0BB485D-284D-452C-A5C6-0A4EA51BD83A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0BB485D-284D-452C-A5C6-0A4EA51BD83A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0BB485D-284D-452C-A5C6-0A4EA51BD83A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{275C5EFF-4109-4CAB-A627-9A920CEA8A91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{275C5EFF-4109-4CAB-A627-9A920CEA8A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{275C5EFF-4109-4CAB-A627-9A920CEA8A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{275C5EFF-4109-4CAB-A627-9A920CEA8A91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
