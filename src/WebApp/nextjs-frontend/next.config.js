@@ -3,8 +3,8 @@ const rewrites = () => {
   return [
     {
       source: "/api/:path*",
-      destination: "http://localhost:5099/api/:path*",
-    },
+      destination: "http://localhost:5099/api/:path*"
+    }
   ];
 };
 
@@ -13,7 +13,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     loader: 'akamai',
-    path: '/',
+    path: '/'
   },
   rewrites
 }
