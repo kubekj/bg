@@ -1,4 +1,4 @@
-using Domain.Primitives;
+using Core.SeedWork;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json;
 

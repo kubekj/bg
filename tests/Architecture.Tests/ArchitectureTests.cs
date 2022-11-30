@@ -13,7 +13,7 @@ public class ArchitectureTests
     public void Domain_Should_Not_Be_Dependent_On_Any_Project()
     {
         //Arrange
-        var domainAssembly = typeof(Domain.AssemblyReference).Assembly;
+        var domainAssembly = Core.AssemblyReference.Assembly;;
 
         var otherProjects = new[]
         {
@@ -37,7 +37,7 @@ public class ArchitectureTests
     public void Application_Should_Not_Be_Dependent_On_Infra_Or_WebApp()
     {
         //Arrange
-        var applicationAssembly = typeof(Application.AssemblyReference).Assembly;
+        var applicationAssembly = Application.AssemblyReference.Assembly;
 
         var otherProjects = new[]
         {
@@ -59,7 +59,7 @@ public class ArchitectureTests
     public void Infrastructure_Should_Not_Be_Dependent_On_WebApp()
     {
         //Arrange
-        var infrastructureAssembly = typeof(Infrastructure.AssemblyReference).Assembly;
+        var infrastructureAssembly = Infrastructure.AssemblyReference.Assembly;
 
         //Act
         var sut = Types
@@ -76,7 +76,7 @@ public class ArchitectureTests
     public void WebApp_Should_Not_Be_Dependent_On_Infrastructure()
     {
         //Arrange
-        var webAppAssembly = typeof(WebApp.AssemblyReference).Assembly;
+        var webAppAssembly = WebApp.AssemblyReference.Assembly;
 
         //Act
         var sut = Types

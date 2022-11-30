@@ -2,4 +2,7 @@ using System.Reflection;
 
 namespace WebApp;
 
-public class AssemblyReference : Assembly { }
+public static class AssemblyReference
+{
+    public static readonly Assembly Assembly = typeof(AssemblyReference).Assembly;
+}
