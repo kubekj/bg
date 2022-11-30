@@ -3,7 +3,7 @@ using Core.SeedWork;
 
 namespace Core.ValueObjects.Workout;
 
-public class WorkoutName : ValueObject
+public record WorkoutName : ValueObject
 {
     private const int MaxLength = 50;
     

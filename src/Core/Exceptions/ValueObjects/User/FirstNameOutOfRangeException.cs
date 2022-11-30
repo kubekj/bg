@@ -1,6 +1,6 @@
 using Core.Exceptions.Common;
 
-namespace Core.Exceptions.ValueObjects.User.FirstName;
+namespace Core.Exceptions.ValueObjects.User;
 
 public class FirstNameOutOfRangeException : StringPropertyOutOfRangeException
 {

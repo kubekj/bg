@@ -1,6 +1,6 @@
 using Core.Exceptions.Common;
 
-namespace Core.Exceptions.ValueObjects.User.LastName;
+namespace Core.Exceptions.ValueObjects.User;
 
 public class LastNameOutOfRangeException : StringPropertyOutOfRangeException
 {

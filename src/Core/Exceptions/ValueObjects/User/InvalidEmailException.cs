@@ -1,4 +1,4 @@
-namespace Core.Exceptions.ValueObjects.User.Email;
+namespace Core.Exceptions.ValueObjects.User;
 
 public class InvalidEmailException : CoreException
 {

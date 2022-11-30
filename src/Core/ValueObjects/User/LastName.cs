@@ -1,9 +1,9 @@
-using Core.Exceptions.ValueObjects.User.LastName;
+using Core.Exceptions.ValueObjects.User;
 using Core.SeedWork;
 
 namespace Core.ValueObjects.User;
 
-public class LastName : ValueObject
+public record LastName : ValueObject
 {
     private const int MaxLength = 50;
     

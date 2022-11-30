@@ -1,10 +1,10 @@
 using System.Text.RegularExpressions;
-using Core.Exceptions.ValueObjects.User.Email;
+using Core.Exceptions.ValueObjects.User;
 using Core.SeedWork;
 
 namespace Core.ValueObjects.User;
 
-public sealed class Email : ValueObject
+public sealed record Email : ValueObject
 {
     public const int MaxLenght = 100;
     

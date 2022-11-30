@@ -9,8 +9,6 @@
     <ItemGroup>
       <Folder Include="Events" />
       <Folder Include="Exceptions\Entities" />
-      <Folder Include="Exceptions\ValueObjects\User" />
-      <Folder Include="Shared" />
       <Folder Include="ValueObjects\Trainer" />
     </ItemGroup>
 

@@ -1,4 +1,4 @@
-namespace Core.Exceptions.ValueObjects.User.LastName;
+namespace Core.Exceptions.ValueObjects.User;
 
 public class InvalidLastNameException : CoreException
 {

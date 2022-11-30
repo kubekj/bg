@@ -5,7 +5,7 @@ public abstract class StringPropertyOutOfRangeException : CoreException
     public string Value { get; }
     public int MaxLenght { get; }
     
-    public StringPropertyOutOfRangeException(string value, int maxLenght,string message) : base($"Workout name: {value} is too long, max lenght is: {maxLenght}")
+    public StringPropertyOutOfRangeException(string value, int maxLenght,string message) : base(message)
     {
         Value = value;
         MaxLenght = maxLenght;

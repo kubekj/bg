@@ -1,12 +1,10 @@
 namespace Core.SeedWork;
 
-public abstract class ValueObject : IEquatable<ValueObject>
+public abstract record ValueObject
 {
     public abstract IEnumerable<object> GetAtomicValues();
-
-    public bool Equals(ValueObject? other) => other is not null && ValuesAreEqual(other);
-
-    public override bool Equals(object? obj) => obj is ValueObject other && ValuesAreEqual(other);
+    
+    public virtual bool Equals(ValueObject? other) => other is not null && ValuesAreEqual(other);
 
     public override int GetHashCode() =>
         GetAtomicValues()

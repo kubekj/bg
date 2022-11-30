@@ -1,4 +1,4 @@
-namespace Core.Exceptions.ValueObjects.User.FirstName;
+namespace Core.Exceptions.ValueObjects.User;
 
 public class InvalidFirstNameException : CoreException
 {

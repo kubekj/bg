@@ -3,7 +3,7 @@ using Core.SeedWork;
 
 namespace Core.ValueObjects.TrainingPlan;
 
-public class Price : ValueObject
+public record Price : ValueObject
 {
     private const decimal MaximumPrice = 1000;
     
