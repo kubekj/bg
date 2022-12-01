@@ -1,6 +1,6 @@
 using Core.Exceptions;
 
-namespace Application.Commands.Handlers;
+namespace Application.Exceptions;
 
 public class InvalidUserRoleException : CoreException
 {
