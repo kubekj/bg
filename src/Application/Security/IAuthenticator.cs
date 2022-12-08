@@ -1,5 +1,4 @@
 using Application.DTO;
-using Core.Enums;
 
 namespace Application.Security;
 

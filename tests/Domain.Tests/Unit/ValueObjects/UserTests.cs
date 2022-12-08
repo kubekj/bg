@@ -1,7 +1,3 @@
-using Core.Entities;
-using Core.Exceptions.ValueObjects.User;
-using FluentAssertions;
-
 namespace Domain.Tests.Unit.ValueObjects;
 
 public class UserTests

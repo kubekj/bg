@@ -4,7 +4,7 @@ using Core.SeedWork;
 
 namespace Core.ValueObjects.User;
 
-public sealed record Email : ValueObject
+public sealed class Email : ValueObject
 {
     public const int MaxLenght = 100;
     

@@ -3,7 +3,7 @@ using Core.SeedWork;
 
 namespace Core.ValueObjects.User;
 
-public sealed record Password : ValueObject
+public sealed class Password : ValueObject
 {
     public string Value { get; }
         

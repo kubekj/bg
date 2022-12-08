@@ -6,7 +6,7 @@ namespace WebApp.Abstraction;
 [ApiController]
 public abstract class ApiController : ControllerBase
 {
-    protected readonly IMediator Mediator;
+    protected readonly ISender Sender;
 
-    protected ApiController(IMediator mediator) => Mediator = mediator;
+    protected ApiController(ISender sender) => Sender = sender;
 }

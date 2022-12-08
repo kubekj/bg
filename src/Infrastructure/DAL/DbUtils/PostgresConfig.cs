@@ -1,4 +1,4 @@
-namespace Infrastructure.Persistence;
+namespace Infrastructure.DAL.DbUtils;
 
 internal sealed class PostgresConfig
 {

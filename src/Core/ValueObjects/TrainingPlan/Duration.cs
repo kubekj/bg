@@ -3,7 +3,7 @@ using Core.SeedWork;
 
 namespace Core.ValueObjects.TrainingPlan;
 
-public record Duration : ValueObject
+public sealed class Duration : ValueObject
 {
     //Weeks
     public const int MaxDuration = 20;

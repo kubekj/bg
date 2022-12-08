@@ -2,7 +2,6 @@ using Application.Abstractions.Messaging.Command;
 using Application.Exceptions;
 using Application.Security;
 using Core.Entities;
-using Core.Enums;
 using Core.Repositories;
 using Core.Shared;
 using Core.ValueObjects.User;
@@ -30,22 +29,14 @@ public class SignUpCommandHandler : ICommandHandler<SignUpCommand>
         var firstName = new FirstName(request.FirstName);
         var lastName = new LastName(request.LastName);
         var password = new Password(request.Password);
-        var enumsHasParsed = Enum.TryParse(request.Role, out Role role);
-
-        if (!enumsHasParsed)
-            throw new InvalidUserRoleException();
+        var role = new Role(request.Role);
 
         if (await _userRepository.GetByEmailAsync(email) is not null)
             throw new EmailAlreadyInUseException(email);
 
         var securedPassword = _passwordManager.Secure(password);
 
-        User user = role switch
-        {
-            Role.Athlete => new Athlete(userId, firstName, lastName, email, securedPassword, role, _clock.Current()),
-            Role.Trainer => new Trainer(userId, firstName, lastName, email, securedPassword, role, _clock.Current()),
-            _ => throw new ArgumentOutOfRangeException()
-        };
+        var user = new User(userId, firstName, lastName, email, securedPassword, _clock.Current(),role);
 
         await _userRepository.AddAsync(user);
 

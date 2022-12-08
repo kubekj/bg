@@ -4,22 +4,22 @@ using Core.ValueObjects.User;
 
 namespace Core.Entities;
 
-public abstract class User : Entity
+public class User : Entity
 {
     public FirstName FirstName { get; private set; }
     public LastName LastName { get; private set; }
     public Email Email { get; private set; }
     public Password Password { get; private set; }
-    public HashSet<Role> Roles { get; private set; } = new();
     public DateTime CreatedAt { get; private set; }
+    public Role Role { get; private set; }
 
-    protected User(Guid id,FirstName firstName, LastName lastName, Email email, Password password, Role role, DateTime createdAt) : base(id)
+    public User(Guid id,FirstName firstName, LastName lastName, Email email, Password password, DateTime createdAt, Role role) : base(id)
     {
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         Password = password;
-        Roles.Add(role);
         CreatedAt = createdAt;
+        Role = role;
     }
 }

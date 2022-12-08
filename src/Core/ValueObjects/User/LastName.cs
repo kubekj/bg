@@ -3,9 +3,9 @@ using Core.SeedWork;
 
 namespace Core.ValueObjects.User;
 
-public record LastName : ValueObject
+public class LastName : ValueObject
 {
-    private const int MaxLength = 50;
+    public const int MaxLength = 50;
     
     public LastName(string value)
     {

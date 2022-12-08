@@ -3,7 +3,7 @@ using Core.SeedWork;
 
 namespace Core.ValueObjects.TrainingPlan;
 
-public record Description : ValueObject
+public sealed class Description : ValueObject
 {
     public const int MaxLength = 250;
     
