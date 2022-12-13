@@ -10,7 +10,7 @@ public static class Extensions
 {
     public static void AddApplication(this IServiceCollection services)
     {
-        services.AddMediatR(typeof(IMediator).Assembly);
+        services.AddMediatR(AssemblyReference.Assembly);
         services.AddSingleton<IClock, Clock>();
     }
 }

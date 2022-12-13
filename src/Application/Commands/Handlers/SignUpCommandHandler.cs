@@ -4,7 +4,7 @@ using Application.Security;
 using Core.Entities;
 using Core.Repositories;
 using Core.Shared;
-using Core.ValueObjects.User;
+using Core.ValueObjects.Properties.User;
 using MediatR;
 
 namespace Application.Commands.Handlers;
@@ -29,14 +29,13 @@ public class SignUpCommandHandler : ICommandHandler<SignUpCommand>
         var firstName = new FirstName(request.FirstName);
         var lastName = new LastName(request.LastName);
         var password = new Password(request.Password);
-        var role = new Role(request.Role);
 
         if (await _userRepository.GetByEmailAsync(email) is not null)
             throw new EmailAlreadyInUseException(email);
 
         var securedPassword = _passwordManager.Secure(password);
 
-        var user = new User(userId, firstName, lastName, email, securedPassword, _clock.Current(),role);
+        var user = new User(userId, firstName, lastName, email, securedPassword, _clock.Current());
 
         await _userRepository.AddAsync(user);
 

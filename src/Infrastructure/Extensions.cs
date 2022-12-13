@@ -1,5 +1,6 @@
 using Infrastructure.DAL;
 using Infrastructure.Middleware;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ public static class Extensions
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddPostgres(configuration);
+        services.AddMediatR(AssemblyReference.Assembly);
         services.AddSingleton<ExceptionMiddleware>();
     }
     

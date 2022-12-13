@@ -1,5 +1,5 @@
 using Core.Entities;
-using Core.ValueObjects.User;
+using Core.ValueObjects.Properties.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -32,5 +32,10 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired()
             .HasMaxLength(30);
         builder.Property(x => x.CreatedAt).IsRequired();
+
+        builder.HasMany(e => e.Goals)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.UserId);
     }
 }
+

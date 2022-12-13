@@ -1,5 +1,5 @@
 using Core.Entities;
-using Core.ValueObjects.User;
+using Core.ValueObjects.Properties.User;
 
 namespace Core.Repositories;
 
