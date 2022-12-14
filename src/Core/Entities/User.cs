@@ -19,6 +19,7 @@ public class User : Entity
         Measurements = new HashSet<Measurement>();
         Goals = new HashSet<Goal>();
         AllowedTrainings = new HashSet<UserTrainingPlan>();
+        CreatedTrainingPlans = new HashSet<TrainingPlan>();
         UserWorkouts = new HashSet<UserWorkout>();
         Ratings = new HashSet<Rating>();
     }
@@ -33,6 +34,7 @@ public class User : Entity
     public IEnumerable<Measurement>? Measurements { get; }
     public IEnumerable<Goal> Goals { get; }
     public IEnumerable<UserTrainingPlan> AllowedTrainings { get; }
+    public IEnumerable<TrainingPlan> CreatedTrainingPlans { get; }
     public IEnumerable<UserWorkout> UserWorkouts { get; }
     public IEnumerable<Rating> Ratings { get; }
 }

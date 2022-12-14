@@ -1,4 +1,6 @@
+using Core.Repositories;
 using Infrastructure.DAL.DbUtils;
+using Infrastructure.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,5 +21,10 @@ public static class Extensions
 
         // EF Core + Npgsql issue
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
+    internal static void AddInfrastructureRepositories(this IServiceCollection services)
+    {
+        services.AddTransient<IUserRepository,UserRepository>();
     }
 }

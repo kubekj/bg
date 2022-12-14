@@ -38,5 +38,9 @@ public class TrainingPlanConfiguration : IEntityTypeConfiguration<TrainingPlan>
         builder.Property(e => e.Status)
             .HasConversion(e => e.Value, e => new Status(e))
             .IsRequired();
+
+        builder.HasOne(e => e.Author)
+            .WithMany(e => e.CreatedTrainingPlans)
+            .HasForeignKey(e => e.AuthorId);
     }
 }

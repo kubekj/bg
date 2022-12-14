@@ -1,5 +1,7 @@
+using Infrastructure.Auth;
 using Infrastructure.DAL;
 using Infrastructure.Middleware;
+using Infrastructure.Security;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +16,9 @@ public static class Extensions
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddPostgres(configuration);
+        services.AddInfrastructureRepositories();
+        services.AddSecurity();
+        services.AddAuth(configuration);
         services.AddMediatR(AssemblyReference.Assembly);
         services.AddSingleton<ExceptionMiddleware>();
     }

@@ -9,15 +9,9 @@ public class HttpContextTokenStorage : ITokenStorage
     private const string TokenKey = "jwt";
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public HttpContextTokenStorage(IHttpContextAccessor httpContextAccessor)
-    {
-        _httpContextAccessor = httpContextAccessor;
-    }
+    public HttpContextTokenStorage(IHttpContextAccessor httpContextAccessor) => _httpContextAccessor = httpContextAccessor;
 
-    public void Set(JwtDto jwt)
-    {
-        _httpContextAccessor.HttpContext?.Items.TryAdd(TokenKey, jwt);
-    }
+    public void Set(JwtDto jwt) => _httpContextAccessor.HttpContext?.Items.TryAdd(TokenKey, jwt);
 
     public JwtDto Get()
     {

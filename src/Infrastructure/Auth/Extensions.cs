@@ -1,6 +1,7 @@
 using System.Text;
 using Application.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -19,6 +20,7 @@ internal static class Extensions
             .Configure<AuthOptions>(configuration.GetRequiredSection(OptionsSectionName))
             .AddSingleton<IAuthenticator, Authenticator>()
             .AddSingleton<ITokenStorage, HttpContextTokenStorage>()
+            .AddSingleton<IHttpContextAccessor,HttpContextAccessor>()
             .AddAuthentication(o =>
             {
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
