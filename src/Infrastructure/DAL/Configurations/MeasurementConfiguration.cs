@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.ValueObjects.Properties.Measurement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,6 +9,18 @@ public class MeasurementConfiguration : IEntityTypeConfiguration<Measurement>
 {
     public void Configure(EntityTypeBuilder<Measurement> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(e => e.Id);
+        builder.Property(e => e.Weight)
+            .HasConversion(e => e.Value, e => new BodyWeight(e))
+            .IsRequired()
+            .HasMaxLength(BodyWeight.MaxWeight);
+        builder.Property(e => e.Height)
+            .HasConversion(e => e.Value, e => new BodyHeight(e))
+            .IsRequired()
+            .HasMaxLength(BodyHeight.MaxHeight);
+
+        builder.HasOne(e => e.User)
+            .WithMany(e => e.Measurements)
+            .HasForeignKey(e => e.UserId);
     }
 }

@@ -1,4 +1,3 @@
-using Core.Entities;
 using Core.Exceptions.ValueObjects.Rate;
 using Core.SeedWork;
 
@@ -8,7 +7,7 @@ public class Rate : ValueObject
 {
     public const int MinRate = 1;
     public const int MaxRate = 5;
-    
+
     public Rate(int value)
     {
         if (value is < MinRate or > MaxRate)
@@ -17,13 +16,17 @@ public class Rate : ValueObject
         Value = value;
     }
 
+    public int Value { get; }
+
     public static implicit operator int(Rate rate)
-        => rate.Value;
+    {
+        return rate.Value;
+    }
 
     public static implicit operator Rate(int value)
-        => new(value);
-    
-    public int Value { get; }
+    {
+        return new(value);
+    }
 
     public override IEnumerable<object> GetAtomicValues()
     {

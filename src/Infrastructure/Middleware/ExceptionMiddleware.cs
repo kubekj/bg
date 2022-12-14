@@ -14,7 +14,7 @@ public class ExceptionMiddleware : IMiddleware
         }
         catch (Exception exception)
         {
-            await HandleExceptionAsync(exception,context);
+            await HandleExceptionAsync(exception, context);
         }
     }
 
@@ -28,7 +28,7 @@ public class ExceptionMiddleware : IMiddleware
             _ => (StatusCodes.Status500InternalServerError,
                 new Error("Internal error", "There was an internal server error"))
         };
-            
+
         context.Response.StatusCode = statusCode;
         await context.Response.WriteAsJsonAsync(error);
     }

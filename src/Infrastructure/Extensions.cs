@@ -17,7 +17,7 @@ public static class Extensions
         services.AddMediatR(AssemblyReference.Assembly);
         services.AddSingleton<ExceptionMiddleware>();
     }
-    
+
     public static void UseInfrastructure(this WebApplication app)
     {
         app.UseMiddleware<ExceptionMiddleware>();
@@ -26,8 +26,8 @@ public static class Extensions
         app.UseRouting();
 
         app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller}/{action=Index}/{id?}");
+            "default",
+            "{controller}/{action=Index}/{id?}");
 
         app.MapFallbackToFile("index.html");
     }

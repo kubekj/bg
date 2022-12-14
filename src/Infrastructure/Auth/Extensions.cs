@@ -10,7 +10,7 @@ namespace Infrastructure.Auth;
 internal static class Extensions
 {
     private const string OptionsSectionName = "auth";
-    
+
     public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
         var options = configuration.GetOptions<AuthOptions>(OptionsSectionName);
@@ -38,10 +38,7 @@ internal static class Extensions
 
         services.AddAuthorization(authorization =>
         {
-            authorization.AddPolicy("is-admin", policy =>
-            {
-                policy.RequireRole("admin");
-            });
+            authorization.AddPolicy("is-trainer", policy => policy.RequireRole("trainer"));
         });
 
         return services;

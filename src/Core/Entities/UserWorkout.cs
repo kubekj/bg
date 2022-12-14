@@ -1,5 +1,3 @@
-using Core.SeedWork;
-
 namespace Core.Entities;
 
 public class UserWorkout

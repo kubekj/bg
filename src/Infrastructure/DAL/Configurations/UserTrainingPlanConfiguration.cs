@@ -11,9 +11,12 @@ public class UserTrainingPlanConfiguration : IEntityTypeConfiguration<UserTraini
         builder.HasKey(e => new { e.UserId, e.TrainingPlanId });
         builder.HasOne(e => e.User)
             .WithMany(e => e.AllowedTrainings)
-            .HasForeignKey(e => e.UserId);       
+            .HasForeignKey(e => e.UserId)
+            .IsRequired();
         builder.HasOne(e => e.TrainingPlan)
             .WithMany(e => e.AllowedUsers)
-            .HasForeignKey(e => e.TrainingPlanId);
+            .HasForeignKey(e => e.TrainingPlanId)
+            .IsRequired();
+        builder.Property(e => e.BoughtAt).IsRequired();
     }
 }

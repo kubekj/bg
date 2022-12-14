@@ -7,11 +7,11 @@ public sealed class Duration : ValueObject
 {
     //Weeks
     public const int MaxDuration = 20;
-    
+
     public Duration(double value)
     {
         if (MaxDuration < value)
-            throw new TooLongTrainingPlanException(value,MaxDuration);
+            throw new TooLongTrainingPlanException(value, MaxDuration);
 
         Value = value;
     }
@@ -19,11 +19,15 @@ public sealed class Duration : ValueObject
     public double Value { get; }
 
     public static implicit operator double(Duration title)
-        => title.Value;
+    {
+        return title.Value;
+    }
 
     public static implicit operator Duration(double value)
-        => new(value);
-    
+    {
+        return new(value);
+    }
+
     public override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;

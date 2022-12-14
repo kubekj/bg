@@ -5,8 +5,6 @@ namespace Core.ValueObjects.Properties.User;
 
 public sealed class Password : ValueObject
 {
-    public string Value { get; }
-        
     public Password(string value)
     {
         if (string.IsNullOrWhiteSpace(value) || value.Length is > 200 or < 6)
@@ -15,14 +13,25 @@ public sealed class Password : ValueObject
         Value = value;
     }
 
-    public static implicit operator Password(string value) => new(value);
+    public string Value { get; }
 
-    public static implicit operator string(Password value) => value.Value;
+    public static implicit operator Password(string value)
+    {
+        return new(value);
+    }
+
+    public static implicit operator string(Password value)
+    {
+        return value.Value;
+    }
 
     public override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;
     }
 
-    public override string ToString() => Value;
+    public override string ToString()
+    {
+        return Value;
+    }
 }

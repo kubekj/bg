@@ -6,17 +6,18 @@ namespace Core.Entities;
 
 public class Workout : Entity
 {
-    public Workout(Guid id, WorkoutName name, Category category, IEnumerable<Exercise> exercises) : base(id)
+    public Workout(Guid id, WorkoutName name, Category category) : base(id)
     {
         Name = name;
         Category = category;
-        Exercises = exercises;
         TrainingPlanWorkouts = new HashSet<TrainingPlanWorkout>();
+        UserWorkouts = new HashSet<UserWorkout>();
+        ExerciseWorkouts = new HashSet<ExerciseWorkout>();
     }
 
-    public WorkoutName Name { get; private set; }
-    public Category Category { get; private set; }
-    public IEnumerable<TrainingPlanWorkout> TrainingPlanWorkouts { get; private set; }
-    public IEnumerable<UserWorkout> UserWorkouts { get; private set; }
-    public IEnumerable<Exercise> Exercises { get; private set; }
+    public WorkoutName Name { get; }
+    public Category Category { get; }
+    public IEnumerable<TrainingPlanWorkout> TrainingPlanWorkouts { get; }
+    public IEnumerable<UserWorkout> UserWorkouts { get; }
+    public IEnumerable<ExerciseWorkout> ExerciseWorkouts { get; }
 }

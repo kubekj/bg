@@ -6,7 +6,7 @@ namespace Core.ValueObjects.Properties.TrainingPlan;
 public sealed class Title : ValueObject
 {
     public const int MaxLength = 50;
-    
+
     public Title(string value)
     {
         if (string.IsNullOrWhiteSpace(value) || string.IsNullOrEmpty(value))
@@ -21,11 +21,20 @@ public sealed class Title : ValueObject
     public string Value { get; }
 
     public static implicit operator string(Title title)
-        => title.Value;
+    {
+        return title.Value;
+    }
 
     public static implicit operator Title(string value)
-        => new(value);
-    
+    {
+        return new(value);
+    }
+
+    public override string ToString()
+    {
+        return Value;
+    }
+
     public override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;

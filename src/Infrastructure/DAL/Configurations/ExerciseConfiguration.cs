@@ -18,14 +18,16 @@ public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
         builder.Property(e => e.BodyPart)
             .HasConversion(
                 v => v.ToString(),
-                v => (BodyPart)Enum.Parse(typeof(BodyPart), v));
+                v => (BodyPart)Enum.Parse(typeof(BodyPart), v))
+            .IsRequired();
         builder.Property(e => e.Category)
             .HasConversion(
                 v => v.ToString(),
-                v => (Category)Enum.Parse(typeof(Category), v));
+                v => (Category)Enum.Parse(typeof(Category), v))
+            .IsRequired();
 
         builder.HasMany(e => e.Sets)
             .WithOne(e => e.Exercise)
-            .HasForeignKey(e => e.ExerciseId);
+            .HasForeignKey(e => e.Id);
     }
 }

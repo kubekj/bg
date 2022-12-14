@@ -15,24 +15,24 @@ public class TrainingPlan : Entity
         SkillLevel = skillLevel;
         Title = title;
         Description = description;
-        Workouts = new HashSet<TrainingPlanWorkout>();
+        TrainingPlanWorkouts = new HashSet<TrainingPlanWorkout>();
         Author = author;
         Status = status;
         AllowedUsers = new HashSet<UserTrainingPlan>();
         Ratings = new HashSet<Rating>();
     }
 
-    public Duration Duration { get; private set; }
-    public Price Price { get; private set; }
-    public SkillLevel SkillLevel { get; private set; }
-    public Title Title { get; private set; }
-    public Description Description { get; private set; }
-    public Status Status { get; private set; }
-    
+    public Duration Duration { get; }
+    public Price Price { get; }
+    public SkillLevel SkillLevel { get; }
+    public Title Title { get; }
+    public Description Description { get; }
+    public Status Status { get; }
+
     public Guid AuthorId { get; private set; }
-    public User Author { get; private set; }
-    
-    public IEnumerable<Rating> Ratings { get; private set; }
-    public IEnumerable<UserTrainingPlan> AllowedUsers { get; private set; }
-    public IEnumerable<TrainingPlanWorkout> Workouts { get; private set; }
+    public User Author { get; }
+
+    public IEnumerable<Rating> Ratings { get; }
+    public IEnumerable<UserTrainingPlan> AllowedUsers { get; }
+    public IEnumerable<TrainingPlanWorkout> TrainingPlanWorkouts { get; }
 }

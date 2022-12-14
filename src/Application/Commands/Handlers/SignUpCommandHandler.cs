@@ -11,9 +11,9 @@ namespace Application.Commands.Handlers;
 
 public class SignUpCommandHandler : ICommandHandler<SignUpCommand>
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IPasswordManager _passwordManager;
     private readonly IClock _clock;
+    private readonly IPasswordManager _passwordManager;
+    private readonly IUserRepository _userRepository;
 
     public SignUpCommandHandler(IUserRepository userRepository, IPasswordManager passwordManager, IClock clock)
     {

@@ -3,14 +3,12 @@ using Core.SeedWork;
 
 namespace Core.ValueObjects.Properties.Language;
 
-public class LanguageName : ValueObject
+public class Language : ValueObject
 {
-    public string Value { get; }
-
     public const string Polish = nameof(Polish);
     public const string English = nameof(English);
 
-    private LanguageName(string value)
+    public Language(string value)
     {
         if (value is not (Polish or English))
             throw new IncorrectLanguageNameException(value);
@@ -18,12 +16,23 @@ public class LanguageName : ValueObject
         Value = value;
     }
 
-    public static implicit operator string(LanguageName languageName)
-        => languageName.Value;
+    public string Value { get; }
 
-    public static implicit operator LanguageName(string value)
-        => new(value);
-    
+    public static implicit operator string(Language language)
+    {
+        return language.Value;
+    }
+
+    public static implicit operator Language(string value)
+    {
+        return new(value);
+    }
+
+    public override string ToString()
+    {
+        return Value;
+    }
+
     public override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;

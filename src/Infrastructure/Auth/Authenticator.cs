@@ -11,12 +11,12 @@ namespace Infrastructure.Auth;
 
 internal sealed class Authenticator : IAuthenticator
 {
-    private readonly IClock _clock;
-    private readonly string _issuer;
-    private readonly TimeSpan _expiry;
     private readonly string _audience;
+    private readonly IClock _clock;
+    private readonly TimeSpan _expiry;
+    private readonly string _issuer;
+    private readonly JwtSecurityTokenHandler _jwtSecurityToken = new();
     private readonly SigningCredentials _signingCredentials;
-    private readonly JwtSecurityTokenHandler _jwtSecurityToken = new JwtSecurityTokenHandler();
 
     public Authenticator(IOptions<AuthOptions> options, IClock clock)
     {
@@ -28,7 +28,7 @@ internal sealed class Authenticator : IAuthenticator
                 Encoding.UTF8.GetBytes(options.Value.SigningKey)),
             SecurityAlgorithms.HmacSha256);
     }
-    
+
     public JwtDto CreateToken(Guid userId)
     {
         var now = _clock.Current();

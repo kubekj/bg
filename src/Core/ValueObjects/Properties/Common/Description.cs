@@ -6,7 +6,7 @@ namespace Core.ValueObjects.Properties.Common;
 public sealed class Description : ValueObject
 {
     public const int MaxLength = 250;
-    
+
     public Description(string value)
     {
         if (string.IsNullOrWhiteSpace(value) || string.IsNullOrEmpty(value))
@@ -21,13 +21,20 @@ public sealed class Description : ValueObject
     public string Value { get; }
 
     public static implicit operator string(Description description)
-        => description.Value;
+    {
+        return description.Value;
+    }
 
     public static implicit operator Description(string value)
-        => new(value);
-    
-    public override string ToString() => Value;
-    
+    {
+        return new(value);
+    }
+
+    public override string ToString()
+    {
+        return Value;
+    }
+
     public override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;

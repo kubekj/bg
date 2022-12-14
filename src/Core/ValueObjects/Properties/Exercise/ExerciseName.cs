@@ -6,7 +6,7 @@ namespace Core.ValueObjects.Properties.Exercise;
 public class ExerciseName : ValueObject
 {
     public const int MaxLenght = 50;
-    
+
     public ExerciseName(string value)
     {
         if (!value.All(char.IsLetter))
@@ -18,14 +18,23 @@ public class ExerciseName : ValueObject
         Value = value;
     }
 
-    public string Value { get; }   
-    
+    public string Value { get; }
+
     public static implicit operator string(ExerciseName exerciseName)
-        => exerciseName.Value;
+    {
+        return exerciseName.Value;
+    }
 
     public static implicit operator ExerciseName(string value)
-        => new(value);
-    
+    {
+        return new(value);
+    }
+
+    public override string ToString()
+    {
+        return Value;
+    }
+
     public override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;

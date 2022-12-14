@@ -5,8 +5,8 @@ namespace Core.ValueObjects.Properties.Workout;
 
 public sealed class WorkoutName : ValueObject
 {
-    private const int MaxLength = 50;
-    
+    public const int MaxLength = 50;
+
     public WorkoutName(string value)
     {
         if (string.IsNullOrWhiteSpace(value) || string.IsNullOrEmpty(value))
@@ -21,13 +21,20 @@ public sealed class WorkoutName : ValueObject
     public string Value { get; }
 
     public static implicit operator string(WorkoutName firstName)
-        => firstName.Value;
+    {
+        return firstName.Value;
+    }
 
     public static implicit operator WorkoutName(string value)
-        => new(value);
-    
-    public override string ToString() => Value;
-    
+    {
+        return new(value);
+    }
+
+    public override string ToString()
+    {
+        return Value;
+    }
+
     public override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;

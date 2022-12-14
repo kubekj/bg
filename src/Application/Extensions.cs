@@ -1,6 +1,5 @@
 using Application.Utils;
 using Core.Shared;
-using FluentAssertions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

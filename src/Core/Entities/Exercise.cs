@@ -12,10 +12,12 @@ public class Exercise : Entity
         BodyPart = bodyPart;
         Category = category;
         Sets = new HashSet<Set>();
+        ExerciseWorkouts = new HashSet<ExerciseWorkout>();
     }
-    
-    public ExerciseName Name { get; private set; }
-    public BodyPart BodyPart { get; private set; }
-    public Category Category { get; private set; }
-    public IEnumerable<Set> Sets { get; private set; }
+
+    public ExerciseName Name { get; }
+    public BodyPart BodyPart { get; }
+    public Category Category { get; }
+    public IEnumerable<Set> Sets { get; }
+    public IEnumerable<ExerciseWorkout> ExerciseWorkouts { get; }
 }

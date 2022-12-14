@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.ValueObjects.Properties.Language;
 using Core.ValueObjects.Properties.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -18,7 +19,7 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.FirstName)
             .HasConversion(x => x.Value, x => new FirstName(x))
             .IsRequired()
-            .HasMaxLength(FirstName.MaxLength);        
+            .HasMaxLength(FirstName.MaxLength);
         builder.Property(x => x.LastName)
             .HasConversion(x => x.Value, x => new LastName(x))
             .IsRequired()
@@ -30,12 +31,21 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.Role)
             .HasConversion(x => x.Value, x => new Role(x))
             .IsRequired()
-            .HasMaxLength(30);
+            .HasMaxLength(Role.MaxLenght);
+        builder.Property(x => x.PreferredLanguage)
+            .HasConversion(x => x.Value, x => new Language(x))
+            .IsRequired()
+            .HasMaxLength(Role.MaxLenght);
         builder.Property(x => x.CreatedAt).IsRequired();
 
         builder.HasMany(e => e.Goals)
             .WithOne(e => e.User)
-            .HasForeignKey(e => e.UserId);
+            .HasForeignKey(e => e.Id);
+        builder.HasMany(e => e.Measurements)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.Id);
+        builder.HasMany(e => e.Ratings)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.Id);
     }
 }
-

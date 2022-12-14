@@ -2,17 +2,28 @@ namespace Core.SeedWork;
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {
+    public bool Equals(ValueObject? other)
+    {
+        return other is not null && ValuesAreEqual(other);
+    }
+
     public abstract IEnumerable<object> GetAtomicValues();
 
-    public bool Equals(ValueObject? other) => other is not null && ValuesAreEqual(other);
+    public override bool Equals(object? obj)
+    {
+        return obj is ValueObject vo && ValuesAreEqual(vo);
+    }
 
-    public override bool Equals(object? obj) => obj is ValueObject vo && ValuesAreEqual(vo);
-
-    public override int GetHashCode() =>
-        GetAtomicValues()
+    public override int GetHashCode()
+    {
+        return GetAtomicValues()
             .Aggregate(
                 default(int),
                 HashCode.Combine);
+    }
 
-    private bool ValuesAreEqual(ValueObject other) => GetAtomicValues().SequenceEqual(other.GetAtomicValues());
+    private bool ValuesAreEqual(ValueObject other)
+    {
+        return GetAtomicValues().SequenceEqual(other.GetAtomicValues());
+    }
 }

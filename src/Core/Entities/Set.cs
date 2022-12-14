@@ -10,10 +10,10 @@ public class Set : Entity
         Repetitions = repetitions;
         Weight = weight;
     }
-    
-    public Repetition Repetitions { get; private set; }
-    public Weight Weight { get; private set; }
-    
+
+    public Repetition Repetitions { get; }
+    public Weight Weight { get; }
+
     public Exercise Exercise { get; private set; }
     public Guid ExerciseId { get; private set; }
 }

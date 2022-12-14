@@ -4,5 +4,8 @@ namespace Application.Utils;
 
 public class Clock : IClock
 {
-    public DateTime Current() => DateTime.Now;
+    public DateTime Current()
+    {
+        return DateTime.Now;
+    }
 }

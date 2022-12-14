@@ -5,9 +5,7 @@ namespace Core.ValueObjects.Properties.User;
 
 public class Role : ValueObject
 {
-    public static IEnumerable<string> AvailableRoles { get; } = new[] {"athlete", "trainer"};
-
-    public string Value { get; }
+    public const int MaxLenght = 30;
 
     public Role(string value)
     {
@@ -17,18 +15,41 @@ public class Role : ValueObject
         if (!AvailableRoles.Contains(value))
             throw new InvalidRoleException(value);
 
+        if (value.Length > MaxLenght)
+            throw new InvalidRoleException(value);
+
         Value = value;
     }
 
-    public static Role Athlete() => new("athlete");
-    
-    public static Role Trainer() => new("trainer");
+    public static IEnumerable<string> AvailableRoles { get; } = new[] { "athlete", "trainer" };
 
-    public static implicit operator Role(string value) => new(value);
+    public string Value { get; }
 
-    public static implicit operator string(Role value) => value.Value;
+    public static Role Athlete()
+    {
+        return new("athlete");
+    }
 
-    public override string ToString() => Value;
+    public static Role Trainer()
+    {
+        return new("trainer");
+    }
+
+    public static implicit operator Role(string value)
+    {
+        return new(value);
+    }
+
+    public static implicit operator string(Role value)
+    {
+        return value.Value;
+    }
+
+    public override string ToString()
+    {
+        return Value;
+    }
+
     public override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;
