@@ -22,7 +22,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Unit\ValueObjects" />
+      <Folder Include="Unit\Entities" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Core\Core.csproj" />
     </ItemGroup>
 
 </Project>
