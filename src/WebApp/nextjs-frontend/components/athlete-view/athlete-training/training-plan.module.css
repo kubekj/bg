@@ -1,0 +1,55 @@
+.container{
+    border: 1px solid #D0D5DD;
+    border-radius: 20px;
+    width: 100%;
+    box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    margin: 1rem;
+    border-bottom: 1px solid #D0D5DD;
+}
+.midSection{
+    /*border-bottom: 1px solid #D0D5DD;*/
+}
+.bottomSection{
+    margin: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+.mainIcon{
+    width: 4rem;
+    height: 4rem;
+    margin-right: 0.75rem
+}
+.info{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+}
+.tableOfTrainings{
+    width: 100%;
+}
+.tHead{
+    background-color: #8098F9;
+    color: white;
+    height: 3rem;
+    text-align: center;
+    width: 100%;
+}
+.tBody{
+
+}
+.thRegular{
+    width: 14%;
+    text-align: left;
+}
+.tdRegular{
+    width: 14%;
+    text-align: left;
+    margin-left: 30px;
+    border-bottom: 1px solid #D0D5DD;
+}

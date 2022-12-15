@@ -43,3 +43,7 @@ next-env.d.ts
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+# yarn & package
+yarn.lock
+package.json
+package-lock.json
