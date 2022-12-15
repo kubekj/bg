@@ -15,7 +15,8 @@ const Button = ({iconSrc, text, extraStyleType, extraStyleValue, borderValue, ba
 
     return (
         <button type="button" className="btn btn-light"
-                style={{border: `${borderValue}`, textAlign: "left", backgroundColor: isHovering ? `${isHoveringColor}` : `${backgroundColorValue}`,marginRight: "1rem" ,[`${extraStyleType}`]:[`${extraStyleValue}`]}}
+                style={{border: `${borderValue}`, textAlign: "left", backgroundColor: isHovering ? `${isHoveringColor}` : `${backgroundColorValue}`,
+                    marginRight: "1rem" ,[`${extraStyleType}`]:[`${extraStyleValue}`]}}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
         >
@@ -23,7 +24,6 @@ const Button = ({iconSrc, text, extraStyleType, extraStyleValue, borderValue, ba
                    height={30}/>
             {text}
         </button>
-
     );
 }
 

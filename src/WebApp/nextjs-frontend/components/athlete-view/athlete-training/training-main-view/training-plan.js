@@ -1,6 +1,7 @@
-import style from "../athlete-training/training-plan.module.css";
+import style from "./training-plan.module.css";
 import React from "react";
-import Button from "../button";
+import Button from "../../button";
+import Link from "next/link";
 
 
 const sampleData = [
@@ -51,12 +52,14 @@ const TrainingPlan = () => {
                         <h5><b>Newest training plans</b></h5>
                     </div>
                     <div style={{marginLeft: "66rem", marginBottom:"0.75rem"}}>
-                        <Button iconSrc="/thumbnails/copy-outline.svg" text="See all"
-                            backgroundColorValue="white"
-                            isHoveringColor="#D0D5DD"
-                            extraStyleType="border"
-                            extraStyleValue="1px solid #D0D5DD"
-                        />
+                        <Link href="/athlete-all-trainings">
+                            <Button iconSrc="/thumbnails/copy-outline.svg" text="See all"
+                                backgroundColorValue="white"
+                                isHoveringColor="#D0D5DD"
+                                extraStyleType="border"
+                                extraStyleValue="1px solid #D0D5DD"
+                            />
+                        </Link>
                     </div>
                 </div>
             </div>

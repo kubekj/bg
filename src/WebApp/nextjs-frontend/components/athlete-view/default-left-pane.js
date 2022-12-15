@@ -1,6 +1,7 @@
 import style from "./left-pane.module.css"
 import Image from "next/image";
 import Button from "./button";
+import Link from "next/link";
 
 const DefaultLeftPane = () => {
     return (
@@ -15,16 +16,20 @@ const DefaultLeftPane = () => {
                 </form>
             </div>
             <div className={style.topButtons} role="group">
+                <Link href="/athlete-main-page">
                 <Button iconSrc="/thumbnails/bar-chart-outline.svg" text="Dashboard"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                </Link>
+                <Link href="/athlete-training-main">
                 <Button iconSrc="/thumbnails/barbell-outline.svg" text="Trainings"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                </Link>
                 <Button iconSrc="/thumbnails/calendar-number-outline.svg" text="Calendar"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
