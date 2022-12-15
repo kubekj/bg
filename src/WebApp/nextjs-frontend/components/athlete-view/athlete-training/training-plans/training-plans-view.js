@@ -63,7 +63,7 @@ const TrainingPlansView = () => {
                             <h4><b>Plan</b></h4>
                         </div>
                         <div style={{marginLeft: "73rem", marginBottom:"0.75rem"}}>
-                            <Link href="/athlete-all-trainings">
+                            <Link href="/athlete-apply-training">
                                 <Button iconSrc="/thumbnails/add-outline.svg" text="Apply training"
                                         backgroundColorValue="#8098F9"
                                         borderValue="none"
