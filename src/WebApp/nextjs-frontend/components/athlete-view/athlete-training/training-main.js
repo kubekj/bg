@@ -2,6 +2,8 @@ import style from "./training-main.module.css";
 import TodayTraining from "../athlete-dashboard/today-training";
 import TomorrowTraining from "../athlete-dashboard/tomorrow-training";
 import TrainingPlan from "./training-plan";
+import PreviousTraining from "./previous-training";
+import WorkoutPlainInfo from "./workout-plain-info";
 
 const TrainingMain = () => {
 
@@ -19,8 +21,8 @@ const TrainingMain = () => {
                 <p>Today's training type</p>
             </div>
             <div className={style.bottom}>
-                <TodayTraining />
-                <TomorrowTraining />
+                <PreviousTraining />
+                <WorkoutPlainInfo />
             </div>
         </div>
     );

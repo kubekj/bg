@@ -77,7 +77,7 @@ const TrainingPlan = () => {
                         sampleData.map(training => {
                             return(
                               <tr key={training.id}>
-                                  <td style={{width:"30%",borderBottom: "1px solid #D0D5DD"}}>
+                                  <td style={{width:"30%",borderBottom: "1px solid #D0D5DD", paddingLeft:"2rem"}}>
                                       {training.trainingName}
                                       <p>adasda</p>
                                   </td>

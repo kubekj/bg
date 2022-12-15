@@ -41,15 +41,16 @@
     width: 100%;
 }
 .tBody{
-
 }
 .thRegular{
     width: 14%;
     text-align: left;
+    padding: 1.25rem;
 }
 .tdRegular{
     width: 14%;
     text-align: left;
     margin-left: 30px;
     border-bottom: 1px solid #D0D5DD;
+    padding-left: 1rem;
 }

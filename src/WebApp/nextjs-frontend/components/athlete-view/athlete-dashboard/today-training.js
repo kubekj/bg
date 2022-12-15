@@ -34,7 +34,6 @@ const TodayTraining = () => {
                             extraStyleType="border"
                             extraStyleValue="1px solid #D0D5DD"
                     />
-
                 </div>
             </div>
         </div>
