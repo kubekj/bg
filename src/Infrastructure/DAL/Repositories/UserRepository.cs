@@ -1,7 +1,8 @@
 using Core.Entities;
-using Core.Exceptions;
 using Core.Repositories;
-using Core.ValueObjects.Properties.User;
+using Core.ValueObjects.User;
+using Infrastructure.DAL.UoW;
+using Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DAL.Repositories;
@@ -9,8 +10,13 @@ namespace Infrastructure.DAL.Repositories;
 internal sealed class UserRepository : IUserRepository
 {
     private readonly DbSet<User> _users;
-
-    public UserRepository(BodyGuardDbContext dbContext) => _users = dbContext.Users;
+    private readonly IUnitOfWork _unitOfWork;
+    
+    public UserRepository(BodyGuardDbContext dbContext, IUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+        _users = dbContext.Users;
+    }
 
     public Task<User> GetByIdAsync(Guid id)
         => _users.SingleOrDefaultAsync(x => x.Id == id);
@@ -19,7 +25,9 @@ internal sealed class UserRepository : IUserRepository
         => _users.SingleOrDefaultAsync(x => x.Email == email);
     
     public async Task AddAsync(User user)
-        => await _users.AddAsync(user);
+    {
+        await _users.AddAsync(user);
+    }
 
     public async Task RemoveUser(Guid id)
     {
@@ -31,15 +39,13 @@ internal sealed class UserRepository : IUserRepository
         _users.Remove(user);
     }
 
-    public Task EditUserDetails(User user)
+    public async Task EditUserDetails(User user)
     {
-        throw new NotImplementedException();
+        var doesUserExists = await GetByIdAsync(user.Id);
+
+        if (doesUserExists is null)
+            throw new UserNotFoundException(user.Id);
+
+        _users.Update(user);
     }
-}
-
-internal class UserNotFoundException : CoreException
-{
-    public UserNotFoundException(Guid id) : base($"") => Value = id;
-
-    public Guid Value { get; set; }
 }

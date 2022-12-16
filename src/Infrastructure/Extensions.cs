@@ -2,7 +2,6 @@ using Infrastructure.Auth;
 using Infrastructure.DAL;
 using Infrastructure.Middleware;
 using Infrastructure.Security;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +18,6 @@ public static class Extensions
         services.AddInfrastructureRepositories();
         services.AddSecurity();
         services.AddAuth(configuration);
-        services.AddMediatR(AssemblyReference.Assembly);
         services.AddSingleton<ExceptionMiddleware>();
     }
 

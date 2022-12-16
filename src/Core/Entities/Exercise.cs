@@ -1,6 +1,6 @@
-using Core.Enums;
 using Core.SeedWork;
-using Core.ValueObjects.Properties.Exercise;
+using Core.ValueObjects.Common;
+using Core.ValueObjects.Exercise;
 
 namespace Core.Entities;
 
@@ -13,6 +13,7 @@ public class Exercise : Entity
         Category = category;
         Sets = new HashSet<Set>();
         ExerciseWorkouts = new HashSet<ExerciseWorkout>();
+        UserExercises = new HashSet<UserExercise>();
     }
 
     public ExerciseName Name { get; }
@@ -20,4 +21,5 @@ public class Exercise : Entity
     public Category Category { get; }
     public IEnumerable<Set> Sets { get; }
     public IEnumerable<ExerciseWorkout> ExerciseWorkouts { get; }
+    public IEnumerable<UserExercise> UserExercises { get; }
 }

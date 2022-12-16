@@ -1,6 +1,6 @@
 using Core.Entities;
-using Core.Enums;
-using Core.ValueObjects.Properties.Exercise;
+using Core.ValueObjects.Common;
+using Core.ValueObjects.Exercise;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,15 +15,11 @@ public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
             .HasConversion(x => x.Value, x => new ExerciseName(x))
             .IsRequired()
             .HasMaxLength(ExerciseName.MaxLenght);
-        builder.Property(e => e.BodyPart)
-            .HasConversion(
-                v => v.ToString(),
-                v => (BodyPart)Enum.Parse(typeof(BodyPart), v))
+        builder.Property(x => x.BodyPart)
+            .HasConversion(x => x.Value, x => new BodyPart(x))
             .IsRequired();
-        builder.Property(e => e.Category)
-            .HasConversion(
-                v => v.ToString(),
-                v => (Category)Enum.Parse(typeof(Category), v))
+        builder.Property(x => x.Category)
+            .HasConversion(x => x.Value, x => new Category(x))
             .IsRequired();
 
         builder.HasMany(e => e.Sets)

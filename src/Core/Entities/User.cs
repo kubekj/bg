@@ -1,6 +1,6 @@
 using Core.SeedWork;
-using Core.ValueObjects.Properties.Language;
-using Core.ValueObjects.Properties.User;
+using Core.ValueObjects.Language;
+using Core.ValueObjects.User;
 
 namespace Core.Entities;
 
@@ -21,6 +21,7 @@ public class User : Entity
         AllowedTrainings = new HashSet<UserTrainingPlan>();
         CreatedTrainingPlans = new HashSet<TrainingPlan>();
         UserWorkouts = new HashSet<UserWorkout>();
+        UserExercises = new HashSet<UserExercise>();
         Ratings = new HashSet<Rating>();
     }
 
@@ -34,6 +35,7 @@ public class User : Entity
     public IEnumerable<Measurement>? Measurements { get; }
     public IEnumerable<Goal> Goals { get; }
     public IEnumerable<UserTrainingPlan> AllowedTrainings { get; }
+    public IEnumerable<UserExercise> UserExercises { get; }
     public IEnumerable<TrainingPlan> CreatedTrainingPlans { get; }
     public IEnumerable<UserWorkout> UserWorkouts { get; }
     public IEnumerable<Rating> Ratings { get; }

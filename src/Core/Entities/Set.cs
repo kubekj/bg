@@ -1,5 +1,5 @@
 using Core.SeedWork;
-using Core.ValueObjects.Properties.Set;
+using Core.ValueObjects.Set;
 
 namespace Core.Entities;
 

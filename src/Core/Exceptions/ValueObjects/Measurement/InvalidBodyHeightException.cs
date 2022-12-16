@@ -1,4 +1,4 @@
-using Core.ValueObjects.Properties.Measurement;
+using Core.ValueObjects.Measurement;
 
 namespace Core.Exceptions.ValueObjects.Measurement;
 

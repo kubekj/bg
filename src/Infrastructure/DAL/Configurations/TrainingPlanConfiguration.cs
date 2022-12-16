@@ -1,7 +1,7 @@
 using Core.Entities;
 using Core.Enums;
-using Core.ValueObjects.Properties.Common;
-using Core.ValueObjects.Properties.TrainingPlan;
+using Core.ValueObjects.Common;
+using Core.ValueObjects.TrainingPlan;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

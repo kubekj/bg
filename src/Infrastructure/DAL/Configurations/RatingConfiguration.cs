@@ -1,6 +1,6 @@
 using Core.Entities;
-using Core.ValueObjects.Properties.Common;
-using Core.ValueObjects.Properties.Rating;
+using Core.ValueObjects.Common;
+using Core.ValueObjects.Rating;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
