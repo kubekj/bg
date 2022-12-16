@@ -1,8 +1,9 @@
 import style from "./apply-training-view.module.css"
-import Button from "../../button";
+import Button from "../../reusable-comps/button";
 import React from "react";
 import Image from "next/image";
 import TrainingPreview from "./training-preview";
+import Link from "next/link";
 
 const ApplyTrainingView = () => {
 
@@ -14,6 +15,7 @@ const ApplyTrainingView = () => {
             </div>
             <div className={style.content}>
                 <div className={style.midHeader}>
+                    <Link href="/athlete-all-trainings">
                     <Button iconSrc="/thumbnails/arrow-back-outline.svg"
                             text="Return to plans"
                             borderValue="none"
@@ -22,6 +24,7 @@ const ApplyTrainingView = () => {
                             extraStyleType="color"
                             extraStyleValue="#8098F9"
                     />
+                    </Link>
                     <h2>Entry-level full body 4 weeks</h2>
                 </div>
                 <div className={style.details}>
@@ -54,7 +57,9 @@ const ApplyTrainingView = () => {
                 <div className={style.bottom}>
                     <div className={style.trainings}>
                         <div>
-                            <TrainingPreview/>
+                            <Link href="/training-plan-details">
+                                <TrainingPreview/>
+                            </Link>
                         </div>
                         <div>
                             <TrainingPreview/>

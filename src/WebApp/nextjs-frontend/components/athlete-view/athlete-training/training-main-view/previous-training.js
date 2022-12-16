@@ -1,6 +1,6 @@
 import style from "./previous-training.module.css";
 import React from "react";
-import Button from "./../../button";
+import Button from "../../reusable-comps/button";
 import Image from 'next/image'
 import {valueOrDefault} from "chart.js/helpers";
 

@@ -1,6 +1,6 @@
 import style from "./training-plan.module.css";
 import React from "react";
-import Button from "../../button";
+import Button from "../../reusable-comps/button";
 import Link from "next/link";
 
 

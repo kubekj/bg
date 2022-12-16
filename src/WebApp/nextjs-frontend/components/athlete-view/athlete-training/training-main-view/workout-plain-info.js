@@ -1,5 +1,5 @@
 import style from "./workout-plain-info.module.css"
-import Button from "../../button";
+import Button from "../../reusable-comps/button";
 import React from "react";
 
 const WorkoutPlainInfo = () => {
