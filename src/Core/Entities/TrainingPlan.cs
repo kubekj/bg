@@ -1,7 +1,7 @@
 using Core.Enums;
 using Core.SeedWork;
-using Core.ValueObjects.Properties.Common;
-using Core.ValueObjects.Properties.TrainingPlan;
+using Core.ValueObjects.Common;
+using Core.ValueObjects.TrainingPlan;
 
 namespace Core.Entities;
 

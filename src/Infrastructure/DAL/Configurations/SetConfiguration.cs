@@ -1,5 +1,5 @@
 using Core.Entities;
-using Core.ValueObjects.Properties.Set;
+using Core.ValueObjects.Set;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

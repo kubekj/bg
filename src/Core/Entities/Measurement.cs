@@ -1,5 +1,5 @@
 using Core.SeedWork;
-using Core.ValueObjects.Properties.Measurement;
+using Core.ValueObjects.Measurement;
 
 namespace Core.Entities;
 

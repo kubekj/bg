@@ -1,6 +1,6 @@
 using Core.Entities;
-using Core.ValueObjects.Properties.Language;
-using Core.ValueObjects.Properties.User;
+using Core.ValueObjects.Language;
+using Core.ValueObjects.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,6 +1,6 @@
-using Core.Enums;
 using Core.SeedWork;
-using Core.ValueObjects.Properties.Workout;
+using Core.ValueObjects.Common;
+using Core.ValueObjects.Workout;
 
 namespace Core.Entities;
 

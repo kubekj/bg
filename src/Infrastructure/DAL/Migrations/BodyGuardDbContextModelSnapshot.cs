@@ -251,6 +251,21 @@ namespace Infrastructure.DAL.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Core.Entities.UserExercise", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ExerciseId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "ExerciseId");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.ToTable("UserExercises");
+                });
+
             modelBuilder.Entity("Core.Entities.UserTrainingPlan", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -262,10 +277,10 @@ namespace Infrastructure.DAL.Migrations
                     b.Property<DateTime>("BoughtAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("From")
+                    b.Property<DateTime?>("From")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("To")
+                    b.Property<DateTime?>("To")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("UserId", "TrainingPlanId");
@@ -411,6 +426,25 @@ namespace Infrastructure.DAL.Migrations
                     b.Navigation("Workout");
                 });
 
+            modelBuilder.Entity("Core.Entities.UserExercise", b =>
+                {
+                    b.HasOne("Core.Entities.Exercise", "Exercise")
+                        .WithMany("UserExercises")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany("UserExercises")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exercise");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Core.Entities.UserTrainingPlan", b =>
                 {
                     b.HasOne("Core.Entities.TrainingPlan", "TrainingPlan")
@@ -454,6 +488,8 @@ namespace Infrastructure.DAL.Migrations
                     b.Navigation("ExerciseWorkouts");
 
                     b.Navigation("Sets");
+
+                    b.Navigation("UserExercises");
                 });
 
             modelBuilder.Entity("Core.Entities.TrainingPlan", b =>
@@ -476,6 +512,8 @@ namespace Infrastructure.DAL.Migrations
                     b.Navigation("Measurements");
 
                     b.Navigation("Ratings");
+
+                    b.Navigation("UserExercises");
 
                     b.Navigation("UserWorkouts");
                 });

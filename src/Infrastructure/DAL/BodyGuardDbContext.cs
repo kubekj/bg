@@ -20,6 +20,7 @@ internal sealed class BodyGuardDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<UserTrainingPlan> UserTrainingPlans { get; set; }
     public DbSet<UserWorkout> UserWorkouts { get; set; }
+    public DbSet<UserExercise> UserExercises { get; set; }
     public DbSet<Workout> Workouts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

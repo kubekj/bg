@@ -1,6 +1,6 @@
 using Core.SeedWork;
-using Core.ValueObjects.Properties.Common;
-using Core.ValueObjects.Properties.Rating;
+using Core.ValueObjects.Common;
+using Core.ValueObjects.Rating;
 
 namespace Core.Entities;
 

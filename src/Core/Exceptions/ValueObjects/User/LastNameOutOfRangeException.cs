@@ -1,4 +1,4 @@
-using Core.Exceptions.Common;
+using Core.Exceptions.Utils;
 
 namespace Core.Exceptions.ValueObjects.User;
 
