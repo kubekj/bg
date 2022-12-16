@@ -15,7 +15,7 @@ const ApplyTrainingView = () => {
             </div>
             <div className={style.content}>
                 <div className={style.midHeader}>
-                    <Link href="/athlete-all-trainings">
+                    <Link href="/athlete-training-main">
                     <Button iconSrc="/thumbnails/arrow-back-outline.svg"
                             text="Return to plans"
                             borderValue="none"
@@ -57,7 +57,7 @@ const ApplyTrainingView = () => {
                 <div className={style.bottom}>
                     <div className={style.trainings}>
                         <div>
-                            <Link href="/training-plan-details">
+                            <Link href="/training-plan-details" style={{textDecoration:"none"}}>
                                 <TrainingPreview/>
                             </Link>
                         </div>

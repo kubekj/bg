@@ -10,7 +10,7 @@ const TopHeader = ({title, text, href}) => {
                 <div className={style.title}>
                     <div>
                         <h4>{title}</h4>
-                        <p>{text}</p>
+                        <p style={{fontSize:"14px"}}>{text}</p>
                     </div>
                 </div>
                 <div style={{paddingLeft: "33rem", marginTop:"1rem"}}>

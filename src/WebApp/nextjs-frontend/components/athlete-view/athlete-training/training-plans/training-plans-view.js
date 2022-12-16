@@ -14,6 +14,7 @@ const TrainingPlansView = () => {
             lastName: "Doe",
             email: "john.doe@gmail.com",
             duration: "2 weeks",
+            isActive: true,
             purchaseDate: "Jan 4, 2022",
             type: "Full-body",
             author: "Olivia Rye"
@@ -24,6 +25,7 @@ const TrainingPlansView = () => {
             lastName: "Smith",
             email: "john.doe@gmail.com",
             duration: "2 weeks",
+            isActive: true,
             purchaseDate: "Jun 14, 2022",
             type: "Full-body",
             author: "Olivia Rye"
@@ -34,6 +36,7 @@ const TrainingPlansView = () => {
             lastName: "Doe",
             email: "john.doe@gmail.com",
             duration: "4 weeks",
+            isActive: false,
             purchaseDate: "Jan 4, 2022",
             type: "Full-body",
             author: "Olivia Rye"
@@ -44,6 +47,7 @@ const TrainingPlansView = () => {
             lastName: "Doe",
             email: "john.doe@gmail.com",
             duration: "3 weeks",
+            isActive: false,
             purchaseDate: "Jan 4, 2022",
             type: "Full-body",
             author: "Me"
@@ -63,8 +67,8 @@ const TrainingPlansView = () => {
                             <h4><b>Plan</b></h4>
                         </div>
                         <div style={{marginLeft: "73rem", marginBottom:"0.75rem"}}>
-                            <Link href="/athlete-apply-training">
-                                <Button iconSrc="/thumbnails/add-outline.svg" text="Apply training"
+                            <Link href="/add-new-training">
+                                <Button iconSrc="/thumbnails/add-outline.svg" text="Add training"
                                         backgroundColorValue="#8098F9"
                                         borderValue="none"
                                         isHoveringColor="#C7D7FE"
@@ -80,6 +84,7 @@ const TrainingPlansView = () => {
                         <thead className={style.tHead}>
                         <tr>
                             <th className={style.thRegular}>Author</th>
+                            <th className={style.thRegular}>Status</th>
                             <th className={style.thRegular}>Duration</th>
                             <th className={style.thRegular}>Purchase date</th>
                             <th className={style.thRegular}>Type</th>
@@ -91,8 +96,10 @@ const TrainingPlansView = () => {
                         {
                             sampleData.map(training => {
                                 return(
+
                                     <tr key={training.id}>
                                         <td style={{width:"30%",borderBottom: "1px solid #D0D5DD", paddingLeft:"2rem"}}>
+                                            <Link href="/training-details-more" style={{textDecoration:"none"}}>
                                             <div className={style.bottomSection}>
                                                 <div className={style.userInfo}>
                                                     <Image className={style.avatar} src="/avatar-svgrepo-com.svg" alt="dadas" width={30} height={30} />
@@ -101,6 +108,16 @@ const TrainingPlansView = () => {
                                                         <p>{training.email}</p>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            </Link>
+                                        </td>
+                                        <td className={style.tdRegular}>
+                                            <div className={style.infoProgress}
+                                                 style={{backgroundColor: sampleData.map(a => a.isActive) ? "#ECFDF3" : "#FEF3F2",
+                                                     color: sampleData.map(a => a.isActive) ? "#027A48" : "#B42318"
+                                                 }}
+                                            >
+                                                Status
                                             </div>
                                         </td>
                                         <td className={style.tdRegular}>{training.duration}</td>
@@ -122,6 +139,7 @@ const TrainingPlansView = () => {
                                             </div>
                                         </td>
                                     </tr>
+
                                 );
                             })
                         }

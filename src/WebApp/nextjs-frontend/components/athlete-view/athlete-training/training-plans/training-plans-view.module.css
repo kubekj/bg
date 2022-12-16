@@ -61,3 +61,16 @@
     flex-direction: row;
     text-align: left;
 }
+.infoProgress{
+    display: flex;
+    justify-content: center;
+    padding-top: 0.33rem;
+    width: 4rem;
+    height: 2rem;
+    /* Blue light/50 */
+
+    /*color: #027A48;*/
+    /*background: #ECFDF3;*/
+    mix-blend-mode: multiply;
+    border-radius: 16px;
+}

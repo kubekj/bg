@@ -80,10 +80,12 @@ const TrainingPlan = () => {
                         sampleData.map(training => {
                             return(
                               <tr key={training.id}>
+                                  <Link href="/athlete-apply-training">
                                   <td style={{width:"30%",borderBottom: "1px solid #D0D5DD", paddingLeft:"2rem"}}>
                                       {training.trainingName}
                                       <p>adasda</p>
                                   </td>
+                                  </Link>
                                   <td className={style.tdRegular}>{training.duration}</td>
                                   <td className={style.tdRegular}>{training.purchaseDate}</td>
                                   <td className={style.tdRegular}>{training.type}</td>
