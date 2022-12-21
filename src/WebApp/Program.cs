@@ -1,6 +1,7 @@
 using Application;
 using Core;
 using Infrastructure;
+using Infrastructure.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddCore();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
+
+builder.UseSerilog();
 
 var app = builder.Build();
 

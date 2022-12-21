@@ -1,6 +1,6 @@
 using Application.Abstractions.Messaging.Command;
-using Application.Commands;
 using Application.Commands.Exercise;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Abstraction;
 
@@ -15,7 +15,8 @@ public class ExerciseController : ApiController
     {
         _createExerciseCommandHandler = createExerciseCommandHandler;
     }
-
+    
+    [Authorize]
     [HttpPost("create")]
     public async Task<ActionResult> Post(CreateExerciseCommand command)
     {
@@ -23,6 +24,7 @@ public class ExerciseController : ApiController
         return NoContent();
     }
 
+    [Authorize]
     [HttpGet("get")]
     public async Task<ActionResult> Get()
     {

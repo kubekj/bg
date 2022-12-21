@@ -31,7 +31,7 @@ internal sealed class CreateExerciseCommandHandler : ICommandHandler<CreateExerc
         var exercise = new Core.Entities.Exercise(id,exerciseName,bodyPart,category);
         
         // var allExercises = (await _userExerciseRepository.GetAllAsync()).ToList();
-        // var canBeAdded = _service.CheckIfNameAlreadyExists(allExercises,request.UserId,exerciseName);
+        // var uniqueName = _service.CheckIfNameAlreadyExists(allExercises,request.UserId,exerciseName);
 
         // if (!canBeAdded)
         //     throw new ExerciseWithProvidedNameAlreadyExistsException(exerciseName);

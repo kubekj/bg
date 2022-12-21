@@ -5,9 +5,8 @@ namespace Core;
 
 public static class Extensions
 {
-    public static IServiceCollection AddCore(this IServiceCollection services)
+    public static void AddCore(this IServiceCollection services)
     {
         services.AddSingleton<IUserExerciseService, UserExerciseService>();
-        return services;
     }
 }

@@ -10,9 +10,9 @@ internal sealed class PasswordManager : IPasswordManager
 
     public PasswordManager(IPasswordHasher<User> passwordHasher) => _passwordHasher = passwordHasher;
 
-    public string Secure(string password) => _passwordHasher.HashPassword(default, password);
+    public string Hash(string password) => _passwordHasher.HashPassword(default, password);
 
-    public bool Validate(string password, string securedPassword) =>
+    public bool CompareSecuredPassword(string password, string securedPassword) =>
         _passwordHasher.VerifyHashedPassword(default, securedPassword, password) ==
         PasswordVerificationResult.Success;
 }

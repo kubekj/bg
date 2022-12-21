@@ -39,4 +39,6 @@ public class User : Entity
     public IEnumerable<TrainingPlan> CreatedTrainingPlans { get; }
     public IEnumerable<UserWorkout> UserWorkouts { get; }
     public IEnumerable<Rating> Ratings { get; }
+
+    public static bool CanBeTrainer(DateTime birthDate) => DateTime.Now.Year - birthDate.Year >= 18;
 }
