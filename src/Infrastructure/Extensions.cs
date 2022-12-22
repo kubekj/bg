@@ -1,4 +1,3 @@
-using Application.Abstractions.Messaging.Query;
 using Infrastructure.Auth;
 using Infrastructure.DAL;
 using Infrastructure.Logging;
@@ -22,34 +21,17 @@ public static class Extensions
         services.AddSecurity();
         services.AddAuth(configuration);
         services.AddAuthorization();
-        
-        services.Scan(s => s.FromAssemblies(AssemblyReference.Assembly)
-            .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
-            .AsImplementedInterfaces()
-            .WithScopedLifetime());
-        
-        services.AddEndpointsApiExplorer();
-        // services.AddSwaggerGen(swagger =>
-        // {
-        //     swagger.EnableAnnotations();
-        //     swagger.SwaggerDoc("v1", new OpenApiInfo
-        //     {
-        //         Title = "BodyGuard API",
-        //         Version = "v1"
-        //     });
-        // });
     }
 
     public static void UseInfrastructure(this WebApplication app)
     {
         app.UseMiddleware<ExceptionMiddleware>();
-        app.UseAuthentication();
-        // app.UseSwagger();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseAuthentication();
         app.UseAuthorization();
-        
+
         app.MapControllerRoute(
             "default",
             "{controller}/{action=Index}/{id?}");

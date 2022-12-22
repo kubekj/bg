@@ -2,6 +2,7 @@ using Application;
 using Core;
 using Infrastructure;
 using Infrastructure.Logging;
+using WebApp.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,4 +24,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseInfrastructure();
+
+app.UseUserApi();
+app.UseExerciseApi();
+
 app.Run();

@@ -27,17 +27,17 @@ public class Role : ValueObject
 
     public static Role Athlete()
     {
-        return new("athlete");
+        return new Role("athlete");
     }
 
     public static Role Trainer()
     {
-        return new("trainer");
+        return new Role("trainer");
     }
 
     public static implicit operator Role(string value)
     {
-        return new(value);
+        return new Role(value);
     }
 
     public static implicit operator string(Role value)

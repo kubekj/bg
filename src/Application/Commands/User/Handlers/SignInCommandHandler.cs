@@ -31,7 +31,7 @@ public class SignInCommandHandler : ICommandHandler<SignInCommand>
         if (!_passwordManager.CompareSecuredPassword(command.Password, user.Password))
             throw new InvalidCredentialException();
 
-        var jwt = _authenticator.CreateToken(user.Id,user.Role);
+        var jwt = _authenticator.CreateToken(user.Id, user.Role);
         _tokenStorage.Set(jwt);
     }
 }

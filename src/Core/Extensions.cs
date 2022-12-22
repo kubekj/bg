@@ -8,5 +8,6 @@ public static class Extensions
     public static void AddCore(this IServiceCollection services)
     {
         services.AddSingleton<IUserExerciseService, UserExerciseService>();
+        services.AddSingleton<IExerciseService, ExerciseService>();
     }
 }

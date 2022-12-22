@@ -25,7 +25,7 @@ public sealed class Duration : ValueObject
 
     public static implicit operator Duration(double value)
     {
-        return new(value);
+        return new Duration(value);
     }
 
     public override IEnumerable<object> GetAtomicValues()

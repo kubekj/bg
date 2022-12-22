@@ -1,20 +1,13 @@
 using Core.Entities;
-using Core.ValueObjects.Exercise;
 
 namespace Core.Services.Exercise;
 
 public class UserExerciseService : IUserExerciseService
 {
-    public bool CheckIfNameAlreadyExists(IEnumerable<UserExercise> userExercises,Guid userId, ExerciseName exerciseName)
+    public UserExercise? CheckIfUserAlreadyHasExercise(IEnumerable<UserExercise> userExercises,
+        UserExercise newUserExercise)
     {
-        foreach (var exercise in userExercises.Where(e => e.UserId == userId).Select(e => e.Exercise))
-        {
-            if (exercise.Name.Equals(exerciseName))
-            {
-                throw new Exception();
-            }
-        }
-
-        return true;
+        return userExercises.SingleOrDefault(ue =>
+            ue.ExerciseId == newUserExercise.ExerciseId && ue.UserId == newUserExercise.UserId);
     }
 }

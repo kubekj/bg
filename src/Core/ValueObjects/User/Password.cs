@@ -15,14 +15,23 @@ public sealed class Password : ValueObject
 
     public string Value { get; }
 
-    public static implicit operator Password(string value) => new(value);
+    public static implicit operator Password(string value)
+    {
+        return new(value);
+    }
 
-    public static implicit operator string(Password value) => value.Value;
+    public static implicit operator string(Password value)
+    {
+        return value.Value;
+    }
 
     public override IEnumerable<object> GetAtomicValues()
     {
         yield return Value;
     }
 
-    public override string ToString() => Value;
+    public override string ToString()
+    {
+        return Value;
+    }
 }

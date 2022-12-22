@@ -26,7 +26,7 @@ public class Status : ValueObject
 
     public static implicit operator Status(string value)
     {
-        return new(value);
+        return new Status(value);
     }
 
     public override string ToString()

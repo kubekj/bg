@@ -27,7 +27,7 @@ public class ExerciseName : ValueObject
 
     public static implicit operator ExerciseName(string value)
     {
-        return new(value);
+        return new ExerciseName(value);
     }
 
     public override string ToString()

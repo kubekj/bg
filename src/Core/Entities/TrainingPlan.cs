@@ -1,4 +1,3 @@
-using Core.Enums;
 using Core.SeedWork;
 using Core.ValueObjects.Common;
 using Core.ValueObjects.TrainingPlan;
@@ -7,8 +6,10 @@ namespace Core.Entities;
 
 public class TrainingPlan : Entity
 {
-    public TrainingPlan(Guid id) : base(id) { }
-    
+    public TrainingPlan(Guid id) : base(id)
+    {
+    }
+
     public TrainingPlan(Guid id, Duration duration, Price price, SkillLevel skillLevel, Title title,
         Description description, User author, Status status) : base(id)
     {

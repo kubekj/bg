@@ -1,5 +1,4 @@
 using Core.Entities;
-using Core.Enums;
 using Core.ValueObjects.Common;
 using Core.ValueObjects.TrainingPlan;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +19,8 @@ public class TrainingPlanConfiguration : IEntityTypeConfiguration<TrainingPlan>
             .HasConversion(e => e.Value, e => new Price(e))
             .IsRequired();
         builder.Property(e => e.SkillLevel)
-            .HasConversion(
-                v => v.ToString(),
-                v => (SkillLevel)Enum.Parse(typeof(SkillLevel), v));
+            .HasConversion(e => e.Value, e => new SkillLevel(e))
+            .IsRequired();
         builder.Property(e => e.Title)
             .HasConversion(e => e.Value, e => new Title(e))
             .IsRequired()

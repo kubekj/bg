@@ -25,7 +25,7 @@ public class Repetition : ValueObject
 
     public static implicit operator Repetition(int value)
     {
-        return new(value);
+        return new Repetition(value);
     }
 
     public override IEnumerable<object> GetAtomicValues()

@@ -24,7 +24,7 @@ public sealed class Price : ValueObject
 
     public static implicit operator Price(decimal value)
     {
-        return new(value);
+        return new Price(value);
     }
 
     public override IEnumerable<object> GetAtomicValues()

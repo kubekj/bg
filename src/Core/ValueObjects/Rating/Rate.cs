@@ -25,7 +25,7 @@ public class Rate : ValueObject
 
     public static implicit operator Rate(int value)
     {
-        return new(value);
+        return new Rate(value);
     }
 
     public override IEnumerable<object> GetAtomicValues()

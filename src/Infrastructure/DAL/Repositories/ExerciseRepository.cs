@@ -6,8 +6,8 @@ namespace Infrastructure.DAL.Repositories;
 
 internal sealed class ExerciseRepository : IExerciseRepository
 {
-    private readonly DbSet<Exercise> _exercises;
     private readonly BodyGuardDbContext _context;
+    private readonly DbSet<Exercise> _exercises;
 
     public ExerciseRepository(BodyGuardDbContext context)
     {
@@ -21,9 +21,15 @@ internal sealed class ExerciseRepository : IExerciseRepository
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Exercise>> GetAllAsync() => await _exercises.ToListAsync();
+    public async Task<IEnumerable<Exercise>> GetAllAsync()
+    {
+        return await _exercises.ToListAsync();
+    }
 
-    public async Task AddAsync(Exercise exercise) => await _exercises.AddAsync(exercise);
+    public async Task AddAsync(Exercise exercise)
+    {
+        await _exercises.AddAsync(exercise);
+    }
 
     public Task Remove(Guid id)
     {

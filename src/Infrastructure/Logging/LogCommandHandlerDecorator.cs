@@ -8,7 +8,8 @@ public class LogCommandHandlerDecorator<TCommand> : ICommandHandler<TCommand> wh
     private readonly ICommandHandler<TCommand> _commandHandler;
     private readonly ILogger<ICommandHandler<TCommand>> _logger;
 
-    public LogCommandHandlerDecorator(ICommandHandler<TCommand> commandHandler, ILogger<ICommandHandler<TCommand>> logger)
+    public LogCommandHandlerDecorator(ICommandHandler<TCommand> commandHandler,
+        ILogger<ICommandHandler<TCommand>> logger)
     {
         _commandHandler = commandHandler;
         _logger = logger;

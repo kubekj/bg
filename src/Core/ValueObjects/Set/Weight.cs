@@ -24,7 +24,7 @@ public class Weight : ValueObject
 
     public static implicit operator Weight(int value)
     {
-        return new(value);
+        return new Weight(value);
     }
 
     public override IEnumerable<object> GetAtomicValues()

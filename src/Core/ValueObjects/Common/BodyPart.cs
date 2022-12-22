@@ -10,7 +10,7 @@ public class BodyPart : ValueObject
     public const string Chest = nameof(Chest);
     public const string Shoulders = nameof(Shoulders);
     public const string Core = nameof(Core);
-    
+
     public BodyPart(string value)
     {
         if (value is not (Legs or Arms or Chest or Shoulders or Core))
@@ -21,11 +21,20 @@ public class BodyPart : ValueObject
 
     public string Value { get; }
 
-    public static implicit operator string(BodyPart bodyPart) => bodyPart.Value;
+    public static implicit operator string(BodyPart bodyPart)
+    {
+        return bodyPart.Value;
+    }
 
-    public static implicit operator BodyPart(string value) => new(value);
+    public static implicit operator BodyPart(string value)
+    {
+        return new(value);
+    }
 
-    public override string ToString() => Value;
+    public override string ToString()
+    {
+        return Value;
+    }
 
     public override IEnumerable<object> GetAtomicValues()
     {
