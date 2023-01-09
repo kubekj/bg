@@ -6,12 +6,8 @@ namespace Core.Entities;
 
 public class TrainingPlan : Entity
 {
-    public TrainingPlan(Guid id) : base(id)
-    {
-    }
-
     public TrainingPlan(Guid id, Duration duration, Price price, SkillLevel skillLevel, Title title,
-        Description description, User author, Status status) : base(id)
+        Description description, Guid authorId, Status status) : base(id)
     {
         Duration = duration;
         Price = price;
@@ -19,8 +15,9 @@ public class TrainingPlan : Entity
         Title = title;
         Description = description;
         TrainingPlanWorkouts = new HashSet<TrainingPlanWorkout>();
-        Author = author;
+        AuthorId = authorId;
         Status = status;
+        IsDeleted = false;
         AllowedUsers = new HashSet<UserTrainingPlan>();
         Ratings = new HashSet<Rating>();
     }
@@ -31,8 +28,11 @@ public class TrainingPlan : Entity
     public Title Title { get; }
     public Description Description { get; }
     public Status Status { get; }
+    
+    //TODO: Create service to comply with SOLID standards - setter shouldn't be public
+    public bool IsDeleted { get; set; } 
 
-    public Guid AuthorId { get; private set; }
+    public Guid AuthorId { get; }
     public User Author { get; }
 
     public IEnumerable<Rating> Ratings { get; }

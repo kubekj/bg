@@ -21,5 +21,10 @@ public static class UserApi
             var jwt = storage.Get();
             return Results.Ok(jwt);
         });
+        
+        // webApp.MapPut($"{Endpoint}/edit/{{userid:guid}}", async (Guid userid) =>
+        // {
+        //     
+        // })
     }
 }

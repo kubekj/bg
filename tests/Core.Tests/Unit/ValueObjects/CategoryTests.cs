@@ -20,12 +20,12 @@ public class CategoryTests
     [InlineData(Category.Full)]
     [InlineData(Category.Upper)]
     [InlineData(Category.Lower)]
-    public void Category_Should_BeCreated_When_Part_Is_InTheScope(string part)
+    public void Category_Should_BeCreated_When_Part_Is_InTheScope(string name)
     {
-        var category = new Category(part);
+        var category = new Category(name);
 
         category.Should().NotBeNull();
-        category.Value.Should().Be(part);
+        category.Value.Should().Be(name);
     }
     
     [Fact]

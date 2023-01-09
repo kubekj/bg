@@ -18,6 +18,12 @@ public class MeasurementConfiguration : IEntityTypeConfiguration<Measurement>
             .HasConversion(e => e.Value, e => new BodyHeight(e))
             .IsRequired()
             .HasMaxLength(BodyHeight.MaxHeight);
+        builder.Property(e => e.CaloriesIntake)
+            .HasConversion(e => e.Value, e => new CaloriesIntake(e))
+            .IsRequired()
+            .HasMaxLength(BodyHeight.MaxHeight);
+        builder.Property(e => e.DateProvided).IsRequired();
+        
 
         builder.HasOne(e => e.User)
             .WithMany(e => e.Measurements)

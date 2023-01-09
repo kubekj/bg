@@ -23,8 +23,27 @@ internal sealed class BodyGuardDbContext : DbContext
     public DbSet<UserExercise> UserExercises { get; set; }
     public DbSet<Workout> Workouts { get; set; }
 
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
+    {
+        HandleTrainingPlanSoftDelete();
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+    }
+
+    private void HandleTrainingPlanSoftDelete()
+    {
+        var entities = ChangeTracker.Entries().Where(e => e.State == EntityState.Deleted);
+
+        foreach (var entityEntry in entities)
+        {
+            if (entityEntry.Entity is not TrainingPlan trainingPlan) continue;
+            
+            entityEntry.State = EntityState.Modified;
+            trainingPlan.IsDeleted = true;
+        }
     }
 }

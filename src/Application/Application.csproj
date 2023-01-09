@@ -7,16 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Core\Core.csproj"/>
+        <ProjectReference Include="..\Core\Core.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Queries"/>
+        <Folder Include="Commands\TrainingPlan" />
+        <Folder Include="Commands\Workout" />
+        <Folder Include="Queries" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mapster" Version="7.3.0"/>
-        <PackageReference Include="Scrutor" Version="4.2.0"/>
+        <PackageReference Include="Mapster" Version="7.3.0" />
+        <PackageReference Include="Scrutor" Version="4.2.0" />
     </ItemGroup>
 
 </Project>
