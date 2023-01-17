@@ -67,6 +67,12 @@ const ApplyTrainingView = () => {
                         <div>
                             <TrainingPreview/>
                         </div>
+                        <div>
+                            <TrainingPreview/>
+                        </div>
+                        <div>
+                            <TrainingPreview/>
+                        </div>
                     </div>
                     <div className={style.rightBottom}>
                         <div className={style.rating}>

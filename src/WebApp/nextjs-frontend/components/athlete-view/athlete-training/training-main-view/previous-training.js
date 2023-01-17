@@ -6,7 +6,7 @@ import {valueOrDefault} from "chart.js/helpers";
 
 const PreviousTraining = () => {
 
-    const sampleData = [{
+    const sampleData = {
             trainingName: "FBW - Push",
             load:{
                value: "1233 kg",
@@ -23,7 +23,7 @@ const PreviousTraining = () => {
                 percentage: "10",
                 progress: false
         }
-    }];
+    };
 
     const simpleSampleData = {
         trainingName: "FBW - Push",
@@ -43,7 +43,7 @@ const PreviousTraining = () => {
             <div className={style.topSection}>
                 <div className={style.info}>
                     <p>Previous training</p>
-                    <h3>{sampleData.map(a => a.trainingName)}</h3>
+                    <h3>{sampleData.trainingName}</h3>
                 </div>
                 <div className={style.infoRight}>
                     <p>Full body</p>
@@ -54,43 +54,45 @@ const PreviousTraining = () => {
                     <div className={style.info}>
                         <p>Load</p>
                         <div className={style.data}>
-                            <h3>{sampleData.map(a => a.load.value)}</h3>
+                            <h3>{sampleData.load.value}</h3>
                             <div className={style.infoProgress}
-                                 style={{backgroundColor: sampleData.map(a => a.load.progress) ? "#ECFDF3" : "#FEF3F2",
-                                     color: sampleData.map(a => a.load.progress) ? "#027A48" : "#B42318"
+                                 style={{backgroundColor: sampleData.load.progress ? "#ECFDF3" : "#FEF3F2",
+                                     color: sampleData.load.progress ? "#027A48" : "#B42318"
                                  }}
                             >
-                                <Image src={sampleData.map(a => a.load.percentage) ? "/thumbnails/arrow-up-green.svg" : "/thumbnails/arrow-down-red.svg"} width={18} height={18}/>
-                                <p>{sampleData.map(a => a.load.percentage)}%</p>
+                                <Image src={simpleSampleData.loadProgress ? "/thumbnails/arrow-up-green.svg" : "/thumbnails/arrow-down-red.svg"} width={18} height={18}/>
+                                <p>{sampleData.load.percentage}%</p>
                             </div>
                         </div>
+                        {sampleData.load.progress}
                     </div>
                     <div className={style.info}>
                         <p>Satisfaction</p>
                         <div className={style.data}>
-                            <h3>{sampleData.map(a => a.satisfaction.value)}</h3>
+                            <h3>{sampleData.satisfaction.value}</h3>
                             <div className={style.infoProgress}
-                                 style={{backgroundColor: sampleData.map(a => a.satisfaction.progress) ? "#ECFDF3" : "#FEF3F2",
-                                     color: sampleData.map(a => a.satisfaction.progress) ? "#027A48" : "#B42318"
+                                 style={{backgroundColor: sampleData.satisfaction.progress ? "#ECFDF3" : "#FEF3F2",
+                                     color: sampleData.satisfaction.progress ? "#027A48" : "#B42318"
                                  }}
                             >
+
                                 <Image src={simpleSampleData.satisfactionProgress ? "/thumbnails/arrow-up-green.svg" : "/thumbnails/arrow-down-red.svg"} width={18} height={18}/>
-                                <p>{sampleData.map(a => a.satisfaction.percentage)}%</p>
+                                <p>{sampleData.satisfaction.percentage}%</p>
                             </div>
                         </div>
                     </div>
                     <div className={style.info}>
                         <p>Fatigue</p>
                         <div className={style.data}>
-                            <h3>{sampleData.map(a => a.fatigue.value)}</h3>
+                            <h3>{sampleData.fatigue.value}</h3>
                             <div className={style.infoProgress}
                                  style={{
-                                     backgroundColor: sampleData.map(a => a.fatigue.progress) ? "#ECFDF3" : "#FEF3F2",
-                                     color: sampleData.map(a => a.fatigue.progress) ? "#027A48" : "#B42318"
+                                     backgroundColor: sampleData.fatigue.progress ? "#ECFDF3" : "#FEF3F2",
+                                     color: sampleData.fatigue.progress ? "#027A48" : "#B42318"
                             }}
                             >
                                 <Image src={simpleSampleData.fatigueProgress ? "/thumbnails/arrow-up-green.svg" : "/thumbnails/arrow-down-red.svg"} width={18} height={18}/>
-                            <p>{sampleData.map(a => a.fatigue.percentage)}%</p>
+                            <p>{sampleData.fatigue.percentage}%</p>
                             </div>
                         </div>
                     </div>

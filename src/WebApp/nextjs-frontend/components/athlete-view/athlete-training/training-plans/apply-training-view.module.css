@@ -58,7 +58,8 @@
 .trainings{
    display: flex;
    margin: 1rem;
-   width: 100%;
+   width: 75%;
+   flex-wrap: wrap;
 }
 .rating{
    display: flex;
@@ -73,9 +74,9 @@
    display: flex;
 }
 .rightBottom{
-   width: 100%;
    display: flex;
    flex-direction: column;
+   width: 25%;
 }
 .apply{
    margin-top: 2rem;
