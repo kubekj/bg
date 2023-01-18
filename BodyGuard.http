@@ -1,0 +1,15 @@
+@url = http://localhost:5099
+
+###
+GET {{url}}/exercises/get
+
+###
+POST {{url}}/exercises/create
+
+Content-Type: application/json
+
+{
+    "excerciseName": "allahy",
+    "bodyPart": "Core",
+    "category": "Upper"
+}

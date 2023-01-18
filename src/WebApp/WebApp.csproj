@@ -6,7 +6,7 @@
         <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
         <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
         <IsPackable>false</IsPackable>
-        <SpaRoot>frontend\</SpaRoot>
+        <SpaRoot>nextjs-frontend\</SpaRoot>
         <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
         <SpaProxyServerUrl>http://localhost:3000</SpaProxyServerUrl>
         <SpaProxyLaunchCommand>yarn dev</SpaProxyLaunchCommand>
@@ -16,6 +16,10 @@
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'BodyGuard.FullStack' " />
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
@@ -29,10 +33,9 @@
       <_ContentIncludedByDefault Remove="ClientApp\package-lock.json" />
       <_ContentIncludedByDefault Remove="ClientApp\package.json" />
       <_ContentIncludedByDefault Remove="ClientApp\public\manifest.json" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controllers" />
+      <_ContentIncludedByDefault Remove="frontend\.eslintrc.json" />
+      <_ContentIncludedByDefault Remove="frontend\package.json" />
+      <_ContentIncludedByDefault Remove="frontend\tsconfig.json" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,0 +1,17 @@
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottomSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.imageTest{
+    background-image: url("../../public/logo.png");
+    height: 90px;
+    width: 112px;
+    background-repeat: no-repeat;
+}
