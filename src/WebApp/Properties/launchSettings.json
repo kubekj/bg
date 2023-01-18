@@ -10,8 +10,7 @@
   "profiles": {
     "BodyGuard.FullStack": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:7004;http://localhost:5099",
+      "applicationUrl": "http://localhost:5099",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
@@ -19,7 +18,6 @@
     },
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"

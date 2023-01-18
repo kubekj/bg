@@ -27,7 +27,7 @@ public class LastName : ValueObject
 
     public static implicit operator LastName(string value)
     {
-        return new(value);
+        return new LastName(value);
     }
 
     public override string ToString()

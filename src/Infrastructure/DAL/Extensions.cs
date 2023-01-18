@@ -18,14 +18,12 @@ public static class Extensions
     {
         services.Configure<PostgresConfig>(configuration.GetRequiredSection(DatabaseName));
         var postgresConfig = configuration.GetOptions<PostgresConfig>(DatabaseName);
-        
+
         services.AddDbContext<BodyGuardDbContext>(x =>
             x.UseNpgsql(postgresConfig.ConnectionString));
         services.AddHostedService<DbInitializer>();
-        services.AddScoped<IExerciseRepository, ExerciseRepository>();
-        services.AddScoped<IUserExerciseRepository, UserExerciseRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.TryDecorate(typeof(ICommandHandler<>),typeof(UnitOfWorkCommandHandlerDecorator<>));
+        services.TryDecorate(typeof(ICommandHandler<>), typeof(UnitOfWorkCommandHandlerDecorator<>));
 
         // EF Core + Npgsql issue
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -33,6 +31,8 @@ public static class Extensions
 
     internal static void AddInfrastructureRepositories(this IServiceCollection services)
     {
-        services.AddScoped<IUserRepository,UserRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IExerciseRepository, ExerciseRepository>();
+        services.AddScoped<IUserExerciseRepository, UserExerciseRepository>();
     }
 }

@@ -27,7 +27,7 @@ public sealed class FirstName : ValueObject
 
     public static implicit operator FirstName(string value)
     {
-        return new(value);
+        return new FirstName(value);
     }
 
     public override string ToString()

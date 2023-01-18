@@ -22,7 +22,7 @@ public class SignUpCommandHandler : ICommandHandler<SignUpCommand>
 
     public async Task HandleAsync(SignUpCommand command)
     {
-        var userId = command.UserId;
+        var userId = Guid.NewGuid();
         var email = new Email(command.Email);
         var firstName = new FirstName(command.FirstName);
         var lastName = new LastName(command.LastName);
@@ -31,7 +31,7 @@ public class SignUpCommandHandler : ICommandHandler<SignUpCommand>
         if (await _userRepository.GetByEmailAsync(email) is not null)
             throw new EmailAlreadyInUseException(email);
 
-        var securedPassword = _passwordManager.Secure(password);
+        var securedPassword = _passwordManager.Hash(password);
 
         var user = new Core.Entities.User(userId, firstName, lastName, email, securedPassword, _clock.Current());
 

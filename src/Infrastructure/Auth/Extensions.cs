@@ -12,7 +12,7 @@ internal static class Extensions
 {
     private const string OptionsSectionName = "auth";
 
-    public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
+    public static void AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
         var options = configuration.GetOptions<AuthOptions>(OptionsSectionName);
 
@@ -20,7 +20,7 @@ internal static class Extensions
             .Configure<AuthOptions>(configuration.GetRequiredSection(OptionsSectionName))
             .AddSingleton<IAuthenticator, Authenticator>()
             .AddSingleton<ITokenStorage, HttpContextTokenStorage>()
-            .AddSingleton<IHttpContextAccessor,HttpContextAccessor>()
+            .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
             .AddAuthentication(o =>
             {
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -37,12 +37,5 @@ internal static class Extensions
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.SigningKey))
                 };
             });
-
-        services.AddAuthorization(authorization =>
-        {
-            authorization.AddPolicy("is-trainer", policy => policy.RequireRole("trainer"));
-        });
-
-        return services;
     }
 }

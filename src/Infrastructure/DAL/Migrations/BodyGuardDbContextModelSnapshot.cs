@@ -84,6 +84,13 @@ namespace Infrastructure.DAL.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("CaloriesIntake")
+                        .HasMaxLength(250)
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateProvided")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<double>("Height")
                         .HasMaxLength(250)
                         .HasColumnType("double precision");
@@ -167,6 +174,9 @@ namespace Infrastructure.DAL.Migrations
                     b.Property<double>("Duration")
                         .HasMaxLength(20)
                         .HasColumnType("double precision");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
@@ -297,6 +307,9 @@ namespace Infrastructure.DAL.Migrations
 
                     b.Property<Guid>("WorkoutId")
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("UserId", "WorkoutId");
 

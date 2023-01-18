@@ -27,7 +27,7 @@ public sealed class Title : ValueObject
 
     public static implicit operator Title(string value)
     {
-        return new(value);
+        return new Title(value);
     }
 
     public override string ToString()

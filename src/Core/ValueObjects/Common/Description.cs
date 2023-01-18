@@ -27,7 +27,7 @@ public sealed class Description : ValueObject
 
     public static implicit operator Description(string value)
     {
-        return new(value);
+        return new Description(value);
     }
 
     public override string ToString()

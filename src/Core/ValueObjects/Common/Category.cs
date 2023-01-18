@@ -9,7 +9,7 @@ public class Category : ValueObject
     public const string Lower = nameof(Lower);
     public const string Full = nameof(Full);
     public const string Cardio = nameof(Cardio);
-    
+
     public Category(string value)
     {
         if (value is not (Upper or Lower or Full or Cardio))
@@ -20,11 +20,20 @@ public class Category : ValueObject
 
     public string Value { get; }
 
-    public static implicit operator string(Category category) => category.Value;
+    public static implicit operator string(Category category)
+    {
+        return category.Value;
+    }
 
-    public static implicit operator Category(string value) => new(value);
+    public static implicit operator Category(string value)
+    {
+        return new(value);
+    }
 
-    public override string ToString() => Value;
+    public override string ToString()
+    {
+        return Value;
+    }
 
     public override IEnumerable<object> GetAtomicValues()
     {

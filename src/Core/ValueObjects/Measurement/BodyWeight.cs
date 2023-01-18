@@ -24,7 +24,7 @@ public class BodyWeight : ValueObject
 
     public static implicit operator BodyWeight(double value)
     {
-        return new(value);
+        return new BodyWeight(value);
     }
 
     public override IEnumerable<object> GetAtomicValues()

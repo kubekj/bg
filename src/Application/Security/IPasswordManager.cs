@@ -2,6 +2,6 @@ namespace Application.Security;
 
 public interface IPasswordManager
 {
-    string Secure(string password);
-    bool Validate(string password, string securedPassword);
+    string Hash(string password);
+    bool CompareSecuredPassword(string password, string securedPassword);
 }

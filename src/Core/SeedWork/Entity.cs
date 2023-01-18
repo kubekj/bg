@@ -2,10 +2,7 @@ namespace Core.SeedWork;
 
 public abstract class Entity : IEquatable<Entity>
 {
-    protected Entity(Guid id)
-    {
-        Id = id;
-    }
+    protected Entity(Guid id) => Id = id;
 
     public Guid Id { get; }
 
@@ -20,15 +17,9 @@ public abstract class Entity : IEquatable<Entity>
         return other.Id == Id;
     }
 
-    public static bool operator ==(Entity? first, Entity? second)
-    {
-        return first is not null && second is not null && first.Equals(second);
-    }
+    public static bool operator ==(Entity? first, Entity? second) => first is not null && second is not null && first.Equals(second);
 
-    public static bool operator !=(Entity? first, Entity? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(Entity? first, Entity? second) => !(first == second);
 
     public override bool Equals(object? obj)
     {
@@ -44,8 +35,5 @@ public abstract class Entity : IEquatable<Entity>
         return entity.Id == Id;
     }
 
-    public override int GetHashCode()
-    {
-        return Id.GetHashCode() * 69;
-    }
+    public override int GetHashCode() => Id.GetHashCode() * 69;
 }
