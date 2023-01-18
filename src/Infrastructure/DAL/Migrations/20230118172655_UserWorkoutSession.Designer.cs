@@ -3,6 +3,7 @@ using System;
 using Infrastructure.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(BodyGuardDbContext))]
-    partial class BodyGuardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230118172655_UserWorkoutSession")]
+    partial class UserWorkoutSession
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,11 +329,14 @@ namespace Infrastructure.DAL.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<Guid>("UserWorkoutSessionId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("UserId", "WorkoutId", "Date");
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("UserWorkoutSessions");
+                    b.ToTable("UserWorkoutSession");
                 });
 
             modelBuilder.Entity("Core.Entities.Workout", b =>

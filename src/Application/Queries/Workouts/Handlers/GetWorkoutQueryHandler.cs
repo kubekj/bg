@@ -9,10 +9,7 @@ public class GetWorkoutQueryHandler : IQueryHandler<GetWorkoutQuery,WorkoutDto>
 {
     private readonly IWorkoutRepository _workoutRepository;
 
-    public GetWorkoutQueryHandler(IWorkoutRepository workoutRepository)
-    {
-        _workoutRepository = workoutRepository;
-    }
+    public GetWorkoutQueryHandler(IWorkoutRepository workoutRepository) => _workoutRepository = workoutRepository;
 
     public async Task<WorkoutDto> HandleAsync(GetWorkoutQuery query)
     {

@@ -11,6 +11,7 @@ public static class MapsterConfig
     {
         TypeAdapterConfig<Workout, WorkoutDto>
             .NewConfig()
+            .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Name, src => src.Name)
             .Map(dest => dest.Category, src => src.Category)
             .Map(dest => dest.Exercises, src => src.ExerciseWorkouts.Select(e => e.Exercise).ToList())
@@ -18,6 +19,7 @@ public static class MapsterConfig
 
         TypeAdapterConfig<Exercise, ExerciseDto>
             .NewConfig()
+            .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Name, src => src.Name)
             .Map(dest => dest.BodyPart, src => src.BodyPart)
             .Map(dest => dest.Category, src => src.Category)

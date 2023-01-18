@@ -12,6 +12,4 @@ public class UserWorkout
     public Workout Workout { get; private set; }
     public Guid UserId { get; }
     public User User { get; private set; }
-    
-    public DateTime? Date {get; private set; }
 }
