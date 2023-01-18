@@ -16,6 +16,9 @@ public class Exercise : Entity
         UserExercises = new HashSet<UserExercise>();
     }
 
+    public Exercise CreateCopyForUser(string? name = default, string? bodyPart = default, string? category = default) =>
+        new(Guid.NewGuid(), name ?? Name, bodyPart ?? BodyPart, category ?? Category);
+
     public ExerciseName Name { get; }
     public BodyPart BodyPart { get; }
     public Category Category { get; }

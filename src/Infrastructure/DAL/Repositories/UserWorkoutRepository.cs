@@ -18,17 +18,18 @@ internal sealed class UserWorkoutRepository : IUserWorkoutRepository
     {
         if (expression == default)
             return await _userWorkouts
-                .Include(x => x.Workout)
-                .ThenInclude(x => x.ExerciseWorkouts.Select(ew => ew.Exercise))
                 .ToListAsync();
 
         return await _userWorkouts
-            .Include(x => x.Workout)
-            .ThenInclude(x => x.ExerciseWorkouts)
-            .ThenInclude(x => x.Exercise)
             .Where(expression)
             .ToListAsync();
     }
 
     public async Task AddAsync(UserWorkout userWorkout) => await _userWorkouts.AddAsync(userWorkout);
+    
+    public async Task RemoveAsync(Guid userId, Guid workoutId)
+    {
+        var userWorkout = await _userWorkouts.FindAsync(userId, workoutId);
+        if (userWorkout != null) _userWorkouts.Remove(userWorkout);
+    }
 }
