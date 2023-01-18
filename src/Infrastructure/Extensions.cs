@@ -1,6 +1,7 @@
 using Infrastructure.Auth;
 using Infrastructure.DAL;
 using Infrastructure.Logging;
+using Infrastructure.Mapping;
 using Infrastructure.Middleware;
 using Infrastructure.Security;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,7 @@ public static class Extensions
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddMapsterConfig();
         services.AddControllers();
         services.AddSingleton<ExceptionMiddleware>();
         services.AddPostgres(configuration);

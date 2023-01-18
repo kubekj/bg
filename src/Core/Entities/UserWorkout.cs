@@ -2,10 +2,16 @@ namespace Core.Entities;
 
 public class UserWorkout
 {
-    public Guid WorkoutId { get; private set; }
+    public UserWorkout(Guid workoutId, Guid userId)
+    {
+        WorkoutId = workoutId;
+        UserId = userId;
+    }
+
+    public Guid WorkoutId { get; }
     public Workout Workout { get; private set; }
-    public Guid UserId { get; private set; }
+    public Guid UserId { get; }
     public User User { get; private set; }
     
-    public DateTime Date {get; private set; }
+    public DateTime? Date {get; private set; }
 }

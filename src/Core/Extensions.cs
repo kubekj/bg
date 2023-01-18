@@ -9,5 +9,7 @@ public static class Extensions
     {
         services.AddSingleton<IUserExerciseService, UserExerciseService>();
         services.AddSingleton<IExerciseService, ExerciseService>();
+        services.AddSingleton<IWorkoutService, WorkoutService>();
+        services.AddSingleton<IUserWorkoutService, UserWorkoutService>();
     }
 }

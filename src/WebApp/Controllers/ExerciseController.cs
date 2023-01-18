@@ -14,6 +14,7 @@ public class ExerciseController : ApiController
     private readonly ICommandHandler<CreateExerciseCommand> _createExerciseCommandHandler;
     private readonly IQueryHandler<GetExercisesQuery,IEnumerable<ExerciseDto>> _getExercisesQueryHandler;
     private readonly IQueryHandler<GetExerciseQuery,ExerciseDto> _getExerciseQueryHandler;
+    private Guid _userId;
 
     public ExerciseController(ICommandHandler<CreateExerciseCommand> createExerciseCommandHandler, IQueryHandler<GetExercisesQuery, IEnumerable<ExerciseDto>> getExercisesQueryHandler, IQueryHandler<GetExerciseQuery, ExerciseDto> getExerciseQueryHandler)
     {
@@ -34,8 +35,8 @@ public class ExerciseController : ApiController
     [HttpGet]
     public async Task<ActionResult> Get()
     {
-        var userId = Guid.Parse(HttpContext.User.Identity?.Name);
-        var result = await _getExercisesQueryHandler.HandleAsync(new GetExercisesQuery(userId));
+        _userId = Guid.Parse(HttpContext.User.Identity.Name);
+        var result = await _getExercisesQueryHandler.HandleAsync(new GetExercisesQuery(_userId));
         return Ok(result);
     }
     
@@ -43,8 +44,8 @@ public class ExerciseController : ApiController
     [HttpGet("{id:guid}")]
     public async Task<ActionResult> GetSpecific(Guid id)
     {
-        var userId = Guid.Parse(HttpContext.User.Identity?.Name);
-        var result = await _getExerciseQueryHandler.HandleAsync(new GetExerciseQuery(userId,id));
+        _userId = Guid.Parse(HttpContext.User.Identity.Name);
+        var result = await _getExerciseQueryHandler.HandleAsync(new GetExerciseQuery(_userId,id));
         return Ok(result);
     }
     
