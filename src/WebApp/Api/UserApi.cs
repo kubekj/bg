@@ -1,6 +1,7 @@
 using Application.Abstractions.Messaging.Command;
 using Application.Commands.User;
 using Application.Security;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Api;
 
@@ -22,9 +23,12 @@ public static class UserApi
             return Results.Ok(jwt);
         });
         
-        // webApp.MapPut($"{Endpoint}/edit/{{userid:guid}}", async (Guid userid) =>
-        // {
-        //     
-        // })
+                
+        webApp.MapGet($"{Endpoint}/test", () => Results.Ok("test"));
     }
 }
+
+// webApp.MapPut($"{Endpoint}/edit/{{userid:guid}}", async (Guid userid) =>
+// {
+//     
+// })

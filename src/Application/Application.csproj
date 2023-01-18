@@ -11,9 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Commands\TrainingPlan" />
+        <Folder Include="Commands\TrainingPlan\Handlers" />
         <Folder Include="Commands\Workout" />
-        <Folder Include="Queries" />
     </ItemGroup>
 
     <ItemGroup>

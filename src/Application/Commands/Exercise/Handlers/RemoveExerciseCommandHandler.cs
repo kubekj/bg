@@ -21,8 +21,5 @@ public class RemoveExerciseCommandHandler : ICommandHandler<RemoveExerciseComman
         _userExerciseService = userExerciseService;
     }
 
-    public Task HandleAsync(RemoveExerciseCommand command)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task HandleAsync(RemoveExerciseCommand command) => await _userExerciseRepository.RemoveAsync(command.UserId, command.ExerciseId);
 }

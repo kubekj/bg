@@ -25,7 +25,7 @@ internal sealed class BodyGuardDbContext : DbContext
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
-        HandleTrainingPlanSoftDelete();
+        // HandleTrainingPlanSoftDelete();
         return base.SaveChangesAsync(cancellationToken);
     }
 
@@ -34,16 +34,16 @@ internal sealed class BodyGuardDbContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
     }
 
-    private void HandleTrainingPlanSoftDelete()
-    {
-        var entities = ChangeTracker.Entries().Where(e => e.State == EntityState.Deleted);
-
-        foreach (var entityEntry in entities)
-        {
-            if (entityEntry.Entity is not TrainingPlan trainingPlan) continue;
-            
-            entityEntry.State = EntityState.Modified;
-            trainingPlan.IsDeleted = true;
-        }
-    }
+    // private void HandleTrainingPlanSoftDelete()
+    // {
+    //     var entities = ChangeTracker.Entries().Where(e => e.State == EntityState.Deleted);
+    //
+    //     foreach (var entityEntry in entities)
+    //     {
+    //         if (entityEntry.Entity is not TrainingPlan trainingPlan) continue;
+    //         
+    //         entityEntry.State = EntityState.Modified;
+    //         trainingPlan.IsDeleted = true;
+    //     }
+    // }
 }

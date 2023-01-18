@@ -8,10 +8,7 @@ internal sealed class DbInitializer : IHostedService
 {
     private readonly IServiceProvider _serviceProvider;
 
-    public DbInitializer(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
+    public DbInitializer(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
@@ -24,8 +21,5 @@ internal sealed class DbInitializer : IHostedService
         return Task.CompletedTask;
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
+    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 }

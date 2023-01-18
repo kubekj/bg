@@ -25,7 +25,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseInfrastructure();
 
-app.UseUserApi();
-app.UseExerciseApi();
+// app.UseUserApi();
+// app.UseExerciseApi();
 
 app.Run();
