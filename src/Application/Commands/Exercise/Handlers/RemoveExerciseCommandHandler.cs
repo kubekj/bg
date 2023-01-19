@@ -7,18 +7,14 @@ namespace Application.Commands.Exercise.Handlers;
 public class RemoveExerciseCommandHandler : ICommandHandler<RemoveExerciseCommand>
 {
     private readonly IExerciseRepository _exerciseRepository;
-    private readonly IExerciseService _exerciseService;
 
     private readonly IUserExerciseRepository _userExerciseRepository;
-    private readonly IUserExerciseService _userExerciseService;
 
-    public RemoveExerciseCommandHandler(IExerciseRepository exerciseRepository, IExerciseService exerciseService, 
-        IUserExerciseRepository userExerciseRepository, IUserExerciseService userExerciseService)
+    public RemoveExerciseCommandHandler(IExerciseRepository exerciseRepository,
+        IUserExerciseRepository userExerciseRepository)
     {
         _exerciseRepository = exerciseRepository;
-        _exerciseService = exerciseService;
         _userExerciseRepository = userExerciseRepository;
-        _userExerciseService = userExerciseService;
     }
 
     public async Task HandleAsync(RemoveExerciseCommand command)

@@ -25,6 +25,8 @@ internal sealed class UserWorkoutRepository : IUserWorkoutRepository
             .ToListAsync();
     }
 
+    public async Task<UserWorkout> GetByIdAsync(Guid userId, Guid workoutId) => await _userWorkouts.FindAsync(userId, workoutId);
+
     public async Task AddAsync(UserWorkout userWorkout) => await _userWorkouts.AddAsync(userWorkout);
     
     public async Task RemoveAsync(Guid userId, Guid workoutId)

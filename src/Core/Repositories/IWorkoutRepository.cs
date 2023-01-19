@@ -5,7 +5,7 @@ namespace Core.Repositories;
 
 public interface IWorkoutRepository
 {
-    Task<IEnumerable<Workout>> GetAllAsync(Guid userId);
+    Task<IEnumerable<Workout>> GetAllAsync(Guid userId = default);
     Task<Workout> GetByIdAsync(Guid userId, Guid workoutId);
     Task AddAsync(Workout workout);
     Task RemoveAsync(Guid id);

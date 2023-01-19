@@ -21,7 +21,7 @@ public class EditExerciseCommandHandler : ICommandHandler<EditExerciseCommand>
     {
         var userExercise = await _userExerciseRepository.GetByIdAsync(command.UserId,command.ExerciseId);
 
-        if (userExercise == null)
+        if (userExercise is null)
             return;
 
         var otherUsersExercises = await _userExerciseRepository

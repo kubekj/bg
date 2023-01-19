@@ -13,7 +13,10 @@ internal sealed class WorkoutRepository : IWorkoutRepository
     public async Task<IEnumerable<Workout>> GetAllAsync(Guid userId = default)
     {
         if (userId == default)
-            return await _workouts.ToListAsync();
+            return await _workouts
+                .Include(w => w.ExerciseWorkouts)
+                .ThenInclude(we => we.Exercise)
+                .ToListAsync();
 
         return await _workouts
             .Include(w => w.ExerciseWorkouts)
