@@ -19,8 +19,8 @@ public class SetConfiguration : IEntityTypeConfiguration<Set>
             .IsRequired()
             .HasMaxLength(Repetition.MaxRepetition);
 
-        builder.HasOne(e => e.Exercise)
+        builder.HasOne(e => e.ExerciseWorkout)
             .WithMany(e => e.Sets)
-            .HasForeignKey(e => e.ExerciseId);
+            .HasForeignKey(e => new {e.ExerciseId,e.WorkoutId});
     }
 }

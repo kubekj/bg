@@ -18,10 +18,12 @@ internal sealed class UserWorkoutRepository : IUserWorkoutRepository
     {
         if (expression == default)
             return await _userWorkouts
+                .Include(x => x.Workout)
                 .ToListAsync();
 
         return await _userWorkouts
             .Where(expression)
+            .Include(x => x.Workout)
             .ToListAsync();
     }
 

@@ -4,7 +4,9 @@ using Core.Entities;
 using Core.Repositories;
 using Core.Services.Exercise;
 using Core.ValueObjects.Common;
+using Core.ValueObjects.Set;
 using Core.ValueObjects.Workout;
+using Mapster;
 
 namespace Application.Commands.Workout.Handlers;
 
@@ -37,23 +39,45 @@ public class CreateWorkoutCommandHandler : ICommandHandler<CreateWorkoutCommand>
         var workout = new Core.Entities.Workout(workoutId,workoutName,category);
 
         var allWorkouts = await _workoutRepository.GetAllAsync();
-        var existingWorkoutId = _workoutService.CheckIfWorkoutAlreadyExists(allWorkouts,workout);
+        var existingWorkout = _workoutService.CheckIfWorkoutAlreadyExists(allWorkouts,workout);
 
-        if (existingWorkoutId is not null)
+        if (existingWorkout is not null)
         {
             var allUserWorkouts = (await _userWorkoutRepository
                 .GetAllAsync(x => x.UserId == command.UserId)).ToList();
-            var existingUserWorkoutId = _userWorkoutService.CheckIfUserWorkoutAlreadyExists(allUserWorkouts, workout);
+            var existingUserWorkout = _userWorkoutService.CheckIfUserWorkoutAlreadyExists(allUserWorkouts, existingWorkout.Id);
 
-            if (existingUserWorkoutId is not null)
-                throw new UserAlreadyHasThatWorkoutException(workout.Name);
+            if (existingUserWorkout != null)
+                throw new UserAlreadyHasThatWorkoutException(existingWorkout.Name);
 
-            await _userWorkoutRepository.AddAsync(new UserWorkout(existingWorkoutId.Value,command.UserId));
-            return;
-        }
+            var workoutExerciseWorkouts = existingWorkout.ExerciseWorkouts.ToList();
+            workoutExerciseWorkouts
+                .AddRange(command.ExerciseWithSets.Select(exercise =>
+                {
+                    var sets = new HashSet<Set>();
+                    foreach (var setDto in exercise.Value)
+                        sets.Add(new Set(Guid.NewGuid(), setDto.Repetitions, new Weight(setDto.Weight), exercise.Key,
+                            existingWorkout.Id));
+                    return new ExerciseWorkout(exercise.Key, existingWorkout.Id,
+                            sets);
+                }));
+
+            var newWorkout = new Core.Entities.Workout(Guid.NewGuid(), workoutName, category, workoutExerciseWorkouts);
+            await _workoutRepository.AddAsync(newWorkout);
+            await _userWorkoutRepository.AddAsync(new UserWorkout(newWorkout.Id, command.UserId));
+        } 
 
         await _workoutRepository.AddAsync(workout);
-        foreach (var exerciseId in command.ExerciseIds) await _exerciseWorkoutRepository.AddAsync(new ExerciseWorkout(exerciseId,workoutId));
+        foreach (var exercise in command.ExerciseWithSets)
+        {
+            var sets = new HashSet<Set>();
+            foreach (var setDto in exercise.Value)
+                sets.Add(new Set(Guid.NewGuid(), setDto.Repetitions, new Weight(setDto.Weight), exercise.Key,
+                    workout.Id));
+            await _exerciseWorkoutRepository.AddAsync(new ExerciseWorkout(exercise.Key, workoutId,
+                sets));
+        }
+
         await _userWorkoutRepository.AddAsync(new UserWorkout(workoutId,command.UserId));
     }
 }

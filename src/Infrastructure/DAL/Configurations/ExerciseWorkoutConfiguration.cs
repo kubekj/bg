@@ -15,5 +15,9 @@ public class ExerciseWorkoutConfiguration : IEntityTypeConfiguration<ExerciseWor
         builder.HasOne(e => e.Exercise)
             .WithMany(e => e.ExerciseWorkouts)
             .HasForeignKey(e => e.ExerciseId);
+        
+        builder.HasMany(e => e.Sets)
+            .WithOne(e => e.ExerciseWorkout)
+            .HasForeignKey(e => e.Id);
     }
 }

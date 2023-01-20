@@ -21,9 +21,5 @@ public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
         builder.Property(x => x.Category)
             .HasConversion(x => x.Value, x => new Category(x))
             .IsRequired();
-
-        builder.HasMany(e => e.Sets)
-            .WithOne(e => e.Exercise)
-            .HasForeignKey(e => e.Id);
     }
 }

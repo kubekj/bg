@@ -14,7 +14,15 @@ public static class MapsterConfig
             .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Name, src => src.Name)
             .Map(dest => dest.Category, src => src.Category)
-            .Map(dest => dest.Exercises, src => src.ExerciseWorkouts.Select(e => e.Exercise).ToList())
+            .Map(dest => dest.ExerciseDtos, src => src.ExerciseWorkouts.Select(ew => new ExerciseDto(
+                ew.ExerciseId,
+                ew.Exercise.Name,
+                ew.Exercise.BodyPart,
+                ew.Exercise.Category,
+                ew.Sets
+                    .Adapt<IEnumerable<SetDto>>()
+                    .ToList()
+            )).ToList().Adapt<IEnumerable<ExerciseDto>>().ToList())
             .IgnoreNonMapped(true);
 
         TypeAdapterConfig<Exercise, ExerciseDto>

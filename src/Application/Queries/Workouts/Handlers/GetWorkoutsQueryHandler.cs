@@ -1,5 +1,7 @@
+using System.Collections;
 using Application.Abstractions.Messaging.Query;
 using Application.DTO.Entities;
+using Core.Entities;
 using Core.Repositories;
 using Mapster;
 
@@ -17,8 +19,8 @@ public class GetWorkoutsQueryHandler : IQueryHandler<GetWorkoutsQuery,IEnumerabl
     public async Task<IEnumerable<WorkoutDto>> HandleAsync(GetWorkoutsQuery query)
     {
         var userWorkouts = (await _workoutRepository
-            .GetAllAsync(query.UserId)).ToList();
-
-        return userWorkouts.Adapt<IEnumerable<WorkoutDto>>();
+            .GetAllAsync(query.UserId));
+        
+        return userWorkouts.Adapt<IEnumerable<WorkoutDto>>().ToList();
     }
 }

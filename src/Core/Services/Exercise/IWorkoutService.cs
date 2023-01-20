@@ -4,5 +4,5 @@ namespace Core.Services.Exercise;
 
 public interface IWorkoutService
 {
-    public Guid? CheckIfWorkoutAlreadyExists(IEnumerable<Workout> workouts,Workout workout);
+    public Workout? CheckIfWorkoutAlreadyExists(IEnumerable<Workout> workouts,Workout workout);
 }

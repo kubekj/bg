@@ -16,11 +16,15 @@ internal sealed class WorkoutRepository : IWorkoutRepository
             return await _workouts
                 .Include(w => w.ExerciseWorkouts)
                 .ThenInclude(we => we.Exercise)
+                .ThenInclude(w => w.ExerciseWorkouts)
+                .ThenInclude(s => s.Sets)
                 .ToListAsync();
 
         return await _workouts
             .Include(w => w.ExerciseWorkouts)
             .ThenInclude(we => we.Exercise)
+            .ThenInclude(w => w.ExerciseWorkouts)
+            .ThenInclude(s => s.Sets)
             .Where(w => w.UserWorkouts.Any(uw => uw.UserId == userId))
             .ToListAsync();
     }
