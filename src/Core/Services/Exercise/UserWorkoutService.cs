@@ -4,6 +4,7 @@ namespace Core.Services.Exercise;
 
 public class UserWorkoutService : IUserWorkoutService
 {
-    public Guid? CheckIfUserWorkoutAlreadyExists(IEnumerable<UserWorkout> userWorkouts, Guid existingWorkout) => 
-        userWorkouts.FirstOrDefault(x => x.WorkoutId == existingWorkout)?.WorkoutId;
+    public UserWorkout? CheckIfUserWorkoutAlreadyExists(IEnumerable<UserWorkout> userWorkouts, Workout existingWorkout) => 
+        userWorkouts.FirstOrDefault(x => x.WorkoutId == existingWorkout.Id || x.Workout.Name.Equals(existingWorkout.Name));
+    
 }

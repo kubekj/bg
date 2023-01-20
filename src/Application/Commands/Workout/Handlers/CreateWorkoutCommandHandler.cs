@@ -38,18 +38,20 @@ public class CreateWorkoutCommandHandler : ICommandHandler<CreateWorkoutCommand>
         var category = new Category(command.Category);
         var workout = new Core.Entities.Workout(workoutId,workoutName,category);
 
-        var allWorkouts = await _workoutRepository.GetAllAsync();
+        var allWorkouts = (await _workoutRepository.GetAllAsync()).ToList();
         var existingWorkout = _workoutService.CheckIfWorkoutAlreadyExists(allWorkouts,workout);
+        var existingWorkoutWithTheSameName =
+            _workoutService.CheckIfWorkoutWithTheSameNameAlreadyExists(allWorkouts, workout);
 
         if (existingWorkout is not null)
         {
             var allUserWorkouts = (await _userWorkoutRepository
                 .GetAllAsync(x => x.UserId == command.UserId)).ToList();
-            var existingUserWorkout = _userWorkoutService.CheckIfUserWorkoutAlreadyExists(allUserWorkouts, existingWorkout.Id);
+            var existingUserWorkout = _userWorkoutService.CheckIfUserWorkoutAlreadyExists(allUserWorkouts, existingWorkout);
 
-            if (existingUserWorkout != null)
+            if (existingUserWorkout is not null)
                 throw new UserAlreadyHasThatWorkoutException(existingWorkout.Name);
-
+            
             var workoutExerciseWorkouts = existingWorkout.ExerciseWorkouts.ToList();
             workoutExerciseWorkouts
                 .AddRange(command.ExerciseWithSets.Select(exercise =>
@@ -74,10 +76,10 @@ public class CreateWorkoutCommandHandler : ICommandHandler<CreateWorkoutCommand>
             foreach (var setDto in exercise.Value)
                 sets.Add(new Set(Guid.NewGuid(), setDto.Repetitions, new Weight(setDto.Weight), exercise.Key,
                     workout.Id));
-            await _exerciseWorkoutRepository.AddAsync(new ExerciseWorkout(exercise.Key, workoutId,
+            await _exerciseWorkoutRepository.AddAsync(new ExerciseWorkout(exercise.Key, workout.Id,
                 sets));
         }
 
-        await _userWorkoutRepository.AddAsync(new UserWorkout(workoutId,command.UserId));
+        await _userWorkoutRepository.AddAsync(new UserWorkout(workout.Id,command.UserId));
     }
 }
