@@ -1,6 +1,7 @@
 import style from "./workout-plain-info.module.css"
 import Button from "../../reusable-comps/button";
 import React from "react";
+import Link from "next/link";
 
 const WorkoutPlainInfo = () => {
 
@@ -12,12 +13,14 @@ const WorkoutPlainInfo = () => {
                 </h3>
             </div>
             <div className={style.buttons}>
+                <Link href="/athlete-exercises">
                 <Button iconSrc="/thumbnails/copy-outline.svg" text="Workouts"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         extraStyleType="border"
                         extraStyleValue="1px solid #D0D5DD"
                 />
+                </Link>
                 <Button iconSrc="/thumbnails/add-own.svg" text="Add own"
                         backgroundColorValue="#EEF4FF"
                         isHoveringColor="#8098F9"

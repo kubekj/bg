@@ -1,0 +1,18 @@
+.container{
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+}
+.name{
+    padding: 1rem;
+}
+.choices{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.buttons{
+    padding-left: 79vh;
+}
+.label{
+    padding-left: 0.5rem;
+}
