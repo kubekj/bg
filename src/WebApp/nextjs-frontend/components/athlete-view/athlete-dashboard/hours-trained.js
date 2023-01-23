@@ -1,6 +1,6 @@
 import style from "./hours-trained.module.css";
 import Image from "next/image";
-import Button from "../button";
+import Button from "../reusable-comps/button";
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';

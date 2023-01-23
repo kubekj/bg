@@ -1,5 +1,5 @@
 import style from "./tomorrow-training.module.css";
-import Button from "../button";
+import Button from "../reusable-comps/button";
 import React from "react";
 
 const TomorrowTraining = () => {
