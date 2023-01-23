@@ -30,11 +30,13 @@ const DefaultLeftPane = () => {
                         borderValue="none"
                 />
                 </Link>
+                <Link href="/athlete-calendar">
                 <Button iconSrc="/thumbnails/calendar-number-outline.svg" text="Calendar"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                </Link>
                 <Button iconSrc="/thumbnails/podium-outline.svg" text="Statistics"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
