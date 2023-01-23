@@ -21,6 +21,6 @@ public class SetConfiguration : IEntityTypeConfiguration<Set>
 
         builder.HasOne(e => e.ExerciseWorkout)
             .WithMany(e => e.Sets)
-            .HasForeignKey(e => new {e.ExerciseId,e.WorkoutId});
+            .HasForeignKey(e => new {e.WorkoutId,e.ExerciseId});
     }
 }

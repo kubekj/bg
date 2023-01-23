@@ -156,7 +156,7 @@ namespace Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExerciseId", "WorkoutId");
+                    b.HasIndex("WorkoutId", "ExerciseId");
 
                     b.ToTable("Sets");
                 });
@@ -420,7 +420,7 @@ namespace Infrastructure.DAL.Migrations
                 {
                     b.HasOne("Core.Entities.ExerciseWorkout", "ExerciseWorkout")
                         .WithMany("Sets")
-                        .HasForeignKey("ExerciseId", "WorkoutId")
+                        .HasForeignKey("WorkoutId", "ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

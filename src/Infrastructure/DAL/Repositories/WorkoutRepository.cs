@@ -29,8 +29,16 @@ internal sealed class WorkoutRepository : IWorkoutRepository
             .ToListAsync();
     }
 
-    public async Task<Workout> GetByIdAsync(Guid userId, Guid workoutId)
+    public async Task<Workout> GetByIdAsync(Guid workoutId,Guid userId = default)
     {
+        if (userId == default)
+            return await _workouts
+                .Include(w => w.ExerciseWorkouts)
+                .ThenInclude(we => we.Exercise)
+                .ThenInclude(w => w.ExerciseWorkouts)
+                .ThenInclude(s => s.Sets)
+                .FirstOrDefaultAsync(w => w.Id == workoutId);
+        
         return await _workouts
             .Include(w => w.ExerciseWorkouts)
             .ThenInclude(we => we.Exercise)

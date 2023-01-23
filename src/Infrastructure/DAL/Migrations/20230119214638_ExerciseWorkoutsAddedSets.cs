@@ -36,7 +36,7 @@ namespace Infrastructure.DAL.Migrations
                 table: "Sets",
                 columns: new[] { "ExerciseId", "WorkoutId" },
                 principalTable: "ExerciseWorkouts",
-                principalColumns: new[] { "WorkoutId", "ExerciseId" },
+                principalColumns: new[] { "ExerciseId", "WorkoutId" },
                 onDelete: ReferentialAction.Cascade);
         }
 

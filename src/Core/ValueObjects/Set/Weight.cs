@@ -22,7 +22,7 @@ public class Weight : ValueObject
         return weight.Value;
     }
 
-    public static implicit operator Weight(int value)
+    public static implicit operator Weight(double value)
     {
         return new Weight(value);
     }

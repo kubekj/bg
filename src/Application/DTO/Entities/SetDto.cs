@@ -1,3 +1,3 @@
 namespace Application.DTO.Entities;
 
-public record SetDto (int Repetitions, double Weight);
+public record SetDto (Guid Id, int Repetitions, double Weight);

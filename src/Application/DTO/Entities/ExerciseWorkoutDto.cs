@@ -1,5 +1,3 @@
-using System.Collections;
-
 namespace Application.DTO.Entities;
 
 public record ExerciseWorkoutDto(Guid Id, 

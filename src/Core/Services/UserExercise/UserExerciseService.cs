@@ -1,11 +1,9 @@
-using Core.Entities;
-
-namespace Core.Services.Exercise;
+namespace Core.Services.UserExercise;
 
 public class UserExerciseService : IUserExerciseService
 {
-    public UserExercise? CheckIfUserAlreadyHasExercise(IEnumerable<UserExercise> userExercises,
-        UserExercise newUserExercise)
+    public Entities.UserExercise? CheckIfUserAlreadyHasExercise(IEnumerable<Entities.UserExercise> userExercises,
+        Entities.UserExercise newUserExercise)
     {
         return userExercises.SingleOrDefault(ue =>
             ue.ExerciseId == newUserExercise.ExerciseId && ue.UserId == newUserExercise.UserId);

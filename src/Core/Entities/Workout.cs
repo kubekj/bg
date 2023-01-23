@@ -15,16 +15,6 @@ public class Workout : Entity
         ExerciseWorkouts = new HashSet<ExerciseWorkout>();
         UserWorkoutSessions = new HashSet<UserWorkoutSession>();
     }
-    
-    public Workout(Guid id, WorkoutName name, Category category, IEnumerable<ExerciseWorkout> exerciseWorkouts) : base(id)
-    {
-        Name = name;
-        Category = category;
-        TrainingPlanWorkouts = new HashSet<TrainingPlanWorkout>();
-        UserWorkouts = new HashSet<UserWorkout>();
-        ExerciseWorkouts = exerciseWorkouts;
-        UserWorkoutSessions = new HashSet<UserWorkoutSession>();
-    }
 
     public Workout CreateCopyForUser(string? name = default, string? category = default) => 
         new(Guid.NewGuid(), name ?? Name, category ?? Category);

@@ -32,6 +32,8 @@ public class EditExerciseCommandHandler : ICommandHandler<EditExerciseCommand>
             var copiedExercise = userExercise.Exercise.CreateCopyForUser(command.ExerciseDto.Name,command.ExerciseDto.BodyPart,command.ExerciseDto.Category);
             await _exerciseRepository.AddAsync(copiedExercise);
 
+            await _userExerciseRepository.RemoveAsync(userExercise.UserId,userExercise.ExerciseId);
+            
             var newUserExercise = new UserExercise(copiedExercise.Id, command.UserId);
             await _userExerciseRepository.AddAsync(newUserExercise);
             

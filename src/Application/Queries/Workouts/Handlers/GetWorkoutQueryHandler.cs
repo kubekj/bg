@@ -13,7 +13,7 @@ public class GetWorkoutQueryHandler : IQueryHandler<GetWorkoutQuery,WorkoutDto>
 
     public async Task<WorkoutDto> HandleAsync(GetWorkoutQuery query)
     {
-        var result = await _workoutRepository.GetByIdAsync(query.UserId, query.WorkoutId);
+        var result = await _workoutRepository.GetByIdAsync(query.WorkoutId, query.UserId);
         return result.Adapt<WorkoutDto>();
     }
 }

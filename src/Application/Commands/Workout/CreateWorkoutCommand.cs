@@ -1,6 +1,5 @@
 using Application.Abstractions.Messaging.Command;
 using Application.DTO.Entities;
-using Core.Entities;
 
 namespace Application.Commands.Workout;
 

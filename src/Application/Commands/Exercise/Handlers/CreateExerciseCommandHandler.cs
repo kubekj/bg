@@ -3,6 +3,7 @@ using Application.Exceptions;
 using Core.Entities;
 using Core.Repositories;
 using Core.Services.Exercise;
+using Core.Services.UserExercise;
 using Core.ValueObjects.Common;
 using Core.ValueObjects.Exercise;
 

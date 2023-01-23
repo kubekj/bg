@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using Core.Entities;
 
 namespace Core.Repositories;
@@ -6,7 +5,7 @@ namespace Core.Repositories;
 public interface IWorkoutRepository
 {
     Task<IEnumerable<Workout>> GetAllAsync(Guid userId = default);
-    Task<Workout> GetByIdAsync(Guid userId, Guid workoutId);
+    Task<Workout> GetByIdAsync(Guid workoutId,Guid userId = default);
     Task AddAsync(Workout workout);
     Task RemoveAsync(Guid id);
     Task EditAsync(Workout workout);

@@ -1,7 +1,5 @@
-using System.Collections;
 using Application.Abstractions.Messaging.Query;
 using Application.DTO.Entities;
-using Core.Entities;
 using Core.Repositories;
 using Mapster;
 

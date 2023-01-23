@@ -32,5 +32,12 @@ public static class MapsterConfig
             .Map(dest => dest.BodyPart, src => src.BodyPart)
             .Map(dest => dest.Category, src => src.Category)
             .IgnoreNonMapped(true);
+        
+        TypeAdapterConfig<Set, SetDto>
+            .NewConfig()
+            .Map(dest => dest.Id, src => src.Id)
+            .Map(dest => dest.Repetitions, src => src.Repetitions)
+            .Map(dest => dest.Weight, src => src.Weight)
+            .IgnoreNonMapped(true);
     }
 }

@@ -1,6 +1,5 @@
 using Application.Abstractions.Messaging.Command;
 using Core.Repositories;
-using Core.Services.Exercise;
 
 namespace Application.Commands.Exercise.Handlers;
 

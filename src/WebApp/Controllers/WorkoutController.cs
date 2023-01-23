@@ -12,17 +12,20 @@ namespace WebApp.Controllers;
 public class WorkoutController : ApiController
 {
     private readonly ICommandHandler<CreateWorkoutCommand> _createExerciseCommandHandler;
+    private readonly ICommandHandler<EditWorkoutCommand> _editExerciseCommandHandler;
     private readonly IQueryHandler<GetWorkoutsQuery, IEnumerable<WorkoutDto>> _getWorkoutsQueryHandler;
     private readonly IQueryHandler<GetWorkoutQuery, WorkoutDto> _getWorkoutQueryHandler;
     private Guid _userId;
 
     public WorkoutController(ICommandHandler<CreateWorkoutCommand> createExerciseCommandHandler, 
         IQueryHandler<GetWorkoutsQuery, IEnumerable<WorkoutDto>> getWorkoutsQueryHandler, 
-        IQueryHandler<GetWorkoutQuery, WorkoutDto> getWorkoutQueryHandler)
+        IQueryHandler<GetWorkoutQuery, WorkoutDto> getWorkoutQueryHandler, 
+        ICommandHandler<EditWorkoutCommand> editExerciseCommandHandler)
     {
         _createExerciseCommandHandler = createExerciseCommandHandler;
         _getWorkoutsQueryHandler = getWorkoutsQueryHandler;
         _getWorkoutQueryHandler = getWorkoutQueryHandler;
+        _editExerciseCommandHandler = editExerciseCommandHandler;
     }
     
     [Authorize]
@@ -50,5 +53,14 @@ public class WorkoutController : ApiController
         _userId = Guid.Parse(HttpContext.User.Identity.Name);
         var result = await _getWorkoutQueryHandler.HandleAsync(new GetWorkoutQuery(_userId,id));
         return Ok(result);
+    }
+    
+    [Authorize]
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult> Put(EditWorkoutCommand editWorkoutCommand, Guid id)
+    {
+        _userId = Guid.Parse(HttpContext.User.Identity.Name);
+        await _editExerciseCommandHandler.HandleAsync(editWorkoutCommand with{UserId = _userId, WorkoutId = id});
+        return NoContent();
     }
 }

@@ -1,7 +1,6 @@
 using Application.Abstractions.Messaging.Command;
 using Application.Commands.User;
 using Application.Security;
-using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Api;
 
