@@ -21,7 +21,6 @@ public class User : Entity
         AllowedTrainings = new HashSet<UserTrainingPlan>();
         CreatedTrainingPlans = new HashSet<TrainingPlan>();
         UserWorkouts = new HashSet<UserWorkout>();
-        UserWorkoutSessions = new HashSet<UserWorkoutSession>();
         UserExercises = new HashSet<UserExercise>();
         Ratings = new HashSet<Rating>();
     }
@@ -39,7 +38,6 @@ public class User : Entity
     public IEnumerable<UserExercise> UserExercises { get; }
     public IEnumerable<TrainingPlan> CreatedTrainingPlans { get; }
     public IEnumerable<UserWorkout> UserWorkouts { get; }
-    public IEnumerable<UserWorkoutSession> UserWorkoutSessions { get; }
     public IEnumerable<Rating> Ratings { get; }
 
     public static bool CanBeTrainer(DateTime birthDate)

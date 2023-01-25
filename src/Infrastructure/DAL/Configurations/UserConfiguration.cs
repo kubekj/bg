@@ -40,15 +40,15 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasMany(e => e.Goals)
             .WithOne(e => e.User)
-            .HasForeignKey(e => e.Id);
+            .HasForeignKey(e => e.UserId);
         builder.HasMany(e => e.Measurements)
             .WithOne(e => e.User)
-            .HasForeignKey(e => e.Id);
+            .HasForeignKey(e => e.UserId);
         builder.HasMany(e => e.Ratings)
             .WithOne(e => e.User)
-            .HasForeignKey(e => e.Id);
+            .HasForeignKey(e => e.UserId);
         builder.HasMany(e => e.CreatedTrainingPlans)
             .WithOne(e => e.Author)
-            .HasForeignKey(e => e.Id);
+            .HasForeignKey(e => e.AuthorId);
     }
 }

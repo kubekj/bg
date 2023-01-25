@@ -13,7 +13,6 @@ public class Workout : Entity
         TrainingPlanWorkouts = new HashSet<TrainingPlanWorkout>();
         UserWorkouts = new HashSet<UserWorkout>();
         ExerciseWorkouts = new HashSet<ExerciseWorkout>();
-        UserWorkoutSessions = new HashSet<UserWorkoutSession>();
     }
 
     public Workout CreateCopyForUser(string? name = default, string? category = default) => 
@@ -24,6 +23,4 @@ public class Workout : Entity
     public IEnumerable<TrainingPlanWorkout> TrainingPlanWorkouts { get; }
     public IEnumerable<UserWorkout> UserWorkouts { get; }
     public IEnumerable<ExerciseWorkout> ExerciseWorkouts { get; }
-    
-    public IEnumerable<UserWorkoutSession> UserWorkoutSessions { get; }
 }

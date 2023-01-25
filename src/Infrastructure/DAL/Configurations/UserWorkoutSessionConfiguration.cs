@@ -10,12 +10,8 @@ public class UserWorkoutSessionConfiguration : IEntityTypeConfiguration<UserWork
     {
         builder.HasKey(uws => new { uws.UserId, uws.WorkoutId, uws.Date });
         builder
-            .HasOne(uws => uws.User)
+            .HasOne(uws => uws.UserWorkout)
             .WithMany(u => u.UserWorkoutSessions)
-            .HasForeignKey(uws => uws.UserId);
-        builder
-            .HasOne(uws => uws.Workout)
-            .WithMany(w => w.UserWorkoutSessions)
-            .HasForeignKey(uws => uws.WorkoutId);
+            .HasForeignKey(uws => new {uws.UserId, uws.WorkoutId});
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Infrastructure.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(BodyGuardDbContext))]
-    partial class BodyGuardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230125113404_TrainingPlanChanges2")]
+    partial class TrainingPlanChanges2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,7 +67,6 @@ namespace Infrastructure.DAL.Migrations
             modelBuilder.Entity("Core.Entities.Goal", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("UserId")
@@ -77,15 +79,12 @@ namespace Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Goals");
                 });
 
             modelBuilder.Entity("Core.Entities.Measurement", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<int>("CaloriesIntake")
@@ -108,15 +107,12 @@ namespace Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Measurements");
                 });
 
             modelBuilder.Entity("Core.Entities.Rating", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
@@ -137,8 +133,6 @@ namespace Infrastructure.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("TrainingPlanId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Ratings");
                 });
@@ -165,7 +159,7 @@ namespace Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WorkoutId", "ExerciseId");
+                    b.HasIndex("ExerciseId", "WorkoutId");
 
                     b.ToTable("Sets");
                 });
@@ -173,7 +167,6 @@ namespace Infrastructure.DAL.Migrations
             modelBuilder.Entity("Core.Entities.TrainingPlan", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AuthorId")
@@ -212,8 +205,6 @@ namespace Infrastructure.DAL.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
 
                     b.ToTable("TrainingPlans");
                 });
@@ -396,7 +387,7 @@ namespace Infrastructure.DAL.Migrations
                 {
                     b.HasOne("Core.Entities.User", "User")
                         .WithMany("Goals")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -407,7 +398,7 @@ namespace Infrastructure.DAL.Migrations
                 {
                     b.HasOne("Core.Entities.User", "User")
                         .WithMany("Measurements")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -416,15 +407,15 @@ namespace Infrastructure.DAL.Migrations
 
             modelBuilder.Entity("Core.Entities.Rating", b =>
                 {
-                    b.HasOne("Core.Entities.TrainingPlan", "TrainingPlan")
+                    b.HasOne("Core.Entities.User", "User")
                         .WithMany("Ratings")
-                        .HasForeignKey("TrainingPlanId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.User", "User")
+                    b.HasOne("Core.Entities.TrainingPlan", "TrainingPlan")
                         .WithMany("Ratings")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("TrainingPlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -437,7 +428,7 @@ namespace Infrastructure.DAL.Migrations
                 {
                     b.HasOne("Core.Entities.ExerciseWorkout", "ExerciseWorkout")
                         .WithMany("Sets")
-                        .HasForeignKey("WorkoutId", "ExerciseId")
+                        .HasForeignKey("ExerciseId", "WorkoutId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -448,7 +439,7 @@ namespace Infrastructure.DAL.Migrations
                 {
                     b.HasOne("Core.Entities.User", "Author")
                         .WithMany("CreatedTrainingPlans")
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

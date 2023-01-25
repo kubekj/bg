@@ -39,5 +39,8 @@ public static class Extensions
         services.AddScoped<IUserWorkoutRepository, UserWorkoutRepository>();
         services.AddScoped<IUserExerciseRepository, UserExerciseRepository>();
         services.AddScoped<ISetRepository, SetRepository>();
+        services.AddScoped<ITrainingPlanRepository, TrainingPlanRepository>();
+        services.AddScoped<IUserTrainingPlanRepository, UserTrainingPlanRepository>();
+        services.AddScoped<ITrainingPlanWorkoutRepository, TrainingPlanWorkoutRepository>();
     }
 }
