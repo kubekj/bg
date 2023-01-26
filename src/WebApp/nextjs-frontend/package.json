@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.6",
     "bootstrap": "^5.2.2",
     "chart.js": "^4.0.1",
     "eslint": "8.27.0",

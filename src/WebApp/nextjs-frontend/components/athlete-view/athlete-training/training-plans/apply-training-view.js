@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import TrainingPreview from "./training-preview";
 import Link from "next/link";
+import {Rating, Typography} from "@mui/material";
 
 const ApplyTrainingView = () => {
 
@@ -77,6 +78,14 @@ const ApplyTrainingView = () => {
                     <div className={style.rightBottom}>
                         <div className={style.rating}>
                             <p>Rating</p>
+                            <Typography component="legend"/>
+                            <Rating
+                                name="simple-controlled"
+                                value={5}
+                                // onChange={(event, newValue) => {
+                                //     setValue(newValue);
+                                // }}
+                            /><p>202 reviews</p>
                             <b>4.02</b>
                             <h5>Rate plan</h5>
                         </div>

@@ -42,16 +42,13 @@ const DefaultLeftPane = () => {
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
-                <Button iconSrc="/thumbnails/chatbox-ellipses-outline.svg" text="Messages"
-                        backgroundColorValue="white"
-                        isHoveringColor="#D0D5DD"
-                        borderValue="none"
-                />
+                <Link href="/athlete-marketplace">
                 <Button iconSrc="/thumbnails/bag-outline.svg" text="Marketplace"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                </Link>
             </div>
             <div className={style.bottomButtons}>
                 <Button iconSrc="/thumbnails/log-in-outline.svg" text="Sign up as a Coach"

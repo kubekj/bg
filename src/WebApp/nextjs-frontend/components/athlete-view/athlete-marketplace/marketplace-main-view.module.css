@@ -1,0 +1,25 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-left: 1rem;
+    width: 100%;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    border-bottom: 1px solid #D0D5DD;
+}
+.mid{
+    flex-direction: column;
+    margin: 1rem;
+}
+.search{
+    display: flex;
+}
+.resultSection{
+    display: flex;
+    flex-direction: column;
+}
