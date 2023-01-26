@@ -28,22 +28,22 @@ const SettingsView = () => {
               </div>
               <div className="input-group flex-nowrap" style={{paddingTop:"1rem", paddingBottom: "1rem"}}>
                   <span className="input-group-text" id="addon-wrapping">Preferred language</span>
-                  <input type="email" className="form-control" placeholder="polish" aria-label="language"
+                  <input type="text" className="form-control" placeholder="polish" aria-label="language"
                          aria-describedby="addon-wrapping"/>
               </div>
               <div className="input-group flex-nowrap" style={{paddingTop:"1rem", paddingBottom: "1rem"}}>
                   <span className="input-group-text" id="addon-wrapping">Weight (kg)</span>
-                  <input type="email" className="form-control" placeholder="88" aria-label="weight"
+                  <input type="number" className="form-control" placeholder="88" aria-label="weight"
                          aria-describedby="addon-wrapping"/>
               </div>
               <div className="input-group flex-nowrap" style={{paddingTop:"1rem", paddingBottom: "1rem"}}>
                   <span className="input-group-text" id="addon-wrapping">Height (cm)</span>
-                  <input type="email" className="form-control" placeholder="193" aria-label="height"
+                  <input type="number" className="form-control" placeholder="193" aria-label="height"
                          aria-describedby="addon-wrapping"/>
               </div>
               <div className="input-group flex-nowrap" style={{paddingTop:"1rem", paddingBottom: "1rem", borderBottom: "1px solid #D0D5DD"}}>
                   <span className="input-group-text" id="addon-wrapping">Calories intake (kcal)</span>
-                  <input type="email" className="form-control" placeholder="3300" aria-label="calories"
+                  <input type="number" className="form-control" placeholder="3300" aria-label="calories"
                          aria-describedby="addon-wrapping"/>
               </div>
           </div>
