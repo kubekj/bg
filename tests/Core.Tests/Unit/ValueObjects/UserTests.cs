@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace Core.Tests.Unit.ValueObjects;
 
 public class UserTests

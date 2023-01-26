@@ -2,7 +2,6 @@ using Application;
 using Core;
 using Infrastructure;
 using Infrastructure.Logging;
-using WebApp.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 

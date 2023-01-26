@@ -1,25 +1,32 @@
 using Application.Abstractions.Messaging.Command;
 using Core.Repositories;
-using Core.Services.Exercise;
 
 namespace Application.Commands.Exercise.Handlers;
 
 public class RemoveExerciseCommandHandler : ICommandHandler<RemoveExerciseCommand>
 {
     private readonly IExerciseRepository _exerciseRepository;
-    private readonly IExerciseService _exerciseService;
 
     private readonly IUserExerciseRepository _userExerciseRepository;
-    private readonly IUserExerciseService _userExerciseService;
 
-    public RemoveExerciseCommandHandler(IExerciseRepository exerciseRepository, IExerciseService exerciseService, 
-        IUserExerciseRepository userExerciseRepository, IUserExerciseService userExerciseService)
+    public RemoveExerciseCommandHandler(IExerciseRepository exerciseRepository,
+        IUserExerciseRepository userExerciseRepository)
     {
         _exerciseRepository = exerciseRepository;
-        _exerciseService = exerciseService;
         _userExerciseRepository = userExerciseRepository;
-        _userExerciseService = userExerciseService;
     }
 
-    public async Task HandleAsync(RemoveExerciseCommand command) => await _userExerciseRepository.RemoveAsync(command.UserId, command.ExerciseId);
+    public async Task HandleAsync(RemoveExerciseCommand command)
+    {
+        var otherUserExercises = await _userExerciseRepository
+            .GetAllAsync(x => x.ExerciseId == command.ExerciseId && x.UserId != command.UserId);
+        
+        if (otherUserExercises.Any())
+        {
+            await _userExerciseRepository.RemoveAsync(command.UserId, command.ExerciseId);
+            return;
+        }
+        
+        await _exerciseRepository.RemoveAsync(command.ExerciseId);
+    }
 }

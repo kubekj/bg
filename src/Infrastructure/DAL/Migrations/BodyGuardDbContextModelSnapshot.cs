@@ -64,6 +64,7 @@ namespace Infrastructure.DAL.Migrations
             modelBuilder.Entity("Core.Entities.Goal", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("UserId")
@@ -76,12 +77,15 @@ namespace Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Goals");
                 });
 
             modelBuilder.Entity("Core.Entities.Measurement", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<int>("CaloriesIntake")
@@ -104,12 +108,15 @@ namespace Infrastructure.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Measurements");
                 });
 
             modelBuilder.Entity("Core.Entities.Rating", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("Description")
@@ -131,6 +138,8 @@ namespace Infrastructure.DAL.Migrations
 
                     b.HasIndex("TrainingPlanId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Ratings");
                 });
 
@@ -151,9 +160,12 @@ namespace Infrastructure.DAL.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("double precision");
 
+                    b.Property<Guid>("WorkoutId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ExerciseId");
+                    b.HasIndex("WorkoutId", "ExerciseId");
 
                     b.ToTable("Sets");
                 });
@@ -161,6 +173,7 @@ namespace Infrastructure.DAL.Migrations
             modelBuilder.Entity("Core.Entities.TrainingPlan", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AuthorId")
@@ -177,6 +190,10 @@ namespace Infrastructure.DAL.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
@@ -195,6 +212,8 @@ namespace Infrastructure.DAL.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("TrainingPlans");
                 });
@@ -308,14 +327,30 @@ namespace Infrastructure.DAL.Migrations
                     b.Property<Guid>("WorkoutId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp without time zone");
-
                     b.HasKey("UserId", "WorkoutId");
 
                     b.HasIndex("WorkoutId");
 
                     b.ToTable("UserWorkouts");
+                });
+
+            modelBuilder.Entity("Core.Entities.UserWorkoutSession", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("WorkoutId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("UserId", "WorkoutId", "Date");
+
+                    b.ToTable("UserWorkoutSessions");
                 });
 
             modelBuilder.Entity("Core.Entities.Workout", b =>
@@ -361,7 +396,7 @@ namespace Infrastructure.DAL.Migrations
                 {
                     b.HasOne("Core.Entities.User", "User")
                         .WithMany("Goals")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -372,7 +407,7 @@ namespace Infrastructure.DAL.Migrations
                 {
                     b.HasOne("Core.Entities.User", "User")
                         .WithMany("Measurements")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -381,15 +416,15 @@ namespace Infrastructure.DAL.Migrations
 
             modelBuilder.Entity("Core.Entities.Rating", b =>
                 {
-                    b.HasOne("Core.Entities.User", "User")
-                        .WithMany("Ratings")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Core.Entities.TrainingPlan", "TrainingPlan")
                         .WithMany("Ratings")
                         .HasForeignKey("TrainingPlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany("Ratings")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -400,20 +435,20 @@ namespace Infrastructure.DAL.Migrations
 
             modelBuilder.Entity("Core.Entities.Set", b =>
                 {
-                    b.HasOne("Core.Entities.Exercise", "Exercise")
+                    b.HasOne("Core.Entities.ExerciseWorkout", "ExerciseWorkout")
                         .WithMany("Sets")
-                        .HasForeignKey("ExerciseId")
+                        .HasForeignKey("WorkoutId", "ExerciseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Exercise");
+                    b.Navigation("ExerciseWorkout");
                 });
 
             modelBuilder.Entity("Core.Entities.TrainingPlan", b =>
                 {
                     b.HasOne("Core.Entities.User", "Author")
                         .WithMany("CreatedTrainingPlans")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -496,13 +531,27 @@ namespace Infrastructure.DAL.Migrations
                     b.Navigation("Workout");
                 });
 
+            modelBuilder.Entity("Core.Entities.UserWorkoutSession", b =>
+                {
+                    b.HasOne("Core.Entities.UserWorkout", "UserWorkout")
+                        .WithMany("UserWorkoutSessions")
+                        .HasForeignKey("UserId", "WorkoutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserWorkout");
+                });
+
             modelBuilder.Entity("Core.Entities.Exercise", b =>
                 {
                     b.Navigation("ExerciseWorkouts");
 
-                    b.Navigation("Sets");
-
                     b.Navigation("UserExercises");
+                });
+
+            modelBuilder.Entity("Core.Entities.ExerciseWorkout", b =>
+                {
+                    b.Navigation("Sets");
                 });
 
             modelBuilder.Entity("Core.Entities.TrainingPlan", b =>
@@ -529,6 +578,11 @@ namespace Infrastructure.DAL.Migrations
                     b.Navigation("UserExercises");
 
                     b.Navigation("UserWorkouts");
+                });
+
+            modelBuilder.Entity("Core.Entities.UserWorkout", b =>
+                {
+                    b.Navigation("UserWorkoutSessions");
                 });
 
             modelBuilder.Entity("Core.Entities.Workout", b =>

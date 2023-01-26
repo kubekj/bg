@@ -1,5 +1,6 @@
 using Core.Entities;
 using Core.ValueObjects.Common;
+using Core.ValueObjects.Language;
 using Core.ValueObjects.TrainingPlan;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -35,6 +36,9 @@ public class TrainingPlanConfiguration : IEntityTypeConfiguration<TrainingPlan>
             .HasMaxLength(Description.MaxLength);
         builder.Property(e => e.Status)
             .HasConversion(e => e.Value, e => new Status(e))
+            .IsRequired();
+        builder.Property(e => e.Language)
+            .HasConversion(e => e.Value, e => new Language(e))
             .IsRequired();
 
         builder.HasOne(e => e.Author)

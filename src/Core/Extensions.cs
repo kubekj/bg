@@ -1,4 +1,9 @@
 using Core.Services.Exercise;
+using Core.Services.ExerciseWorkout;
+using Core.Services.TrainingPlan;
+using Core.Services.UserExercise;
+using Core.Services.UserWorkout;
+using Core.Services.Workout;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core;
@@ -9,5 +14,9 @@ public static class Extensions
     {
         services.AddSingleton<IUserExerciseService, UserExerciseService>();
         services.AddSingleton<IExerciseService, ExerciseService>();
+        services.AddSingleton<IWorkoutService, WorkoutService>();
+        services.AddSingleton<IUserWorkoutService, UserWorkoutService>();
+        services.AddSingleton<ITrainingPlanService, TrainingPlanService>();
+        services.AddScoped<IExerciseWorkoutService, ExerciseWorkoutService>();
     }
 }

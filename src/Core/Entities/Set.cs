@@ -10,10 +10,19 @@ public class Set : Entity
         Repetitions = repetitions;
         Weight = weight;
     }
+    
+    public Set(Guid id, Repetition repetitions, Weight weight, Guid workoutId ,Guid exerciseId) : base(id)
+    {
+        Repetitions = repetitions;
+        Weight = weight;
+        WorkoutId = workoutId;
+        ExerciseId = exerciseId;
+    }
 
     public Repetition Repetitions { get; }
     public Weight Weight { get; }
 
-    public Exercise Exercise { get; private set; }
+    public ExerciseWorkout ExerciseWorkout { get; private set; }
+    public Guid WorkoutId { get; private set; }
     public Guid ExerciseId { get; private set; }
 }

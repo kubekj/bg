@@ -1,5 +1,7 @@
 using Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Infrastructure.DAL;
 
@@ -22,6 +24,7 @@ internal sealed class BodyGuardDbContext : DbContext
     public DbSet<UserWorkout> UserWorkouts { get; set; }
     public DbSet<UserExercise> UserExercises { get; set; }
     public DbSet<Workout> Workouts { get; set; }
+    public DbSet<UserWorkoutSession> UserWorkoutSessions { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
@@ -32,6 +35,20 @@ internal sealed class BodyGuardDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        var loggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder
+                .AddFilter((category, level) =>
+                    category == DbLoggerCategory.Database.Command.Name
+                    && level == LogLevel.Information)
+                .AddConsole();
+        });
+        optionsBuilder.UseLoggerFactory(loggerFactory);
+        base.OnConfiguring(optionsBuilder);
     }
 
     // private void HandleTrainingPlanSoftDelete()
