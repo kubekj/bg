@@ -1,5 +1,6 @@
 import style from "../athlete-marketplace/marketplace-main-view.module.css";
 import MarketplaceResultItem from "./marketplace-result-item";
+import Link from "next/link";
 
 const MarketplaceMainView = () => {
 
@@ -24,7 +25,9 @@ const MarketplaceMainView = () => {
                 </div>
             </div>
             <div className={style.resultSection}>
+                <Link href="/athlete-buy-training">
                 <MarketplaceResultItem />
+                </Link>
                 <MarketplaceResultItem />
                 <MarketplaceResultItem />
                 <MarketplaceResultItem />

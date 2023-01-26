@@ -1,0 +1,88 @@
+.container{
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 40%;
+}
+
+.mainImage{
+    margin-top: 1rem;
+    background-image: url("../../../public/apply-training.png");
+    width: 153vh;
+    height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+}
+.midHeader{
+    margin-top: 1rem;
+    border-bottom: 1px solid #D0D5DD;
+}
+.details{
+    margin-top: 2rem;
+}
+.description{
+    display: flex;
+}
+.bottomSection{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+}
+.userInfo{
+    margin-left: 4rem;
+    margin-right: 2rem;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+}
+.avatar{
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    margin-right: 0.75rem
+}
+.trainings{
+    display: flex;
+    margin: 1rem;
+    width: 75%;
+    flex-wrap: wrap;
+}
+.rating{
+    display: flex;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #D0D5DD;
+    border-radius: 20px;
+    box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+    flex-direction: column;
+}
+.bottom{
+    display: flex;
+}
+.rightBottom{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+.apply{
+    margin-top: 2rem;
+    border: 1px solid #D0D5DD;
+    padding: 2rem 2rem 2rem 10rem;
+    border-radius: 20px;
+    box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+    flex-direction: column;
+}
