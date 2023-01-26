@@ -5,8 +5,9 @@ namespace Core.Entities;
 
 public class Measurement : Entity
 {
-    public Measurement(Guid id, BodyWeight weight, BodyHeight height, CaloriesIntake caloriesIntake, DateTime dateProvided) : base(id)
+    public Measurement(Guid id, Guid userId, BodyWeight weight, BodyHeight height, CaloriesIntake caloriesIntake, DateTime dateProvided) : base(id)
     {
+        UserId = userId;
         Weight = weight;
         Height = height;
         CaloriesIntake = caloriesIntake;

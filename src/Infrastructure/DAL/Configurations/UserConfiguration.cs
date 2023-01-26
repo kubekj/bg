@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.ValueObjects.Common;
 using Core.ValueObjects.Language;
 using Core.ValueObjects.User;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,10 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .HasConversion(x => x.Value, x => new Language(x))
             .IsRequired()
             .HasMaxLength(Role.MaxLenght);
+        builder.Property(x => x.Bio)
+            .HasConversion(x => x.Value, x => new Description(x))
+            .IsRequired()
+            .HasMaxLength(Description.MaxLength);
         builder.Property(x => x.CreatedAt).IsRequired();
 
         builder.HasMany(e => e.Goals)

@@ -1,4 +1,6 @@
+using System.Runtime.InteropServices.ComTypes;
 using Core.SeedWork;
+using Core.ValueObjects.Common;
 using Core.ValueObjects.Language;
 using Core.ValueObjects.User;
 
@@ -16,6 +18,7 @@ public class User : Entity
         CreatedAt = createdAt;
         Role = Role.Athlete();
         PreferredLanguage = Language.English;
+        Bio = $"Hey there, my name is {firstName} {lastName} !";
         Measurements = new HashSet<Measurement>();
         Goals = new HashSet<Goal>();
         AllowedTrainings = new HashSet<UserTrainingPlan>();
@@ -25,13 +28,23 @@ public class User : Entity
         Ratings = new HashSet<Rating>();
     }
 
-    public FirstName FirstName { get; }
-    public LastName LastName { get; }
-    public Email Email { get; }
-    public Password Password { get; }
+    public void ChangeDetails(FirstName firstName, LastName lastName, Email email,Language preferredLanguage ,Description bio)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        PreferredLanguage = preferredLanguage;
+        Bio = bio;
+    }
+
+    public FirstName FirstName { get; private set; }
+    public LastName LastName { get; private set;}
+    public Email Email { get; private set;}
+    public Password Password { get; private set;}
     public DateTime CreatedAt { get; }
-    public Role Role { get; }
-    public Language PreferredLanguage { get; }
+    public Role Role { get; private set;}
+    public Language PreferredLanguage { get; private set;}
+    public Description Bio { get; private set;}
     public IEnumerable<Measurement>? Measurements { get; }
     public IEnumerable<Goal> Goals { get; }
     public IEnumerable<UserTrainingPlan> AllowedTrainings { get; }
