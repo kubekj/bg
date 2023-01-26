@@ -11,10 +11,17 @@ internal sealed class MeasurementRepository : IMeasurementRepository
 
     public MeasurementRepository(BodyGuardDbContext context) => _measurements = context.Measurements;
 
-    public Task<Measurement> GetAllMeasurements(Expression<Func<Measurement, bool>> expression = default)
+
+    public Task<List<Measurement>> GetAllMeasurementsAsync(Expression<Func<Measurement, bool>> expression = default)
     {
         throw new NotImplementedException();
     }
+
+    public async Task<Measurement> GetForUserAsync(Guid userId) 
+        => await _measurements
+            .Where(m => m.UserId == userId)
+            .OrderByDescending(m => m.DateProvided)
+            .FirstOrDefaultAsync();
 
     public async Task AddAsync(Measurement measurement) => await _measurements.AddAsync(measurement);
 }

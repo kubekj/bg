@@ -5,6 +5,7 @@ namespace Core.Repositories;
 
 public interface IMeasurementRepository
 {
-    public Task<Measurement> GetAllMeasurements(Expression<Func<Measurement, bool>>? expression = default);
+    public Task<List<Measurement>> GetAllMeasurementsAsync(Expression<Func<Measurement, bool>>? expression = default);
+    public Task<Measurement> GetForUserAsync(Guid userId);
     public Task AddAsync(Measurement measurement);
 }
