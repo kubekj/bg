@@ -56,11 +56,13 @@ const DefaultLeftPane = () => {
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                <Link href="/settings">
                 <Button iconSrc="/thumbnails/settings-outline.svg" text="Settings"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                </Link>
             </div>
             <div className={style.bottomSection}>
                 <div className={style.userInfo}>

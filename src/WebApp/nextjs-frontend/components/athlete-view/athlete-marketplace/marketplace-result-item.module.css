@@ -16,6 +16,10 @@
     background-repeat: no-repeat;
     object-fit: contain;
     border-radius: 20px;
+    /*-webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*-o-background-size: cover;*/
+    /*background-size: cover;*/
 }
 .info{
     width: 33%;
