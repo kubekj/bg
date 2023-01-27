@@ -1,7 +1,7 @@
-import TopHeader from "../../../reusable-comps/top-header";
+import TopHeader from "../../../../reusable-comps/top-header";
 import style from "./training-in-progress.module.css";
 import ExerciseDropdown from "./exercise-dropdown";
-import Button from "../../../reusable-comps/button";
+import Button from "../../../../reusable-comps/button";
 
 const TrainingInProgress = () => {
 

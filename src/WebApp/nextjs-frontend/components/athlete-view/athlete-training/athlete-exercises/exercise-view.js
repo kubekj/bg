@@ -1,5 +1,5 @@
 import style from "./exercise-view.module.css";
-import TopHeader from "../../reusable-comps/top-header";
+import TopHeader from "../../../reusable-comps/top-header";
 
 const ExerciseView = ({title, btnRightLabel}) => {
     return(

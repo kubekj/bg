@@ -2,7 +2,7 @@ import style from "../athlete-marketplace/creator-view.module.css"
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "../reusable-comps/button";
+import Button from "../../reusable-comps/button";
 import TrainingPreview from "../athlete-training/training-plans/training-preview";
 
 const CreatorView = () => {

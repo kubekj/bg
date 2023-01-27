@@ -1,4 +1,4 @@
-import DefaultLeftPane from "../components/athlete-view/reusable-comps/default-left-pane";
+import DefaultLeftPane from "../components/reusable-comps/default-left-pane";
 import style from "../styles/athlete-main-page.module.css"
 import TrainingMain from "../components/athlete-view/athlete-training/training-main-view/training-main";
 

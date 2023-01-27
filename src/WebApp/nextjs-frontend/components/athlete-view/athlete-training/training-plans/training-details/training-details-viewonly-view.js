@@ -1,5 +1,5 @@
 import style from "./training-add-view.module.css";
-import TopHeader from "../../../reusable-comps/top-header";
+import TopHeader from "../../../../reusable-comps/top-header";
 import DetailsTraining from "./details-training";
 
 const TrainingDetailsViewonlyView = () => {

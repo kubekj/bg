@@ -1,0 +1,57 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-left: 1rem;
+    width: 100%;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    /*margin-bottom: 1rem;*/
+    /*margin-left: 1rem;*/
+    /*margin-right: 1rem;*/
+    border-bottom: 1px solid #D0D5DD;
+    width: 100%;
+    justify-items: left;
+    justify-content: left;
+}
+.mainPhoto{
+    margin-top: 1rem;
+    width: 100%;
+    background-image: url("../../public/overview-trainer.jpg");
+    background-repeat: no-repeat;
+    /*object-fit: contain;*/
+    border-radius: 20px;
+    height: 25vh;
+    background-position-y: 50%;
+    /*-webkit-background-size: cover;*/
+    /*-moz-background-size: cover;*/
+    /*-o-background-size: cover;*/
+    background-size: cover;
+}
+.overview{
+    margin-top: 2rem;
+    width: 100%;
+}
+.props{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.paragraph{
+    text-align: left;
+    width: 100%;
+}
+.avatar{
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    margin-right: 0.75rem
+}
+.userInfo{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+}

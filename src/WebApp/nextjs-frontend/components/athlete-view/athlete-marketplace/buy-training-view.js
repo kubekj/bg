@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {Rating, Typography} from "@mui/material";
-import Button from "../reusable-comps/button";
+import Button from "../../reusable-comps/button";
 import TrainingPreview from "../athlete-training/training-plans/training-preview";
 
 const BuyTrainingView = () => {

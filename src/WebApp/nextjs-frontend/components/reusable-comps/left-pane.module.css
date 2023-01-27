@@ -40,7 +40,7 @@
 }
 
 .imageTest{
-    background-image: url("../../../public/logo.png");
+    background-image: url("../../public/logo.png");
     background-repeat: no-repeat;
     object-fit: contain;
 }

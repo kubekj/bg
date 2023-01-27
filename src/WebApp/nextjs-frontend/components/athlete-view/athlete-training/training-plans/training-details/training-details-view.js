@@ -1,7 +1,7 @@
 import style from "./training-details-view.module.css"
-import TopHeader from "../../../reusable-comps/top-header";
-import BelowHeader from "../../../reusable-comps/below-header";
-import BottomButtonsSection from "../../../reusable-comps/bottom-buttons-section";
+import TopHeader from "../../../../reusable-comps/top-header";
+import BelowHeader from "../../../../reusable-comps/below-header";
+import BottomButtonsSection from "../../../../reusable-comps/bottom-buttons-section";
 
 const TrainingDetailsView = () => {
 

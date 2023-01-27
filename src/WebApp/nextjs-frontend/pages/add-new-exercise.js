@@ -1,5 +1,5 @@
 import style from "../styles/athlete-main-page.module.css";
-import DefaultLeftPane from "../components/athlete-view/reusable-comps/default-left-pane";
+import DefaultLeftPane from "../components/reusable-comps/default-left-pane";
 import ExerciseView from "../components/athlete-view/athlete-training/athlete-exercises/exercise-view";
 
 const AddNewExercise = () => {
