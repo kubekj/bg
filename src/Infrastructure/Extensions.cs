@@ -7,6 +7,7 @@ using Infrastructure.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 
 namespace Infrastructure;
 
@@ -21,6 +22,15 @@ public static class Extensions
         services.AddInfrastructureRepositories();
         services.AddCustomLogging();
         services.AddSecurity();
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen(swagger =>
+        {
+            swagger.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "BodyGuard API",
+                Version = "v1"
+            });
+        });
         services.AddAuth(configuration);
         services.AddAuthorization();
     }
@@ -31,9 +41,15 @@ public static class Extensions
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseSwagger();
+        app.UseReDoc(reDoc =>
+        {
+            reDoc.RoutePrefix = "docs";
+            reDoc.SpecUrl("/swagger/v1/swagger.json");
+            reDoc.DocumentTitle = "BodyGuard API";
+        });
         app.UseAuthentication();
         app.UseAuthorization();
-
         app.MapControllerRoute(
             "default",
             "{controller}/{action=Index}/{id?}");

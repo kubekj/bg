@@ -24,7 +24,6 @@ public class MeasurementConfiguration : IEntityTypeConfiguration<Measurement>
             .HasMaxLength(BodyHeight.MaxHeight);
         builder.Property(e => e.DateProvided).IsRequired();
         
-
         builder.HasOne(e => e.User)
             .WithMany(e => e.Measurements)
             .HasForeignKey(e => e.UserId);

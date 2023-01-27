@@ -1,7 +1,11 @@
 using Application.Abstractions.Messaging.Command;
+using Application.Abstractions.Messaging.Query;
 using Application.Commands.User;
 using Application.DTO;
+using Application.DTO.Entities;
+using Application.Queries.User;
 using Application.Security;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
@@ -12,12 +16,22 @@ public class UserController : ApiController
     private readonly ITokenStorage _tokenStorage;
     private readonly ICommandHandler<SignUpCommand> _signUpCommandHandler;
     private readonly ICommandHandler<SignInCommand> _signInCommandHandler;
+    private readonly ICommandHandler<ChangeUserDetailsCommand> _changeUserDetailsCommandHandler;
+    private readonly ICommandHandler<SignUpAsCoachCommand> _signUpAsCoachCommandHandler;
+    private readonly IQueryHandler<GetPersonalInfoQuery,UserDto> _getPersonalInfoQueryHandler;
     
-    public UserController(ICommandHandler<SignUpCommand> signUpCommandHandler, ICommandHandler<SignInCommand> signInCommandHandler, ITokenStorage tokenStorage)
+    public UserController(ICommandHandler<SignUpCommand> signUpCommandHandler, 
+        ICommandHandler<SignInCommand> signInCommandHandler, ITokenStorage tokenStorage, 
+        ICommandHandler<ChangeUserDetailsCommand> changeUserDetailsCommandHandler, 
+        IQueryHandler<GetPersonalInfoQuery, UserDto> getPersonalInfoQueryHandler,
+        ICommandHandler<SignUpAsCoachCommand> signUpAsCoachCommandHandler)
     {
         _signUpCommandHandler = signUpCommandHandler;
         _signInCommandHandler = signInCommandHandler;
         _tokenStorage = tokenStorage;
+        _changeUserDetailsCommandHandler = changeUserDetailsCommandHandler;
+        _getPersonalInfoQueryHandler = getPersonalInfoQueryHandler;
+        _signUpAsCoachCommandHandler = signUpAsCoachCommandHandler;
     }
 
     [HttpPost("signup")]
@@ -32,5 +46,32 @@ public class UserController : ApiController
     {
         await _signInCommandHandler.HandleAsync(command);
         return Ok(_tokenStorage.Get());
+    }
+
+    [Authorize]
+    [HttpPut("details")]
+    public async Task<ActionResult> ChangeDetails(ChangeUserDetailsCommand command)
+    {
+        var userId = Guid.Parse(HttpContext.User.Identity?.Name);
+        await _changeUserDetailsCommandHandler.HandleAsync(command with {UserId = userId});
+        return NoContent();
+    }
+    
+    [Authorize(Roles = "athlete")]
+    [HttpPut("trainer")]
+    public async Task<ActionResult> RegisterAsTrainer()
+    {
+        var userId = Guid.Parse(HttpContext.User.Identity?.Name);
+        await _signUpAsCoachCommandHandler.HandleAsync(new SignUpAsCoachCommand(UserId: userId));
+        return NoContent();
+    }
+    
+    [Authorize]
+    [HttpGet("details")]
+    public async Task<ActionResult> GetDetails()
+    {
+        var userId = Guid.Parse(HttpContext.User.Identity?.Name);
+        var result = await _getPersonalInfoQueryHandler.HandleAsync(new GetPersonalInfoQuery(UserId: userId));
+        return Ok(result);
     }
 }

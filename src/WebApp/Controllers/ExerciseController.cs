@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
 
+[Authorize]
 [Route("exercises")]
 public class ExerciseController : ApiController
 {
@@ -31,15 +32,13 @@ public class ExerciseController : ApiController
         _removeExerciseCommandHandler = removeExerciseCommandHandler;
     }
     
-    [Authorize]
     [HttpPost("create")]
     public async Task<ActionResult> Post(CreateExerciseCommand command)
     {
         await _createExerciseCommandHandler.HandleAsync(command);
         return NoContent();
     }
-    
-    [Authorize]
+
     [HttpPut("{id:guid}")]
     public async Task<ActionResult> Post(Guid id,EditExerciseCommand editExerciseCommand)
     {
@@ -47,8 +46,7 @@ public class ExerciseController : ApiController
         await _editExerciseCommandHandler.HandleAsync(editExerciseCommand with{ UserId = _userId, ExerciseId = id});
         return NoContent();
     }
-    
-    [Authorize]
+
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> Post(Guid id)
     {
@@ -57,7 +55,6 @@ public class ExerciseController : ApiController
         return NoContent();
     }
 
-    [Authorize]
     [HttpGet]
     public async Task<ActionResult> Get()
     {
@@ -66,7 +63,6 @@ public class ExerciseController : ApiController
         return Ok(result);
     }
     
-    [Authorize]
     [HttpGet("{id:guid}")]
     public async Task<ActionResult> GetSpecific(Guid id)
     {
