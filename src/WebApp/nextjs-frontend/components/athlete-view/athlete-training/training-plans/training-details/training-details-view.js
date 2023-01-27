@@ -35,10 +35,10 @@ const TrainingDetailsView = () => {
     return(
         <div className={style.container}>
             <div style={{borderBottom:"1px solid #D0D5DD"}}>
-            <TopHeader title="Training plan"
-                       text="Training plan details provided below"
-                       href="/athlete-apply-training"
-             />
+                <TopHeader title="Training plan"
+                           text="Training plan details provided below"
+                           href="/athlete-apply-training"
+                />
             <BelowHeader title="Healthy back"
                          text="A plan meant dor developing back and core"
             />

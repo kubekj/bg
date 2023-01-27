@@ -30,26 +30,25 @@ const DefaultLeftPane = () => {
                         borderValue="none"
                 />
                 </Link>
+                <Link href="/athlete-calendar">
                 <Button iconSrc="/thumbnails/calendar-number-outline.svg" text="Calendar"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                </Link>
                 <Button iconSrc="/thumbnails/podium-outline.svg" text="Statistics"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
-                <Button iconSrc="/thumbnails/chatbox-ellipses-outline.svg" text="Messages"
-                        backgroundColorValue="white"
-                        isHoveringColor="#D0D5DD"
-                        borderValue="none"
-                />
+                <Link href="/athlete-marketplace">
                 <Button iconSrc="/thumbnails/bag-outline.svg" text="Marketplace"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                </Link>
             </div>
             <div className={style.bottomButtons}>
                 <Button iconSrc="/thumbnails/log-in-outline.svg" text="Sign up as a Coach"
@@ -57,11 +56,13 @@ const DefaultLeftPane = () => {
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                <Link href="/settings">
                 <Button iconSrc="/thumbnails/settings-outline.svg" text="Settings"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                </Link>
             </div>
             <div className={style.bottomSection}>
                 <div className={style.userInfo}>

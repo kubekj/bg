@@ -1,32 +1,32 @@
-import style from "./apply-training-view.module.css"
-import Button from "../../reusable-comps/button";
+import style from "../reusable-comps/training-view.module.css"
 import React from "react";
 import Image from "next/image";
 import TrainingPreview from "./training-preview";
 import Link from "next/link";
 import {Rating, Typography} from "@mui/material";
+import Button from "./button";
 
-const ApplyTrainingView = () => {
+const TrainingView = ({header, backHref, detailsHref, trainingName, applyButtonText, planDescription}) => {
 
     return (
         <div className={style.container}>
             <div className={style.header}>
-                <h3>Training plan</h3>
+                <h3>{header}</h3>
                 <div className={style.mainImage}/>
             </div>
             <div className={style.content}>
                 <div className={style.midHeader}>
-                    <Link href="/athlete-training-main">
-                    <Button iconSrc="/thumbnails/arrow-back-outline.svg"
-                            text="Return to plans"
-                            borderValue="none"
-                            backgroundColorValue="white"
-                            isHoveringColor="#C7D7FE"
-                            extraStyleType="color"
-                            extraStyleValue="#8098F9"
-                    />
+                    <Link href={backHref}>
+                        <Button iconSrc="/thumbnails/arrow-back-outline.svg"
+                                text="Return to plans"
+                                borderValue="none"
+                                backgroundColorValue="white"
+                                isHoveringColor="#C7D7FE"
+                                extraStyleType="color"
+                                extraStyleValue="#8098F9"
+                        />
                     </Link>
-                    <h2>Entry-level full body 4 weeks</h2>
+                    <h2>{trainingName}</h2>
                 </div>
                 <div className={style.details}>
                     <h5>Length: 4 weeks</h5>
@@ -34,11 +34,7 @@ const ApplyTrainingView = () => {
                     <div className={style.description}>
                         <div>
                             <h5>Plan description</h5>
-                            <p>I'm a Product Designer based in Melbourne, Australia. I specialise in UX/UI design, brand
-                                strategy, and Webflow development. I'm always striving to grow and learn something new
-                                and I don't take myself too seriously.
-                                I'm passionate about helping startups grow, improve their customer experience, and to
-                                raise venture capital through good design.</p>
+                            <p>{planDescription}</p>
                         </div>
                         <div>
                             <div className={style.bottomSection}>
@@ -58,7 +54,7 @@ const ApplyTrainingView = () => {
                 <div className={style.bottom}>
                     <div className={style.trainings}>
                         <div>
-                            <Link href="/training-plan-details" style={{textDecoration:"none"}}>
+                            <Link href={detailsHref} style={{textDecoration:"none"}}>
                                 <TrainingPreview/>
                             </Link>
                         </div>
@@ -91,7 +87,7 @@ const ApplyTrainingView = () => {
                         </div>
                         <div className={style.apply}>
                             <Button iconSrc="/thumbnails/checkmark-outline.svg"
-                                    text="Apply plan"
+                                    text={applyButtonText}
                                     borderValue="none"
                                     backgroundColorValue="#8098F9"
                                     isHoveringColor="#C7D7FE"
@@ -106,4 +102,4 @@ const ApplyTrainingView = () => {
     );
 }
 
-export default ApplyTrainingView;
+export default TrainingView;

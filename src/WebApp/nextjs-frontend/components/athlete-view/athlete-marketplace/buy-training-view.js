@@ -1,30 +1,30 @@
-import style from "./apply-training-view.module.css"
-import Button from "../../reusable-comps/button";
+import style from "../athlete-marketplace/buy-training-view.module.css"
 import React from "react";
 import Image from "next/image";
-import TrainingPreview from "./training-preview";
 import Link from "next/link";
 import {Rating, Typography} from "@mui/material";
+import Button from "../reusable-comps/button";
+import TrainingPreview from "../athlete-training/training-plans/training-preview";
 
-const ApplyTrainingView = () => {
+const BuyTrainingView = () => {
 
     return (
         <div className={style.container}>
             <div className={style.header}>
-                <h3>Training plan</h3>
+                <h3>Marketplace</h3>
                 <div className={style.mainImage}/>
             </div>
             <div className={style.content}>
                 <div className={style.midHeader}>
-                    <Link href="/athlete-training-main">
-                    <Button iconSrc="/thumbnails/arrow-back-outline.svg"
-                            text="Return to plans"
-                            borderValue="none"
-                            backgroundColorValue="white"
-                            isHoveringColor="#C7D7FE"
-                            extraStyleType="color"
-                            extraStyleValue="#8098F9"
-                    />
+                    <Link href="/athlete-marketplace">
+                        <Button iconSrc="/thumbnails/arrow-back-outline.svg"
+                                text="Browse more plans"
+                                borderValue="none"
+                                backgroundColorValue="white"
+                                isHoveringColor="#C7D7FE"
+                                extraStyleType="color"
+                                extraStyleValue="#8098F9"
+                        />
                     </Link>
                     <h2>Entry-level full body 4 weeks</h2>
                 </div>
@@ -42,6 +42,7 @@ const ApplyTrainingView = () => {
                         </div>
                         <div>
                             <div className={style.bottomSection}>
+                                <Link href="/creator-details">
                                 <div className={style.userInfo}>
                                     <Image className={style.avatar} src="/avatar-svgrepo-com.svg" alt="dadas" width={30}
                                            height={30}/>
@@ -50,6 +51,7 @@ const ApplyTrainingView = () => {
                                         <p>adsasda@dsaasd.pl</p>
                                     </div>
                                 </div>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -59,7 +61,7 @@ const ApplyTrainingView = () => {
                     <div className={style.trainings}>
                         <div>
                             <Link href="/training-plan-details" style={{textDecoration:"none"}}>
-                                <TrainingPreview/>
+                                <TrainingPreview backHref="/athlete-buy-training"/>
                             </Link>
                         </div>
                         <div>
@@ -90,8 +92,9 @@ const ApplyTrainingView = () => {
                             <h5>Rate plan</h5>
                         </div>
                         <div className={style.apply}>
+                            <h5>120PLN</h5>
                             <Button iconSrc="/thumbnails/checkmark-outline.svg"
-                                    text="Apply plan"
+                                    text="Buy plan"
                                     borderValue="none"
                                     backgroundColorValue="#8098F9"
                                     isHoveringColor="#C7D7FE"
@@ -106,4 +109,4 @@ const ApplyTrainingView = () => {
     );
 }
 
-export default ApplyTrainingView;
+export default BuyTrainingView;
