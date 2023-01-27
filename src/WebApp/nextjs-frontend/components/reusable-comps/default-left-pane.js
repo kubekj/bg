@@ -51,11 +51,13 @@ const DefaultLeftPane = () => {
                 </Link>
             </div>
             <div className={style.bottomButtons}>
+                <Link href="/trainer-dashboard">
                 <Button iconSrc="/thumbnails/log-in-outline.svg" text="Sign up as a Coach"
                         backgroundColorValue="white"
                         isHoveringColor="#D0D5DD"
                         borderValue="none"
                 />
+                </Link>
                 <Link href="/settings">
                 <Button iconSrc="/thumbnails/settings-outline.svg" text="Settings"
                         backgroundColorValue="white"

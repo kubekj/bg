@@ -1,6 +1,6 @@
 import style from "./exercise-list.module.css";
 import Link from "next/link";
-import Button from "../../reusable-comps/button";
+import Button from "../../../reusable-comps/button";
 import React from "react";
 
 const ExercisesList = () => {

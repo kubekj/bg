@@ -1,5 +1,5 @@
 import style from "../styles/athlete-main-page.module.css";
-import DefaultLeftPane from "../components/athlete-view/reusable-comps/default-left-pane";
+import DefaultLeftPane from "../components/reusable-comps/default-left-pane";
 import MarketplaceMainView from "../components/athlete-view/athlete-marketplace/marketplace-main-view";
 
 const AthleteMarketplace = () => {

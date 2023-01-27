@@ -1,4 +1,4 @@
-import style from "../reusable-comps/training-view.module.css"
+import style from "./training-view.module.css"
 import React from "react";
 import Image from "next/image";
 import TrainingPreview from "./training-preview";

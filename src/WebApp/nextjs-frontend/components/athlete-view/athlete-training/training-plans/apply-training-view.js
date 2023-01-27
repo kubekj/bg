@@ -1,5 +1,5 @@
 import style from "./apply-training-view.module.css"
-import Button from "../../reusable-comps/button";
+import Button from "../../../reusable-comps/button";
 import React from "react";
 import Image from "next/image";
 import TrainingPreview from "./training-preview";

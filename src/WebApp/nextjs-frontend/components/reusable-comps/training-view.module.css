@@ -14,7 +14,7 @@
 
 .mainImage{
    margin-top: 1rem;
-   background-image: url("../../../public/apply-training.png");
+   background-image: url("../../public/apply-training.png");
    width: 153vh;
    height: 100%;
    -webkit-background-size: cover;
