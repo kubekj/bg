@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: left;
     margin-left: 1rem;
+    flex: 1;
 }
 .header{
     display: flex;

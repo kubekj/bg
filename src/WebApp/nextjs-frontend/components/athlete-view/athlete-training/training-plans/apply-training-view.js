@@ -57,28 +57,28 @@ const ApplyTrainingView = () => {
                 </div>
                 <div className={style.bottom}>
                     <div className={style.trainings}>
-                        <div>
+                        <div style={{width:"33%"}}>
                             <Link href="/training-plan-details" style={{textDecoration:"none"}}>
                                 <TrainingPreview/>
                             </Link>
                         </div>
-                        <div>
+                        <div style={{width:"33%"}}>
                             <TrainingPreview/>
                         </div>
-                        <div>
+                        <div style={{width:"33%"}}>
                             <TrainingPreview/>
                         </div>
-                        <div>
+                        <div style={{width:"33%"}}>
                             <TrainingPreview/>
                         </div>
-                        <div>
+                        <div style={{width:"33%"}}>
                             <TrainingPreview/>
                         </div>
                     </div>
                     <div className={style.rightBottom}>
                         <div className={style.rating}>
                             <p>Rating</p>
-                            <Typography component="legend"/>
+                            {/*<Typography component="legend"/>*/}
                             <Rating
                                 name="simple-controlled"
                                 value={5}
@@ -90,6 +90,7 @@ const ApplyTrainingView = () => {
                             <h5>Rate plan</h5>
                         </div>
                         <div className={style.apply}>
+
                             <Button iconSrc="/thumbnails/checkmark-outline.svg"
                                     text="Apply plan"
                                     borderValue="none"
@@ -98,6 +99,7 @@ const ApplyTrainingView = () => {
                                     extraStyleType="color"
                                     extraStyleValue="white"
                             />
+
                         </div>
                     </div>
                 </div>

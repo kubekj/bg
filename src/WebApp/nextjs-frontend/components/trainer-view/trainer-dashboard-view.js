@@ -12,6 +12,7 @@ const TrainerDashboardView = () => {
             </div>
             <div className={style.overview}>
                 <TrainerOverviewView />
+                <div style={{borderLeft: "1px solid #D0D5DD", marginLeft:"1rem"}}/>
                 <TrainerRightPaneView />
             </div>
         </div>

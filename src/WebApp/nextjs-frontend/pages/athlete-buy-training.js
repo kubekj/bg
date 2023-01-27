@@ -5,7 +5,7 @@ import BuyTrainingView from "../components/athlete-view/athlete-marketplace/buy-
 const AthleteBuyTraining = () => {
     return(
         <div className={style.container}>
-            <div style={{borderRight: "1px solid #D0D5DD"}}>
+            <div style={{borderRight: "1px solid #D0D5DD", width:"350px"}}>
                 <DefaultLeftPane />
             </div>
             <BuyTrainingView />

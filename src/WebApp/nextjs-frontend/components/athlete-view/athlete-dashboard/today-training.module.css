@@ -1,12 +1,13 @@
 .container{
     border: 1px solid #D0D5DD;
     border-radius: 20px;
-    width: 100vh;
+    width: 66%;
     box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
 }
 .header{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     text-align: left;
     margin: 1rem;
     border-bottom: 1px solid #D0D5DD;
@@ -17,19 +18,20 @@
 }
 .buttonCalendar{
     justify-items: right;
-    margin-left: 58%;
     margin-top: 1rem;
 }
 .buttonDetails{
     justify-items: right;
-    margin-left: 32%;
 }
 .bottomSection{
     display: flex;
     flex-direction: row;
     text-align: left;
-    justify-content: center;
+    margin-left: 1rem;
+    /*justify-content: center;*/
+    justify-content: space-between;
     margin-top: 3rem;
+    margin-right: 1rem;
 }
 .mainIcon{
     width: 4rem;

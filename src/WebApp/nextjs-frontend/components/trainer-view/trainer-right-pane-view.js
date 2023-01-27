@@ -123,6 +123,13 @@ const TrainerRightPaneView = () => {
                         <p>john.doe@gmail.com</p>
                     </div>
                 </div>
+                <div className={style.userInfo}>
+                    <Image className={style.avatar} src="/avatar-svgrepo-com.svg" alt="dadas" width={30} height={30} />
+                    <div>
+                        <h5>John Doe</h5>
+                        <p>john.doe@gmail.com</p>
+                    </div>
+                </div>
             </div>
         </div>
     );
