@@ -14,7 +14,8 @@ public static class MapsterConfig
             .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Name, src => src.Name)
             .Map(dest => dest.Category, src => src.Category)
-            .Map(dest => dest.ExerciseDtos, src => src.ExerciseWorkouts.Select(ew => new ExerciseDto(
+            .Map(dest => dest.ExerciseDtos, src => src.ExerciseWorkouts
+                .Select(ew => new ExerciseDto(
                 ew.ExerciseId,
                 ew.Exercise.Name,
                 ew.Exercise.BodyPart,
@@ -24,6 +25,18 @@ public static class MapsterConfig
                     .ToList()
             )).ToList().Adapt<IEnumerable<ExerciseDto>>().ToList())
             .IgnoreNonMapped(true);
+
+        TypeAdapterConfig<TrainingPlan, TrainingPlanDto>
+            .NewConfig()
+            .Map(dest => dest.Workouts, src => src.TrainingPlanWorkouts
+                .Select(w => w.Workout.Adapt<WorkoutDto>())
+                .ToList())
+            .Map(dest => dest.NoOfExercises, src => src.TrainingPlanWorkouts
+                .Select(w => w.Workout.ExerciseWorkouts
+                    .Select(ew => ew.Exercise))
+                .Count())
+            .Map(src => src.CreatorEmail,dest => dest.Author.Email)
+            .IgnoreNonMapped(false);
 
         TypeAdapterConfig<Exercise, ExerciseDto>
             .NewConfig()

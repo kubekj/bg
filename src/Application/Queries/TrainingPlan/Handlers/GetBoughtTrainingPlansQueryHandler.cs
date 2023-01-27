@@ -3,9 +3,9 @@ using Application.DTO.Entities;
 
 namespace Application.Queries.TrainingPlan.Handlers;
 
-public class GetBoughtTrainingPlansQueryHandler : IQueryHandler<GetAllTrainingPlansQuery,IEnumerable<TrainingPlanDto>>
+public class GetBoughtTrainingPlansQueryHandler : IQueryHandler<GetBoughtTrainingPlansQuery,IEnumerable<TrainingPlanDto>>
 {
-    public Task<IEnumerable<TrainingPlanDto>> HandleAsync(GetAllTrainingPlansQuery query)
+    public Task<IEnumerable<TrainingPlanDto>> HandleAsync(GetBoughtTrainingPlansQuery query)
     {
         throw new NotImplementedException();
     }

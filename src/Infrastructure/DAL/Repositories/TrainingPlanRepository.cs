@@ -14,9 +14,26 @@ internal sealed class TrainingPlanRepository : ITrainingPlanRepository
     public async Task<IEnumerable<TrainingPlan>> GetAllAsync(Expression<Func<TrainingPlan, bool>> expression = default)
     {
         if (expression != default)
-            return await _trainingPlans.Where(expression).ToListAsync();
+            return await _trainingPlans
+                .Include(tp => tp.Author)
+                .Include(tp => tp.TrainingPlanWorkouts)
+                .ThenInclude(tpw => tpw.Workout)
+                .ThenInclude(w => w.ExerciseWorkouts)
+                .ThenInclude(ew => ew.Exercise)
+                .ThenInclude(e => e.ExerciseWorkouts)
+                .ThenInclude(ew => ew.Sets)
+                .Where(expression)
+                .ToListAsync();
 
-        return await _trainingPlans.ToListAsync();
+        return await _trainingPlans               
+            .Include(tp => tp.Author)
+            .Include(tp => tp.TrainingPlanWorkouts)
+            .ThenInclude(tpw => tpw.Workout)
+            .ThenInclude(w => w.ExerciseWorkouts)
+            .ThenInclude(ew => ew.Exercise)
+            .ThenInclude(e => e.ExerciseWorkouts)
+            .ThenInclude(ew => ew.Sets)
+            .ToListAsync();
     }
 
     public Task<TrainingPlan> GetByIdAsync()

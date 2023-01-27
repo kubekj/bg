@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
 
+[Authorize]
 [Route("workouts")]
 public class WorkoutController : ApiController
 {
@@ -31,7 +32,6 @@ public class WorkoutController : ApiController
         _getWorkoutQueryHandler = getWorkoutQueryHandler;
     }
     
-    [Authorize]
     [HttpPost("create")]
     public async Task<ActionResult> Post(CreateWorkoutCommand command)
     {
@@ -40,7 +40,6 @@ public class WorkoutController : ApiController
         return NoContent();
     }
     
-    [Authorize]
     [HttpPost("assign")]
     public async Task<ActionResult> Post(CreateWorkoutSessionCommand command)
     {
@@ -49,7 +48,6 @@ public class WorkoutController : ApiController
         return NoContent();
     }
     
-    [Authorize]
     [HttpGet]
     public async Task<ActionResult> Get()
     {
@@ -58,7 +56,6 @@ public class WorkoutController : ApiController
         return Ok(result);
     }
     
-    [Authorize]
     [HttpGet("{id:guid}")]
     public async Task<ActionResult> Get(Guid id)
     {
@@ -67,7 +64,6 @@ public class WorkoutController : ApiController
         return Ok(result);
     }
     
-    [Authorize]
     [HttpPut("{id:guid}")]
     public async Task<ActionResult> Put(EditWorkoutCommand editWorkoutCommand, Guid id)
     {

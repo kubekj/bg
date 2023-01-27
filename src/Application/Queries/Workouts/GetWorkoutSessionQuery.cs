@@ -1,4 +1,3 @@
-using Application.Abstractions.Messaging.Command;
 using Application.Abstractions.Messaging.Query;
 using Application.DTO.Entities;
 

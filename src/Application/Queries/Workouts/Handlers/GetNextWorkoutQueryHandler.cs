@@ -3,7 +3,6 @@ using Application.DTO.Entities;
 using Application.Exceptions;
 using Core.Repositories;
 using Core.Services.UserWorkoutSession;
-using Core.Shared;
 using Mapster;
 
 namespace Application.Queries.Workouts.Handlers;

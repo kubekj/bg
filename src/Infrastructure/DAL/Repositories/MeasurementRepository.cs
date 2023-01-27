@@ -12,9 +12,12 @@ internal sealed class MeasurementRepository : IMeasurementRepository
     public MeasurementRepository(BodyGuardDbContext context) => _measurements = context.Measurements;
 
 
-    public Task<List<Measurement>> GetAllMeasurementsAsync(Expression<Func<Measurement, bool>> expression = default)
+    public async Task<IEnumerable<Measurement>> GetAllMeasurementsAsync(Expression<Func<Measurement, bool>> expression = default)
     {
-        throw new NotImplementedException();
+        if (expression is not null)
+            return await _measurements.Where(expression).ToListAsync();
+        
+        return await _measurements.ToListAsync();
     }
 
     public async Task<Measurement> GetForUserAsync(Guid userId) 

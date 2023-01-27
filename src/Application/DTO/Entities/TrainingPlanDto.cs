@@ -2,7 +2,7 @@ namespace Application.DTO.Entities;
 
 public record TrainingPlanDto(
     string Title,
-    int Lenght,
+    double Duration,
     int NoOfExercises,
     string SkillLevel,
     string Description,
