@@ -61,7 +61,7 @@ const PlansList = () => {
                             <h4><b>Plans</b></h4>
                         </div>
                         <div style={{marginLeft: "73rem", marginBottom:"0.75rem"}}>
-                            <Link href="/add-new-exercise">
+                            <Link href="/trainer-add-plan">
                                 <Button iconSrc="/thumbnails/add-outline.svg" text="Add new"
                                         backgroundColorValue="#8098F9"
                                         borderValue="none"
