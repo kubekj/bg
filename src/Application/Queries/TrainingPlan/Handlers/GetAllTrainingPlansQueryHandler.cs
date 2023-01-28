@@ -17,6 +17,6 @@ public class GetAllTrainingPlansQueryHandler : IQueryHandler<GetAllTrainingPlans
     public async Task<IEnumerable<TrainingPlanDto>> HandleAsync(GetAllTrainingPlansQuery query)
     {
         var trainingPlans = await _trainingPlanRepository.GetAllAsync();
-        return trainingPlans.Adapt<List<TrainingPlanDto>>();
+        return trainingPlans.Adapt<IEnumerable<TrainingPlanDto>>();
     }
 }

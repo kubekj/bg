@@ -3,4 +3,4 @@ using Application.DTO.Entities;
 
 namespace Application.Queries.TrainingPlan;
 
-public record GetCreatedTrainingPlansQuery() : IQuery<IEnumerable<TrainingPlanDto>>;
+public record GetCreatedTrainingPlansQuery(Guid AuthorId) : IQuery<IEnumerable<TrainingPlanDto>>;

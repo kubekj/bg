@@ -1,12 +1,23 @@
 using Application.Abstractions.Messaging.Query;
 using Application.DTO.Entities;
+using Core.Repositories;
+using Mapster;
 
 namespace Application.Queries.TrainingPlan.Handlers;
 
 public class GetCreatedTrainingPlansQueryHandler : IQueryHandler<GetCreatedTrainingPlansQuery,IEnumerable<TrainingPlanDto>>
 {
-    public Task<IEnumerable<TrainingPlanDto>> HandleAsync(GetCreatedTrainingPlansQuery query)
+    private readonly ITrainingPlanRepository _trainingPlanRepository;
+
+    public GetCreatedTrainingPlansQueryHandler(ITrainingPlanRepository trainingPlanRepository)
     {
-        throw new NotImplementedException();
+        _trainingPlanRepository = trainingPlanRepository;
+    }
+
+    public async Task<IEnumerable<TrainingPlanDto>> HandleAsync(GetCreatedTrainingPlansQuery query)
+    {
+        var trainingPlans =
+            await _trainingPlanRepository.GetAllAsync(tp => tp.AuthorId == query.AuthorId);
+        return trainingPlans.Adapt<IEnumerable<TrainingPlanDto>>();
     }
 }

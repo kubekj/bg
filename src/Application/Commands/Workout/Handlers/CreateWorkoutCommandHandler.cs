@@ -14,21 +14,18 @@ public class CreateWorkoutCommandHandler : ICommandHandler<CreateWorkoutCommand>
 {
     private readonly IWorkoutRepository _workoutRepository;
     private readonly IUserWorkoutRepository _userWorkoutRepository;
-    private readonly IExerciseWorkoutRepository _exerciseWorkoutRepository;
 
     private readonly IWorkoutService _workoutService;
     private readonly IUserWorkoutService _userWorkoutService;
     private readonly IExerciseWorkoutService _exerciseWorkoutService;
 
-    public CreateWorkoutCommandHandler(IWorkoutRepository workoutRepository, 
-        IExerciseWorkoutRepository exerciseWorkoutRepository, 
+    public CreateWorkoutCommandHandler(IWorkoutRepository workoutRepository,
         IUserWorkoutRepository userWorkoutRepository, 
         IUserWorkoutService userWorkoutService, 
         IWorkoutService workoutService, 
         IExerciseWorkoutService exerciseWorkoutService)
     {
         _workoutRepository = workoutRepository;
-        _exerciseWorkoutRepository = exerciseWorkoutRepository;
         _userWorkoutRepository = userWorkoutRepository;
         _userWorkoutService = userWorkoutService;
         _workoutService = workoutService;

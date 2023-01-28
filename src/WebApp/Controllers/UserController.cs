@@ -1,6 +1,7 @@
 using Application.Abstractions.Messaging.Command;
 using Application.Abstractions.Messaging.Query;
 using Application.Commands.User;
+using Application.Commands.User.Handlers;
 using Application.DTO;
 using Application.DTO.Entities;
 using Application.Queries.User;

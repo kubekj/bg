@@ -20,7 +20,8 @@ public class StatisticsController : ApiController
     public async Task<ActionResult> GetAvgWeightGroupedByMonth()
     {
         _userId = Guid.Parse(HttpContext.User.Identity.Name);
-        var result = await _getWeightAvgByMonthQueryHandler.HandleAsync(new GetWeightAvgByMonthQuery(_userId));
+        var result = 
+            await _getWeightAvgByMonthQueryHandler.HandleAsync(new GetWeightAvgByMonthQuery(_userId));
         return Ok(result);
     }
 }

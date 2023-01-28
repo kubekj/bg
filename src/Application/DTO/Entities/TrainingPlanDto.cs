@@ -9,4 +9,5 @@ public record TrainingPlanDto(
     string Language,
     string CreatorEmail,
     double RatingAvg,
+    decimal Price,
     IEnumerable<WorkoutDto> Workouts);
