@@ -1,9 +1,9 @@
-import style from "./exercise-list.module.css";
+import style from "./plans-list.module.css";
 import Link from "next/link";
-import Button from "../../../reusable-comps/button";
+import Button from "../../reusable-comps/button";
 import React from "react";
 
-const ExercisesList = () => {
+const PlansList = () => {
 
     const sampleData = [
         {
@@ -14,7 +14,7 @@ const ExercisesList = () => {
             duration: "2 weeks",
             isActive: true,
             purchaseDate: "Jan 4, 2022",
-            type: "Full-body",
+            type: "Split",
             author: "Olivia Rye"
         },
         {
@@ -47,22 +47,18 @@ const ExercisesList = () => {
             duration: "3 weeks",
             isActive: false,
             purchaseDate: "Jan 4, 2022",
-            type: "Full-body",
+            type: "Push",
             author: "Me"
         },
     ];
 
     return(
         <div className={style.container}>
-            <div className={style.header}>
-                <h2>Exercises</h2>
-                <p>Manage your exercises here.</p>
-            </div>
             <div className={style.tableContainer}>
                 <div className={style.header}>
                     <div className={style.info}>
                         <div>
-                            <h4><b>Exercise</b></h4>
+                            <h4><b>Plans</b></h4>
                         </div>
                         <div style={{marginLeft: "73rem", marginBottom:"0.75rem"}}>
                             <Link href="/add-new-exercise">
@@ -82,9 +78,11 @@ const ExercisesList = () => {
                         <thead className={style.tHead}>
                         <tr>
                             <th className={style.thRegular}>Name</th>
-                            <th className={style.thRegular}>Body Part</th>
-                            <th className={style.thRegular}>Category</th>
-                            <th className={style.thRegular}>Action</th>
+                            <th className={style.thRegular}>Status</th>
+                            <th className={style.thRegular}>Weeks</th>
+                            <th className={style.thRegular}>Created at</th>
+                            <th className={style.thRegular}>Body part</th>
+                            <th className={style.thRegular}>Actions</th>
                         </tr>
                         </thead>
                         <tbody className={style.tBody}>
@@ -98,23 +96,41 @@ const ExercisesList = () => {
                                         </td>
                                         <td className={style.tdRegular}>
                                             <div className={style.infoProgress}
-                                                 style={{backgroundColor: sampleData.map(a => a.isActive) ? "#ECFDF3" : "#FEF3F2",
-                                                     color: sampleData.map(a => a.isActive) ? "#027A48" : "#B42318"
+                                                 style={{backgroundColor: sampleData.find(obj => {
+                                                     return obj.id === training.id
+                                                     }).isActive ? "#ECFDF3" : "#FEF3F2",
+                                                     color: sampleData.find(obj => {
+                                                         return obj.id === training.id
+                                                     }).isActive ? "#027A48" : "#B42318"
                                                  }}
                                             >
-                                                Status
+                                                {sampleData.find(obj => {
+                                                    return obj.id === training.id
+                                                }).isActive ? "Published" : "Unpublished"}
                                             </div>
                                         </td>
                                         <td className={style.tdRegular}>{training.duration}</td>
+                                        <td className={style.tdRegular}>{training.purchaseDate}</td>
+                                        <td className={style.tdRegular}>
+                                            <div className={style.infoProgress}
+                                                 style={{backgroundColor: "#F9F5FF",
+                                                     color: "#98B3DB"
+                                                 }}
+                                            >
+                                                {sampleData.find(obj => {
+                                                    return obj.id === training.id
+                                                }).type}
+                                            </div>
+                                        </td>
                                         <td className={style.tdRegular}>
                                             <div>
                                                 <Link href="/edit-exercise">
-                                                <Button iconSrc="/thumbnails/modify.svg" extraStyleType="marginLeft" extraStyleValue="2rem"
-                                                        backgroundColorValue="white"
-                                                        isHoveringColor="#D0D5DD"
-                                                        borderValue="none"
+                                                    <Button iconSrc="/thumbnails/modify.svg" extraStyleType="marginLeft" extraStyleValue="2rem"
+                                                            backgroundColorValue="white"
+                                                            isHoveringColor="#D0D5DD"
+                                                            borderValue="none"
 
-                                                />
+                                                    />
                                                 </Link>
                                                 <Button iconSrc="/thumbnails/trash-bin-outline.svg" extraStyleType="marginLeft" extraStyleValue="2rem"
                                                         backgroundColorValue="white"
@@ -136,4 +152,4 @@ const ExercisesList = () => {
     );
 }
 
-export default ExercisesList;
+export default PlansList;

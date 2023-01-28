@@ -1,4 +1,4 @@
-import style from "../trainer-view/trainer-dashboard-view.module.css";
+import style from "./trainer-dashboard-view.module.css";
 import TrainerOverviewView from "./trainer-overview-view";
 import TrainerRightPaneView from "./trainer-right-pane-view";
 
