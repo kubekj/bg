@@ -20,11 +20,11 @@
 .mainPhoto{
     margin-top: 1rem;
     width: 100%;
-    background-image: url("../../public/overview-trainer.jpg");
+    background-image: url("../../../public/overview-trainer.jpg");
     background-repeat: no-repeat;
     /*object-fit: contain;*/
     border-radius: 20px;
-    height: 400px;
+    height: 25vh;
     background-position-y: 50%;
     /*-webkit-background-size: cover;*/
     /*-moz-background-size: cover;*/
@@ -43,15 +43,4 @@
 .paragraph{
     text-align: left;
     width: 100%;
-}
-.avatar{
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    margin-right: 0.75rem
-}
-.userInfo{
-    display: flex;
-    flex-direction: row;
-    text-align: left;
 }

@@ -1,0 +1,21 @@
+.container{
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+}
+.name{
+    padding: 1rem;
+}
+.choices{
+
+}
+.buttons{
+    display: flex;
+    justify-content: right;
+}
+.bottomInput{
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    justify-content: space-between;
+}

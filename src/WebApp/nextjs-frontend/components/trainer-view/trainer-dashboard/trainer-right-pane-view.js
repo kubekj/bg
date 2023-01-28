@@ -1,4 +1,4 @@
-import style from "../trainer-view/trainer-right-pane-view.module.css";
+import style from "./trainer-right-pane-view.module.css";
 import React from 'react';
 import {
     Chart as ChartJS,

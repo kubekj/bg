@@ -26,7 +26,7 @@ const TrainerLeftPane = () => {
                                 extraStyleValue="100%"
                         />
                     </Link>
-                    <Link href="/athlete-training-main">
+                    <Link href="/trainer-plans">
                         <Button iconSrc="/thumbnails/layers-outline.svg" text="Plans"
                                 backgroundColorValue="white"
                                 isHoveringColor="#D0D5DD"
