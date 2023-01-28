@@ -6,7 +6,7 @@ const AddNewExercise = () => {
 
     return(
         <div className={style.container}>
-            <div style={{borderRight: "1px solid #D0D5DD"}}>
+            <div style={{borderRight: "1px solid #D0D5DD", width:"350px"}}>
                 <DefaultLeftPane />
             </div>
             <ExerciseView

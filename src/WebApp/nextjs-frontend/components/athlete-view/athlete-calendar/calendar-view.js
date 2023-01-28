@@ -25,13 +25,13 @@ const myEventsList = [
 
 const CalendarView = () => {
     return (
-        <div className="App">
+        <div className="App" style={{marginLeft:"1rem", flex:"1"}}>
             <Calendar
                 localizer={localizer}
                 events={myEventsList}
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height: "100%", width:"85rem"}}
+                style={{height:"100vh", flex:"1"}}
             />
         </div>
     );

@@ -59,21 +59,21 @@ const BuyTrainingView = () => {
                 </div>
                 <div className={style.bottom}>
                     <div className={style.trainings}>
-                        <div>
+                        <div style={{width:"33%"}}>
                             <Link href="/training-plan-details" style={{textDecoration:"none"}}>
                                 <TrainingPreview backHref="/athlete-buy-training"/>
                             </Link>
                         </div>
-                        <div>
+                        <div style={{width:"33%"}}>
                             <TrainingPreview/>
                         </div>
-                        <div>
+                        <div style={{width:"33%"}}>
                             <TrainingPreview/>
                         </div>
-                        <div>
+                        <div style={{width:"33%"}}>
                             <TrainingPreview/>
                         </div>
-                        <div>
+                        <div style={{width:"33%"}}>
                             <TrainingPreview/>
                         </div>
                     </div>

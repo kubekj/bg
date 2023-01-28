@@ -1,5 +1,6 @@
 .container{
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: left;
     margin-left: 1rem;
@@ -24,6 +25,7 @@
 }
 .bottom{
     display: flex;
+    flex: 1;
     flex-direction: row;
     justify-content: left;
     margin-top: 1rem;

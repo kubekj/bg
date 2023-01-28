@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: left;
     margin-left: 1rem;
+    flex: 1;
 }
 .header{
     display: flex;
@@ -14,6 +15,7 @@
     flex-direction: row;
     text-align: left;
     padding: 1.5rem;
+    justify-content: space-between;
 }
 .tableContainer{
     border: 1px solid #D0D5DD;

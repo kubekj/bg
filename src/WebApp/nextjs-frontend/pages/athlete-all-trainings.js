@@ -6,7 +6,7 @@ import TrainingPlansView from "../components/athlete-view/athlete-training/train
 const AthleteAllTrainings = () => {
     return(
         <div className={style.container}>
-            <div style={{borderRight: "1px solid #D0D5DD"}}>
+            <div style={{borderRight: "1px solid #D0D5DD", width:"350px"}}>
                 <DefaultLeftPane />
             </div>
             <TrainingPlansView />

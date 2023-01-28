@@ -51,7 +51,7 @@ const TrainingPlan = () => {
                     <div>
                         <h5><b>Newest training plans</b></h5>
                     </div>
-                    <div style={{marginLeft: "66rem", marginBottom:"0.75rem"}}>
+                    <div style={{marginBottom:"0.75rem"}}>
                         <Link href="/athlete-all-trainings">
                             <Button iconSrc="/thumbnails/copy-outline.svg" text="See all"
                                 backgroundColorValue="white"
@@ -94,12 +94,12 @@ const TrainingPlan = () => {
                                   <td className={style.tdRegular}>{training.author}</td>
                                   <td className={style.tdRegular}>
                                       <div>
-                                        <Button iconSrc="/thumbnails/copy-outline.svg" extraStyleType="marginLeft" extraStyleValue="2rem"
+                                        <Button iconSrc="/thumbnails/copy-outline.svg"
                                               backgroundColorValue="white"
                                               isHoveringColor="#D0D5DD"
                                               borderValue="none"
                                         />
-                                        <Button iconSrc="/thumbnails/trash-bin-outline.svg" extraStyleType="marginLeft" extraStyleValue="2rem"
+                                        <Button iconSrc="/thumbnails/trash-bin-outline.svg"
                                               backgroundColorValue="white"
                                               isHoveringColor="#D0D5DD"
                                               borderValue="none"
