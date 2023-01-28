@@ -20,13 +20,8 @@
     /*align-items: center;*/
     justify-content: left;
     margin-top: 1rem;
+    margin-right: 1rem;
 }
-.img{
-    width: 1.2rem;
-    height: 1.2rem;
-    margin-right: 0.75rem
-}
-
 .bottomButtons{
     /*margin-top: 22rem;*/
     margin-right: 1rem;
@@ -34,9 +29,17 @@
     flex-direction: column;
     text-align: left;
     border-bottom: 1px solid #D0D5DD;
+    margin-bottom: 1rem;
 }
+.img{
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.75rem
+}
+
+
 .bottomSection{
-    margin-top: 2rem;
+    /*margin-top: 2rem;*/
     display: flex;
     flex-direction: row;
     text-align: left;

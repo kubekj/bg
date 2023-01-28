@@ -30,3 +30,27 @@
     justify-content: left;
     margin-top: 1rem;
 }
+/*=======================STATISTICS VIEW*/
+.content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.barChart{
+    display: flex;
+    margin: 2rem 1rem 1rem 1rem;
+    /*border-bottom: 1px solid #D0D5DD;*/
+}
+.donutsSection{
+    margin-top: 2rem;
+    margin-left: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+.eachDonut{
+    width: 28%
+}
+.bottomChart{
+    margin-top: 2rem;
+    display: flex;
+}

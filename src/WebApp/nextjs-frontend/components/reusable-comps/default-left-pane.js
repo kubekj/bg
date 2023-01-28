@@ -44,6 +44,7 @@ const DefaultLeftPane = () => {
                                 extraStyleValue="100%"
                         />
                     </Link>
+                    <Link href="/athlete-statistics" >
                     <Button iconSrc="/thumbnails/podium-outline.svg" text="Statistics"
                             backgroundColorValue="white"
                             isHoveringColor="#D0D5DD"
@@ -51,6 +52,7 @@ const DefaultLeftPane = () => {
                             extraStyleType="width"
                             extraStyleValue="100%"
                     />
+                    </Link>
                     <Link href="/athlete-marketplace" >
                         <Button iconSrc="/thumbnails/bag-outline.svg" text="Marketplace"
                                 backgroundColorValue="white"
