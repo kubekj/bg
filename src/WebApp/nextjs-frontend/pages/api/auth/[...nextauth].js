@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { poster } from "../../../lib/rest-api";
+import { poster, signin } from "../../../lib/rest-api";
 
 export const options = {
   providers: [
@@ -8,12 +8,8 @@ export const options = {
       async authorize(credentials, req) {
         if (credentials == null) return null;
         try {
-          const { user, jwt } = await poster("api/users/signin", {
-            email: credentials.email,
-            password: credentials.password,
-          });
-
-          return { ...user, jwt };
+          const user = await signin(credentials);
+          return user;
         } catch (error) {
           return null;
         }
@@ -35,6 +31,7 @@ export const options = {
     session: async ({ session, token }) => {
       session.jwt = token.jwt;
       session.id = token.id;
+      console.log(session.jwt + "session");
       return Promise.resolve(session);
     },
   },

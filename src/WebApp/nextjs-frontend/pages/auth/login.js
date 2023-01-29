@@ -2,7 +2,6 @@ import style from "../../styles/log-in.module.css";
 import Header from "../../components/register-login/header";
 import LogInContent from "../../components/register-login/log-in-content";
 import Auth from "../../components/layouts/Auth";
-import { getTokenFromLocalCookie } from "../../lib/auth";
 
 const LogIn = () => {
   return (

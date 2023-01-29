@@ -29,7 +29,6 @@ export async function poster(endpoint, data) {
 
 export async function signin(data) {
   const url = `${Url}/users/signin`;
-
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(data),

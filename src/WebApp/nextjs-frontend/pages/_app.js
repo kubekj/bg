@@ -3,11 +3,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 
 import { SessionProvider } from "next-auth/react";
-import { useFetchUser } from "../lib/authContext";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const Layout = Component.layout || (({ children }) => <>{children}</>);
-  var user = useFetchUser;
   return (
     <>
       <Head>
@@ -19,7 +17,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <SessionProvider session={session}>
-        <Layout user={user}>
+        <Layout>
           <Component {...pageProps} />;
         </Layout>
       </SessionProvider>
