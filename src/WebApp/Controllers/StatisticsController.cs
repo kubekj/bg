@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApp.Controllers;
 
 [Authorize]
-[Route("statistics")]
+[Route("api/statistics")]
 public class StatisticsController : ApiController
 {
     private readonly IQueryHandler<GetWeightAvgByMonthQuery,IDictionary<string,double>> _getWeightAvgByMonthQueryHandler;

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApp.Controllers;
 
 [Authorize]
-[Route("exercises")]
+[Route("api/exercises")]
 public class ExerciseController : ApiController
 {
     private readonly ICommandHandler<CreateExerciseCommand> _createExerciseCommandHandler;

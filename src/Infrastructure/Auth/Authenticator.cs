@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Application.DTO;
 using Application.Security;
+using Core.Entities;
 using Core.Shared;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -29,13 +30,13 @@ internal sealed class Authenticator : IAuthenticator
         _signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
     }
 
-    public JwtDto CreateToken(Guid userId, string role)
+    public JwtDto CreateToken(User user, string role)
     {
         var now = _clock.Current();
         var claims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Sub, userId.ToString()),
-            new(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
+            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new(JwtRegisteredClaimNames.UniqueName, user.Id.ToString()),
             new(ClaimTypes.Role, role)
         };
 
@@ -45,7 +46,9 @@ internal sealed class Authenticator : IAuthenticator
 
         return new JwtDto
         {
-            AccessToken = token
+            Id = user.Id,
+            Email = user.Email,
+            Jwt = token
         };
     }
 }

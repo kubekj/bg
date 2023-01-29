@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
 
-[Route("users")]
+[Route("api/users")]
 public class UserController : ApiController
 {
     private readonly ITokenStorage _tokenStorage;

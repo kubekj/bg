@@ -2,6 +2,7 @@ using Application;
 using Core;
 using Infrastructure;
 using Infrastructure.Logging;
+using Infrastructure.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,17 @@ builder.Services.AddCore();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
-
+builder.Services.AddCors(options =>
+{
+    // this defines a CORS policy called "default"
+    options.AddPolicy("default", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+}); 
 builder.UseSerilog();
 
 var app = builder.Build();
@@ -22,6 +33,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors("default");
 app.UseInfrastructure();
 
 // app.UseUserApi();

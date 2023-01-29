@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApp.Controllers;
 
 [Authorize]
-[Route("training-plans")]
+[Route("api/training-plans")]
 public class TrainingPlanController : ApiController
 {
     private readonly ICommandHandler<CreateTrainingPlanCommand> _createTrainingCommandHandler;
