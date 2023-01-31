@@ -1,9 +1,9 @@
 import style from "./hours-trained.module.css";
-import Image from "next/image";
 import Button from "../../reusable-comps/button";
 import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import Link from "next/link";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -61,23 +61,18 @@ const HoursTrained = () => {
                 </div>
             </div>
             <div className={style.bottomSection}>
-                <Button iconSrc="/thumbnails/thunder.svg" text="View all statistics" extraStyleType="border" extraStyleValue="1px solid #D0D5DD"
-                        backgroundColorValue="white"
-                        isHoveringColor="#D0D5DD"
-                />
+                <Link href="/athlete/statistics">
+                    <Button iconSrc="/thumbnails/thunder.svg" text="View all statistics" extraStyleType="border" extraStyleValue="1px solid #D0D5DD"
+                            backgroundColorValue="white"
+                            isHoveringColor="#D0D5DD"
+                    />
+                </Link>
                 <Button iconSrc="/thumbnails/square-add.svg" text="Add goals"
                         backgroundColorValue="#8098F9"
                         isHoveringColor="#C7D7FE"
                         borderValue="none"
                         extraStyleType="color" extraStyleValue="white"
                 />
-                {/*<button type="button" className="btn btn-light"*/}
-                {/*        style={{border: "none", textAlign: "left", backgroundColor: '#D0D5DD',marginRight: "1rem", color:"white"}}*/}
-                {/*>*/}
-                {/*    <Image className={style.thumbNails} src="/thumbnails/square-add.svg" alt="dasda" width={30}*/}
-                {/*           height={30}/>*/}
-                {/*    Add goalsaa*/}
-                {/*</button>*/}
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
-import ExercisesList from "../../components/athlete-view/athlete-training/athlete-exercises/exercises-list";
-import Athlete from "../../components/layouts/Athlete";
+import MarketplaceMainView from "../../../components/athlete-view/athlete-marketplace/marketplace-main-view";
+import Athlete from "../../../components/layouts/Athlete";
 import {getSession} from "next-auth/react";
 
 
@@ -20,10 +20,10 @@ import {getSession} from "next-auth/react";
 //   };
 // }
 
-const AthleteExercises = ({jwt}) => {
-    return <ExercisesList />
+const AthleteMarketplace = ({jwt}) => {
+    return <MarketplaceMainView />
 }
 
-export default AthleteExercises;
+export default AthleteMarketplace;
 
-AthleteExercises.layout = Athlete;
+AthleteMarketplace.layout = Athlete;

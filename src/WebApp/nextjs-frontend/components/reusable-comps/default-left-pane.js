@@ -3,6 +3,7 @@ import Image from "next/image";
 import Button from "./button";
 import Link from "next/link";
 
+
 const DefaultLeftPane = () => {
     return (
         <div className={style.container}>
@@ -17,7 +18,7 @@ const DefaultLeftPane = () => {
                     </form>
                 </div>
                 <div className={style.topButtons} role="group">
-                    <Link href="/athlete-main-page">
+                    <Link href="/athlete/dashboard">
                         <Button iconSrc="/thumbnails/bar-chart-outline.svg" text="Dashboard"
                                 backgroundColorValue="white"
                                 isHoveringColor="#D0D5DD"
@@ -26,7 +27,7 @@ const DefaultLeftPane = () => {
                                 extraStyleValue="100%"
                         />
                     </Link>
-                    <Link href="/athlete-training-main">
+                    <Link href="/athlete/training/">
                         <Button iconSrc="/thumbnails/barbell-outline.svg" text="Trainings"
                                 backgroundColorValue="white"
                                 isHoveringColor="#D0D5DD"
@@ -35,7 +36,7 @@ const DefaultLeftPane = () => {
                                 extraStyleValue="100%"
                         />
                     </Link>
-                    <Link href="/athlete-calendar">
+                    <Link href="/athlete/calendar">
                         <Button iconSrc="/thumbnails/calendar-number-outline.svg" text="Calendar"
                                 backgroundColorValue="white"
                                 isHoveringColor="#D0D5DD"
@@ -44,7 +45,7 @@ const DefaultLeftPane = () => {
                                 extraStyleValue="100%"
                         />
                     </Link>
-                    <Link href="/athlete-statistics" >
+                    <Link href="/athlete/statistics" >
                     <Button iconSrc="/thumbnails/podium-outline.svg" text="Statistics"
                             backgroundColorValue="white"
                             isHoveringColor="#D0D5DD"
@@ -53,7 +54,7 @@ const DefaultLeftPane = () => {
                             extraStyleValue="100%"
                     />
                     </Link>
-                    <Link href="/athlete-marketplace" >
+                    <Link href="/athlete/marketplace" >
                         <Button iconSrc="/thumbnails/bag-outline.svg" text="Marketplace"
                                 backgroundColorValue="white"
                                 isHoveringColor="#D0D5DD"

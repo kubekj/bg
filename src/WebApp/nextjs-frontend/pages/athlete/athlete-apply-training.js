@@ -1,6 +1,6 @@
-import DefaultLeftPane from "../components/reusable-comps/default-left-pane";
-import style from "../styles/athlete-main-page.module.css"
-import ApplyTrainingView from "../components/athlete-view/athlete-training/training-plans/apply-training-view";
+import DefaultLeftPane from "../../components/reusable-comps/default-left-pane";
+import style from "../../styles/athlete-main-page.module.css"
+import ApplyTrainingView from "../../components/athlete-view/athlete-training/training-plans/apply-training-view";
 
 const AthleteApplyTraining = () => {
     return(

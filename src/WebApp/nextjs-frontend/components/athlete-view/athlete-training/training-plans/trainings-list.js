@@ -1,27 +1,26 @@
-import style from "./exercise-list.module.css";
-import React from "react";
+import style from "./trainings-list.module.css";
 import Link from "next/link";
 import Button from "../../../reusable-comps/button";
+import React from "react";
 
-const ExercisesList = ({exercises}) => {
 
-    console.log(exercises);
+const TrainingsList = ({plans}) => {
 
     return (
         <div className={style.container}>
             <div className={style.header}>
-                <h2>Exercises</h2>
-                <p>Manage your exercises here.</p>
+                <h2>Training plans</h2>
+                <p>Manage all your training plans here.</p>
             </div>
             <div className={style.tableContainer}>
                 <div className={style.header}>
                     <div className={style.info}>
                         <div>
-                            <h4><b>Exercise</b></h4>
+                            <h4><b>Plans</b></h4>
                         </div>
                         <div style={{marginBottom: "0.75rem"}}>
-                            <Link href="/add-new-exercise">
-                                <Button iconSrc="/thumbnails/add-outline.svg" text="Add new"
+                            <Link href="/add-new-training">
+                                <Button iconSrc="/thumbnails/add-outline.svg" text="Add training"
                                         backgroundColorValue="#8098F9"
                                         borderValue="none"
                                         isHoveringColor="#C7D7FE"
@@ -37,23 +36,27 @@ const ExercisesList = ({exercises}) => {
                         <thead className={style.tHead}>
                         <tr>
                             <th className={style.thRegular}>Name</th>
-                            <th className={style.thRegular}>Body Part</th>
-                            <th className={style.thRegular}>Category</th>
-                            <th className={style.thRegular}>Action</th>
+                            <th className={style.thRegular}>Weeks</th>
+                            <th className={style.thRegular}>Duration</th>
+                            <th className={style.thRegular}>Purchase date</th>
+                            <th className={style.thRegular}>Type</th>
+                            <th className={style.thRegular}>Actions</th>
                         </tr>
                         </thead>
                         <tbody className={style.tBody}>
-                        {exercises.map(exercise => {
+                        {plans.map(plan => {
                             return (
-                                <tr key={exercise.id}>
-                                    <td className={style.tdRegular}>{exercise.name}</td>
+                                <tr key={plan.title}>
+                                    <td className={style.tdRegular}>{plan.title}</td>
+                                    <td className={style.tdRegular}>{plan.duration}</td>
+                                    <td className={style.tdRegular}>{plan.creatorEmail}</td>
                                     <td className={style.tdRegular}>
                                         <div className={style.infoProgress} style={{backgroundColor: "#F9F5FF",
                                             color: "#98B3DB"
-                                        }}>{exercise.category}
+                                        }}>{plan.skillLevel}
                                         </div>
                                     </td>
-                                    <td className={style.tdRegular}>{exercise.category}</td>
+                                    <td className={style.tdRegular}>{plan.creatorEmail}</td>
                                     <td className={style.tdRegular} style={{padding:"0"}}>
                                         <Button iconSrc="/thumbnails/copy-outline.svg"
                                                 backgroundColorValue="white"
@@ -82,4 +85,4 @@ const ExercisesList = ({exercises}) => {
     );
 }
 
-export default ExercisesList;
+export default TrainingsList;

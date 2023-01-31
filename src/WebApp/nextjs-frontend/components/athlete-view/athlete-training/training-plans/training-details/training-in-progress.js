@@ -10,7 +10,7 @@ const TrainingInProgress = () => {
             <TopHeader
                 title="Training"
                 text="Training details provided below"
-                href="/athlete-all-trainings"
+                href="/athlete/training/trainings"
             />
             <div className={style.name}>
                 <h5>Name</h5>

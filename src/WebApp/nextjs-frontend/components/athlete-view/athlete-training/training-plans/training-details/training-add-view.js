@@ -10,7 +10,7 @@ const TrainingAddView = () => {
             <TopHeader
                 title="Create new training"
                 text="Provide details"
-                href="/athlete-all-trainings"
+                href="/athlete/training/trainings"
             />
             <div className={style.name}>
                 <h5>Name</h5>

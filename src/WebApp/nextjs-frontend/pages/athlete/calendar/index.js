@@ -1,5 +1,5 @@
-import ExercisesList from "../../components/athlete-view/athlete-training/athlete-exercises/exercises-list";
-import Athlete from "../../components/layouts/Athlete";
+import CalendarView from "../../../components/athlete-view/athlete-calendar/calendar-view";
+import Athlete from "../../../components/layouts/Athlete";
 import {getSession} from "next-auth/react";
 
 
@@ -20,10 +20,10 @@ import {getSession} from "next-auth/react";
 //   };
 // }
 
-const AthleteExercises = ({jwt}) => {
-    return <ExercisesList />
-}
+const AthleteCalendar = ({jwt}) => {
+  return <CalendarView />;
+};
 
-export default AthleteExercises;
+export default AthleteCalendar;
 
-AthleteExercises.layout = Athlete;
+AthleteCalendar.layout = Athlete;

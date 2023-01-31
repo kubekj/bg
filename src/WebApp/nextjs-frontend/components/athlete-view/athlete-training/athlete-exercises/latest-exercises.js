@@ -1,20 +1,21 @@
-import style from "./training-plan.module.css";
+import style from "../training-main-view/training-plan.module.css";
 import React from "react";
 import Button from "../../../reusable-comps/button";
 import Link from "next/link";
 
-const TrainingPlan = ({plans}) => {
+const LatestExercises = ({exercises}) => {
+
     return (
-        <div className={style.container}>
+        <div className={style.container} style={{marginBottom:"1rem"}}>
             <div className={style.header}>
                 <div className={style.info}>
                     <div>
                         <h5>
-                            <b>Latest training plans</b>
+                            <b>Latest exercises</b>
                         </h5>
                     </div>
-                    <div style={{marginBottom: "0.75rem"}}>
-                        <Link href='/athlete/training/trainings'>
+                    <div style={{ marginBottom: "0.75rem" }}>
+                        <Link href='/athlete/exercise'>
                             <Button
                                 iconSrc='/thumbnails/copy-outline.svg'
                                 text='See all'
@@ -31,22 +32,18 @@ const TrainingPlan = ({plans}) => {
                 <table className={style.tableOfTrainings}>
                     <thead className={style.tHead}>
                     <tr>
-                        <th className={style.thRegular}>Training name</th>
-                        <th className={style.thRegular}>Duration</th>
-                        <th className={style.thRegular}>Purchase date</th>
-                        <th className={style.thRegular}>Skill level</th>
-                        <th className={style.thRegular}>Author</th>
+                        <th className={style.thRegular}>Exercise name</th>
+                        <th className={style.thRegular}>Category</th>
+                        <th className={style.thRegular}>Body part</th>
                     </tr>
                     </thead>
                     <tbody className={style.tBody}>
-                    {plans.map(plan => {
+                    {exercises.map(exercise => {
                         return (
-                            <tr key={plan.title}>
-                                <td className={style.tdRegular}>{plan.title}</td>
-                                <td className={style.tdRegular}>{plan.duration}</td>
-                                <td className={style.tdRegular}>{plan.creatorEmail}</td>
-                                <td className={style.tdRegular}>{plan.skillLevel}</td>
-                                <td className={style.tdRegular}>{plan.creatorEmail}</td>
+                            <tr key={exercise.id}>
+                                <td className={style.tdRegular}>{exercise.name}</td>
+                                <td className={style.tdRegular}>{exercise.category}</td>
+                                <td className={style.tdRegular}>{exercise.bodyPart}</td>
                             </tr>
                         );
                     })}
@@ -57,4 +54,4 @@ const TrainingPlan = ({plans}) => {
     );
 };
 
-export default TrainingPlan;
+export default LatestExercises;

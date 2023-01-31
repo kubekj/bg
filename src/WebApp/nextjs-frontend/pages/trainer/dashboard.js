@@ -1,6 +1,6 @@
-import style from "../styles/athlete-main-page.module.css"
-import TrainerDashboardView from "../components/trainer-view/trainer-dashboard/trainer-dashboard-view";
-import TrainerLeftPane from "../components/trainer-view/trainer-left-pane";
+import style from "../../styles/athlete-main-page.module.css"
+import TrainerDashboardView from "../../components/trainer-view/trainer-dashboard/trainer-dashboard-view";
+import TrainerLeftPane from "../../components/trainer-view/trainer-left-pane";
 
 const TrainerDashboard = () => {
     return(

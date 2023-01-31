@@ -1,6 +1,6 @@
 import style from "./weight-breakdown.module.css";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,6 +13,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import faker from "faker";
 import Button from "../../reusable-comps/button";
+import Link from "next/link";
 
 ChartJS.register(
   CategoryScale,
@@ -102,14 +103,16 @@ const WeightBreakdown = () => {
         <Bar options={options} data={data} />
       </div>
       <div className={style.bottomSection}>
-        <Button
-          iconSrc='/thumbnails/podium-outline.svg'
-          text='View all statistics'
-          extraStyleType='border'
-          extraStyleValue='1px solid #D0D5DD'
-          backgroundColorValue='white'
-          isHoveringColor='#D0D5DD'
+        <Link href="/athlete/statistics">
+          <Button
+            iconSrc='/thumbnails/podium-outline.svg'
+            text='View all statistics'
+            extraStyleType='border'
+            extraStyleValue='1px solid #D0D5DD'
+            backgroundColorValue='white'
+            isHoveringColor='#D0D5DD'
         />
+        </Link>
       </div>
     </div>
   );

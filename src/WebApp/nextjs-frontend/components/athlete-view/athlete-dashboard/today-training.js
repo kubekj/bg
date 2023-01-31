@@ -1,6 +1,7 @@
 import style from "./today-training.module.css";
 import Button from "../../reusable-comps/button";
 import React from "react";
+import Link from "next/link";
 
 const TodayTraining = () => {
 
@@ -14,6 +15,7 @@ const TodayTraining = () => {
                     </div>
                 </div>
                 <div className={style.buttonCalendar}>
+                    <Link href="/athlete/calendar">
                         <Button iconSrc="/thumbnails/wcalendar-number-outline.svg"
                                 text="Calendar"
                                 borderValue="none"
@@ -22,6 +24,7 @@ const TodayTraining = () => {
                                 extraStyleType="color"
                                 extraStyleValue="white"
                         />
+                        </Link>
                 </div>
             </div>
             <div className={style.bottomSection}>

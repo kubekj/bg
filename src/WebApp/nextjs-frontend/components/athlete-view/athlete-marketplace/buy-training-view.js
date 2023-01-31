@@ -16,7 +16,7 @@ const BuyTrainingView = () => {
             </div>
             <div className={style.content}>
                 <div className={style.midHeader}>
-                    <Link href="/athlete-marketplace">
+                    <Link href="/athlete/marketplace">
                         <Button iconSrc="/thumbnails/arrow-back-outline.svg"
                                 text="Browse more plans"
                                 borderValue="none"

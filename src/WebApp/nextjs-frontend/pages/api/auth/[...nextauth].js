@@ -31,7 +31,7 @@ export const options = {
     session: async ({ session, token }) => {
       session.jwt = token.jwt;
       session.id = token.id;
-      console.log(session.jwt + "session");
+      //console.log(session.jwt + "session");
       return Promise.resolve(session);
     },
   },

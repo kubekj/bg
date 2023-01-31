@@ -1,32 +1,32 @@
 import style from "./training-main.module.css";
 import TrainingPlan from "./training-plan";
-import PreviousTraining from "./previous-training";
-import WorkoutPlainInfo from "./workout-plain-info";
+import LatestWorkouts from "../workouts/latest-workouts";
+import LatestExercises from "../athlete-exercises/latest-exercises";
 
-const TrainingMain = () => {
-  return (
-    <div className={style.container}>
-      <div className={style.header}>
-        <h2>Training</h2>
-        <p>Manage your training data here.</p>
-      </div>
-      <div className={style.mid}>
-        <TrainingPlan />
-      </div>
-      <div className={style.bottom}>
-        <TrainingPlan />
-        <TrainingPlan />
-      </div>
-      {/* <div className={style.header2}>
-                <h2>What's planned for today</h2>
-                <p>Today's training type</p>
+
+const TrainingMain = ({workouts, exercises, plans}) => {
+
+    return (
+        <div className={style.container}>
+            <div className={style.header}>
+                <h2>Training</h2>
+                <p>Manage your training data here.</p>
+            </div>
+            <div className={style.mid}>
+                <TrainingPlan
+                    plans={plans}
+                />
             </div>
             <div className={style.bottom}>
-                <PreviousTraining />
-                <WorkoutPlainInfo />
-            </div> */}
-    </div>
-  );
+                <LatestWorkouts
+                    workouts={workouts}
+                />
+                <LatestExercises
+                    exercises={exercises}
+                />
+            </div>
+        </div>
+    );
 };
 
 export default TrainingMain;
