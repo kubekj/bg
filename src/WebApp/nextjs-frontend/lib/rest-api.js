@@ -3,14 +3,12 @@ export const Url = "http://localhost:5099/api";
 export default async function fetcher(endpoint, options = {}) {
   let response;
   const url = `${Url}/${endpoint}`;
-  //console.log(url);
   if (!options) {
     response = await fetch(url);
   } else {
     response = await fetch(url, options);
   }
   const data = await response.json();
-  //console.log(data);
   return data;
 }
 
@@ -30,7 +28,7 @@ export async function poster(endpoint, data) {
 }
 
 export async function signin(data) {
-  const url = `${Url}/users/signin`;
+  const url = `${Url}/api/users/signin`;
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(data),
