@@ -1,6 +1,7 @@
 namespace Application.DTO.Entities;
 
 public record TrainingPlanDto(
+    Guid Id,
     string Title,
     double Duration,
     int NoOfExercises,

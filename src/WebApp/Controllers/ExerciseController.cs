@@ -35,7 +35,8 @@ public class ExerciseController : ApiController
     [HttpPost("create")]
     public async Task<ActionResult> Post(CreateExerciseCommand command)
     {
-        await _createExerciseCommandHandler.HandleAsync(command);
+        _userId = Guid.Parse(HttpContext.User.Identity.Name);
+        await _createExerciseCommandHandler.HandleAsync(command with {UserId = _userId});
         return NoContent();
     }
 
@@ -43,12 +44,12 @@ public class ExerciseController : ApiController
     public async Task<ActionResult> Post(Guid id,EditExerciseCommand editExerciseCommand)
     {
         _userId = Guid.Parse(HttpContext.User.Identity.Name);
-        await _editExerciseCommandHandler.HandleAsync(editExerciseCommand with{ UserId = _userId, ExerciseId = id});
+        await _editExerciseCommandHandler.HandleAsync(editExerciseCommand with { UserId = _userId, ExerciseId = id});
         return NoContent();
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<ActionResult> Post(Guid id)
+    public async Task<ActionResult> Delete(Guid id)
     {
         _userId = Guid.Parse(HttpContext.User.Identity.Name);
         await _removeExerciseCommandHandler.HandleAsync(new RemoveExerciseCommand(_userId,id));

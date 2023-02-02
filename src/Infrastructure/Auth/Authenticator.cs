@@ -46,7 +46,8 @@ internal sealed class Authenticator : IAuthenticator
 
         return new JwtDto
         {
-            Id = user.Id,
+            FullName = $"{user.FirstName} {user.LastName}",
+            Role = user.Role,
             Email = user.Email,
             Jwt = token
         };

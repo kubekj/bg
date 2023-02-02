@@ -10,6 +10,7 @@ const Button = ({
   borderValue,
   backgroundColorValue,
   isHoveringColor,
+  onClick,
 }) => {
   const [isHovering, setIsHovering] = useState(false);
 
@@ -24,7 +25,7 @@ const Button = ({
   return (
     <button
       type='button'
-      className='btn btn-light '
+      className='btn btn-light'
       style={{
         border: `${borderValue}`,
         textAlign: "left",
@@ -36,14 +37,26 @@ const Button = ({
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
     >
-      <Image
-        className={style.thumbNails}
-        src={iconSrc}
-        alt='dasda'
-        width={30}
-        height={30}
-      />
+      {iconSrc && text && (
+        <Image
+          className={style.thumbNailsWithText}
+          src={iconSrc}
+          alt='dasda'
+          width={30}
+          height={30}
+        />
+      )}
+      {iconSrc && !text && (
+        <Image
+          className={style.thumbNails}
+          src={iconSrc}
+          alt='dasda'
+          width={30}
+          height={30}
+        />
+      )}
       {text}
     </button>
   );

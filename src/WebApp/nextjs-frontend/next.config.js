@@ -11,10 +11,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  images: {
-    loader: "akamai",
-    path: "/",
-  },
+  // images: {
+  //   loader: "akamai",
+  //   path: "/",
+  // },
   // rewrites,
   // env: {
   //   NEXTAUTH_URL: process.env.NEXTAUTH_URL,

@@ -8,6 +8,7 @@ import Image from "next/image";
 import logo from "../../public/logo.png";
 import fetcher, { poster, signin } from "../../lib/rest-api";
 import Router from "next/router";
+import { errorHandler } from "../../lib/error-handler";
 
 const validationSchema = Yup.object({
   email: Yup.string(),
@@ -21,27 +22,18 @@ const LogInContent = () => {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      const response = await signIn("credentials", {
+    onSubmit: (values) => {
+      signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
+      }).then(({ ok, error }) => {
+        if (ok) {
+          Router.push("/athlete/dashboard");
+        } else {
+          errorHandler(error, "test");
+        }
       });
-
-      // var response = await signin(values);
-      // if (response.code && response.reason)
-      //   return alert("incorrect credentials");
-      // setToken(response);
-      // var jwt = getTokenFromLocalCookie();
-      // var options = {
-      //   headers: {
-      //     Authorization: `Bearer ${jwt}`,
-      //   },
-      // };
-      // response = await fetcher("workouts", options);
-      //   Router.push("/");
-      console.log(response);
-      alert(JSON.stringify(response, null, 2));
     },
   });
 
@@ -84,7 +76,7 @@ const LogInContent = () => {
             onChange={formik.handleChange}
           />
         </div>
-        <div className={style.bottomSection}>
+        {/* <div className={style.bottomSection}>
           <div className='form-check w-50'>
             <input
               className='form-check-input'
@@ -105,7 +97,7 @@ const LogInContent = () => {
               Forgot password
             </a>
           </div>
-        </div>
+        </div> */}
         <ButtonsSection
           topButtonText='Sign in'
           bottomButtonText='Sign in with Google'

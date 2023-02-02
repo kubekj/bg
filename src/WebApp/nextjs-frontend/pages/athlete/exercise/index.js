@@ -1,36 +1,35 @@
 import Athlete from "../../../components/layouts/Athlete";
-import {getSession} from "next-auth/react";
+import { getSession } from "next-auth/react";
 import fetcher from "../../../lib/rest-api";
 import ExercisesList from "../../../components/athlete-view/athlete-training/athlete-exercises/exercises-list";
 
-
 export async function getServerSideProps(context) {
-    const session = await getSession({req: context.req});
+  const session = await getSession({ req: context.req });
 
-    if (!session) {
-        return {
-            redirect: {
-                destination: "/auth/login",
-                permanent: false,
-            },
-        };
-    }
-
-    const options = {
-        headers: {
-            Authorization: `Bearer ${session.jwt}`,
-        },
-    };
-
-    const response = await fetcher("exercises", options);
-
+  if (!session) {
     return {
-        props: {session: session, jwt: session.jwt, exercises: response},
-    }
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  const options = {
+    headers: {
+      Authorization: `Bearer ${session.jwt}`,
+    },
+  };
+
+  const response = await fetcher("exercises", options);
+
+  return {
+    props: { exercises: response },
+  };
 }
 
-const ExercisePage = ({exercises, jwt}) => {
-    return <ExercisesList exercises={exercises}/>
+const ExercisePage = ({ exercises, jwt }) => {
+  return <ExercisesList exercises={exercises} />;
 };
 
 export default ExercisePage;

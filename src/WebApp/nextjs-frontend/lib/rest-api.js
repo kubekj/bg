@@ -1,4 +1,8 @@
-export const Url = "http://localhost:5099/api";
+import { handleError } from "./error-handler";
+import { handleSuccess } from "./success-handler";
+
+const Url = "http://localhost:5099/api";
+// export const Url = "https://bgpjatk.azurewebsites.net/api";
 
 export default async function fetcher(endpoint, options = {}) {
   let response;
@@ -12,7 +16,7 @@ export default async function fetcher(endpoint, options = {}) {
   return data;
 }
 
-export async function poster(endpoint, data) {
+export async function poster(endpoint, data, jwt) {
   const url = `${Url}/${endpoint}`;
 
   const response = await fetch(url, {
@@ -23,12 +27,12 @@ export async function poster(endpoint, data) {
       Authorization: `Bearer ${jwt}`,
     },
   });
-  const resp = await response.json();
-  return resp;
+  if (!response.ok) return await handleError(response);
+  handleSuccess("Operation ended successfully !");
 }
 
 export async function signin(data) {
-  const url = `${Url}/api/users/signin`;
+  const url = `${Url}/users/signin`;
   const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify(data),
@@ -42,8 +46,7 @@ export async function signin(data) {
 
 export async function putter(endpoint, data, jwt) {
   const url = `${Url}/${endpoint}`;
-  console.log(jwt);
-  await fetch(url, {
+  const response = await fetch(url, {
     method: "PUT",
     body: JSON.stringify(data),
     headers: {
@@ -51,14 +54,18 @@ export async function putter(endpoint, data, jwt) {
       Authorization: `Bearer ${jwt}`,
     },
   });
+  if (!response.ok) return await handleError(response);
+  handleSuccess("Operation ended successfully !");
 }
 
 export async function deleter(endpoint, jwt) {
   const url = `${Url}/${endpoint}`;
-  await fetch(url, {
+  const response = await fetch(url, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
   });
+  if (!response.ok) return await handleError(response);
+  handleSuccess("Operation ended successfully !");
 }

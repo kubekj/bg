@@ -1,6 +1,12 @@
 import style from "../settings/settings.module.css";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+const validationSchema = yup.object().shape({});
 
 const SettingsView = () => {
+  const formik = useFormik();
+
   return (
     <div className={style.container}>
       <div>
@@ -10,7 +16,7 @@ const SettingsView = () => {
         <h5>Personal info</h5>
         <p>Update your personal data here</p>
       </div>
-      <div className={style.main}>
+      <form className={style.main}>
         <div className='input-group' style={{ paddingTop: "2rem" }}>
           <span className='input-group-text w-48'>First and last name</span>
           <input
@@ -120,18 +126,18 @@ const SettingsView = () => {
             aria-describedby='addon-wrapping'
           />
         </div>
-      </div>
-      <div
-        className='d-grid gap-2 d-md-flex justify-content-md-end'
-        style={{ paddingTop: "2rem" }}
-      >
-        <button className='btn btn-light me-md-2' type='button'>
-          Cancel
-        </button>
-        <button className='btn btn-primary' type='button'>
-          Save
-        </button>
-      </div>
+        <div
+          className='d-grid gap-2 d-md-flex justify-content-md-end'
+          style={{ paddingTop: "2rem" }}
+        >
+          <button className='btn btn-light me-md-2' type='button'>
+            Reset
+          </button>
+          <button className='btn btn-primary' type='button'>
+            Save
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

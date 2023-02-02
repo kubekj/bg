@@ -15,12 +15,20 @@ public class Exercise : Entity
         UserExercises = new HashSet<UserExercise>();
     }
 
+    public Exercise Edit(string name, string bodyPart, string category)
+    {
+        Name = name;
+        BodyPart = bodyPart;
+        Category = category;
+        return this;
+    }
+
     public Exercise CreateCopyForUser(string? name = default, string? bodyPart = default, string? category = default) =>
         new(Guid.NewGuid(), name ?? Name, bodyPart ?? BodyPart, category ?? Category);
 
-    public ExerciseName Name { get; }
-    public BodyPart BodyPart { get; }
-    public Category Category { get; }
+    public ExerciseName Name { get; private set; }
+    public BodyPart BodyPart { get; private set; }
+    public Category Category { get; private set; }
     public IEnumerable<ExerciseWorkout> ExerciseWorkouts { get; }
     public IEnumerable<UserExercise> UserExercises { get; }
 }

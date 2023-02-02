@@ -3,4 +3,4 @@ using Application.DTO.Entities;
 
 namespace Application.Commands.Exercise;
 
-public record EditExerciseCommand(Guid UserId, Guid ExerciseId, ExerciseDto ExerciseDto) : ICommand;
+public record EditExerciseCommand(Guid UserId, Guid ExerciseId,string Name, string BodyPart, string Category) : ICommand;

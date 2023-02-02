@@ -1,4 +1,5 @@
 using Application.Abstractions.Messaging.Command;
+using Application.DTO.Entities;
 using Core.Entities;
 using Core.Repositories;
 using Mapster;
@@ -29,7 +30,7 @@ public class EditExerciseCommandHandler : ICommandHandler<EditExerciseCommand>
 
         if (otherUsersExercises.Any())
         {
-            var copiedExercise = userExercise.Exercise.CreateCopyForUser(command.ExerciseDto.Name,command.ExerciseDto.BodyPart,command.ExerciseDto.Category);
+            var copiedExercise = userExercise.Exercise.CreateCopyForUser(command.Name,command.BodyPart,command.Category);
             await _exerciseRepository.AddAsync(copiedExercise);
 
             await _userExerciseRepository.RemoveAsync(userExercise.UserId,userExercise.ExerciseId);
@@ -40,7 +41,7 @@ public class EditExerciseCommandHandler : ICommandHandler<EditExerciseCommand>
             return;
         }
 
-        var exercise = command.ExerciseDto.Adapt<Core.Entities.Exercise>();
+        var exercise = userExercise.Exercise.Edit(command.Name,command.BodyPart,command.Category);
         await _exerciseRepository.EditAsync(exercise);
     }
 }

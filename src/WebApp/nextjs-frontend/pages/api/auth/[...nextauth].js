@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { errorHandler } from "../../../lib/error-handler";
 import { poster, signin } from "../../../lib/rest-api";
 
 export const options = {
@@ -11,7 +12,7 @@ export const options = {
           const user = await signin(credentials);
           return user;
         } catch (error) {
-          return null;
+          errorHandler(error);
         }
       },
     }),
@@ -25,12 +26,16 @@ export const options = {
       if (isSignIn) {
         token.jwt = user.jwt;
         token.id = user.id;
+        token.fullName = user.fullName;
+        token.role = user.role;
       }
       return Promise.resolve(token);
     },
     session: async ({ session, token }) => {
       session.jwt = token.jwt;
       session.id = token.id;
+      session.user.fullName = token.fullName;
+      session.user.role = token.role;
       return Promise.resolve(session);
     },
   },

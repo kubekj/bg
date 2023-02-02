@@ -2,7 +2,6 @@ import React from "react";
 import DefaultLeftPane from "../reusable-comps/default-left-pane";
 import style from "../../styles/athlete-main-page.module.css";
 
-
 function Athlete({ user, loading = false, children }) {
   return (
     <>

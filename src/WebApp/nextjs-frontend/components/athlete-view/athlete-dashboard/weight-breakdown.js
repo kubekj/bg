@@ -103,7 +103,7 @@ const WeightBreakdown = () => {
         <Bar options={options} data={data} />
       </div>
       <div className={style.bottomSection}>
-        <Link href="/athlete/statistics">
+        <Link href='/athlete/statistics'>
           <Button
             iconSrc='/thumbnails/podium-outline.svg'
             text='View all statistics'
@@ -111,7 +111,7 @@ const WeightBreakdown = () => {
             extraStyleValue='1px solid #D0D5DD'
             backgroundColorValue='white'
             isHoveringColor='#D0D5DD'
-        />
+          />
         </Link>
       </div>
     </div>

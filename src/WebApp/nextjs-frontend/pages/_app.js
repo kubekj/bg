@@ -1,8 +1,10 @@
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.css";
-import Head from "next/head";
 
+import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
+
+import { ToastContainer } from "react-toastify";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const Layout = Component.layout || (({ children }) => <>{children}</>);
@@ -19,6 +21,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <SessionProvider session={session}>
         <Layout>
           <Component {...pageProps} />;
+          <ToastContainer />
         </Layout>
       </SessionProvider>
     </>
