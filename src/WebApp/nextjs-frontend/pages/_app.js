@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       </Head>
       <SessionProvider session={session}>
         <Layout>
-          <Component {...pageProps} />;
+          <Component {...pageProps} />
           <ToastContainer />
         </Layout>
       </SessionProvider>
