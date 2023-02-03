@@ -3,12 +3,9 @@
   padding: 2rem;
   flex-direction: column;
   height: 100vh;
-  background: #fcfcfd;
 }
 .header {
   margin-top: 1rem;
   border-bottom: 1px solid #d0d5dd;
   width: 145vh;
-}
-.main {
 }

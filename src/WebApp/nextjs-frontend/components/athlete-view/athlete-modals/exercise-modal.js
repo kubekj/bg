@@ -188,7 +188,7 @@ function ExerciseModal(props) {
                 style={{
                   backgroundColor: "#D0D5DD",
                   color: "#000000",
-                  borderRadius: 14,
+                  borderRadius: 10,
                   border: "none",
                 }}
                 variant='outlined'
@@ -204,7 +204,7 @@ function ExerciseModal(props) {
                 <Button
                   style={{
                     backgroundColor: "#8098F9",
-                    borderRadius: 14,
+                    borderRadius: 10,
                   }}
                   variant='contained'
                   type='submit'
