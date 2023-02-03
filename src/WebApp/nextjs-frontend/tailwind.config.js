@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const windmill = require("@windmill/react-ui/config");
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",

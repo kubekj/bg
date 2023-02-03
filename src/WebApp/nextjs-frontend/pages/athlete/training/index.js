@@ -1,4 +1,4 @@
-import TrainingMain from "../../../components/athlete-view/athlete-training/training-main-view/training-main";
+import TrainingMain from "../../../components/athlete/training/main-view/training-main";
 import Athlete from "../../../components/layouts/Athlete";
 import { getSession } from "next-auth/react";
 import fetcher from "../../../lib/rest-api";

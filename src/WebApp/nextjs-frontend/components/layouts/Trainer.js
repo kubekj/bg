@@ -1,10 +1,10 @@
 import React from "react";
-import TrainerLeftPane from "../trainer-view/trainer-left-pane";
+import TrainerSidebar from "../trainer/sidebar";
 
 function Trainer({ children }) {
   return (
     <>
-      <TrainerLeftPane />
+      <TrainerSidebar />
       {children}
     </>
   );

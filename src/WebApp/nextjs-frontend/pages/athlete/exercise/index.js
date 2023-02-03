@@ -1,7 +1,7 @@
 import Athlete from "../../../components/layouts/Athlete";
 import { getSession } from "next-auth/react";
 import fetcher from "../../../lib/rest-api";
-import ExercisesList from "../../../components/athlete-view/athlete-training/athlete-exercises/exercises-list";
+import ExercisesList from "../../../components/athlete/training/exercises/exercises-list";
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });

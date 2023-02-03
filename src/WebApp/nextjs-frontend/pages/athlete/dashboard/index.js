@@ -1,29 +1,27 @@
-import DashboardMain from "../../../components/athlete-view/athlete-dashboard/dashboard-main";
+import DashboardMain from "../../../components/athlete/dashboard/dashboard-main";
 import Athlete from "../../../components/layouts/Athlete";
-import {getSession} from "next-auth/react";
-
+import { getSession } from "next-auth/react";
 
 export async function getServerSideProps(context) {
-    const session = await getSession({req: context.req});
+  const session = await getSession({ req: context.req });
 
-    if (!session) {
-        return {
-            redirect: {
-                destination: "/auth/login",
-                permanent: false,
-            },
-        };
-    }
-
+  if (!session) {
     return {
-        props: {jwt: session.jwt},
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
     };
+  }
+
+  return {
+    props: { jwt: session.jwt },
+  };
 }
 
-const AthleteMainPage = ({jwt}) => {
-    return <DashboardMain/>
+const AthleteMainPage = ({ jwt }) => {
+  return <DashboardMain />;
 };
-
 
 export default AthleteMainPage;
 

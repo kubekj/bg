@@ -1,4 +1,4 @@
-import SettingsView from "../../components/settings/settings-view";
+import SettingsView from "../../components/settings/form";
 import Athlete from "../../components/layouts/Athlete";
 import { getSession } from "next-auth/react";
 import fetcher from "../../lib/rest-api";

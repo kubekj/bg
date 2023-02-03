@@ -1,7 +1,6 @@
-import StatisticsView from "../../../components/athlete-view/athlete-statistics/statistics-view";
+import StatisticsView from "../../../components/athlete/statistics/statistics-view";
 import Athlete from "../../../components/layouts/Athlete";
-import {getSession} from "next-auth/react";
-
+import { getSession } from "next-auth/react";
 
 // export async function getServerSideProps(context) {
 //   const session = await getSession({req: context.req});
@@ -20,9 +19,8 @@ import {getSession} from "next-auth/react";
 //   };
 // }
 
-const AthleteStatistics = ({jwt}) => {
-  return <StatisticsView />
-
+const AthleteStatistics = ({ jwt }) => {
+  return <StatisticsView />;
 };
 
 export default AthleteStatistics;

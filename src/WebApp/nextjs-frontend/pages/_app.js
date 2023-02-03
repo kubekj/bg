@@ -5,6 +5,7 @@ import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
 
 import { ToastContainer } from "react-toastify";
+import { Windmill } from "@windmill/react-ui";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const Layout = Component.layout || (({ children }) => <>{children}</>);
