@@ -17,12 +17,16 @@ internal sealed class UserWorkoutSessionRepository : IUserWorkoutSessionReposito
             return await _workoutSessions
                 .Include(uws => uws.UserWorkout)
                 .ThenInclude(uw => uw.Workout)
+                .ThenInclude(ws => ws.ExerciseWorkouts)
+                .ThenInclude(w => w.Exercise)
                 .Where(expression)
                 .ToListAsync();
 
         return await _workoutSessions
             .Include(uws => uws.UserWorkout)
             .ThenInclude(uw => uw.Workout)
+            .ThenInclude(ws => ws.ExerciseWorkouts)
+            .ThenInclude(w => w.Exercise)
             .ToListAsync();
     }
 
