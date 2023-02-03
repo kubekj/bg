@@ -3,4 +3,4 @@ using Application.DTO.Entities;
 
 namespace Application.Queries.Workouts;
 
-public record GetWorkoutSessionQuery(Guid UserId) : IQuery<WorkoutDto>;
+public record GetCurrentWorkoutQuery(Guid UserId) : IQuery<WorkoutDto>;

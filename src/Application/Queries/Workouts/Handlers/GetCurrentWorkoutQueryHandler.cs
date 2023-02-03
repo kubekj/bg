@@ -8,7 +8,7 @@ using Mapster;
 
 namespace Application.Queries.Workouts.Handlers;
 
-public class GetCurrentWorkoutQueryHandler : IQueryHandler<GetWorkoutSessionQuery,WorkoutDto>
+public class GetCurrentWorkoutQueryHandler : IQueryHandler<GetCurrentWorkoutQuery,WorkoutDto>
 {
     private readonly IUserWorkoutSessionRepository _userWorkoutSessionRepository;
     private readonly IUserWorkoutSessionService _userWorkoutSessionService;
@@ -22,7 +22,7 @@ public class GetCurrentWorkoutQueryHandler : IQueryHandler<GetWorkoutSessionQuer
         _clock = clock;
     }
 
-    public async Task<WorkoutDto> HandleAsync(GetWorkoutSessionQuery query)
+    public async Task<WorkoutDto> HandleAsync(GetCurrentWorkoutQuery query)
     {
         var userSessions = await _userWorkoutSessionRepository.GetAllAsync(usw => usw.UserId == query.UserId);
         var workout = _userWorkoutSessionService.GetCurrentUserWorkoutSession(userSessions,_clock);

@@ -18,9 +18,9 @@ public class WorkoutController : ApiController
     private readonly ICommandHandler<CreateWorkoutSessionCommand> _createWorkoutSessionCommandHandler;
     private readonly IQueryHandler<GetWorkoutsQuery, IEnumerable<WorkoutDto>> _getWorkoutsQueryHandler;
     private readonly IQueryHandler<GetWorkoutQuery, WorkoutDto> _getWorkoutQueryHandler;
-    private readonly GetCurrentWorkoutQueryHandler _getCurrentWorkoutQueryHandler;
-    private readonly GetPreviousWorkoutQueryHandler _getPreviousWorkoutQueryHandler;
-    private readonly GetNextWorkoutQueryHandler _getNextWorkoutQueryHandler;
+    private readonly IQueryHandler<GetCurrentWorkoutQuery,WorkoutDto> _getCurrentWorkoutQueryHandler;
+    private readonly IQueryHandler<GetPreviousWorkoutQuery,WorkoutDto> _getPreviousWorkoutQueryHandler;
+    private readonly IQueryHandler<GetNextWorkoutQuery,WorkoutDto> _getNextWorkoutQueryHandler;
     private Guid _userId;
 
     public WorkoutController(ICommandHandler<CreateWorkoutCommand> createWorkoutCommandHandler,
@@ -28,9 +28,9 @@ public class WorkoutController : ApiController
         ICommandHandler<CreateWorkoutSessionCommand> createWorkoutSessionCommandHandler,
         IQueryHandler<GetWorkoutsQuery, IEnumerable<WorkoutDto>> getWorkoutsQueryHandler, 
         IQueryHandler<GetWorkoutQuery, WorkoutDto> getWorkoutQueryHandler, 
-        GetCurrentWorkoutQueryHandler getCurrentWorkoutQueryHandler, 
-        GetPreviousWorkoutQueryHandler getPreviousWorkoutQueryHandler, 
-        GetNextWorkoutQueryHandler getNextWorkoutQueryHandler)
+        IQueryHandler<GetCurrentWorkoutQuery, WorkoutDto> getCurrentWorkoutQueryHandler, 
+        IQueryHandler<GetPreviousWorkoutQuery, WorkoutDto> getPreviousWorkoutQueryHandler, 
+        IQueryHandler<GetNextWorkoutQuery, WorkoutDto> getNextWorkoutQueryHandler)
     {
         _createWorkoutCommandHandler = createWorkoutCommandHandler;
         _editWorkoutCommandHandler = editWorkoutCommandHandler;
@@ -63,7 +63,7 @@ public class WorkoutController : ApiController
     public async Task<ActionResult> GetCurrent()
     {
         _userId = Guid.Parse(HttpContext.User.Identity.Name);
-        var result = await _getCurrentWorkoutQueryHandler.HandleAsync(new GetWorkoutSessionQuery(_userId));
+        var result = await _getCurrentWorkoutQueryHandler.HandleAsync(new GetCurrentWorkoutQuery(_userId));
         return Ok(result);
     }
 
@@ -71,7 +71,7 @@ public class WorkoutController : ApiController
     public async Task<ActionResult> GetPrevious()
     {
         _userId = Guid.Parse(HttpContext.User.Identity.Name);
-        var result = await _getCurrentWorkoutQueryHandler.HandleAsync(new GetWorkoutSessionQuery(_userId));
+        var result = await _getPreviousWorkoutQueryHandler.HandleAsync(new GetPreviousWorkoutQuery(_userId));
         return Ok(result);
     }
 
@@ -79,7 +79,7 @@ public class WorkoutController : ApiController
     public async Task<ActionResult> GetNext()
     {
         _userId = Guid.Parse(HttpContext.User.Identity.Name);
-        var result = await _getCurrentWorkoutQueryHandler.HandleAsync(new GetWorkoutSessionQuery(_userId));
+        var result = await _getNextWorkoutQueryHandler.HandleAsync(new GetNextWorkoutQuery(_userId));
         return Ok(result);
     }
 
