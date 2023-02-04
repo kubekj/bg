@@ -1,6 +1,6 @@
 import style from "../../styles/log-in.module.css";
-import Header from "../../components/register-login/header";
-import LogInContent from "../../components/register-login/log-in-content";
+import Header from "../../components/auth/header";
+import LogInContent from "../../components/auth/log-in-content";
 import Auth from "../../components/layouts/Auth";
 
 const LogIn = () => {

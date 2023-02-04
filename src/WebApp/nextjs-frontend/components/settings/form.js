@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { putter } from "../../lib/rest-api";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Router from "next/router";
 
 const languages = ["English", "Polish"];
@@ -38,6 +38,8 @@ const SettingsView = ({ user }) => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       await putter(`users/details`, values, data.jwt);
+      data.user.email = values.email;
+      data.user.user = `${values.firstName} ${values.lastName}`;
       Router.replace("/athlete/settings");
     },
   });
@@ -109,7 +111,7 @@ const SettingsView = ({ user }) => {
           <span className='input-group-text w-48'>Email</span>
           <TextField
             label='Email'
-            name='lastName'
+            name='email'
             value={formik.values.email}
             error={formik.touched.email && Boolean(formik.errors.email)}
             className={

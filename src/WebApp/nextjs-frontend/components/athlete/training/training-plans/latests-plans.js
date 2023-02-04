@@ -5,7 +5,7 @@ import Button from "../../../reusable/button";
 function LatestPlans({ plans }) {
   return (
     <>
-      <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl'>
+      <div className='relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-md rounded-xl'>
         <div className='rounded-t py-3 border-0'>
           <div className='flex flex-wrap items-center'>
             <div className='relative w-full px-4 max-w-full flex-grow flex-1'>
