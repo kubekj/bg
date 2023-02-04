@@ -23,7 +23,7 @@ export async function getServerSideProps(context) {
 
   const workouts = await fetcher("workouts", options);
   const exercises = await fetcher("exercises", options);
-  const plans = await fetcher("training-plans/bought", options);
+  const plans = await fetcher("training-plans", options);
 
   return {
     props: {

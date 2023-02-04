@@ -21,7 +21,7 @@ export async function getServerSideProps(context) {
     },
   };
 
-  const plans = await fetcher("training-plans/bought", options);
+  const plans = await fetcher("training-plans", options);
 
   return {
     props: { jwt: session.jwt, plans: plans },

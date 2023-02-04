@@ -30,8 +30,7 @@ ChartJS.register(
   Legend
 );
 
-
-const StatisticsView = ({weightBreakdown}) => {
+const StatisticsView = ({ weightBreakdown }) => {
   const options = {
     responsive: true,
     plugins: {
@@ -115,7 +114,7 @@ const StatisticsView = ({weightBreakdown}) => {
     datasets: [
       {
         label: "Dataset 2",
-        data: apilabels.map(month => weightBreakdown[month]),
+        data: apilabels.map((month) => weightBreakdown[month]),
         backgroundColor: "#C7D7FE",
       },
     ],

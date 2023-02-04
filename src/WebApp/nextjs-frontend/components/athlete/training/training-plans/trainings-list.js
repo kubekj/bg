@@ -4,6 +4,7 @@ import DeleteModal from "../../../reusable/delete-modal";
 import { Stack } from "@mui/system";
 import { Pagination } from "@mui/material";
 import TrainingPlanModal from "../../modals/training-plan-modal";
+import TrainingPlanPreview from "./training-preview-dialog";
 
 const TrainingsList = ({ plans }) => {
   return (
@@ -89,6 +90,12 @@ const TrainingsList = ({ plans }) => {
                           isHoveringColor='#D0D5DD'
                           borderValue='none'
                         /> */}
+                        <TrainingPlanPreview
+                          icon='/thumbnails/copy-outline.svg'
+                          backgroundColorValue='white'
+                          isHoveringColor='#D0D5DD'
+                          borderValue='none'
+                        />
                         <DeleteModal
                           subtitle={`Remove training plan "${plan.title}"`}
                           endpoint={`training-plans/${plan.id}`}

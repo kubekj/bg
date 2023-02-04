@@ -1,7 +1,7 @@
 import style from "../../styles/log-in.module.css";
-import Header from "../../components/register-login/header";
-import ButtonsSection from "../../components/register-login/buttons-section";
-import SignInContent from "../../components/register-login/sign-in-content";
+import Header from "../../components/auth/header";
+import ButtonsSection from "../../components/auth/buttons-section";
+import SignInContent from "../../components/auth/sign-in-content";
 import Auth from "../../components/layouts/Auth";
 
 const SignIn = () => {
