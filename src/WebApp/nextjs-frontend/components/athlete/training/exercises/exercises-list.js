@@ -3,6 +3,7 @@ import React from "react";
 import ExerciseModal from "../../modals/exercise-modal";
 import DeleteModal from "../../../reusable/delete-modal";
 import { Stack } from "@mui/system";
+import { Chip, Pagination } from "@mui/material";
 
 const ExercisesList = ({ exercises }) => {
   return (
@@ -54,7 +55,15 @@ const ExercisesList = ({ exercises }) => {
                   <tr key={exercise.id}>
                     <td className='text-xs p-4'>{exercise.name}</td>
                     <td className='text-xs p-4'>{exercise.category}</td>
-                    <td className='text-xs p-4'>{exercise.bodyPart}</td>
+                    <td className='text-xs p-4'>
+                      <Chip
+                        label={exercise.bodyPart}
+                        style={{
+                          backgroundColor: "#EEF4FF",
+                          color: "#6172F3",
+                        }}
+                      />
+                    </td>
 
                     <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 grid justify-items-end'>
                       <Stack
@@ -90,6 +99,9 @@ const ExercisesList = ({ exercises }) => {
               })}
             </tbody>
           </table>
+          <div className='flex flex-row items-center justify-center p-6 w-full'>
+            <Pagination></Pagination>
+          </div>
         </div>
       </div>
     </div>

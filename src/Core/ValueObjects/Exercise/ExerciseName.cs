@@ -9,8 +9,8 @@ public class ExerciseName : ValueObject
 
     public ExerciseName(string value)
     {
-        if (!value.All(char.IsLetter))
-            throw new InvalidExerciseNameException(value);
+        // if (!value.All(char.IsLetter))
+        //     throw new InvalidExerciseNameException(value);
 
         if (value.Length > MaxLenght)
             throw new InvalidExerciseNameException(value);

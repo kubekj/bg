@@ -1,4 +1,3 @@
-import style from "../../training/main-view/training-plan.module.css";
 import React from "react";
 import Button from "../../../reusable/button";
 import Link from "next/link";

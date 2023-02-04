@@ -1,11 +1,10 @@
 import style from "./workouts-list.module.css";
-import Link from "next/link";
-import Button from "../../../reusable/button";
 import React from "react";
 
 import DeleteModal from "../../../reusable/delete-modal";
 import WorkoutModal from "../../modals/workout-modal";
 import { Stack } from "@mui/system";
+import { Pagination } from "@mui/material";
 
 const WorkoutsList = ({ workouts }) => {
   return (
@@ -95,6 +94,9 @@ const WorkoutsList = ({ workouts }) => {
               })}
             </tbody>
           </table>
+          <div className='flex flex-row items-center justify-center p-6 w-full'>
+            <Pagination></Pagination>
+          </div>
         </div>
       </div>
     </div>
