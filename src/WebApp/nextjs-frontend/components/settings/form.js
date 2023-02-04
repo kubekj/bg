@@ -39,7 +39,7 @@ const SettingsView = ({ user }) => {
     onSubmit: async (values) => {
       await putter(`users/details`, values, data.jwt);
       data.user.email = values.email;
-      data.user.user = `${values.firstName} ${values.lastName}`;
+      data.user.fullName = `${values.firstName} ${values.lastName}`;
       Router.replace("/athlete/settings");
     },
   });
