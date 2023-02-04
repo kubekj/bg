@@ -1,18 +1,18 @@
 import style from "./training-preview.module.css"
 import React from "react";
 
-const TrainingPreview = () => {
+const TrainingPreview = ({workout}) => {
 
     return(
         <div className={style.container}>
             <div className={style.header}>
                 <div className={style.info}>
-                    <b>Healthy back</b>
-                    <p>Upper-body</p>
-                    <p>8 exercises</p>
+                    <b>{workout.name}</b>
+                    <p>{workout.category}</p>
+                    <p>{workout.exerciseDtos.length} exercises</p>
                 </div>
                 <div className={style.infoRight}>
-                    <p>Full body</p>
+                    <p>{workout.category}</p>
                 </div>
             </div>
         </div>

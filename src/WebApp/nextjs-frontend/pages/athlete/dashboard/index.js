@@ -21,19 +21,20 @@ export async function getServerSideProps(context) {
         },
     };
 
-    const workouts = await fetcher("workouts", options);
-    // const current = await fetcher("workouts/current", options);
-    // const next = await fetcher("workouts/next", options);
-    // const previous = await fetcher("workouts/previous", options);
+    //const workouts = await fetcher("workouts", options);
+    const current = await fetcher("workouts/current", options);
+    const next = await fetcher("workouts/next", options);
+    const previous = await fetcher("workouts/previous", options);
+    const weightBreakdown = await fetcher("statistics/weight", options);
 
   return {
-        props: {jwt: session.jwt, workouts: workouts},
+        props: {jwt: session.jwt, current: current, next: next, previous: previous, weightBreakdown: weightBreakdown},
   };
 }
 
 
-const AthleteMainPage = ({workouts}) => {
-    return <DashboardMain workouts={workouts}/>
+const AthleteMainPage = ({current, next, previous, weightBreakdown}) => {
+    return <DashboardMain current={current} next={next} previous={previous} weightBreakdown={weightBreakdown}/>
 };
 
 export default AthleteMainPage;

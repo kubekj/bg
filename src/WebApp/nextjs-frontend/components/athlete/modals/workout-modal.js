@@ -1,5 +1,5 @@
-import React from "react";
-import { useFormik } from "formik";
+import React, { useState, useEffect } from "react";
+import { useFormik, setFieldValue } from "formik";
 import * as yup from "yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -11,66 +11,89 @@ import Modal from "@mui/material/Modal";
 import { Button, InputLabel, MenuItem, TextField } from "@mui/material";
 import CustomButton from "../../reusable/button";
 import { Select } from "@mui/material";
+import { Stack } from "@mui/system";
 
-const bodyParts = ["Legs", "Arms", "Chest", "Shoulders", "Core"];
 const categories = ["Upper", "Lower", "Full", "Cardio"];
+const noOfExercieses = [1, 2, 3, 4, 5, 6, 7];
 
 const validationSchema = yup.object().shape({
-  name: yup.string().required("Please provide a name for exercise"),
-  bodyPart: yup
-    .string()
-    .required("Please choose the body part meant for this exercise"),
-  category: yup
-    .string()
-    .required("Please choose the category of this exercise"),
+  name: yup.string().required("Please provide a name for workout"),
+  category: yup.string().required("Please choose the category of this workout"),
+  exercises: yup.array().of(
+    yup.object().shape({
+      id: yup.string().required("Exercise is required"),
+      sets: yup.array().of(
+        yup.object().shape({
+          repetitions: yup.number().required("Please provide number of reps"),
+          weight: yup
+            .number()
+            .required("Please provide weight (0 if it's bodyweight)"),
+        })
+      ),
+    })
+  ),
 });
 
 function WorkoutModal(props) {
-  const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const { data } = useSession();
-  const {
-    exercise,
-    isDetails,
-    icon,
-    backgroundColorValue,
-    isHoveringColor,
-    text,
-    extraStyleType,
-    extraStyleValue,
-  } = props;
+  const router = useRouter();
+  const { workout } = props;
+
+  const initialValues = {
+    name: workout ? workout.name : "",
+    bodyPart: workout ? workout.category : "",
+    exercises: workout ? workout.exercises : [],
+    noOfExercieses: 1,
+  };
 
   const formik = useFormik({
     initialValues: {
-      name: exercise ? exercise.name : "",
-      bodyPart: exercise ? exercise.bodyPart : "",
-      category: exercise ? exercise.category : "",
+      name: workout ? workout.name : "",
+      bodyPart: workout ? workout.category : "",
+      exercises: workout ? workout.exercises : [],
+      noOfExercieses: 1,
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      exercise
-        ? await putter(`exercises/${exercise.id}`, values, data.jwt)
-        : await poster("exercises/create", values, data.jwt);
-      router.replace("/athlete/exercise");
-      handleClose();
-    },
+    onSubmit: async (values) => {},
   });
 
-  const title = !exercise ? "Add new exercise" : "Exercise details";
-  const btnlabel = !exercise ? "Add" : "Edit";
+  function onChangeExercises(e, field, values) {
+    // update dynamic form
+    const exercises = formik.values.exercises;
+    const numberOfExercises = formik.values.noOfExercieses;
+    const previousNumber = parseInt(field.value || "0");
+    if (previousNumber < numberOfExercises) {
+      for (let i = previousNumber; i < numberOfExercises; i++) {
+        exercises.push({ id: "", sets: { repetitions: "", weight: "" } });
+      }
+    } else {
+      for (let i = previousNumber; i >= numberOfExercises; i--) {
+        exercises.splice(i, 1);
+      }
+    }
+
+    formik.values.exercises = exercises;
+
+    // call formik onChange method
+  }
+
+  const title = !props.workout ? "Create new workout" : "Workout details";
+  const btnlabel = !props.workout ? "Add" : "Edit";
 
   return (
     <>
       <CustomButton
-        iconSrc={icon}
-        text={text}
-        backgroundColorValue={backgroundColorValue}
+        iconSrc={props.icon}
+        text={props.text}
+        backgroundColorValue={props.backgroundColorValue}
         borderValue='none'
-        isHoveringColor={isHoveringColor}
-        extraStyleType={extraStyleType}
-        extraStyleValue={extraStyleValue}
+        isHoveringColor={props.isHoveringColor}
+        extraStyleType={props.extraStyleType}
+        extraStyleValue={props.extraStyleValue}
         onClick={handleOpen}
       />
       <Modal
@@ -120,36 +143,10 @@ function WorkoutModal(props) {
                     : ""
                 }`}
                 onChange={formik.handleChange}
-                disabled={isDetails}
+                // disabled={isDetails}
               ></TextField>
               {formik.touched.name && formik.errors.name && (
                 <span className='text-red-500'>{formik.errors.name}</span>
-              )}
-              <InputLabel>Body Part</InputLabel>
-              <Select
-                name='bodyPart'
-                value={formik.values.bodyPart}
-                error={
-                  formik.touched.bodyPart && Boolean(formik.errors.bodyPart)
-                }
-                className={`${
-                  formik.touched.bodyPart && formik.errors.bodyPart
-                    ? "border-red-500"
-                    : ""
-                }`}
-                onChange={formik.handleChange}
-                disabled={isDetails}
-              >
-                {bodyParts.map((bodyPart) => {
-                  return (
-                    <MenuItem key={bodyPart} value={bodyPart}>
-                      {bodyPart}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-              {formik.touched.bodyPart && formik.errors.bodyPart && (
-                <span className='text-red-500'>{formik.errors.bodyPart}</span>
               )}
               <InputLabel>Category</InputLabel>
               <Select
@@ -164,7 +161,7 @@ function WorkoutModal(props) {
                     : ""
                 }`}
                 onChange={formik.handleChange}
-                disabled={isDetails}
+                // disabled={isDetails}
               >
                 {categories.map((category) => {
                   return (
@@ -177,6 +174,102 @@ function WorkoutModal(props) {
               {formik.touched.category && formik.errors.category && (
                 <span className='text-red-500'>{formik.errors.category}</span>
               )}
+
+              {/* Handling of exercise addition */}
+              {formik.values.exercises.map((exercise, i) => {
+                return (
+                  <Grid conatiner key={i}>
+                    <Grid
+                      item
+                      lg={12}
+                      justifyContent='center'
+                      display='flex'
+                      direction='column'
+                      key={i}
+                    >
+                      <Stack direction='row' spacing={2}>
+                        <Stack direction='column' className='w-full '>
+                          <InputLabel>Select exercise</InputLabel>
+                          <Select name='bodyPart' />
+                          {formik.touched.bodyPart &&
+                            formik.errors.bodyPart && (
+                              <span className='text-red-500'>
+                                {formik.errors.bodyPart}
+                              </span>
+                            )}
+                        </Stack>
+                        <Stack direction='column'>
+                          <InputLabel>Sets</InputLabel>
+                          <TextField name='bodyPart' />
+                          {formik.touched.bodyPart &&
+                            formik.errors.bodyPart && (
+                              <span className='text-red-500'>
+                                {formik.errors.bodyPart}
+                              </span>
+                            )}
+                        </Stack>
+                        <Stack direction='column'>
+                          <InputLabel>Reps</InputLabel>
+                          <TextField name='bodyPart' />
+                          {formik.touched.bodyPart &&
+                            formik.errors.bodyPart && (
+                              <span className='text-red-500'>
+                                {formik.errors.bodyPart}
+                              </span>
+                            )}
+                        </Stack>
+                        <Stack direction='column'>
+                          <InputLabel>Weight</InputLabel>
+                          <TextField name='bodyPart' />
+                          {formik.touched.bodyPart &&
+                            formik.errors.bodyPart && (
+                              <span className='text-red-500'>
+                                {formik.errors.bodyPart}
+                              </span>
+                            )}
+                          {formik.touched.bodyPart &&
+                            formik.errors.bodyPart && (
+                              <span className='text-red-500'>
+                                {formik.errors.bodyPart}
+                              </span>
+                            )}
+                        </Stack>
+                      </Stack>
+                    </Grid>
+                  </Grid>
+                );
+              })}
+              <Stack
+                direction='row'
+                spacing={2}
+                className='items-center justify-end'
+              >
+                <InputLabel>
+                  Please specify how much exercises you want to add to this
+                  workout
+                </InputLabel>
+                <Select
+                  name='noOfExercieses'
+                  value={formik.values.noOfExercieses}
+                  onChange={(e) => {
+                    onChangeExercises(
+                      e,
+                      formik.values.noOfExercieses,
+                      formik.values.exercises
+                    );
+                    formik.handleChange(e);
+                    console.log(formik.values.noOfExercieses);
+                  }}
+                >
+                  {noOfExercieses.map((number) => {
+                    return (
+                      <MenuItem key={number} value={number}>
+                        {number}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </Stack>
             </div>
           </div>
 
@@ -186,7 +279,7 @@ function WorkoutModal(props) {
                 style={{
                   backgroundColor: "#D0D5DD",
                   color: "#000000",
-                  borderRadius: 14,
+                  borderRadius: 10,
                   border: "none",
                 }}
                 variant='outlined'
@@ -194,23 +287,23 @@ function WorkoutModal(props) {
                   formik.handleReset();
                   handleClose();
                 }}
-                className={isDetails ? "w-full" : "w-1/2"}
+                className={"w-1/2"}
               >
-                {isDetails ? "Close" : "Cancel"}
+                {/* {isDetails ? "Close" : "Cancel"} */}
+                Cancel
               </Button>
-              {!isDetails && (
-                <Button
-                  style={{
-                    backgroundColor: "#8098F9",
-                    borderRadius: 14,
-                  }}
-                  variant='contained'
-                  type='submit'
-                  className='w-1/2'
-                >
-                  {btnlabel}
-                </Button>
-              )}
+              {/* {!isDetails && ( */}
+              <Button
+                style={{
+                  backgroundColor: "#8098F9",
+                  borderRadius: 10,
+                }}
+                variant='contained'
+                type='submit'
+                className='w-1/2'
+              >
+                {btnlabel}
+              </Button>
             </div>
           </div>
         </form>
@@ -218,5 +311,56 @@ function WorkoutModal(props) {
     </>
   );
 }
+
+const generateTable = (formik, rows) => {
+  return rows.map((row) => {
+    return (
+      <Grid conatiner key={row.id}>
+        <Grid
+          item
+          lg={12}
+          justifyContent='center'
+          display='flex'
+          direction='column'
+          key={row.id}
+        >
+          <Stack direction='row' spacing={2}>
+            <Stack direction='column' className='w-full '>
+              <InputLabel>Select exercise</InputLabel>
+              <Select name='bodyPart' />
+              {formik.touched.bodyPart && formik.errors.bodyPart && (
+                <span className='text-red-500'>{formik.errors.bodyPart}</span>
+              )}
+            </Stack>
+            <Stack direction='column'>
+              <InputLabel>Sets</InputLabel>
+              <TextField name='bodyPart' />
+              {formik.touched.bodyPart && formik.errors.bodyPart && (
+                <span className='text-red-500'>{formik.errors.bodyPart}</span>
+              )}
+            </Stack>
+            <Stack direction='column'>
+              <InputLabel>Reps</InputLabel>
+              <TextField name='bodyPart' />
+              {formik.touched.bodyPart && formik.errors.bodyPart && (
+                <span className='text-red-500'>{formik.errors.bodyPart}</span>
+              )}
+            </Stack>
+            <Stack direction='column'>
+              <InputLabel>Weight</InputLabel>
+              <TextField name='bodyPart' />
+              {formik.touched.bodyPart && formik.errors.bodyPart && (
+                <span className='text-red-500'>{formik.errors.bodyPart}</span>
+              )}
+              {formik.touched.bodyPart && formik.errors.bodyPart && (
+                <span className='text-red-500'>{formik.errors.bodyPart}</span>
+              )}
+            </Stack>
+          </Stack>
+        </Grid>
+      </Grid>
+    );
+  });
+};
 
 export default WorkoutModal;

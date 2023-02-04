@@ -19,6 +19,8 @@ internal sealed class UserWorkoutSessionRepository : IUserWorkoutSessionReposito
                 .ThenInclude(uw => uw.Workout)
                 .ThenInclude(ws => ws.ExerciseWorkouts)
                 .ThenInclude(w => w.Exercise)
+                .ThenInclude(e => e.ExerciseWorkouts)
+                .ThenInclude(ew => ew.Sets)
                 .Where(expression)
                 .ToListAsync();
 
@@ -27,6 +29,8 @@ internal sealed class UserWorkoutSessionRepository : IUserWorkoutSessionReposito
             .ThenInclude(uw => uw.Workout)
             .ThenInclude(ws => ws.ExerciseWorkouts)
             .ThenInclude(w => w.Exercise)
+            .ThenInclude(e => e.ExerciseWorkouts)
+            .ThenInclude(ew => ew.Sets)
             .ToListAsync();
     }
 

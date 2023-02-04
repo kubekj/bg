@@ -36,10 +36,16 @@ internal sealed class TrainingPlanRepository : ITrainingPlanRepository
             .ToListAsync();
     }
 
-    public Task<TrainingPlan> GetByIdAsync()
-    {
-        throw new NotImplementedException();
-    }
+    public Task<TrainingPlan> GetByIdAsync(Guid trainingPlanId) =>
+        _trainingPlans      
+            .Include(tp => tp.Author)
+            .Include(tp => tp.TrainingPlanWorkouts)
+            .ThenInclude(tpw => tpw.Workout)
+            .ThenInclude(w => w.ExerciseWorkouts)
+            .ThenInclude(ew => ew.Exercise)
+            .ThenInclude(e => e.ExerciseWorkouts)
+            .ThenInclude(ew => ew.Sets)
+            .FirstOrDefaultAsync(tp => tp.Id == trainingPlanId);
 
     public async Task AddAsync(TrainingPlan trainingPlan) => await _trainingPlans.AddAsync(trainingPlan);
 }

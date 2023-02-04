@@ -9,12 +9,12 @@ function LatestPlans({ plans }) {
         <div className='rounded-t py-3 border-0'>
           <div className='flex flex-wrap items-center'>
             <div className='relative w-full px-4 max-w-full flex-grow flex-1'>
-              <h3 className='font-semibold text-base text-blueGray-700 my-auto'>
+              <h3 className='font-semi-bold text-base text-blueGray-700 my-auto'>
                 Latest training plans
               </h3>
             </div>
             <div className='relative w-full px-4 max-w-full flex-grow flex-1 text-right'>
-              <Link href='/athlete/trainings'>
+              <Link href='/athlete/training/trainings'>
                 <Button
                   iconSrc='/thumbnails/copy-outline.svg'
                   text='See all'

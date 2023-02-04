@@ -30,158 +30,161 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-      position: "bottom",
-    },
-    title: {
-      display: false,
-      text: "Chart.js Bar Chart",
-    },
-  },
-  scales: {
-    y: {
-      title: {
-        display: true,
-        text: "Kilograms",
-      },
-    },
-    x: {
-      title: {
-        display: true,
-        text: "Month",
-      },
-      grid: {
+
+const StatisticsView = ({weightBreakdown}) => {
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
         display: false,
+        position: "bottom",
       },
-    },
-  },
-};
-export const optionsL = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-      position: "bottom",
-    },
-    title: {
-      display: false,
-      text: "Chart.js Bar Chart",
-    },
-  },
-  scales: {
-    y: {
       title: {
-        display: true,
-        text: "Training load (kg lifted)",
-      },
-    },
-    x: {
-      title: {
-        display: true,
-        text: "Month",
-      },
-      grid: {
         display: false,
+        text: "Chart.js Bar Chart",
       },
     },
-  },
-};
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: "Kilograms",
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Month",
+        },
+        grid: {
+          display: false,
+        },
+      },
+    },
+  };
+  const optionsL = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+        position: "bottom",
+      },
+      title: {
+        display: false,
+        text: "Chart.js Bar Chart",
+      },
+    },
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: "Training load (kg lifted)",
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Month",
+        },
+        grid: {
+          display: false,
+        },
+      },
+    },
+  };
 
-const labels = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+  const labels = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 150 })),
-      backgroundColor: "#C7D7FE",
-    },
-  ],
-};
+  let apilabels = Object.keys(weightBreakdown);
 
-export const options2 = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-      position: "bottom",
-    },
-    title: {
-      display: false,
-      text: "Chart.js Bar Chart",
-    },
-  },
-};
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Dataset 2",
+        data: apilabels.map(month => weightBreakdown[month]),
+        backgroundColor: "#C7D7FE",
+      },
+    ],
+  };
 
-export const data2 = {
-  labels: ["Red", "Blue"],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [33, 19],
-      backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
-      borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
-      borderWidth: 1,
+  const options2 = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+        position: "bottom",
+      },
+      title: {
+        display: false,
+        text: "Chart.js Bar Chart",
+      },
     },
-  ],
-};
-export const data3 = {
-  labels: ["Red", "Blue"],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [40, 10],
-      backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
-      borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
-      borderWidth: 1,
-    },
-  ],
-};
-export const data4 = {
-  labels: ["Red", "Blue"],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [30, 21],
-      backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
-      borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
-      borderWidth: 1,
-    },
-  ],
-};
+  };
 
-export const dataL = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 10000 })),
-      borderColor: "#8098F9",
-      backgroundColor: "#8098F9",
-    },
-  ],
-};
+  const data2 = {
+    labels: ["Red", "Blue"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [33, 19],
+        backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
+        borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
+  const data3 = {
+    labels: ["Red", "Blue"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [40, 10],
+        backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
+        borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
+  const data4 = {
+    labels: ["Red", "Blue"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [30, 21],
+        backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
+        borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
 
-const StatisticsView = () => {
+  const dataL = {
+    labels,
+    datasets: [
+      {
+        fill: true,
+        label: "Dataset 2",
+        data: labels.map(() => faker.datatype.number({ min: 0, max: 10000 })),
+        borderColor: "#8098F9",
+        backgroundColor: "#8098F9",
+      },
+    ],
+  };
+
   return (
     <div className={style.container}>
       <div className={style.header} style={{ marginBottom: 0 }}>

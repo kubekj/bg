@@ -16,16 +16,19 @@ public class TrainingPlanController : ApiController
     private readonly IQueryHandler<GetAllTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllTrainingPlansQueryHandler;
     private readonly IQueryHandler<GetBoughtTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllBoughtTrainingPlansQueryHandler;
     private readonly IQueryHandler<GetCreatedTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllCreatedTrainingPlansQueryHandler;
+    private readonly IQueryHandler<GetTrainingPlanQuery,TrainingPlanDto> _getTrainingPlanQueryHandler;
     private Guid _userId;
     public TrainingPlanController(ICommandHandler<CreateTrainingPlanCommand> createTrainingCommandHandler,
         IQueryHandler<GetAllTrainingPlansQuery, IEnumerable<TrainingPlanDto>> getAllTrainingPlansQueryHandler,
         IQueryHandler<GetBoughtTrainingPlansQuery, IEnumerable<TrainingPlanDto>> getAllBoughtTrainingPlansQueryHandler,
-        IQueryHandler<GetCreatedTrainingPlansQuery, IEnumerable<TrainingPlanDto>> getAllCreatedTrainingPlansQueryHandler)
+        IQueryHandler<GetCreatedTrainingPlansQuery, IEnumerable<TrainingPlanDto>> getAllCreatedTrainingPlansQueryHandler, 
+        IQueryHandler<GetTrainingPlanQuery, TrainingPlanDto> getTrainingPlanQueryHandler)
     {
         _createTrainingCommandHandler = createTrainingCommandHandler;
         _getAllTrainingPlansQueryHandler = getAllTrainingPlansQueryHandler;
         _getAllBoughtTrainingPlansQueryHandler = getAllBoughtTrainingPlansQueryHandler;
         _getAllCreatedTrainingPlansQueryHandler = getAllCreatedTrainingPlansQueryHandler;
+        _getTrainingPlanQueryHandler = getTrainingPlanQueryHandler;
     }
     
     [Authorize(Roles = "trainer")]
@@ -42,6 +45,15 @@ public class TrainingPlanController : ApiController
     {
         var result = 
             await _getAllTrainingPlansQueryHandler.HandleAsync(new GetAllTrainingPlansQuery());
+        return Ok(result);
+    }
+    
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult> GetSingle(Guid id)
+    {
+        _userId = Guid.Parse(HttpContext.User.Identity.Name);
+        var result = 
+            await _getTrainingPlanQueryHandler.HandleAsync(new GetTrainingPlanQuery(_userId,id));
         return Ok(result);
     }
     

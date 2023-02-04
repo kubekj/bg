@@ -1,12 +1,13 @@
-import style from "../athlete-marketplace/buy-training-view.module.css";
+import style from "./buy-training-view.module.css";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Rating, Typography } from "@mui/material";
 import Button from "../../reusable/button";
-import TrainingPreview from "../athlete/training-plans/training-preview";
+import TrainingPreview from "../training/training-plans/training-preview";
 
-const BuyTrainingView = () => {
+
+const BuyTrainingView = ({plan}) => {
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -35,17 +36,12 @@ const BuyTrainingView = () => {
             <div>
               <h5>Plan description</h5>
               <p>
-                I'm a Product Designer based in Melbourne, Australia. I
-                specialise in UX/UI design, brand strategy, and Webflow
-                development. I'm always striving to grow and learn something new
-                and I don't take myself too seriously. I'm passionate about
-                helping startups grow, improve their customer experience, and to
-                raise venture capital through good design.
+                {plan.description}
               </p>
             </div>
             <div>
               <div className={style.bottomSection}>
-                <Link href='/creator-details'>
+                <Link href='/creator-details' style={{textDecoration:"none"}}>
                   <div className={style.userInfo}>
                     <Image
                       className={style.avatar}
@@ -67,26 +63,16 @@ const BuyTrainingView = () => {
         </div>
         <div className={style.bottom}>
           <div className={style.trainings}>
-            <div style={{ width: "33%" }}>
-              <Link
-                href='/training-plan-details'
-                style={{ textDecoration: "none" }}
-              >
-                <TrainingPreview backHref='/athlete-buy-training' />
-              </Link>
-            </div>
-            <div style={{ width: "33%" }}>
-              <TrainingPreview />
-            </div>
-            <div style={{ width: "33%" }}>
-              <TrainingPreview />
-            </div>
-            <div style={{ width: "33%" }}>
-              <TrainingPreview />
-            </div>
-            <div style={{ width: "33%" }}>
-              <TrainingPreview />
-            </div>
+            {plan.workouts.map(workout => {
+              return(
+                  <div style={{ width: "33%" }}>
+                    {/*<Link href={{pathname: `/athlete/workout`, query:{id: workout.id}}} style={{textDecoration: "none"}}>*/}
+                    {/*  <TrainingPreview workout={workout}/>*/}
+                    {/*</Link>*/}
+                    <TrainingPreview workout={workout}/>
+                  </div>
+              );
+            })}
           </div>
           <div className={style.rightBottom}>
             <div className={style.rating}>
@@ -94,17 +80,17 @@ const BuyTrainingView = () => {
               <Typography component='legend' />
               <Rating
                 name='simple-controlled'
-                value={5}
+                value={plan.ratingAvg}
                 // onChange={(event, newValue) => {
                 //     setValue(newValue);
                 // }}
               />
               <p>202 reviews</p>
-              <b>4.02</b>
+              <b>{plan.ratingAvg}</b>
               <h5>Rate plan</h5>
             </div>
             <div className={style.apply}>
-              <h5>120PLN</h5>
+              <h5>{plan.price}</h5>
               <Button
                 iconSrc='/thumbnails/checkmark-outline.svg'
                 text='Buy plan'

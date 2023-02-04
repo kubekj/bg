@@ -3,7 +3,7 @@ import MarketplaceResultItem from "./marketplace-result-item";
 import Link from "next/link";
 import { Pagination } from "@mui/material";
 
-const MarketplaceMainView = () => {
+const MarketplaceMainView = ({plans}) => {
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -11,7 +11,7 @@ const MarketplaceMainView = () => {
       </div>
       <div className={style.mid}>
         <div>
-          <h2>232 trainings found</h2>
+          <h2>{plans.length} trainings found</h2>
           <p>Click on the training plan you'd like to check out</p>
         </div>
         <div className={style.search}>
@@ -34,12 +34,13 @@ const MarketplaceMainView = () => {
         </div>
       </div>
       <div className={style.resultSection}>
-        <Link href='/athlete-buy-training'>
-          <MarketplaceResultItem />
-        </Link>
-        <MarketplaceResultItem />
-        <MarketplaceResultItem />
-        <MarketplaceResultItem />
+          {plans.map(plan => {
+              return(
+                  <Link href={{pathname: `/athlete/marketplace/plan`, query:{id: plan.id}}} style={{textDecoration: "none"}}>
+                      <MarketplaceResultItem plan={plan}/>
+                  </Link>
+              );
+          })}
       </div>
       <div className='flex flex-row items-center p-6 mx-auto'>
         <Pagination></Pagination>

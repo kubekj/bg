@@ -49,7 +49,7 @@ const TrainingsList = ({ plans }) => {
             <tbody className={style.tBody}>
               {plans.map((plan) => {
                 return (
-                  <tr key={plan.title}>
+                  <tr key={plan.id}>
                     <td className={style.tdRegular}>{plan.title}</td>
                     <td className={style.tdRegular}>{plan.duration}</td>
                     <td className={style.tdRegular}>{plan.creatorEmail}</td>
@@ -63,12 +63,14 @@ const TrainingsList = ({ plans }) => {
                     </td>
                     <td className={style.tdRegular}>{plan.creatorEmail}</td>
                     <td className={style.tdRegular} style={{ padding: "0" }}>
+                      <Link href={{pathname: `plan`, query:{id: plan.id}}}>
                       <Button
                         iconSrc='/thumbnails/copy-outline.svg'
                         backgroundColorValue='white'
                         isHoveringColor='#D0D5DD'
                         borderValue='none'
                       />
+                      </Link>
                       <Button
                         iconSrc='/thumbnails/modify.svg'
                         backgroundColorValue='white'

@@ -5,8 +5,8 @@ import TomorrowTraining from "./tomorrow-training";
 import TodayWorkout from "./today-workout";
 
 
-const DashboardMain = ({workouts}) => {
-    console.log(workouts);
+const DashboardMain = ({current, next, previous, weightBreakdown}) => {
+
     return (
         <div className={style.container}>
             <div className={style.header}>
@@ -14,7 +14,7 @@ const DashboardMain = ({workouts}) => {
                 <p>You can find the most important info here</p>
             </div>
             <div className={style.mid}>
-                <WeightBreakdown />
+                <WeightBreakdown weightBreakdown={weightBreakdown}/>
                 <HoursTrained />
             </div>
             <div className={style.header2}>
@@ -22,13 +22,13 @@ const DashboardMain = ({workouts}) => {
                 <p>Today's training type</p>
             </div>
             <div className={style.bottom}>
-                <TodayWorkout workouts={workouts}/>
+                <TodayWorkout current={next}/>
                 <div className={style.todayTomorrow}>
                     <div style={{marginBottom:"2rem"}}>
-                        <TomorrowTraining />
+                        <TomorrowTraining workout={next} date={1} title="Tomorrow"/>
                     </div>
                     <div>
-                        <TomorrowTraining />
+                        <TomorrowTraining workout={previous} date={-1} title="Previous"/>
                     </div>
                 </div>
             </div>

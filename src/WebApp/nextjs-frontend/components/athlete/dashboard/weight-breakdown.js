@@ -24,64 +24,71 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-      position: "bottom",
-    },
-    title: {
-      display: false,
-      text: "Chart.js Bar Chart",
-    },
-  },
-  scales: {
-    y: {
-      title: {
-        display: true,
-        text: "Kilograms",
-      },
-    },
-    x: {
-      title: {
-        display: true,
-        text: "Month",
-      },
-      grid: {
+
+
+const WeightBreakdown = ({weightBreakdown}) => {
+   const options = {
+    responsive: true,
+    plugins: {
+      legend: {
         display: false,
+        position: "bottom",
+      },
+      title: {
+        display: false,
+        text: "Chart.js Bar Chart",
       },
     },
-  },
-};
-
-const labels = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 150 })),
-      backgroundColor: "#C7D7FE",
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: "Kilograms",
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Month",
+        },
+        grid: {
+          display: false,
+        },
+      },
     },
-  ],
-};
+  };
 
-const WeightBreakdown = () => {
+
+  let labels = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  let apilabels = Object.keys(weightBreakdown);
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Dataset 2",
+        data: apilabels.map(month => weightBreakdown[month]),
+        backgroundColor: "#C7D7FE",
+      },
+    ],
+  };
+
+  console.log(weightBreakdown);
+  console.log(apilabels);
   return (
     <div className={style.container}>
       <div className={style.header}>
