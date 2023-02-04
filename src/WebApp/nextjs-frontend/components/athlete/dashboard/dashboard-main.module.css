@@ -30,6 +30,12 @@
     justify-content: left;
     margin-top: 1rem;
 }
+.todayTomorrow{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
 /*=======================STATISTICS VIEW*/
 .content{
     width: 100%;
