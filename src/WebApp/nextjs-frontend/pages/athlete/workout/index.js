@@ -21,15 +21,16 @@ export async function getServerSideProps(context) {
     },
   };
 
-  const response = await fetcher("workouts", options);
+  const workouts = await fetcher("workouts", options);
+  const exercises = await fetcher("exercises", options);
 
   return {
-    props: { session: session, jwt: session.jwt, workouts: response },
+    props: { workouts: workouts, exercises: exercises },
   };
 }
 
-const WorkoutPage = ({ workouts, jwt }) => {
-  return <WorkoutsList workouts={workouts} jwt={jwt} />;
+const WorkoutPage = ({ workouts, exercises }) => {
+  return <WorkoutsList workouts={workouts} exercises={exercises} />;
 };
 
 export default WorkoutPage;

@@ -21,7 +21,47 @@ import { Stack } from "@mui/system";
 
 const categories = ["Upper", "Lower", "Full", "Cardio"];
 const noOfExercieses = [1, 2, 3, 4, 5, 6, 7, 8];
-const baseExercise = { id: "", sets: 0, repetitions: "", weight: "" };
+const baseExercise = { id: "", sets: 0, repetitions: 0, weight: 0 };
+
+function convertForPost(values) {
+  const workoutWithSets = {
+    name: values.name,
+    category: values.category,
+    ExerciseWithSets: {},
+  };
+
+  for (let i = 0; i < values.exercises.length; i++) {
+    const exercise = values.exercises[i];
+    const setsArray = [];
+
+    for (let j = 0; j < exercise.sets; j++) {
+      setsArray.push({
+        Repetitions: exercise.repetitions,
+        Weight: exercise.weight,
+      });
+    }
+
+    workoutWithSets.ExerciseWithSets[exercise.id] = setsArray;
+  }
+
+  return workoutWithSets;
+}
+
+function convertForDetails(exerciseDtos) {
+  const exercises = [];
+
+  exerciseDtos.forEach((exercise) => {
+    const sets = exercise.setDtos;
+    console.log(sets);
+    exercises.push({
+      id: exercise.id,
+      sets: sets.length,
+      repetitions: sets[0].repetitions,
+      weight: sets[0].weight,
+    });
+  });
+  return exercises;
+}
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("Please provide a name for workout"),
@@ -45,21 +85,32 @@ function WorkoutModal(props) {
 
   const { data } = useSession();
   const router = useRouter();
-  const { workout } = props;
+  const { workout, exercises } = props;
 
   const formik = useFormik({
     initialValues: {
       name: workout ? workout.name : "",
-      bodyPart: workout ? workout.category : "",
-      exercises: workout ? workout.exercises : [baseExercise],
-      noOfExercieses: 1,
+      category: workout ? workout.category : "",
+      exercises: workout
+        ? convertForDetails(workout.exerciseDtos)
+        : [baseExercise],
+      noOfExercieses: workout ? workout.exerciseDtos.length : 1,
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {},
+    onSubmit: async (values) => {
+      workout
+        ? await putter(
+            `workouts/${workout.id}`,
+            convertForPost(values),
+            data.jwt
+          )
+        : await poster("workouts/create", convertForPost(values), data.jwt);
+      router.replace("/athlete/workout");
+      handleClose();
+    },
   });
 
   function onChangeExercises(e) {
-    // update dynamic form
     const exercises = formik.values.exercises;
     const numberOfExercises = e.target.value || 0;
     const previousNumber = parseInt(formik.values.noOfExercieses || "0");
@@ -73,10 +124,7 @@ function WorkoutModal(props) {
       }
     }
     formik.setFieldValue("exercises", exercises);
-    // call formik onChange method
     formik.setFieldValue("noOfExercieses", e.target.value);
-
-    console.log(exercises);
   }
 
   const title = !props.workout ? "Create new workout" : "Workout details";
@@ -143,7 +191,6 @@ function WorkoutModal(props) {
                     : ""
                 }`}
                 onChange={formik.handleChange}
-                // disabled={isDetails}
               ></TextField>
               {formik.touched.name && formik.errors.name && (
                 <span className='text-red-500'>{formik.errors.name}</span>
@@ -151,7 +198,6 @@ function WorkoutModal(props) {
               <InputLabel>Category</InputLabel>
               <Select
                 name='category'
-                defaultValue={categories[2]}
                 value={formik.values.category}
                 error={
                   formik.touched.category && Boolean(formik.errors.category)
@@ -162,7 +208,6 @@ function WorkoutModal(props) {
                     : ""
                 }`}
                 onChange={formik.handleChange}
-                // disabled={isDetails}
               >
                 {categories.map((category) => {
                   return (
@@ -175,65 +220,53 @@ function WorkoutModal(props) {
               {formik.touched.category && formik.errors.category && (
                 <span className='text-red-500'>{formik.errors.category}</span>
               )}
-
-              {/* Handling of exercise addition */}
               {formik.values.exercises.map((exercise, i) => {
-                // console.log(exercise);
                 return (
                   <Grid container key={i}>
-                    <Grid
-                      item
-                      lg={12}
-                      justifyContent='center'
-                      display='flex'
-                      direction='column'
-                    >
+                    <Grid item lg={12} justifyContent='center' display='flex'>
                       <Stack direction='row' spacing={2}>
                         <Stack direction='column' className='w-full '>
                           <InputLabel>Select exercise</InputLabel>
-                          <Select name='[exercise.id]' />
-                          {formik.touched.exercises &&
-                            formik.errors.exercises && (
-                              <span className='text-red-500'>
-                                {formik.errors.exercises}
-                              </span>
-                            )}
+                          <Select
+                            name={`exercises.${i}.id`}
+                            value={exercise.id}
+                            onChange={formik.handleChange}
+                          >
+                            {exercises.map((exer) => {
+                              return (
+                                <MenuItem key={exer.id} value={exer.id}>
+                                  {exer.name}
+                                </MenuItem>
+                              );
+                            })}
+                          </Select>
                         </Stack>
                         <Stack direction='column'>
                           <InputLabel>Sets</InputLabel>
-                          <TextField name='[exercise.sets]' />
-                          {formik.touched.bodyPart &&
-                            formik.errors.bodyPart && (
-                              <span className='text-red-500'>
-                                {formik.errors.bodyPart}
-                              </span>
-                            )}
+                          <TextField
+                            type='number'
+                            name={`exercises.${i}.sets`}
+                            value={exercise.sets}
+                            onChange={formik.handleChange}
+                          />
                         </Stack>
                         <Stack direction='column'>
                           <InputLabel>Reps</InputLabel>
-                          <TextField name='bodyPart' />
-                          {formik.touched.bodyPart &&
-                            formik.errors.bodyPart && (
-                              <span className='text-red-500'>
-                                {formik.errors.bodyPart}
-                              </span>
-                            )}
+                          <TextField
+                            type='number'
+                            name={`exercises.${i}.repetitions`}
+                            value={exercise.repetitions}
+                            onChange={formik.handleChange}
+                          />
                         </Stack>
                         <Stack direction='column'>
                           <InputLabel>Weight</InputLabel>
-                          <TextField name='bodyPart' />
-                          {formik.touched.bodyPart &&
-                            formik.errors.bodyPart && (
-                              <span className='text-red-500'>
-                                {formik.errors.bodyPart}
-                              </span>
-                            )}
-                          {formik.touched.bodyPart &&
-                            formik.errors.bodyPart && (
-                              <span className='text-red-500'>
-                                {formik.errors.bodyPart}
-                              </span>
-                            )}
+                          <TextField
+                            type='number'
+                            name={`exercises.${i}.weight`}
+                            value={exercise.weight}
+                            onChange={formik.handleChange}
+                          />
                         </Stack>
                       </Stack>
                     </Grid>
@@ -246,11 +279,11 @@ function WorkoutModal(props) {
                 className='items-center justify-end'
               >
                 <Typography>
-                  Please specify how much exercises you want to add to this
+                  Please specify how many exercises you want to add to this
                   workout
                 </Typography>
                 <Select
-                  defaultValue={1}
+                  defaultValue={formik.values.noOfExercieses}
                   onChange={(e) => {
                     onChangeExercises(e);
                   }}
@@ -279,7 +312,8 @@ function WorkoutModal(props) {
                 variant='outlined'
                 onClick={() => {
                   formik.handleReset();
-                  formik.setFieldValue("exercises", [baseExercise]);
+                  if (!workout)
+                    formik.setFieldValue("exercises", [baseExercise]);
                   handleClose();
                 }}
                 className={"w-1/2"}

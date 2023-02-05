@@ -16,10 +16,11 @@ public class RemoveWorkoutCommandHandler : ICommandHandler<RemoveWorkoutCommand>
 
     public async Task HandleAsync(RemoveWorkoutCommand command)
     {
-        var otherUserWorkouts = await _userWorkoutRepository
-            .GetAllAsync(x => x.WorkoutId == command.WorkoutId && x.UserId != command.UserId);
+        var otherUserWorkouts = (await _userWorkoutRepository
+            .GetAllAsync(x => x.WorkoutId == command.WorkoutId && x.UserId != command.UserId)).ToList();
 
-        if (otherUserWorkouts.Any())
+        if (otherUserWorkouts.Any() || otherUserWorkouts.Any(x => x.Workout.TrainingPlanWorkouts
+                .Any(tpw => tpw.WorkoutId == command.WorkoutId)))
         {
             await _userWorkoutRepository.RemoveAsync(command.UserId, command.WorkoutId);
             return;

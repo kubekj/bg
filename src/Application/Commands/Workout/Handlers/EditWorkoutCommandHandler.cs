@@ -1,7 +1,9 @@
 using Application.Abstractions.Messaging.Command;
+using Application.Exceptions;
 using Core.Entities;
 using Core.Repositories;
 using Core.Services.ExerciseWorkout;
+using Core.Services.Workout;
 
 namespace Application.Commands.Workout.Handlers;
 
@@ -10,15 +12,18 @@ public class EditWorkoutCommandHandler : ICommandHandler<EditWorkoutCommand>
     private readonly IUserWorkoutRepository _userWorkoutRepository;
     private readonly IWorkoutRepository _workoutRepository;
 
+    private readonly IWorkoutService _workoutService;
     private readonly IExerciseWorkoutService _exerciseWorkoutService;
 
     public EditWorkoutCommandHandler(IUserWorkoutRepository userWorkoutRepository,
         IWorkoutRepository workoutRepository, 
-        IExerciseWorkoutService exerciseWorkoutService)
+        IExerciseWorkoutService exerciseWorkoutService,
+        IWorkoutService workoutService)
     {
         _userWorkoutRepository = userWorkoutRepository;
         _workoutRepository = workoutRepository;
         _exerciseWorkoutService = exerciseWorkoutService;
+        _workoutService = workoutService;
     }
 
     public async Task HandleAsync(EditWorkoutCommand command)
@@ -27,15 +32,21 @@ public class EditWorkoutCommandHandler : ICommandHandler<EditWorkoutCommand>
 
         if (userWorkout is null)
             return;
+        
+        var userWorkouts = (await _userWorkoutRepository
+            .GetAllAsync(x => x.WorkoutId != command.WorkoutId && x.UserId == command.UserId)).ToList();
 
-        var otherUserWorkouts = await _userWorkoutRepository
-            .GetAllAsync(x => x.WorkoutId == command.WorkoutId && x.UserId != command.UserId);
+        if (userWorkouts.Any(uw => uw.Workout.Name.Value == command.Name))
+            throw new UserAlreadyHasThatWorkoutException(command.Name);
+
+        var anotherUserWorkouts = (await _userWorkoutRepository
+            .GetAllAsync(x => x.WorkoutId == command.WorkoutId && x.UserId != command.UserId)).ToList();
 
         var exercisesWithSets = command.ExerciseWithSets
             .ToDictionary(k => k.Key, 
                 v => v.Value.Select(s => new Set(s.Id,s.Repetitions,s.Weight)));
 
-        if (otherUserWorkouts.Any())
+        if (anotherUserWorkouts.Any())
         {
             var copiedWorkout = userWorkout.Workout.CreateCopyForUser(command.Name,command.Category);
             await _workoutRepository.AddAsync(copiedWorkout);

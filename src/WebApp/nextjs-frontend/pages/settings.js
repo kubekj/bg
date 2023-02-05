@@ -1,4 +1,4 @@
-import SettingsView from "../components/settings/settings-view";
+import SettingsView from "../components/settings/form";
 import Athlete from "../components/layouts/Athlete";
 
 const Settings = () => {

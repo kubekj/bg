@@ -33,7 +33,7 @@ internal sealed class ExerciseWorkoutRepository : IExerciseWorkoutRepository
 
     public async Task RemoveAsync(Guid workoutId, Guid exerciseId)
     {
-        var exerciseWorkout = await _exerciseWorkouts.FindAsync(workoutId,exerciseId);
+        var exerciseWorkout = await _exerciseWorkouts.FindAsync(exerciseId,workoutId);
         if (exerciseWorkout != null) _exerciseWorkouts.Remove(exerciseWorkout);
     }
 }

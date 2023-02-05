@@ -118,7 +118,7 @@ const Sidebar = () => {
       </div>
       <div>
         <div className={style.bottomButtons}>
-          <Link href='/trainer-dashboard'>
+          <Link href='/trainer/dashboard'>
             <Button
               iconSrc='/thumbnails/log-in-outline.svg'
               text={

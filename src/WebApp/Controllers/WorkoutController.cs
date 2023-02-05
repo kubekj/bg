@@ -3,7 +3,6 @@ using Application.Abstractions.Messaging.Query;
 using Application.Commands.Workout;
 using Application.DTO.Entities;
 using Application.Queries.Workouts;
-using Application.Queries.Workouts.Handlers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +15,7 @@ public class WorkoutController : ApiController
     private readonly ICommandHandler<CreateWorkoutCommand> _createWorkoutCommandHandler;
     private readonly ICommandHandler<EditWorkoutCommand> _editWorkoutCommandHandler;
     private readonly ICommandHandler<CreateWorkoutSessionCommand> _createWorkoutSessionCommandHandler;
+    private readonly ICommandHandler<RemoveWorkoutCommand> _removeWorkoutCommandHandler;
     private readonly IQueryHandler<GetWorkoutsQuery, IEnumerable<WorkoutDto>> _getWorkoutsQueryHandler;
     private readonly IQueryHandler<GetWorkoutQuery, WorkoutDto> _getWorkoutQueryHandler;
     private readonly IQueryHandler<GetCurrentWorkoutQuery,WorkoutDto> _getCurrentWorkoutQueryHandler;
@@ -26,6 +26,7 @@ public class WorkoutController : ApiController
     public WorkoutController(ICommandHandler<CreateWorkoutCommand> createWorkoutCommandHandler,
         ICommandHandler<EditWorkoutCommand> editWorkoutCommandHandler, 
         ICommandHandler<CreateWorkoutSessionCommand> createWorkoutSessionCommandHandler,
+        ICommandHandler<RemoveWorkoutCommand> removeWorkoutCommandHandler,
         IQueryHandler<GetWorkoutsQuery, IEnumerable<WorkoutDto>> getWorkoutsQueryHandler, 
         IQueryHandler<GetWorkoutQuery, WorkoutDto> getWorkoutQueryHandler, 
         IQueryHandler<GetCurrentWorkoutQuery, WorkoutDto> getCurrentWorkoutQueryHandler, 
@@ -35,11 +36,20 @@ public class WorkoutController : ApiController
         _createWorkoutCommandHandler = createWorkoutCommandHandler;
         _editWorkoutCommandHandler = editWorkoutCommandHandler;
         _createWorkoutSessionCommandHandler = createWorkoutSessionCommandHandler;
+        _removeWorkoutCommandHandler = removeWorkoutCommandHandler;
         _getWorkoutsQueryHandler = getWorkoutsQueryHandler;
         _getWorkoutQueryHandler = getWorkoutQueryHandler;
         _getCurrentWorkoutQueryHandler = getCurrentWorkoutQueryHandler;
         _getPreviousWorkoutQueryHandler = getPreviousWorkoutQueryHandler;
         _getNextWorkoutQueryHandler = getNextWorkoutQueryHandler;
+    }
+    
+    [HttpDelete("{id:guid}")]
+    public async Task<ActionResult> Delete(Guid id)
+    {
+        _userId = Guid.Parse(HttpContext.User.Identity.Name);
+        await _removeWorkoutCommandHandler.HandleAsync(new RemoveWorkoutCommand(_userId,id));
+        return NoContent();
     }
     
     [HttpPost("create")]

@@ -1,8 +1,9 @@
-import style from "../reusable-comps/left-pane.module.css";
+import style from "../reusable/left-pane.module.css";
 import Image from "next/image";
-import Button from "../reusable-comps/button";
+import Button from "../reusable/button";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { Avatar } from "@mui/material";
 
 const TrainerSidebar = () => {
   const { data } = useSession();
@@ -18,20 +19,9 @@ const TrainerSidebar = () => {
             width={30}
             height={30}
           />
-          <h3 style={{ marginTop: "0.85rem" }}>BodyGuard menu</h3>
-        </div>
-        <div>
-          <form className='d-flex' role='search'>
-            <input
-              className='form-control me-2'
-              type='search'
-              placeholder='Search'
-              aria-label='Search...'
-            />
-          </form>
         </div>
         <div className={style.topButtons} role='group'>
-          <Link href='/trainer-dashboard'>
+          <Link href='/trainer/dashboard'>
             <Button
               iconSrc='/thumbnails/bar-chart-outline.svg'
               text='Dashboard'
@@ -42,7 +32,7 @@ const TrainerSidebar = () => {
               extraStyleValue='100%'
             />
           </Link>
-          <Link href='/trainer-plans'>
+          <Link href='/trainer/plans'>
             <Button
               iconSrc='/thumbnails/layers-outline.svg'
               text='Plans'
@@ -57,7 +47,7 @@ const TrainerSidebar = () => {
       </div>
       <div>
         <div className={style.bottomButtons}>
-          <Link href='/athlete-main-page'>
+          <Link href='/athlete/dashboard'>
             <Button
               iconSrc='/thumbnails/log-in-outline.svg'
               text='Change to athlete view'
@@ -68,7 +58,7 @@ const TrainerSidebar = () => {
               extraStyleValue='100%'
             />
           </Link>
-          <Link href='/settings'>
+          <Link href='/trainer/settings'>
             <Button
               iconSrc='/thumbnails/settings-outline.svg'
               text='Settings'
@@ -82,16 +72,12 @@ const TrainerSidebar = () => {
         </div>
         <div className={style.bottomSection}>
           <div className={style.userInfo}>
-            <Image
-              className={style.avatar}
-              src='/avatar-svgrepo-com.svg'
-              alt='dadas'
-              width={30}
-              height={30}
-            />
-            <div>
-              <h5>{data.user.fullName}</h5>
-              <p>{data.user.email}</p>
+            <div className={style.userInfo}>
+              <Avatar src='/avatar.webp' className={"mr-4 mt-2"} />
+              <div>
+                <h5>{data?.user.fullName}</h5>
+                <p>{data?.user.email}</p>
+              </div>
             </div>
           </div>
           <Button

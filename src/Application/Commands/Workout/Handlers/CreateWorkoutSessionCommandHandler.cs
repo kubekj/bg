@@ -8,13 +8,11 @@ namespace Application.Commands.Workout.Handlers;
 
 public class CreateWorkoutSessionCommandHandler : ICommandHandler<CreateWorkoutSessionCommand>
 {
-    private readonly IWorkoutRepository _workoutRepository;
     private readonly IUserWorkoutSessionRepository _userWorkoutSessionRepository;
     private readonly IClock _clock;
     
-    public CreateWorkoutSessionCommandHandler(IWorkoutRepository workoutRepository, IUserWorkoutSessionRepository userWorkoutSessionRepository, IClock clock)
+    public CreateWorkoutSessionCommandHandler(IUserWorkoutSessionRepository userWorkoutSessionRepository, IClock clock)
     {
-        _workoutRepository = workoutRepository;
         _userWorkoutSessionRepository = userWorkoutSessionRepository;
         _clock = clock;
     }

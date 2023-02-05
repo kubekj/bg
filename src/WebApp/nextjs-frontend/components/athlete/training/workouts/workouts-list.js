@@ -6,7 +6,7 @@ import WorkoutModal from "../../modals/workout-modal";
 import { Stack } from "@mui/system";
 import { Pagination } from "@mui/material";
 
-const WorkoutsList = ({ workouts }) => {
+const WorkoutsList = ({ workouts, exercises }) => {
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -29,7 +29,7 @@ const WorkoutsList = ({ workouts }) => {
                 isHoveringColor='#C7D7FE'
                 extraStyleType='color'
                 extraStyleValue='white'
-                isDetails={false}
+                exercises={exercises}
               />
             </div>
           </div>
@@ -66,26 +66,28 @@ const WorkoutsList = ({ workouts }) => {
                         spacing={2}
                         className='items-center'
                       >
-                        {/* <WorkoutModal
+                        <WorkoutModal
                           icon='/thumbnails/copy-outline.svg'
                           isDetails={true}
-                          exercise={exercise}
                           backgroundColorValue='white'
                           isHoveringColor='#D0D5DD'
                           borderValue='none'
+                          workout={workout}
+                          exercises={exercises}
                         />
                         <WorkoutModal
                           icon='/thumbnails/modify.svg'
                           isDetails={false}
-                          exercise={exercise}
                           backgroundColorValue='white'
                           isHoveringColor='#D0D5DD'
                           borderValue='none'
-                        /> */}
+                          workout={workout}
+                          exercises={exercises}
+                        />
                         <DeleteModal
                           subtitle={`Remove workout "${workout.name}"`}
                           endpoint={`workouts/${workout.id}`}
-                          redirect='/athlete/exercise'
+                          redirect='/athlete/workout'
                         />
                       </Stack>
                     </td>
@@ -95,7 +97,7 @@ const WorkoutsList = ({ workouts }) => {
             </tbody>
           </table>
           <div className='flex flex-row items-center justify-center p-6 w-full'>
-            <Pagination></Pagination>
+            <Pagination />
           </div>
         </div>
       </div>
