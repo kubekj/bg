@@ -63,7 +63,7 @@ const ApplyTrainingView = ({plan}) => {
           <div className={style.trainings}>
             {plan.workouts.map(workout => {
               return(
-              <div style={{ width: "33%" }}>
+              <div style={{ width: "33%" }} key={workout.id}>
                   <TrainingPreview workout={workout}>
                   <TrainingPlanPreview
                       icon='/thumbnails/copy-outline.svg'

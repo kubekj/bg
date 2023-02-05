@@ -2,6 +2,7 @@ using Application.Abstractions.Messaging.Command;
 using Application.Abstractions.Messaging.Query;
 using Application.Commands.Workout;
 using Application.DTO.Entities;
+using Application.Queries.TrainingPlan;
 using Application.Queries.Workouts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,7 @@ public class WorkoutController : ApiController
     private readonly IQueryHandler<GetCurrentWorkoutQuery,WorkoutDto> _getCurrentWorkoutQueryHandler;
     private readonly IQueryHandler<GetPreviousWorkoutQuery,WorkoutDto> _getPreviousWorkoutQueryHandler;
     private readonly IQueryHandler<GetNextWorkoutQuery,WorkoutDto> _getNextWorkoutQueryHandler;
+    private readonly IQueryHandler<GetAllWorkoutSessionsQuery,IEnumerable<WorkoutSessionDto>> _getAllWorkoutSessionsQuery;
     private Guid _userId;
 
     public WorkoutController(ICommandHandler<CreateWorkoutCommand> createWorkoutCommandHandler,
@@ -31,7 +33,8 @@ public class WorkoutController : ApiController
         IQueryHandler<GetWorkoutQuery, WorkoutDto> getWorkoutQueryHandler, 
         IQueryHandler<GetCurrentWorkoutQuery, WorkoutDto> getCurrentWorkoutQueryHandler, 
         IQueryHandler<GetPreviousWorkoutQuery, WorkoutDto> getPreviousWorkoutQueryHandler, 
-        IQueryHandler<GetNextWorkoutQuery, WorkoutDto> getNextWorkoutQueryHandler)
+        IQueryHandler<GetNextWorkoutQuery, WorkoutDto> getNextWorkoutQueryHandler, 
+        IQueryHandler<GetAllWorkoutSessionsQuery, IEnumerable<WorkoutSessionDto>> getAllWorkoutSessionsQuery)
     {
         _createWorkoutCommandHandler = createWorkoutCommandHandler;
         _editWorkoutCommandHandler = editWorkoutCommandHandler;
@@ -42,6 +45,7 @@ public class WorkoutController : ApiController
         _getCurrentWorkoutQueryHandler = getCurrentWorkoutQueryHandler;
         _getPreviousWorkoutQueryHandler = getPreviousWorkoutQueryHandler;
         _getNextWorkoutQueryHandler = getNextWorkoutQueryHandler;
+        _getAllWorkoutSessionsQuery = getAllWorkoutSessionsQuery;
     }
     
     [HttpDelete("{id:guid}")]
@@ -68,7 +72,14 @@ public class WorkoutController : ApiController
         return NoContent();
     }
     
-        
+    [HttpGet("sessions")]
+    public async Task<ActionResult> GetSessions()
+    {
+        _userId = Guid.Parse(HttpContext.User.Identity.Name);
+        var sessions = await _getAllWorkoutSessionsQuery.HandleAsync(new GetAllWorkoutSessionsQuery(_userId));
+        return Ok(sessions);
+    }
+
     [HttpGet("current")]
     public async Task<ActionResult> GetCurrent()
     {

@@ -24,14 +24,14 @@ const TrainingsList = ({ plans }) => {
               </h3>
             </div>
             <div className='relative w-full px-4 max-w-full flex-grow flex-1 text-right'>
-              <TrainingPlanModal
+              {/* <TrainingPlanModal
                 icon='/thumbnails/add-outline.svg'
                 text='Add new'
                 backgroundColorValue='#8098F9'
                 isHoveringColor='#C7D7FE'
                 extraStyleType='color'
                 extraStyleValue='white'
-              ></TrainingPlanModal>
+              ></TrainingPlanModal> */}
             </div>
           </div>
         </div>
@@ -76,37 +76,22 @@ const TrainingsList = ({ plans }) => {
                         spacing={2}
                         className='items-center'
                       >
-                        {/* <WorkoutModal
-                          icon='/thumbnails/copy-outline.svg'
-                          isDetails={true}
-                          exercise={exercise}
-                          backgroundColorValue='white'
-                          isHoveringColor='#D0D5DD'
-                          borderValue='none'
-                        />
-                        <WorkoutModal
-                          icon='/thumbnails/modify.svg'
-                          isDetails={false}
-                          exercise={exercise}
-                          backgroundColorValue='white'
-                          isHoveringColor='#D0D5DD'
-                          borderValue='none'
-                        /> */}
-                        <Link href={{pathname: `/athlete/training/plan`, query:{id: plan.id}}} style={{textDecoration: "none"}}>
-                        <Button
+                        <Link
+                          href={{
+                            pathname: `/athlete/training/plan`,
+                            query: { id: plan.id },
+                          }}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <Button
                             iconSrc='/thumbnails/copy-outline.svg'
                             borderValue='none'
                             backgroundColorValue='#FFFFFF'
                             isHoveringColor='#C7D7FE'
                             extraStyleType='color'
                             extraStyleValue='white'
-                        />
+                          />
                         </Link>
-                        <DeleteModal
-                          subtitle={`Remove training plan "${plan.title}"`}
-                          endpoint={`training-plans/${plan.id}`}
-                          redirect='/athlete/training-plans'
-                        />
                       </Stack>
                     </td>
                   </tr>

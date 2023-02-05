@@ -5,6 +5,7 @@ import DeleteModal from "../../../reusable/delete-modal";
 import WorkoutModal from "../../modals/workout-modal";
 import { Stack } from "@mui/system";
 import { Pagination } from "@mui/material";
+import TrainingPlanPreview from "../training-plans/training-preview-dialog";
 
 const WorkoutsList = ({ workouts, exercises }) => {
   return (
@@ -66,14 +67,12 @@ const WorkoutsList = ({ workouts, exercises }) => {
                         spacing={2}
                         className='items-center'
                       >
-                        <WorkoutModal
+                        <TrainingPlanPreview
                           icon='/thumbnails/copy-outline.svg'
-                          isDetails={true}
                           backgroundColorValue='white'
                           isHoveringColor='#D0D5DD'
                           borderValue='none'
                           workout={workout}
-                          exercises={exercises}
                         />
                         <WorkoutModal
                           icon='/thumbnails/modify.svg'

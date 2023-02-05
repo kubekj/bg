@@ -1,8 +1,6 @@
 import React from "react";
-import Link from "next/link";
 
 import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 import { Button, Dialog, Grid, InputLabel, TextField } from "@mui/material";
 import CustomButton from "../../../reusable/button";
 import { Stack } from "@mui/system";
@@ -20,7 +18,7 @@ function TrainingPlanPreview(props) {
     extraStyleType,
     extraStyleValue,
   } = props;
-  console.log(workout)
+  console.log(workout);
   return (
     <>
       <CustomButton
@@ -41,16 +39,15 @@ function TrainingPlanPreview(props) {
                 Workout
               </Typography>
 
-                <Typography
-                  id='modal-modal-title'
-                  variant='h6'
-                  component='h2'
-                  onClick={handleClose}
-                  className="cursor-pointer"
-                >
-                    X
-                </Typography>
-
+              <Typography
+                id='modal-modal-title'
+                variant='h6'
+                component='h2'
+                onClick={handleClose}
+                className='cursor-pointer'
+              >
+                X
+              </Typography>
             </div>
             <Typography
               id='modal-modal-description'
@@ -73,24 +70,67 @@ function TrainingPlanPreview(props) {
                   justifyContent='center'
                   display='flex'
                   direction='column'
-                >{workout.exerciseDtos.map(exercise => {
-                  return(
-                      <Stack direction='row' spacing={2} id={exercise.id}>
-                        <Stack direction='column' className='w-full'>
-                          <InputLabel>Exercise</InputLabel>
-                          <TextField placeholder={exercise.name} disabled={true}></TextField>
+                >
+                  {workout.exerciseDtos.map((exercise) => {
+                    return (
+                      <div key={exercise.id} className='p-2'>
+                        <Stack direction='row' spacing={2}>
+                          <Stack direction='column' className='w-full'>
+                            <InputLabel>Exercise</InputLabel>
+                            <TextField
+                              placeholder={exercise.name}
+                              disabled={true}
+                              sx={{
+                                ".MuiInputBase-input.Mui-disabled": {
+                                  WebkitTextFillColor: "#000",
+                                  color: "#000",
+                                },
+                              }}
+                            ></TextField>
+                          </Stack>
+                          <Stack direction='column'>
+                            <InputLabel>Sets</InputLabel>
+                            <TextField
+                              placeholder={exercise.setDtos.length}
+                              disabled={true}
+                              sx={{
+                                ".MuiInputBase-input.Mui-disabled": {
+                                  WebkitTextFillColor: "#000",
+                                  color: "#000",
+                                },
+                              }}
+                            ></TextField>
+                          </Stack>
+                          <Stack direction='column'>
+                            <InputLabel>Reps</InputLabel>
+                            <TextField
+                              placeholder={exercise.setDtos[0].repetitions}
+                              disabled={true}
+                              sx={{
+                                ".MuiInputBase-input.Mui-disabled": {
+                                  WebkitTextFillColor: "#000",
+                                  color: "#000",
+                                },
+                              }}
+                            ></TextField>
+                          </Stack>
+                          <Stack direction='column'>
+                            <InputLabel>Weight</InputLabel>
+                            <TextField
+                              placeholder={exercise.setDtos[0].weight}
+                              disabled={true}
+                              sx={{
+                                ".MuiInputBase-input.Mui-disabled": {
+                                  WebkitTextFillColor: "#000",
+                                  color: "#000",
+                                },
+                              }}
+                            ></TextField>
+                          </Stack>
                         </Stack>
-                        <Stack direction='column'>
-                          <InputLabel>Sets</InputLabel>
-                          <TextField placeholder={exercise.setDtos.length} disabled={true}></TextField>
-                        </Stack>
-                        <Stack direction='column'>
-                          <InputLabel>Reps</InputLabel>
-                          <TextField placeholder={exercise.setDtos[0].repetitions} disabled={true}></TextField>
-                        </Stack>
-                      </Stack>
-                  );
-                })}
+                      </div>
+                    );
+                  })}
                 </Grid>
               </Grid>
               <Stack direction='row' spacing={2} className='items-center'>

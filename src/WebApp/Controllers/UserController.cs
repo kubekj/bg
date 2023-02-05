@@ -6,6 +6,7 @@ using Application.DTO;
 using Application.DTO.Entities;
 using Application.Queries.User;
 using Application.Security;
+using Core.ValueObjects.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,12 +21,14 @@ public class UserController : ApiController
     private readonly ICommandHandler<ChangeUserDetailsCommand> _changeUserDetailsCommandHandler;
     private readonly ICommandHandler<SignUpAsCoachCommand> _signUpAsCoachCommandHandler;
     private readonly IQueryHandler<GetPersonalInfoQuery,UserDto> _getPersonalInfoQueryHandler;
+    private readonly IQueryHandler<GetTrainerInfoQuery,TrainerDto> _getTrainerInfoQueryHandler;
     
     public UserController(ICommandHandler<SignUpCommand> signUpCommandHandler, 
         ICommandHandler<SignInCommand> signInCommandHandler, ITokenStorage tokenStorage, 
         ICommandHandler<ChangeUserDetailsCommand> changeUserDetailsCommandHandler, 
         IQueryHandler<GetPersonalInfoQuery, UserDto> getPersonalInfoQueryHandler,
-        ICommandHandler<SignUpAsCoachCommand> signUpAsCoachCommandHandler)
+        ICommandHandler<SignUpAsCoachCommand> signUpAsCoachCommandHandler, 
+        IQueryHandler<GetTrainerInfoQuery, TrainerDto> getTrainerInfoQueryHandler)
     {
         _signUpCommandHandler = signUpCommandHandler;
         _signInCommandHandler = signInCommandHandler;
@@ -33,6 +36,7 @@ public class UserController : ApiController
         _changeUserDetailsCommandHandler = changeUserDetailsCommandHandler;
         _getPersonalInfoQueryHandler = getPersonalInfoQueryHandler;
         _signUpAsCoachCommandHandler = signUpAsCoachCommandHandler;
+        _getTrainerInfoQueryHandler = getTrainerInfoQueryHandler;
     }
 
     [HttpPost("signup")]
@@ -73,6 +77,14 @@ public class UserController : ApiController
     {
         var userId = Guid.Parse(HttpContext.User.Identity?.Name);
         var result = await _getPersonalInfoQueryHandler.HandleAsync(new GetPersonalInfoQuery(UserId: userId));
+        return Ok(result);
+    }
+    
+    [Authorize]
+    [HttpGet("trainer-details/{email}")]
+    public async Task<ActionResult> GetTrainerDetails(string email)
+    {
+        var result = await _getTrainerInfoQueryHandler.HandleAsync(new GetTrainerInfoQuery(email));
         return Ok(result);
     }
 }

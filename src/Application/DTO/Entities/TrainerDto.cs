@@ -5,6 +5,7 @@ public record TrainerDto(
     string LastName,
     string Description,
     string PreferredLanguage,
-    string TrainerEmail,
-    IEnumerable<WorkoutDto> BestSellers,
-    IEnumerable<WorkoutDto> MostRecent);
+    string TrainerEmail
+    // IEnumerable<WorkoutDto> BestSellers,
+    // IEnumerable<WorkoutDto> MostRecent
+    );
