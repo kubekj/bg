@@ -20,20 +20,18 @@ import { Select } from "@mui/material";
 import { Stack } from "@mui/system";
 
 const statuses = ["Active", "Unpublished", "Published"];
+const languages = ["English", "Polish"];
+const skillLevels = ["Beginner", "Intermediate", "Advanced"];
 const noOfExercieses = [1, 2, 3, 4, 5, 6, 7];
-const basePlan = { id: "" };
+const baseWorkout = {};
 
 const validationSchema = yup.object().shape({
   title: yup.string().required("Please provide a title for plan"),
-  description: yup
-    .string()
-    .required("Please choose the category of this workout"),
-  plans: yup.array().of(
-    yup.object().shape({
-      id: yup.string().required("Training is required"),
-    })
-  ),
-  weeks: yup.number().required("Please mark how long will the training last"),
+  description: yup.string().required("Please describe the plan"),
+  workouts: yup.array().of(yup.string().required("training is required")),
+  duration: yup
+    .number()
+    .required("Please mark how long will the training last (in weeks)"),
   price: yup.number().required("Please provide the price of given plan"),
   language: yup
     .string()
@@ -44,7 +42,7 @@ const validationSchema = yup.object().shape({
     .required(
       "Please provide an info of what the status of this plan should be"
     ),
-  noOfPlans: yup
+  noOfWorkouts: yup
     .number()
     .required("Mark how many workouts will the plan contain"),
 });
@@ -56,44 +54,51 @@ function TrainingPlanModal(props) {
 
   const { data } = useSession();
   const router = useRouter();
+  const { plan, workouts, isDetails } = props;
 
   const formik = useFormik({
     initialValues: {
-      title: "",
-      description: "",
-      plans: [],
-      weeks: "",
-      price: "",
-      language: "",
-      skillLevel: "",
-      status: "",
-      noOfPlans: 1,
+      title: plan ? plan.title : "",
+      description: plan ? plan.description : "",
+      workouts: plan ? plan.workouts : [baseWorkout],
+      duration: plan ? plan.duration : "",
+      price: plan ? plan.price : "",
+      language: plan ? plan.language : "",
+      skillLevel: plan ? plan.skillLevel : "",
+      status: plan ? plan.status : "",
+      noOfWorkouts: plan ? plan.noOfWorkouts : 1,
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {},
+    onSubmit: async (values) => {
+      plan
+        ? await putter(`training-plans/${plan.id}`, values, data.jwt)
+        : await poster("training-plans/create", values, data.jwt);
+      router.replace("/trainer/plans");
+      handleClose();
+    },
   });
 
   function onChangeWorkouts(e) {
     // update dynamic form
-    const plans = formik.values.plans;
-    const numberOfPlans = e.target.value || 0;
-    const previousNumber = parseInt(formik.values.noOfPlans || "0");
-    if (previousNumber < numberOfPlans) {
-      for (let i = previousNumber; i < numberOfPlans; i++) {
-        plans.push({ id: "" });
+    const workouts = formik.values.workouts;
+    const numberOfWorkouts = e.target.value || 0;
+    const previousNumber = parseInt(formik.values.noOfWorkouts || "0");
+    if (previousNumber < numberOfWorkouts) {
+      for (let i = previousNumber; i < numberOfWorkouts; i++) {
+        workouts.push({});
       }
     } else {
-      for (let i = previousNumber; i >= numberOfPlans; i--) {
-        plans.splice(i, 1);
+      for (let i = previousNumber; i >= numberOfWorkouts; i--) {
+        workouts.splice(i, 1);
       }
     }
-    formik.setFieldValue("plans", plans);
+    formik.setFieldValue("workouts", workouts);
     // call formik onChange method
-    formik.setFieldValue("noOfPlans", e.target.value);
+    formik.setFieldValue("noOfWorkouts", e.target.value);
   }
 
-  const title = !props.workout ? "Create new plan" : "Plan details";
-  const btnlabel = !props.workout ? "Add" : "Edit";
+  const title = !props.plan ? "Create new plan" : "Plan details";
+  const btnlabel = !props.plan ? "Add" : "Edit";
 
   return (
     <>
@@ -144,22 +149,22 @@ function TrainingPlanModal(props) {
           </div>
           <div className='flex flex-col items-start p-10 gap-5 w-full'>
             <div className='flex flex-col justify-center gap-3 w-full'>
-              <InputLabel>Name</InputLabel>
+              <InputLabel>Title</InputLabel>
               <TextField
-                name='name'
-                value={formik.values.name}
+                name='title'
+                value={formik.values.title}
                 placeholder='eg. Push'
-                error={formik.touched.name && Boolean(formik.errors.name)}
+                error={formik.touched.title && Boolean(formik.errors.title)}
                 className={`${
-                  formik.touched.name && formik.errors.name
+                  formik.touched.title && formik.errors.title
                     ? "border-red-500"
                     : ""
                 }`}
                 onChange={formik.handleChange}
-                // disabled={isDetails}
+                disabled={isDetails}
               ></TextField>
-              {formik.touched.name && formik.errors.name && (
-                <span className='text-red-500'>{formik.errors.name}</span>
+              {formik.touched.title && formik.errors.title && (
+                <span className='text-red-500'>{formik.errors.title}</span>
               )}
               <InputLabel>Description</InputLabel>
               <TextField
@@ -177,7 +182,7 @@ function TrainingPlanModal(props) {
                     : ""
                 }`}
                 onChange={formik.handleChange}
-                // disabled={isDetails}
+                disabled={isDetails}
               ></TextField>
               {formik.touched.description && formik.errors.description && (
                 <span className='text-red-500'>
@@ -185,10 +190,11 @@ function TrainingPlanModal(props) {
                 </span>
               )}
 
-              {formik.values.plans.map((exercise, i) => {
+              {formik.values.workouts.map((workout, i) => {
                 return (
                   <Grid container key={i}>
                     <Grid
+                      container
                       item
                       lg={12}
                       justifyContent='center'
@@ -198,11 +204,35 @@ function TrainingPlanModal(props) {
                       <Stack direction='row' spacing={2}>
                         <Stack direction='column' className='w-full '>
                           <InputLabel>Select workout</InputLabel>
-                          <Select name='[exercise.id]' />
-                          {formik.touched.exercises &&
-                            formik.errors.exercises && (
+                          <Select
+                            name={`workouts.${i}`}
+                            value={workout.id}
+                            error={
+                              formik.touched.workouts &&
+                              Boolean(formik.errors.workouts)
+                            }
+                            className={`${
+                              formik.touched.workouts && formik.errors.workouts
+                                ? "border-red-500"
+                                : ""
+                            }`}
+                            onChange={formik.handleChange}
+                            disabled={isDetails}
+                          >
+                            {workouts.map((workout) => {
+                              return (
+                                <MenuItem key={workout.id} value={workout.id}>
+                                  {workout.name}
+                                </MenuItem>
+                              );
+                            })}
+                          </Select>
+                          {formik.touched.workouts &&
+                            formik.touched.workouts[i] &&
+                            formik.touched.workouts[i] &&
+                            formik.errors.workouts && (
                               <span className='text-red-500'>
-                                {formik.errors.exercises}
+                                {formik.errors.workouts[i]}
                               </span>
                             )}
                         </Stack>
@@ -211,35 +241,37 @@ function TrainingPlanModal(props) {
                   </Grid>
                 );
               })}
-              <Stack
-                direction='row'
-                spacing={2}
-                className='items-center justify-end'
-              >
-                <Typography>
-                  Please specify how many workouts you want to add to this plan
-                  -{" "}
-                  <span className='text-red-400'>
-                    workouts are distributed by weeks
-                  </span>{" "}
-                  so with, for eg. 7 workouts included an user will have them
-                  assigned on each day of the week
-                </Typography>
-                <Select
-                  defaultValue={1}
-                  onChange={(e) => {
-                    onChangeWorkouts(e);
-                  }}
+              {!isDetails && (
+                <Stack
+                  direction='row'
+                  spacing={2}
+                  className='items-center justify-end'
                 >
-                  {noOfExercieses.map((number) => {
-                    return (
-                      <MenuItem key={number} value={number}>
-                        {number}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </Stack>
+                  <Typography>
+                    Please specify how many workouts you want to add to this
+                    plan -{" "}
+                    <span className='text-red-400'>
+                      workouts are distributed by weeks
+                    </span>{" "}
+                    so with, for eg. 7 workouts included an user will have them
+                    assigned on each day of the week
+                  </Typography>
+                  <Select
+                    value={formik.values.noOfWorkouts}
+                    onChange={(e) => {
+                      onChangeWorkouts(e);
+                    }}
+                  >
+                    {noOfExercieses.map((number) => {
+                      return (
+                        <MenuItem key={number} value={number}>
+                          {number}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </Stack>
+              )}
               <Grid container>
                 <Grid
                   item
@@ -251,19 +283,47 @@ function TrainingPlanModal(props) {
                   <Stack direction='row' spacing={2}>
                     <Stack direction='column' className='w-full'>
                       <InputLabel>Weeks</InputLabel>
-                      <Select name='[exercise.id]' />
-                      {formik.touched.exercises && formik.errors.exercises && (
+                      <TextField
+                        type='number'
+                        name='duration'
+                        value={formik.values.duration}
+                        error={
+                          formik.touched.duration &&
+                          Boolean(formik.errors.duration)
+                        }
+                        className={`${
+                          formik.touched.duration && formik.errors.duration
+                            ? "border-red-500"
+                            : ""
+                        }`}
+                        onChange={formik.handleChange}
+                        disabled={isDetails}
+                      />
+                      {formik.touched.duration && formik.errors.duration && (
                         <span className='text-red-500'>
-                          {formik.errors.exercises}
+                          {formik.errors.duration}
                         </span>
                       )}
                     </Stack>
                     <Stack direction='column' className='w-full '>
                       <InputLabel>Price</InputLabel>
-                      <TextField name='[exercise.sets]' />
-                      {formik.touched.bodyPart && formik.errors.bodyPart && (
+                      <TextField
+                        name='price'
+                        value={formik.values.price}
+                        error={
+                          formik.touched.price && Boolean(formik.errors.price)
+                        }
+                        className={`${
+                          formik.touched.price && formik.errors.price
+                            ? "border-red-500"
+                            : ""
+                        }`}
+                        onChange={formik.handleChange}
+                        disabled={isDetails}
+                      />
+                      {formik.touched.price && formik.errors.price && (
                         <span className='text-red-500'>
-                          {formik.errors.bodyPart}
+                          {formik.errors.price}
                         </span>
                       )}
                     </Stack>
@@ -271,21 +331,66 @@ function TrainingPlanModal(props) {
                   <Stack direction='row' spacing={2} className='mt-6'>
                     <Stack direction='column' className='w-full'>
                       <InputLabel>Language</InputLabel>
-                      <Select name='[exercise.id]' />
-                      {formik.touched.exercises && formik.errors.exercises && (
+                      <Select
+                        name='language'
+                        value={formik.values.language}
+                        error={
+                          formik.touched.language &&
+                          Boolean(formik.errors.language)
+                        }
+                        className={`${
+                          formik.touched.language && formik.errors.language
+                            ? "border-red-500"
+                            : ""
+                        }`}
+                        onChange={formik.handleChange}
+                        disabled={isDetails}
+                      >
+                        {languages.map((language) => {
+                          return (
+                            <MenuItem key={language} value={language}>
+                              {language}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                      {formik.touched.language && formik.errors.language && (
                         <span className='text-red-500'>
-                          {formik.errors.exercises}
+                          {formik.errors.language}
                         </span>
                       )}
                     </Stack>
                     <Stack direction='column' className='w-full '>
                       <InputLabel>Skill level</InputLabel>
-                      <Select name='[exercise.sets]' />
-                      {formik.touched.bodyPart && formik.errors.bodyPart && (
-                        <span className='text-red-500'>
-                          {formik.errors.bodyPart}
-                        </span>
-                      )}
+                      <Select
+                        name='skillLevel'
+                        value={formik.values.skillLevel}
+                        error={
+                          formik.touched.skillLevel &&
+                          Boolean(formik.errors.skillLevel)
+                        }
+                        className={`${
+                          formik.touched.skillLevel && formik.errors.skillLevel
+                            ? "border-red-500"
+                            : ""
+                        }`}
+                        onChange={formik.handleChange}
+                        disabled={isDetails}
+                      >
+                        {skillLevels.map((skillLevel) => {
+                          return (
+                            <MenuItem key={skillLevel} value={skillLevel}>
+                              {skillLevel}
+                            </MenuItem>
+                          );
+                        })}
+                      </Select>
+                      {formik.touched.skillLevel &&
+                        formik.errors.skillLevel && (
+                          <span className='text-red-500'>
+                            {formik.errors.skillLevel}
+                          </span>
+                        )}
                     </Stack>
                   </Stack>
                 </Grid>
@@ -302,7 +407,7 @@ function TrainingPlanModal(props) {
                     : ""
                 }`}
                 onChange={formik.handleChange}
-                // disabled={isDetails}
+                disabled={isDetails}
               >
                 {statuses.map((status) => {
                   return (
@@ -330,26 +435,27 @@ function TrainingPlanModal(props) {
                 variant='outlined'
                 onClick={() => {
                   formik.handleReset();
-                  formik.setFieldValue("plans", [basePlan]);
+                  if (!plan && !isDetails)
+                    formik.setFieldValue("workouts", [baseWorkout]);
                   handleClose();
                 }}
-                className={"w-1/2"}
+                className={isDetails ? "w-full" : "w-1/2"}
               >
-                {/* {isDetails ? "Close" : "Cancel"} */}
-                Cancel
+                {isDetails ? "Close" : "Cancel"}
               </Button>
-              {/* {!isDetails && ( */}
-              <Button
-                style={{
-                  backgroundColor: "#8098F9",
-                  borderRadius: 10,
-                }}
-                variant='contained'
-                type='submit'
-                className='w-1/2'
-              >
-                {btnlabel}
-              </Button>
+              {!isDetails && (
+                <Button
+                  style={{
+                    backgroundColor: "#8098F9",
+                    borderRadius: 10,
+                  }}
+                  variant='contained'
+                  type='submit'
+                  className='w-1/2'
+                >
+                  {btnlabel}
+                </Button>
+              )}
             </div>
           </div>
         </form>

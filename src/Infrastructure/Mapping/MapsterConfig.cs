@@ -31,9 +31,9 @@ public static class MapsterConfig
             .Map(dest => dest.Workouts, src => src.TrainingPlanWorkouts
                 .Select(w => w.Workout.Adapt<WorkoutDto>())
                 .ToList())
-            .Map(dest => dest.NoOfExercises, src => src.TrainingPlanWorkouts
+            .Map(dest => dest.NoOfWorkouts, src => src.TrainingPlanWorkouts
                 .Select(w => w.Workout.ExerciseWorkouts
-                    .Select(ew => ew.Exercise))
+                    .Select(ew => ew.Workout))
                 .Count())
             .Map(src => src.CreatorEmail,dest => dest.Author.Email)
             .IgnoreNonMapped(false);

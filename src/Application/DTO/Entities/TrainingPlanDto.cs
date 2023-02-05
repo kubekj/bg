@@ -4,7 +4,7 @@ public record TrainingPlanDto(
     Guid Id,
     string Title,
     double Duration,
-    int NoOfExercises,
+    int NoOfWorkouts,
     string SkillLevel,
     string Description,
     string Language,

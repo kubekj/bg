@@ -23,16 +23,7 @@ const TrainingsList = ({ plans }) => {
                 Training plans
               </h3>
             </div>
-            <div className='relative w-full px-4 max-w-full flex-grow flex-1 text-right'>
-              {/* <TrainingPlanModal
-                icon='/thumbnails/add-outline.svg'
-                text='Add new'
-                backgroundColorValue='#8098F9'
-                isHoveringColor='#C7D7FE'
-                extraStyleType='color'
-                extraStyleValue='white'
-              ></TrainingPlanModal> */}
-            </div>
+            <div className='relative w-full px-4 max-w-full flex-grow flex-1 text-right'></div>
           </div>
         </div>
         <div className='block w-full overflow-x-auto'>
@@ -66,7 +57,7 @@ const TrainingsList = ({ plans }) => {
                   <tr key={plan.id}>
                     <td className='text-xs p-4'>{plan.title}</td>
                     <td className='text-xs p-4'>{plan.duration}</td>
-                    <td className='text-xs p-4'>{plan.noOfExercises}</td>
+                    <td className='text-xs p-4'>{plan.noOfWorkouts}</td>
                     <td className='text-xs p-4'>{plan.title}</td>
                     <td className='text-xs p-4'>{plan.skillLevel}</td>
                     <td className='text-xs p-4'>{plan.creatorEmail}</td>
