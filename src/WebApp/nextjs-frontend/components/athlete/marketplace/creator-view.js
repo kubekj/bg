@@ -3,9 +3,16 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../../reusable/button";
-import TrainingPreview from "../athlete-training/training-plans/training-preview";
+import TrainingPreview from "../training/training-plans/training-preview";
+import {useRouter} from "next/router";
 
-const CreatorView = () => {
+const CreatorView = ({creatorDetails}) => {
+  function getId() {
+    const router = useRouter();
+
+    return router.query.id
+  }
+
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -14,7 +21,7 @@ const CreatorView = () => {
       </div>
       <div className={style.content}>
         <div className={style.midHeader}>
-          <Link href='/athlete/marketplace'>
+          <Link href={{pathname: `/athlete/marketplace/plan`, query:{id: getId()}}} style={{textDecoration: "none"}}>
             <Button
               iconSrc='/thumbnails/arrow-back-outline.svg'
               text='Browse more plans'
@@ -37,8 +44,8 @@ const CreatorView = () => {
                 height={30}
               />
               <div>
-                <h5>Creator</h5>
-                <p>adsasda@dsaasd.pl</p>
+                <h5>{creatorDetails.firstName} {creatorDetails.lastName}</h5>
+                <p>{creatorDetails.email}</p>
               </div>
             </div>
           </div>
@@ -48,12 +55,7 @@ const CreatorView = () => {
             <div>
               <h5>About me</h5>
               <p>
-                I'm a Product Designer based in Melbourne, Australia. I
-                specialise in UX/UI design, brand strategy, and Webflow
-                development. I'm always striving to grow and learn something new
-                and I don't take myself too seriously. I'm passionate about
-                helping startups grow, improve their customer experience, and to
-                raise venture capital through good design.
+                {creatorDetails.description}
               </p>
             </div>
           </div>
@@ -61,26 +63,26 @@ const CreatorView = () => {
         </div>
         <div className={style.bottom}>
           <div className={style.trainings}>
-            <div style={{ width: "33%" }}>
-              <Link
-                href='/training-plan-details'
-                style={{ textDecoration: "none" }}
-              >
-                <TrainingPreview backHref='/athlete-buy-training' />
-              </Link>
-            </div>
-            <div style={{ width: "33%" }}>
-              <TrainingPreview />
-            </div>
-            <div style={{ width: "33%" }}>
-              <TrainingPreview />
-            </div>
-            <div style={{ width: "33%" }}>
-              <TrainingPreview />
-            </div>
-            <div style={{ width: "33%" }}>
-              <TrainingPreview />
-            </div>
+            {/*<div style={{ width: "33%" }}>*/}
+            {/*  <Link*/}
+            {/*    href='/training-plan-details'*/}
+            {/*    style={{ textDecoration: "none" }}*/}
+            {/*  >*/}
+            {/*    <TrainingPreview backHref='/athlete-buy-training' />*/}
+            {/*  </Link>*/}
+            {/*</div>*/}
+            {/*<div style={{ width: "33%" }}>*/}
+            {/*  <TrainingPreview />*/}
+            {/*</div>*/}
+            {/*<div style={{ width: "33%" }}>*/}
+            {/*  <TrainingPreview />*/}
+            {/*</div>*/}
+            {/*<div style={{ width: "33%" }}>*/}
+            {/*  <TrainingPreview />*/}
+            {/*</div>*/}
+            {/*<div style={{ width: "33%" }}>*/}
+            {/*  <TrainingPreview />*/}
+            {/*</div>*/}
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import TrainingPreview from "./training-preview";
 import Link from "next/link";
 import { Rating, Typography } from "@mui/material";
+import TrainingPlanPreview from "./training-preview-dialog";
 
 const ApplyTrainingView = ({plan}) => {
   return (
@@ -63,9 +64,15 @@ const ApplyTrainingView = ({plan}) => {
             {plan.workouts.map(workout => {
               return(
               <div style={{ width: "33%" }}>
-                <Link href={{pathname: `/athlete/workout`, query:{id: workout.id}}} style={{textDecoration: "none"}}>
-                  <TrainingPreview workout={workout}/>
-                </Link>
+                  <TrainingPreview workout={workout}>
+                  <TrainingPlanPreview
+                      icon='/thumbnails/copy-outline.svg'
+                      backgroundColorValue='white'
+                      isHoveringColor='#D0D5DD'
+                      borderValue='none'
+                      workout={workout}
+                  />
+                  </TrainingPreview>
               </div>
               );
             })}

@@ -5,6 +5,8 @@ import { Stack } from "@mui/system";
 import { Pagination } from "@mui/material";
 import TrainingPlanModal from "../../modals/training-plan-modal";
 import TrainingPlanPreview from "./training-preview-dialog";
+import Button from "../../../reusable/button";
+import Link from "next/link";
 
 const TrainingsList = ({ plans }) => {
   return (
@@ -90,12 +92,16 @@ const TrainingsList = ({ plans }) => {
                           isHoveringColor='#D0D5DD'
                           borderValue='none'
                         /> */}
-                        <TrainingPlanPreview
-                          icon='/thumbnails/copy-outline.svg'
-                          backgroundColorValue='white'
-                          isHoveringColor='#D0D5DD'
-                          borderValue='none'
+                        <Link href={{pathname: `/athlete/training/plan`, query:{id: plan.id}}} style={{textDecoration: "none"}}>
+                        <Button
+                            iconSrc='/thumbnails/copy-outline.svg'
+                            borderValue='none'
+                            backgroundColorValue='#FFFFFF'
+                            isHoveringColor='#C7D7FE'
+                            extraStyleType='color'
+                            extraStyleValue='white'
                         />
+                        </Link>
                         <DeleteModal
                           subtitle={`Remove training plan "${plan.title}"`}
                           endpoint={`training-plans/${plan.id}`}

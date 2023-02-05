@@ -20,7 +20,7 @@ function TrainingPlanPreview(props) {
     extraStyleType,
     extraStyleValue,
   } = props;
-
+  console.log(workout)
   return (
     <>
       <CustomButton
@@ -40,16 +40,17 @@ function TrainingPlanPreview(props) {
               <Typography id='modal-modal-title' variant='h6' component='h2'>
                 Workout
               </Typography>
-              <Link href={""} className='no-underline text-gray-800'>
+
                 <Typography
                   id='modal-modal-title'
                   variant='h6'
                   component='h2'
                   onClick={handleClose}
+                  className="cursor-pointer"
                 >
-                  x
+                    X
                 </Typography>
-              </Link>
+
             </div>
             <Typography
               id='modal-modal-description'
@@ -72,21 +73,24 @@ function TrainingPlanPreview(props) {
                   justifyContent='center'
                   display='flex'
                   direction='column'
-                >
-                  <Stack direction='row' spacing={2}>
-                    <Stack direction='column' className='w-full'>
-                      <InputLabel>Exercise</InputLabel>
-                      <TextField></TextField>
-                    </Stack>
-                    <Stack direction='column'>
-                      <InputLabel>Sets</InputLabel>
-                      <TextField></TextField>
-                    </Stack>
-                    <Stack direction='column'>
-                      <InputLabel>Reps</InputLabel>
-                      <TextField></TextField>
-                    </Stack>
-                  </Stack>
+                >{workout.exerciseDtos.map(exercise => {
+                  return(
+                      <Stack direction='row' spacing={2} id={exercise.id}>
+                        <Stack direction='column' className='w-full'>
+                          <InputLabel>Exercise</InputLabel>
+                          <TextField placeholder={exercise.name} disabled={true}></TextField>
+                        </Stack>
+                        <Stack direction='column'>
+                          <InputLabel>Sets</InputLabel>
+                          <TextField placeholder={exercise.setDtos.length} disabled={true}></TextField>
+                        </Stack>
+                        <Stack direction='column'>
+                          <InputLabel>Reps</InputLabel>
+                          <TextField placeholder={exercise.setDtos[0].repetitions} disabled={true}></TextField>
+                        </Stack>
+                      </Stack>
+                  );
+                })}
                 </Grid>
               </Grid>
               <Stack direction='row' spacing={2} className='items-center'>
