@@ -24,7 +24,7 @@ const CreatorView = ({creatorDetails}) => {
           <Link href={{pathname: `/athlete/marketplace/plan`, query:{id: getId()}}} style={{textDecoration: "none"}}>
             <Button
               iconSrc='/thumbnails/arrow-back-outline.svg'
-              text='Browse more plans'
+              text='Go back'
               borderValue='none'
               backgroundColorValue='white'
               isHoveringColor='#C7D7FE'
@@ -45,7 +45,7 @@ const CreatorView = ({creatorDetails}) => {
               />
               <div>
                 <h5>{creatorDetails.firstName} {creatorDetails.lastName}</h5>
-                <p>{creatorDetails.email}</p>
+                <p>{creatorDetails.trainerEmail}</p>
               </div>
             </div>
           </div>

@@ -1,7 +1,6 @@
 import Athlete from "../../../components/layouts/Athlete";
 import { getSession } from "next-auth/react";
 import fetcher from "../../../lib/rest-api";
-import BuyTrainingView from "../../../components/athlete/marketplace/buy-training-view";
 import CreatorView from "../../../components/athlete/marketplace/creator-view";
 
 
@@ -23,7 +22,9 @@ export async function getServerSideProps(context) {
         },
     };
 
-    const creatorDetails = await fetcher(`users/details`, options);
+    const creatorEmail = context.query.creatorEmail;
+
+    const creatorDetails = await fetcher(`users/trainer-details/${creatorEmail}`, options);
 
     return {
         props: { jwt: session.jwt, creatorDetails: creatorDetails},
