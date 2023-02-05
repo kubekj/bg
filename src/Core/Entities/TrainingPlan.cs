@@ -27,7 +27,7 @@ public class TrainingPlan : Entity
     public TrainingPlan MarkAsDeleted(TrainingPlan trainingPlan)
     {
         trainingPlan.IsDeleted = true;
-        trainingPlan.Status = Status.InActive;
+        trainingPlan.Status = Status.Unpublished;
         return trainingPlan;
     }
 

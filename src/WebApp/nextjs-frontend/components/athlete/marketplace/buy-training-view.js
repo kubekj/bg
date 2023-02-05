@@ -42,7 +42,7 @@ const BuyTrainingView = ({plan}) => {
             <div>
               <div className={style.bottomSection}>
                 {/*<Link href='/athlete/marketplace/creator' style={{textDecoration:"none"}}>*/}
-                  <Link href={{pathname: `/athlete/marketplace/creator`, query:{creatorEmail: plan.creatorEmail}}} style={{textDecoration: "none"}}>
+                  <Link href={{pathname: `/athlete/marketplace/creator`, query:{creatorEmail: plan.creatorEmail, id:plan.id}}} style={{textDecoration: "none"}}>
                   <div className={style.userInfo}>
                     <Image
                       className={style.avatar}

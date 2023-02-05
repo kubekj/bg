@@ -22,7 +22,7 @@ const DashboardMain = ({current, next, previous, weightBreakdown}) => {
                 <p>Today's training type</p>
             </div>
             <div className={style.bottom}>
-                <TodayWorkout current={next}/>
+                <TodayWorkout current={current}/>
                 <div className={style.todayTomorrow}>
                     <div style={{marginBottom:"2rem"}}>
                         <TomorrowTraining workout={next} date={1} title="Tomorrow"/>

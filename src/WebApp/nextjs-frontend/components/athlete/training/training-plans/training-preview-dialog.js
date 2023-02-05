@@ -6,10 +6,8 @@ import CustomButton from "../../../reusable/button";
 import { Stack } from "@mui/system";
 
 function TrainingPlanPreview(props) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const {
+    isOpen,
     workout,
     icon,
     backgroundColorValue,
@@ -18,7 +16,10 @@ function TrainingPlanPreview(props) {
     extraStyleType,
     extraStyleValue,
   } = props;
-  console.log(workout);
+  const [open, setOpen] = React.useState(isOpen);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <>
       <CustomButton

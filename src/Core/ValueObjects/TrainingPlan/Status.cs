@@ -5,13 +5,13 @@ namespace Core.ValueObjects.TrainingPlan;
 
 public class Status : ValueObject
 {
-    public const string Draft = nameof(Draft);
     public const string Active = nameof(Active);
-    public const string InActive = nameof(InActive);
+    public const string Unpublished = nameof(Unpublished);
+    public const string Published = nameof(Published);
 
     public Status(string value)
     {
-        if (value is not (Active or Draft or InActive))
+        if (value is not (Active or Unpublished or Published))
             throw new IncorrectStatusException(value);
 
         Value = value;

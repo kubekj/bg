@@ -1,6 +1,7 @@
 import CalendarView from "../../../components/athlete/calendar/calendar-view";
 import Athlete from "../../../components/layouts/Athlete";
 import { getSession } from "next-auth/react";
+import fetcher from "../../../lib/rest-api";
 
 export async function getServerSideProps(context) {
   const session = await getSession({ req: context.req });
@@ -14,13 +15,21 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const options = {
+    headers: {
+      Authorization: `Bearer ${session.jwt}`,
+    },
+  };
+
+  const workouts = await fetcher("workouts/sessions", options);
+
   return {
-    props: { jwt: session.jwt },
+    props: { jwt: session.jwt, workouts: workouts },
   };
 }
 
-const AthleteCalendar = ({ jwt }) => {
-  return <CalendarView />;
+const AthleteCalendar = ({ jwt, workouts }) => {
+  return <CalendarView workouts={workouts}/>;
 };
 
 export default AthleteCalendar;
