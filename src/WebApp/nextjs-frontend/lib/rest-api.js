@@ -41,6 +41,7 @@ export async function signin(data) {
     },
   });
   const resp = await response.json();
+  if (resp === "Internal error") throw new Error("Invalid credentials");
   return resp;
 }
 

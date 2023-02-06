@@ -2,17 +2,21 @@ import style from "./header.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import { toast } from "react-toastify";
 import { getSession, signIn } from "next-auth/react";
 import ButtonsSection from "./buttons-section";
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import fetcher, { poster, signin } from "../../lib/rest-api";
 import Router from "next/router";
-import { errorHandler } from "../../lib/error-handler";
+import { errorHandler, handleError } from "../../lib/error-handler";
+import { tr } from "faker/lib/locales";
+import { Button, TextField } from "@mui/material";
+import { Stack } from "@mui/system";
 
 const validationSchema = Yup.object({
-  email: Yup.string(),
-  password: Yup.string(),
+  email: Yup.string().email().required("please provide and email"),
+  password: Yup.string().required("password cannot be empty"),
 });
 
 const LogInContent = () => {
@@ -22,18 +26,24 @@ const LogInContent = () => {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      signIn("credentials", {
-        email: values.email,
-        password: values.password,
-        redirect: false,
-      }).then(({ ok, error }) => {
-        if (ok) {
-          Router.push("/athlete/dashboard");
-        } else {
-          errorHandler(error, "test");
-        }
-      });
+    onSubmit: async (values) => {
+      const correctLogin = await signin(values);
+
+      if (correctLogin.code && correctLogin.reason)
+        return toast.error("Invalid credentials");
+
+      if (correctLogin)
+        await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: false,
+        }).then(({ ok, error }) => {
+          if (ok) {
+            Router.push("/athlete/dashboard");
+          } else {
+            errorHandler(error, "test");
+          }
+        });
     },
   });
 
@@ -44,68 +54,56 @@ const LogInContent = () => {
           <label htmlFor='formGroupExampleInput' className='form-label'>
             Email
           </label>
-          <input
-            type='email'
-            name='email'
-            id='email'
-            placeholder='f.e. john.doe@gmail.com'
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.userId && Boolean(formik.errors.userId)}
-            className={`form-control ${
-              formik.touched.email && formik.errors.email
-                ? "border-red-500"
-                : ""
-            }`}
-          />
-          {formik.touched.email && formik.errors.email && (
-            <span className='text-red-500'>{formik.errors.userId}</span>
-          )}
+          <Stack>
+            <TextField
+              name='email'
+              placeholder='f.e. john.doe@gmail.com'
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              className={`${
+                formik.touched.email && formik.errors.email
+                  ? "border-red-500"
+                  : ""
+              }`}
+            />
+            {formik.touched.email && formik.errors.email && (
+              <span className='text-red-500'>{formik.errors.email}</span>
+            )}
+          </Stack>
         </div>
         <div className='mb-3'>
           <label htmlFor='formGroupExampleInput2' className='form-label'>
             Password
           </label>
-          <input
-            type='password'
-            className='form-control'
-            name='password'
-            id='password'
-            placeholder='******'
-            value={formik.values.password}
-            onChange={formik.handleChange}
-          />
-        </div>
-        {/* <div className={style.bottomSection}>
-          <div className='form-check w-50'>
-            <input
-              className='form-check-input'
-              type='checkbox'
-              value=''
-              id='flexCheckDefault'
+          <Stack>
+            <TextField
+              type='password'
+              className={`${
+                formik.touched.password && formik.errors.password
+                  ? "border-red-500"
+                  : ""
+              }`}
+              name='password'
+              placeholder='******'
+              value={formik.values.password}
+              onChange={formik.handleChange}
             />
-            <label className='form-check-label' htmlFor='flexCheckDefault'>
-              Remember for 30 days
-            </label>
-          </div>
-          <div>
-            <a
-              className={`text-decoration-none`}
-              style={{ color: "#98B3DB" }}
-              href='#'
-            >
-              Forgot password
-            </a>
-          </div>
-        </div> */}
-        <ButtonsSection
+            {formik.touched.password && formik.errors.password && (
+              <span className='text-red-500'>{formik.errors.password}</span>
+            )}
+          </Stack>
+        </div>
+        <Button type='submit' variant='contained' className='w-full'>
+          Log in
+        </Button>
+        {/* <ButtonsSection
           topButtonText='Sign in'
           bottomButtonText='Sign in with Google'
           leftBottomSectionText='Dont have an account?'
           rightBottomSectionText='Sign up!'
           className='submit'
-        />
-        <button type='submit'></button>
+        /> */}
       </form>
     </div>
   );

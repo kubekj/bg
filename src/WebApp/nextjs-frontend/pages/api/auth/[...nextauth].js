@@ -7,7 +7,7 @@ export const options = {
   providers: [
     CredentialsProvider({
       async authorize(credentials, req) {
-        if (credentials == null) return null;
+        if (credentials == null) throw new Error("Credentials cannot be null");
         try {
           const user = await signin(credentials);
           return user;

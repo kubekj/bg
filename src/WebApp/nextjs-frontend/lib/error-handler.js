@@ -5,6 +5,6 @@ export async function handleError(response) {
     let message = await response.json();
     toast.error(message.reason);
   } catch (e) {
-    toast.error(err.message);
+    toast.error(e.message);
   }
 }

@@ -44,5 +44,6 @@ public static class Extensions
         services.AddScoped<ITrainingPlanWorkoutRepository, TrainingPlanWorkoutRepository>();
         services.AddScoped<IMeasurementRepository, MeasurementRepository>();
         services.AddScoped<IUserWorkoutSessionRepository, UserWorkoutSessionRepository>();
+        services.AddScoped<IRatingRepository, RatingRepository>();
     }
 }

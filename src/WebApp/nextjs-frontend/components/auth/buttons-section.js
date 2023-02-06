@@ -14,7 +14,7 @@ const ButtonsSection = ({
       aria-label='Vertical button group'
     >
       <button
-        type='button'
+        type='submit'
         className='btn mt-2 rounded'
         style={{ backgroundColor: "#98B3DB", color: "white" }}
       >
