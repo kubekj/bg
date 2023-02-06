@@ -16,6 +16,7 @@ import {
 } from "chart.js";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
 import faker from "faker";
+import fetcher from "../../../lib/rest-api";
 
 ChartJS.register(
   CategoryScale,
@@ -30,7 +31,7 @@ ChartJS.register(
   Legend
 );
 
-const StatisticsView = ({ weightBreakdown, doneTrainings }) => {
+const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
   const options = {
     responsive: true,
     plugins: {
@@ -75,12 +76,15 @@ const StatisticsView = ({ weightBreakdown, doneTrainings }) => {
     },
     scales: {
       y: {
+        // min: 0,
+        // max: 15000,
         title: {
           display: true,
           text: "Training load (kg lifted)",
         },
       },
       x: {
+
         title: {
           display: true,
           text: "Month",
@@ -113,7 +117,7 @@ const StatisticsView = ({ weightBreakdown, doneTrainings }) => {
     labels,
     datasets: [
       {
-        label: "Dataset 2",
+        label: "Body weight",
         data: apilabels.map((month) => weightBreakdown[month]),
         backgroundColor: "#C7D7FE",
       },
@@ -134,36 +138,41 @@ const StatisticsView = ({ weightBreakdown, doneTrainings }) => {
     },
   };
 
+  const toDo = doneTrainings["item2"] - doneTrainings["item1"];
   const data2 = {
-    labels: ["Red", "Blue"],
+    labels: ["Done", "To do"],
     datasets: [
       {
-        label: "# of Votes",
-        data: [doneTrainings["item1"], doneTrainings["item2"]],
+        label: "Trainings",
+        data: [doneTrainings["item1"], toDo],
         backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
         borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
         borderWidth: 1,
       },
     ],
   };
+
+  const toEat = 3000 - user.caloriesIntake;
   const data3 = {
-    labels: ["Red", "Blue"],
+    labels: ["Eaten", "To eat"],
     datasets: [
       {
-        label: "# of Votes",
-        data: [40, 10],
+        label: "Calories",
+        data: [user.caloriesIntake, toEat],
         backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
         borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
         borderWidth: 1,
       },
     ],
   };
+
+  const toBuild = 90 - user.weight;
   const data4 = {
-    labels: ["Red", "Blue"],
+    labels: ["Built", "To build"],
     datasets: [
       {
-        label: "# of Votes",
-        data: [30, 21],
+        label: "Weight(kg)",
+        data: [user.weight, toBuild],
         backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
         borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
         borderWidth: 1,
@@ -177,7 +186,7 @@ const StatisticsView = ({ weightBreakdown, doneTrainings }) => {
       {
         fill: true,
         label: "Dataset 2",
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 10000 })),
+        data: labels.map(() => faker.datatype.number({ min: 8000, max: 10000 })),
         borderColor: "#8098F9",
         backgroundColor: "#8098F9",
       },
@@ -199,12 +208,15 @@ const StatisticsView = ({ weightBreakdown, doneTrainings }) => {
         </div>
         <div className={style.donutsSection}>
           <div className={style.eachDonut}>
+            <h5 className={style.statTitle}>Trainings done: {doneTrainings["item1"]}/{doneTrainings["item2"]}</h5>
             <Doughnut options={options2} data={data2} />
           </div>
           <div className={style.eachDonut}>
+            <h5 className={style.statTitle}>Calories intake: {user.caloriesIntake}/3000</h5>
             <Doughnut options={options2} data={data3} />
           </div>
           <div className={style.eachDonut}>
+            <h5 className={style.statTitle}>Body mass: {user.weight}/90</h5>
             <Doughnut options={options2} data={data4} />
           </div>
         </div>

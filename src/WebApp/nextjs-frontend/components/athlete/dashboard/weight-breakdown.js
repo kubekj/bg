@@ -80,7 +80,7 @@ const WeightBreakdown = ({weightBreakdown}) => {
     labels,
     datasets: [
       {
-        label: "Dataset 2",
+        label: "Body weight",
         data: apilabels.map(month => weightBreakdown[month]),
         backgroundColor: "#C7D7FE",
       },

@@ -61,7 +61,7 @@ function TrainingPlanPreview(props) {
           <div className='flex flex-col items-start p-10 gap-5 w-full'>
             <div className='flex flex-col justify-center gap-3 w-full'>
               <Typography id='modal-modal-title' variant='h3' component='h2'>
-                Healthy back
+                {workout.name}
               </Typography>
               <hr />
               <Grid container>

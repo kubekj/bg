@@ -23,13 +23,13 @@ const HoursTrained = ({doneTrainings}) => {
       },
     },
   };
-
+  const toDo = doneTrainings["item2"] - doneTrainings["item1"];
   const data = {
-    labels: ["Red", "Blue"],
+    labels: ["Done", "To do"],
     datasets: [
       {
-        label: "# of Votes",
-        data: [doneTrainings["item1"], doneTrainings["item2"]],
+        label: "Trainings",
+        data: [doneTrainings["item1"], toDo],
         backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
         borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
         borderWidth: 1,
@@ -49,6 +49,7 @@ const HoursTrained = ({doneTrainings}) => {
         </div>
       </div>
       <div className={style.midSection}>
+        <h5 className={style.statTitle}>Trainings done: {doneTrainings["item1"]}/{doneTrainings["item2"]}</h5>
         <Doughnut options={options} data={data} />
         <div className={style.underDonut}>
           <h5>You've almost reached your goal</h5>

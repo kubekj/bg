@@ -23,14 +23,15 @@ export async function getServerSideProps(context) {
 
   const weightBreakdown = await fetcher("statistics/weight", options);
   const doneTrainings = await fetcher("statistics/trainings", options);
+  const user = await fetcher("users/details", options);
 
   return {
-    props: {jwt: session.jwt, weightBreakdown: weightBreakdown, doneTrainings: doneTrainings},
+    props: {jwt: session.jwt, weightBreakdown: weightBreakdown, doneTrainings: doneTrainings, user: user},
   };
 }
 
-const AthleteStatistics = ({ jwt, weightBreakdown, doneTrainings }) => {
-  return <StatisticsView weightBreakdown={weightBreakdown} doneTrainings={doneTrainings}/>;
+const AthleteStatistics = ({ jwt, weightBreakdown, doneTrainings, user }) => {
+  return <StatisticsView weightBreakdown={weightBreakdown} doneTrainings={doneTrainings} user={user}/>;
 };
 
 export default AthleteStatistics;
