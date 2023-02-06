@@ -24,6 +24,6 @@ public class GetTrainingsDoneThisMonthQueryHandler : IQueryHandler<GetTrainingsD
             .GetAllAsync(x => x.UserId == query.UserId && x.Date < _clock.Current() && x.Date.Month == _clock.Current().Month);
         var currentGoal = await _goalRepository.GetByMonth(query.UserId);
 
-        return new Tuple<int, int>(doneTrainingsThisMonth.Count(), currentGoal);
+        return new Tuple<int, int>(doneTrainingsThisMonth.Count(), currentGoal.Value);
     }
 }

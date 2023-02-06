@@ -10,10 +10,13 @@ internal sealed class GoalRepository : IGoalRepository
 
     public GoalRepository(BodyGuardDbContext context) => _goals = context.Goals;
 
-    public async Task<int> GetByMonth(Guid userId)
+    public async Task<Goal> GetByMonth(int month, Guid userId) 
+        => await _goals.FirstOrDefaultAsync(x => x.Month == DateTime.Now.Month && x.UserId == userId);
+
+    public async Task<Goal?> GetByMonth(Guid userId)
     {
         var goal = await _goals.FirstOrDefaultAsync(x => x.Month == DateTime.Now.Month && x.UserId == userId);
-        return goal.Value;
+        return goal;
     }
 
     public async Task AddAsync(Goal goal) => await _goals.AddAsync(goal);
