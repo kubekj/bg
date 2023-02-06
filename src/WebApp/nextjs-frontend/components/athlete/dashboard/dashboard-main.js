@@ -5,7 +5,7 @@ import TomorrowTraining from "./tomorrow-training";
 import TodayWorkout from "./today-workout";
 
 
-const DashboardMain = ({current, next, previous, weightBreakdown}) => {
+const DashboardMain = ({current, next, previous, weightBreakdown, doneTrainings}) => {
 
     return (
         <div className={style.container}>
@@ -15,7 +15,7 @@ const DashboardMain = ({current, next, previous, weightBreakdown}) => {
             </div>
             <div className={style.mid}>
                 <WeightBreakdown weightBreakdown={weightBreakdown}/>
-                <HoursTrained />
+                <HoursTrained doneTrainings={doneTrainings}/>
             </div>
             <div className={style.header2}>
                 <h2>What's planned for today</h2>

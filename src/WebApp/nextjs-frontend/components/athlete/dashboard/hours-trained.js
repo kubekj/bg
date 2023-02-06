@@ -7,41 +7,44 @@ import Link from "next/link";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-      position: "bottom",
-    },
-    title: {
-      display: false,
-      text: "Chart.js Bar Chart",
-    },
-  },
-};
 
-export const data = {
-  labels: ["Red", "Blue"],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [33, 19],
-      backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
-      borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
-      borderWidth: 1,
-    },
-  ],
-};
 
-const HoursTrained = () => {
+const HoursTrained = ({doneTrainings}) => {
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+        position: "bottom",
+      },
+      title: {
+        display: false,
+        text: "Chart.js Bar Chart",
+      },
+    },
+  };
+
+  const data = {
+    labels: ["Red", "Blue"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [doneTrainings["item1"], doneTrainings["item2"]],
+        backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
+        borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+
   return (
     <div className={style.container}>
       <div className={style.header}>
         <div className={style.info}>
           <div>
-            <h4>Hours trained</h4>
-            <p>You've been doing well</p>
+            <h4>Trainings done</h4>
+            <p>Track your progress down below</p>
           </div>
         </div>
       </div>

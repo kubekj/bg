@@ -30,7 +30,7 @@ ChartJS.register(
   Legend
 );
 
-const StatisticsView = ({ weightBreakdown }) => {
+const StatisticsView = ({ weightBreakdown, doneTrainings }) => {
   const options = {
     responsive: true,
     plugins: {
@@ -139,7 +139,7 @@ const StatisticsView = ({ weightBreakdown }) => {
     datasets: [
       {
         label: "# of Votes",
-        data: [33, 19],
+        data: [doneTrainings["item1"], doneTrainings["item2"]],
         backgroundColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
         borderColor: ["#8098F9", "rgba(240, 240, 240, 1)"],
         borderWidth: 1,

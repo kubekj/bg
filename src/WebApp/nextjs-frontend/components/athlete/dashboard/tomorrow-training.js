@@ -16,7 +16,7 @@ const TomorrowTraining = ({workout, title}) => {
                 </div>
             </div>
             <div className={style.bottomSection}>
-                <h2>{workout.name}</h2>
+                <h2>{workout.item1.name}</h2>
             </div>
             <div className={style.hrCustom}/>
             <div className={style.bottomSection2}>
