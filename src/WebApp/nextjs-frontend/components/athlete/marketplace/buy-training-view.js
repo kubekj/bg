@@ -81,8 +81,7 @@ const BuyTrainingView = ({plan}) => {
                 disabled={true}
               />
               <p>202 reviews</p>
-              <b>{plan.ratingAvg}</b>
-              <h5>Rate plan</h5>
+              {/*<b>{plan.ratingAvg}</b>*/}
             </div>
             <div className={style.apply}>
               <h5>{plan.price}</h5>

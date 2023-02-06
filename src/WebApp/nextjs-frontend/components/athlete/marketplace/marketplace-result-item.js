@@ -11,13 +11,10 @@ const MarketplaceResultItem = ({plan}) => {
         </h5>
         <h4>{plan.title}</h4>
         <div className={style.rating}>
-          {/*<Typography component="legend"></Typography>*/}
           <Rating
             name='simple-controlled'
-            value={5}
-            // onChange={(event, newValue) => {
-            //     setValue(newValue);
-            // }}
+            value={plan.ratingAvg}
+            disabled={true}
           />
           <p style={{ margin: "0" }}>202 reviews</p>
         </div>
