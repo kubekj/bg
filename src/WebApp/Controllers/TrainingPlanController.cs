@@ -14,6 +14,7 @@ public class TrainingPlanController : ApiController
 {
     private readonly ICommandHandler<CreateTrainingPlanCommand> _createTrainingCommandHandler;
     private readonly ICommandHandler<RateTrainingPlanCommand> _rateTrainingCommandHandler;
+    private readonly ICommandHandler<BuyTrainingPlanCommand> _buyTrainingCommandHandler;
     private readonly IQueryHandler<GetAllTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllTrainingPlansQueryHandler;
     private readonly IQueryHandler<GetBoughtTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllBoughtTrainingPlansQueryHandler;
     private readonly IQueryHandler<GetCreatedTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllCreatedTrainingPlansQueryHandler;
@@ -26,7 +27,8 @@ public class TrainingPlanController : ApiController
         IQueryHandler<GetCreatedTrainingPlansQuery, IEnumerable<TrainingPlanDto>> getAllCreatedTrainingPlansQueryHandler, 
         IQueryHandler<GetTrainingPlanQuery, TrainingPlanDto> getTrainingPlanQueryHandler, 
         IQueryHandler<GetMostRecentlyCreatedPlansQuery, IEnumerable<TrainingPlanDto>> getMostRecentlyCreatedPlansQueryQueryHandler,
-        ICommandHandler<RateTrainingPlanCommand> rateTrainingCommandHandler)
+        ICommandHandler<RateTrainingPlanCommand> rateTrainingCommandHandler, 
+        ICommandHandler<BuyTrainingPlanCommand> buyTrainingCommandHandler)
     {
         _createTrainingCommandHandler = createTrainingCommandHandler;
         _getAllTrainingPlansQueryHandler = getAllTrainingPlansQueryHandler;
@@ -35,6 +37,7 @@ public class TrainingPlanController : ApiController
         _getTrainingPlanQueryHandler = getTrainingPlanQueryHandler;
         _getMostRecentlyCreatedPlansQueryQueryHandler = getMostRecentlyCreatedPlansQueryQueryHandler;
         _rateTrainingCommandHandler = rateTrainingCommandHandler;
+        _buyTrainingCommandHandler = buyTrainingCommandHandler;
     }
     
     [Authorize(Roles = "trainer")]
@@ -51,6 +54,14 @@ public class TrainingPlanController : ApiController
     {
         _userId = Guid.Parse(HttpContext.User.Identity.Name);
         await _rateTrainingCommandHandler.HandleAsync(command with {UserId = _userId, TrainingPlanId = id});
+        return NoContent();
+    }
+    
+    [HttpPost("buy/{id:guid}")]
+    public async Task<ActionResult> Rate( Guid id)
+    {
+        _userId = Guid.Parse(HttpContext.User.Identity.Name);
+        await _buyTrainingCommandHandler.HandleAsync(new BuyTrainingPlanCommand(UserId: _userId, TrainingPlanId: id));
         return NoContent();
     }
 

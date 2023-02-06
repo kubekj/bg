@@ -10,5 +10,7 @@ public record ChangeUserDetailsCommand(
     string Bio,
     string PreferredLanguage,
     double Weight,
+    double WeightGoal,
     double Height,
-    int CaloriesIntake) : ICommand; 
+    int CaloriesIntake,
+    int CaloriesIntakeGoal) : ICommand; 

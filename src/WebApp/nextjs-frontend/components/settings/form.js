@@ -15,10 +15,14 @@ const validationSchema = yup.object().shape({
   bio: yup.string().required("Please describe yourself"),
   preferredLanguage: yup.string().required("Please choose preferred language"),
   weight: yup.number().required("Please provide your current weight"),
+  weightGoal: yup.number().required("Please provide your weight goal"),
   height: yup.number().required("Please provide your height"),
   caloriesIntake: yup
     .number()
     .required("Please provide your daily calories intake"),
+  caloriesIntakeGoal: yup
+    .number()
+    .required("Please provide your daily calories intake goal"),
 });
 
 const SettingsView = ({ user }) => {
@@ -32,8 +36,10 @@ const SettingsView = ({ user }) => {
       bio: user.description,
       preferredLanguage: user.preferredLanguage,
       weight: user.weight ? user.weight : "",
+      weightGoal: user.weight ? user.weightGoal : "",
       height: user.height ? user.height : "",
       caloriesIntake: user.caloriesIntake ? user.caloriesIntake : "",
+      caloriesIntakeGoal: user.caloriesIntake ? user.caloriesIntakeGoal : "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -240,36 +246,103 @@ const SettingsView = ({ user }) => {
         </div>
         <div
           className='mx-auto flex flex-row gap-6'
-          style={{
-            paddingTop: "1rem",
-            paddingBottom: "1rem",
-            borderBottom: "1px solid #D0D5DD",
-          }}
+          style={{ paddingTop: "1rem" }}
         >
           <span className='input-group-text w-48' id='addon-wrapping'>
             Calories (kcal)
           </span>
-          <TextField
-            label='Calories intake'
-            name='caloriesIntake'
-            value={formik.values.caloriesIntake}
-            error={
-              formik.touched.caloriesIntake &&
-              Boolean(formik.errors.caloriesIntake)
-            }
-            className={
-              "w-full" +
-              `${
-                formik.touched.caloriesIntake && formik.errors.caloriesIntake
-                  ? "border-red-500"
-                  : ""
-              }`
-            }
-            onChange={formik.handleChange}
-          />
-          {formik.touched.caloriesIntake && formik.errors.caloriesIntake && (
-            <span className='text-red-500'>{formik.errors.caloriesIntake}</span>
-          )}
+          <div className='flex flex-row w-full gap-6'>
+            <TextField
+              label='Calories intake'
+              name='caloriesIntake'
+              value={formik.values.caloriesIntake}
+              error={
+                formik.touched.caloriesIntake &&
+                Boolean(formik.errors.caloriesIntake)
+              }
+              className={
+                "w-full" +
+                `${
+                  formik.touched.caloriesIntake && formik.errors.caloriesIntake
+                    ? "border-red-500"
+                    : ""
+                }`
+              }
+              onChange={formik.handleChange}
+            />
+            {formik.touched.caloriesIntake && formik.errors.caloriesIntake && (
+              <span className='text-red-500'>
+                {formik.errors.caloriesIntake}
+              </span>
+            )}
+            <TextField
+              label='Calories intake goal'
+              name='caloriesIntakeGoal'
+              value={formik.values.caloriesIntakeGoal}
+              error={
+                formik.touched.caloriesIntakeGoal &&
+                Boolean(formik.errors.caloriesIntakeGoal)
+              }
+              className={
+                "w-full" +
+                `${
+                  formik.touched.caloriesIntakeGoal &&
+                  formik.errors.caloriesIntakeGoal
+                    ? "border-red-500"
+                    : ""
+                }`
+              }
+              onChange={formik.handleChange}
+            />
+          </div>
+        </div>
+        <div
+          className='mx-auto flex flex-row gap-6'
+          style={{ paddingTop: "1rem" }}
+        >
+          <span className='input-group-text w-48' id='addon-wrapping'>
+            Weight (kg)
+          </span>
+          <div className='flex flex-row w-full gap-6'>
+            <TextField
+              label='Weight'
+              name='weight'
+              value={formik.values.weight}
+              error={formik.touched.weight && Boolean(formik.errors.weight)}
+              className={
+                "w-full" +
+                `${
+                  formik.touched.weight && formik.errors.weight
+                    ? "border-red-500"
+                    : ""
+                }`
+              }
+              onChange={formik.handleChange}
+            />
+            {formik.touched.weight && formik.errors.weight && (
+              <span className='text-red-500'>{formik.errors.weight}</span>
+            )}
+            <TextField
+              label='Weight goal'
+              name='weightGoal'
+              value={formik.values.weightGoal}
+              error={
+                formik.touched.weightGoal && Boolean(formik.errors.weightGoal)
+              }
+              className={
+                "w-full" +
+                `${
+                  formik.touched.weightGoal && formik.errors.weightGoal
+                    ? "border-red-500"
+                    : ""
+                }`
+              }
+              onChange={formik.handleChange}
+            />
+            {formik.touched.weightGoal && formik.errors.weightGoal && (
+              <span className='text-red-500'>{formik.errors.weightGoal}</span>
+            )}
+          </div>
         </div>
         <div
           className='d-grid gap-2 d-md-flex justify-content-md-end'

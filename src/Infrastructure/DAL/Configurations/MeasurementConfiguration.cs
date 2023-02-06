@@ -14,11 +14,19 @@ public class MeasurementConfiguration : IEntityTypeConfiguration<Measurement>
             .HasConversion(e => e.Value, e => new BodyWeight(e))
             .IsRequired()
             .HasMaxLength(BodyWeight.MaxWeight);
+        builder.Property(e => e.WeightGoal)
+            .HasConversion(e => e.Value, e => new BodyWeight(e))
+            .IsRequired()
+            .HasMaxLength(BodyWeight.MaxWeight);
         builder.Property(e => e.Height)
             .HasConversion(e => e.Value, e => new BodyHeight(e))
             .IsRequired()
             .HasMaxLength(BodyHeight.MaxHeight);
         builder.Property(e => e.CaloriesIntake)
+            .HasConversion(e => e.Value, e => new CaloriesIntake(e))
+            .IsRequired()
+            .HasMaxLength(BodyHeight.MaxHeight);      
+        builder.Property(e => e.CaloriesIntakeGoal)
             .HasConversion(e => e.Value, e => new CaloriesIntake(e))
             .IsRequired()
             .HasMaxLength(BodyHeight.MaxHeight);

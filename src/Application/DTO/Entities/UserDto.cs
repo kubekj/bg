@@ -7,5 +7,7 @@ public record UserDto(
     string Description,
     string PreferredLanguage,
     double Weight,
+    double WeightGoal,
     double Height,
-    int CaloriesIntake);
+    int CaloriesIntake,
+    int CaloriesIntakeGoal);

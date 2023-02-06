@@ -21,6 +21,6 @@ public class GetPersonalInfoQueryHandler : IQueryHandler<GetPersonalInfoQuery,Us
         var userLatestMeasurement = await _measurementRepository.GetForUserAsync(query.UserId);
 
         return new UserDto(userInfo.FirstName,userInfo.LastName,userInfo.Email,userInfo.Bio,userInfo.PreferredLanguage,
-            userLatestMeasurement.Weight,userLatestMeasurement.Height,userLatestMeasurement.CaloriesIntake);
+            userLatestMeasurement.Weight,userLatestMeasurement.WeightGoal,userLatestMeasurement.Height,userLatestMeasurement.CaloriesIntake,userLatestMeasurement.CaloriesIntakeGoal);
     }
 }

@@ -39,11 +39,13 @@ public class ChangeUserDetailsCommandHandler : ICommandHandler<ChangeUserDetails
         var language = new Language(command.PreferredLanguage);
 
         var weight = new BodyWeight(command.Weight);
+        var weightGoal = new BodyWeight(command.WeightGoal);
         var height = new BodyHeight(command.Height);
         var caloriesIntake = new CaloriesIntake(command.CaloriesIntake);
+        var caloriesIntakeGoal = new CaloriesIntake(command.CaloriesIntakeGoal);
 
         user.ChangeDetails(firstName,lastName,email,language,bio);
-        var measurement = new Measurement(Guid.NewGuid(),user.Id,weight,height,caloriesIntake,_clock.Current());
+        var measurement = new Measurement(Guid.NewGuid(),user.Id,weight,height,caloriesIntake,_clock.Current(),weightGoal,caloriesIntakeGoal);
         
         await _userRepository.EditUserDetails(user);
         await _measurementRepository.AddAsync(measurement);

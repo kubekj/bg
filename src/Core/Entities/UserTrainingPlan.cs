@@ -2,6 +2,12 @@ namespace Core.Entities;
 
 public class UserTrainingPlan
 {
+    public UserTrainingPlan(Guid userId, Guid trainingPlanId)
+    {
+        UserId = userId;
+        TrainingPlanId = trainingPlanId;
+        BoughtAt = DateTime.Now;
+    }
     public TrainingPlan TrainingPlan { get; private set; }
     public Guid TrainingPlanId { get; private set; }
     public User User { get; private set; }
