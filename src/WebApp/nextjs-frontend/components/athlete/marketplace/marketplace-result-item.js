@@ -27,7 +27,7 @@ const MarketplaceResultItem = ({plan}) => {
         </div>
       </div>
       <div className={style.price}>
-        <p style={{ margin: "0" }}>120 PLN total</p>
+        <p style={{ margin: "0" }}>{plan.price} $</p>
       </div>
     </div>
   );
