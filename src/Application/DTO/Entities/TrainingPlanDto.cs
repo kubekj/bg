@@ -11,4 +11,5 @@ public record TrainingPlanDto(
     string CreatorEmail,
     double RatingAvg,
     decimal Price,
+    DateTime CreatedAt,
     IEnumerable<WorkoutDto> Workouts);

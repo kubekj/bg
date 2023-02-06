@@ -27,6 +27,7 @@ public static class Extensions
 
         // EF Core + Npgsql issue
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
     }
 
     internal static void AddInfrastructureRepositories(this IServiceCollection services)

@@ -40,6 +40,7 @@ public class TrainingPlanConfiguration : IEntityTypeConfiguration<TrainingPlan>
         builder.Property(e => e.Language)
             .HasConversion(e => e.Value, e => new Language(e))
             .IsRequired();
+        builder.Property(e => e.CreatedAt).IsRequired();
 
         builder.HasOne(e => e.Author)
             .WithMany(e => e.CreatedTrainingPlans)

@@ -17,18 +17,21 @@ public class TrainingPlanController : ApiController
     private readonly IQueryHandler<GetBoughtTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllBoughtTrainingPlansQueryHandler;
     private readonly IQueryHandler<GetCreatedTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllCreatedTrainingPlansQueryHandler;
     private readonly IQueryHandler<GetTrainingPlanQuery,TrainingPlanDto> _getTrainingPlanQueryHandler;
+    private readonly IQueryHandler<GetMostRecentlyCreatedPlansQuery,IEnumerable<TrainingPlanDto>> _getMostRecentlyCreatedPlansQueryQueryHandler;
     private Guid _userId;
     public TrainingPlanController(ICommandHandler<CreateTrainingPlanCommand> createTrainingCommandHandler,
         IQueryHandler<GetAllTrainingPlansQuery, IEnumerable<TrainingPlanDto>> getAllTrainingPlansQueryHandler,
         IQueryHandler<GetBoughtTrainingPlansQuery, IEnumerable<TrainingPlanDto>> getAllBoughtTrainingPlansQueryHandler,
         IQueryHandler<GetCreatedTrainingPlansQuery, IEnumerable<TrainingPlanDto>> getAllCreatedTrainingPlansQueryHandler, 
-        IQueryHandler<GetTrainingPlanQuery, TrainingPlanDto> getTrainingPlanQueryHandler)
+        IQueryHandler<GetTrainingPlanQuery, TrainingPlanDto> getTrainingPlanQueryHandler, 
+        IQueryHandler<GetMostRecentlyCreatedPlansQuery, IEnumerable<TrainingPlanDto>> getMostRecentlyCreatedPlansQueryQueryHandler)
     {
         _createTrainingCommandHandler = createTrainingCommandHandler;
         _getAllTrainingPlansQueryHandler = getAllTrainingPlansQueryHandler;
         _getAllBoughtTrainingPlansQueryHandler = getAllBoughtTrainingPlansQueryHandler;
         _getAllCreatedTrainingPlansQueryHandler = getAllCreatedTrainingPlansQueryHandler;
         _getTrainingPlanQueryHandler = getTrainingPlanQueryHandler;
+        _getMostRecentlyCreatedPlansQueryQueryHandler = getMostRecentlyCreatedPlansQueryQueryHandler;
     }
     
     [Authorize(Roles = "trainer")]
@@ -54,6 +57,14 @@ public class TrainingPlanController : ApiController
         _userId = Guid.Parse(HttpContext.User.Identity.Name);
         var result = 
             await _getTrainingPlanQueryHandler.HandleAsync(new GetTrainingPlanQuery(_userId,id));
+        return Ok(result);
+    }
+    
+    [HttpGet("most-recent-trainings/{id:guid}")]
+    public async Task<ActionResult> GetMostRecentTrainings(Guid id)
+    {
+        var result = 
+            await _getMostRecentlyCreatedPlansQueryQueryHandler.HandleAsync(new GetMostRecentlyCreatedPlansQuery(id));
         return Ok(result);
     }
     

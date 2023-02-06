@@ -20,6 +20,7 @@ public class TrainingPlan : Entity
         Status = status;
         Language = language;
         IsDeleted = false;
+        CreatedAt = DateTime.Now;
         AllowedUsers = new HashSet<UserTrainingPlan>();
         Ratings = new HashSet<Rating>();
     }
@@ -38,7 +39,7 @@ public class TrainingPlan : Entity
     public Description Description { get; }
     public Status Status { get; private set; }
     public Language Language { get; }
-    
+    public DateTime CreatedAt { get; }
     public bool IsDeleted { get; private set; } 
 
     public Guid AuthorId { get; }

@@ -1,3 +1,3 @@
 namespace Application.DTO.Entities;
 
-public record RatingDto();
+public record RatingDto(Guid TrainingPlanId, int Rate);
