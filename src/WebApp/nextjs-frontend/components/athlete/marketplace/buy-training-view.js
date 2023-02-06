@@ -27,11 +27,11 @@ const BuyTrainingView = ({plan}) => {
               extraStyleValue='#8098F9'
             />
           </Link>
-          <h2>Entry-level full body 4 weeks</h2>
+          <h2>{plan.title}</h2>
         </div>
         <div className={style.details}>
-          <h5>Length: 4 weeks</h5>
-          <h5>Number of exercises: 6</h5>
+          <h5>Length: {plan.duration} weeks</h5>
+          <h5>Number of workouts: {plan.noOfWorkouts}</h5>
           <div className={style.description}>
             <div>
               <h5>Plan description</h5>
@@ -41,7 +41,6 @@ const BuyTrainingView = ({plan}) => {
             </div>
             <div>
               <div className={style.bottomSection}>
-                {/*<Link href='/athlete/marketplace/creator' style={{textDecoration:"none"}}>*/}
                   <Link href={{pathname: `/athlete/marketplace/creator`, query:{creatorEmail: plan.creatorEmail, id:plan.id}}} style={{textDecoration: "none"}}>
                   <div className={style.userInfo}>
                     <Image
@@ -67,9 +66,6 @@ const BuyTrainingView = ({plan}) => {
             {plan.workouts.map(workout => {
               return(
                   <div style={{ width: "33%" }}>
-                    {/*<Link href={{pathname: `/athlete/workout`, query:{id: workout.id}}} style={{textDecoration: "none"}}>*/}
-                    {/*  <TrainingPreview workout={workout}/>*/}
-                    {/*</Link>*/}
                     <TrainingPreview workout={workout}/>
                   </div>
               );
@@ -82,9 +78,7 @@ const BuyTrainingView = ({plan}) => {
               <Rating
                 name='simple-controlled'
                 value={plan.ratingAvg}
-                // onChange={(event, newValue) => {
-                //     setValue(newValue);
-                // }}
+                disabled={true}
               />
               <p>202 reviews</p>
               <b>{plan.ratingAvg}</b>
