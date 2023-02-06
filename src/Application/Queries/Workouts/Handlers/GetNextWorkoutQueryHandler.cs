@@ -7,7 +7,7 @@ using Mapster;
 
 namespace Application.Queries.Workouts.Handlers;
 
-public class GetNextWorkoutQueryHandler : IQueryHandler<GetNextWorkoutQuery,WorkoutDto>
+public class GetNextWorkoutQueryHandler : IQueryHandler<GetNextWorkoutQuery,Tuple<WorkoutDto,DateTime>>
 {
     private readonly IUserWorkoutSessionRepository _userWorkoutSessionRepository;
     private readonly IUserWorkoutSessionService _userWorkoutSessionService;
@@ -19,13 +19,17 @@ public class GetNextWorkoutQueryHandler : IQueryHandler<GetNextWorkoutQuery,Work
         _userWorkoutSessionService = userWorkoutSessionService;
     }
 
-    public async Task<WorkoutDto> HandleAsync(GetNextWorkoutQuery query)
+    public async Task<Tuple<WorkoutDto,DateTime>> HandleAsync(GetNextWorkoutQuery query)
     {
         var userSessions = await _userWorkoutSessionRepository.GetAllAsync(usw => usw.UserId == query.UserId);
         var workout = _userWorkoutSessionService.GetNextUserWorkoutSession(userSessions);
 
         if (workout is null) throw new NoWorkoutFoundException();
 
-        return workout.Adapt<WorkoutDto>();
+        var closestDate = userSessions
+            .OrderBy(x => x.Date)
+            .FirstOrDefault(x => x.Date > DateTime.Now).Date;
+        
+        return new Tuple<WorkoutDto, DateTime>(workout.Adapt<WorkoutDto>(),closestDate);
     }
 }

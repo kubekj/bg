@@ -20,8 +20,8 @@ public class WorkoutController : ApiController
     private readonly IQueryHandler<GetWorkoutsQuery, IEnumerable<WorkoutDto>> _getWorkoutsQueryHandler;
     private readonly IQueryHandler<GetWorkoutQuery, WorkoutDto> _getWorkoutQueryHandler;
     private readonly IQueryHandler<GetCurrentWorkoutQuery,WorkoutDto> _getCurrentWorkoutQueryHandler;
-    private readonly IQueryHandler<GetPreviousWorkoutQuery,WorkoutDto> _getPreviousWorkoutQueryHandler;
-    private readonly IQueryHandler<GetNextWorkoutQuery,WorkoutDto> _getNextWorkoutQueryHandler;
+    private readonly IQueryHandler<GetPreviousWorkoutQuery,Tuple<WorkoutDto,DateTime>> _getPreviousWorkoutQueryHandler;
+    private readonly IQueryHandler<GetNextWorkoutQuery,Tuple<WorkoutDto,DateTime>> _getNextWorkoutQueryHandler;
     private readonly IQueryHandler<GetAllWorkoutSessionsQuery,IEnumerable<WorkoutSessionDto>> _getAllWorkoutSessionsQuery;
     private Guid _userId;
 
@@ -32,8 +32,8 @@ public class WorkoutController : ApiController
         IQueryHandler<GetWorkoutsQuery, IEnumerable<WorkoutDto>> getWorkoutsQueryHandler, 
         IQueryHandler<GetWorkoutQuery, WorkoutDto> getWorkoutQueryHandler, 
         IQueryHandler<GetCurrentWorkoutQuery, WorkoutDto> getCurrentWorkoutQueryHandler, 
-        IQueryHandler<GetPreviousWorkoutQuery, WorkoutDto> getPreviousWorkoutQueryHandler, 
-        IQueryHandler<GetNextWorkoutQuery, WorkoutDto> getNextWorkoutQueryHandler, 
+        IQueryHandler<GetPreviousWorkoutQuery, Tuple<WorkoutDto,DateTime>> getPreviousWorkoutQueryHandler, 
+        IQueryHandler<GetNextWorkoutQuery, Tuple<WorkoutDto,DateTime>> getNextWorkoutQueryHandler, 
         IQueryHandler<GetAllWorkoutSessionsQuery, IEnumerable<WorkoutSessionDto>> getAllWorkoutSessionsQuery)
     {
         _createWorkoutCommandHandler = createWorkoutCommandHandler;

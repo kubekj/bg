@@ -22,6 +22,7 @@ internal sealed class TrainingPlanRepository : ITrainingPlanRepository
                 .ThenInclude(ew => ew.Exercise)
                 .ThenInclude(e => e.ExerciseWorkouts)
                 .ThenInclude(ew => ew.Sets)
+                .Include(tp => tp.Ratings)
                 .Where(expression)
                 .ToListAsync();
 
@@ -33,6 +34,7 @@ internal sealed class TrainingPlanRepository : ITrainingPlanRepository
             .ThenInclude(ew => ew.Exercise)
             .ThenInclude(e => e.ExerciseWorkouts)
             .ThenInclude(ew => ew.Sets)
+            .Include(tp => tp.Ratings)
             .ToListAsync();
     }
 
@@ -45,6 +47,7 @@ internal sealed class TrainingPlanRepository : ITrainingPlanRepository
             .ThenInclude(ew => ew.Exercise)
             .ThenInclude(e => e.ExerciseWorkouts)
             .ThenInclude(ew => ew.Sets)
+            .Include(tp => tp.Ratings)
             .FirstOrDefaultAsync(tp => tp.Id == trainingPlanId);
 
     public async Task AddAsync(TrainingPlan trainingPlan) => await _trainingPlans.AddAsync(trainingPlan);

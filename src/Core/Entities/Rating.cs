@@ -6,10 +6,12 @@ namespace Core.Entities;
 
 public class Rating : Entity
 {
-    public Rating(Guid id, Rate rate, Description description) : base(id)
+    public Rating(Guid id, Rate rate, Description description, Guid userId, Guid trainingPlanId) : base(id)
     {
         Rate = rate;
         Description = description;
+        UserId = userId;
+        TrainingPlanId = trainingPlanId;
     }
 
     public Rate Rate { get; }

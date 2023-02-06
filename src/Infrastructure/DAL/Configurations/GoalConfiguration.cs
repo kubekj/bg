@@ -10,7 +10,8 @@ public class GoalConfiguration : IEntityTypeConfiguration<Goal>
     {
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Value)
-            .HasMaxLength(200)
+            .IsRequired();
+        builder.Property(e => e.Month)
             .IsRequired();
         builder.HasOne(e => e.User)
             .WithMany(e => e.Goals)

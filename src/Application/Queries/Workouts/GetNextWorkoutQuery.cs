@@ -3,4 +3,4 @@ using Application.DTO.Entities;
 
 namespace Application.Queries.Workouts;
 
-public record GetNextWorkoutQuery(Guid UserId) : IQuery<WorkoutDto>;
+public record GetNextWorkoutQuery(Guid UserId) : IQuery<Tuple<WorkoutDto,DateTime>>;

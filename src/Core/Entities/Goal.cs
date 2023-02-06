@@ -4,12 +4,15 @@ namespace Core.Entities;
 
 public class Goal : Entity
 {
-    public Goal(Guid id, string value) : base(id)
+    public Goal(Guid id, int value, Guid userId) : base(id)
     {
+        Month = DateTime.Now.Month;
         Value = value;
+        UserId = userId;
     }
 
-    public string Value { get; }
+    public int Month { get; }
+    public int Value { get; }
     public User User { get; private set; }
     public Guid UserId { get; private set; }
 }

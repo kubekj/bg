@@ -36,6 +36,7 @@ public static class MapsterConfig
                     .Select(ew => ew.Workout))
                 .Count())
             .Map(src => src.CreatorEmail,dest => dest.Author.Email)
+            .Map(src => src.RatingAvg, dest => dest.Ratings.Any() ? dest.Ratings.Average(x => x.Rate) : 0)
             .IgnoreNonMapped(false);
 
         TypeAdapterConfig<Exercise, ExerciseDto>
