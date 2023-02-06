@@ -72,7 +72,7 @@ function TrainingPlanPreview(props) {
                   display='flex'
                   direction='column'
                 >
-                  {workout.exerciseDtos.map((exercise) => {
+                  {workout.item1.exerciseDtos.map((exercise) => {
                     return (
                       <div key={exercise.id} className='p-2'>
                         <Stack direction='row' spacing={2}>

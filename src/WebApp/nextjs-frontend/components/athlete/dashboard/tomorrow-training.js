@@ -2,10 +2,9 @@ import style from "./tomorrow-training.module.css";
 import React from "react";
 import TrainingPlanPreview from "../training/training-plans/training-preview-dialog";
 
-const TomorrowTraining = ({workout, title, date}) => {
-    const today = new Date();
-    let dateToDisplay = new Date();
-    dateToDisplay.setDate(today.getDate() + date);
+const TomorrowTraining = ({workout, title}) => {
+    const dateToDisplay = new Date(Date.parse(workout.item2));
+
     return (
         <div className={style.container}>
             <div className={style.header}>

@@ -47,7 +47,7 @@ const CalendarView = ({ workouts }) => {
         popup={true}
         startAccessor='start'
         endAccessor='end'
-        style={{ height: "95vh", flex: "1" }}
+        style={{ height: "93vh", flex: "1" }}
         onDoubleClickEvent={(e) => handleSelectedEvent(e)}
         onSelectEvent={() => handleClose()}
       />
@@ -58,7 +58,6 @@ const CalendarView = ({ workouts }) => {
             isOpen={open}
           ></TrainingPlanPreview>
         )}
-        ;
       </div>
     </div>
   );
