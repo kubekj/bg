@@ -28,7 +28,7 @@ const TomorrowTraining = ({workout, title}) => {
                     backgroundColorValue='#8098F9'
                     isHoveringColor='#C7D7FE'
                     borderValue='none'
-                    workout={workout}
+                    workout={workout.item1}
                 />
             </div>
         </div>

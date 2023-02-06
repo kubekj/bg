@@ -38,6 +38,8 @@ const CalendarView = ({ workouts }) => {
     });
   });
 
+
+
   return (
     <div className='App' style={{ marginLeft: "1rem", flex: "1" }}>
       <Calendar
