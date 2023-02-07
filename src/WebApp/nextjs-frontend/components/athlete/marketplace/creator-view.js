@@ -4,13 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "../../reusable/button";
 import TrainingPreview from "../training/training-plans/training-preview";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
-const CreatorView = ({creatorDetails}) => {
+const CreatorView = ({ creatorDetails }) => {
+  const router = useRouter();
+
   function getId() {
-    const router = useRouter();
-
-    return router.query.id
+    return router.query.id;
   }
 
   return (
@@ -21,7 +21,13 @@ const CreatorView = ({creatorDetails}) => {
       </div>
       <div className={style.content}>
         <div className={style.midHeader}>
-          <Link href={{pathname: `/athlete/marketplace/plan`, query:{id: getId()}}} style={{textDecoration: "none"}}>
+          <Link
+            href={{
+              pathname: `/athlete/marketplace/plan`,
+              query: { id: getId() },
+            }}
+            style={{ textDecoration: "none" }}
+          >
             <Button
               iconSrc='/thumbnails/arrow-back-outline.svg'
               text='Go back'
@@ -44,7 +50,9 @@ const CreatorView = ({creatorDetails}) => {
                 height={30}
               />
               <div>
-                <h5>{creatorDetails.firstName} {creatorDetails.lastName}</h5>
+                <h5>
+                  {creatorDetails.firstName} {creatorDetails.lastName}
+                </h5>
                 <p>{creatorDetails.trainerEmail}</p>
               </div>
             </div>
@@ -54,9 +62,7 @@ const CreatorView = ({creatorDetails}) => {
           <div className={style.description}>
             <div>
               <h5>About me</h5>
-              <p>
-                {creatorDetails.description}
-              </p>
+              <p>{creatorDetails.description}</p>
             </div>
           </div>
           <h5 style={{ color: "#8098F9" }}>Workouts</h5>

@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-export function handleSuccess(message) {
+export default function handleSuccess(message) {
   toast.success(message, {
     position: "top-right",
     autoClose: 2000,

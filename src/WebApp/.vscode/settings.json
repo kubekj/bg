@@ -1,0 +1,5 @@
+{
+  "appService.preDeployTask": "publish-release",
+  "appService.deploySubpath": "bin/Release/net7.0/publish",
+  "appService.defaultWebAppToDeploy": "/subscriptions/2ee530d3-602a-4a66-9048-031e7456fed8/AppServices/subscriptions/2ee530d3-602a-4a66-9048-031e7456fed8/resourceGroups/bguard/providers/Microsoft.Web/sites/bgweb"
+}

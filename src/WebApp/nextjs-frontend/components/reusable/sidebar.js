@@ -2,7 +2,7 @@ import style from "./left-pane.module.css";
 import Image from "next/image";
 import Button from "./button";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { Avatar } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -163,6 +163,10 @@ const Sidebar = () => {
             backgroundColorValue='white'
             isHoveringColor='#D0D5DD'
             borderValue='none'
+            onClick={() => {
+              signOut();
+              router.push("/auth/login");
+            }}
           />
         </div>
       </div>

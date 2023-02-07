@@ -14,8 +14,6 @@ const SignIn = () => {
         />
         <SignInContent />
         <ButtonsSection
-          topButtonText='Get started'
-          bottomButtonText='Sign up with Google'
           leftBottomSectionText='Already have an account?'
           rightBottomSectionText='Sign in!'
         />

@@ -34,6 +34,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseCors("default");
+app.UseStaticFiles();
 app.UseInfrastructure();
 
 // app.UseUserApi();

@@ -8,8 +8,7 @@
         <IsPackable>false</IsPackable>
         <SpaRoot>nextjs-frontend\</SpaRoot>
         <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
-<!--        <SpaProxyServerUrl>http://localhost:3000</SpaProxyServerUrl>-->
-        <SpaProxyServerUrl>http://localhost:3000</SpaProxyServerUrl>
+       <SpaProxyServerUrl>http://localhost:3000</SpaProxyServerUrl>
         <SpaProxyLaunchCommand>yarn dev</SpaProxyLaunchCommand>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
@@ -64,7 +63,7 @@
         <!-- Include the newly-built files in the publish output -->
         <ItemGroup>
             <DistFiles Include="$(SpaRoot)out\**" />
-            <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+            <ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
                 <RelativePath>wwwroot\%(RecursiveDir)%(FileName)%(Extension)</RelativePath>
                 <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
                 <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
