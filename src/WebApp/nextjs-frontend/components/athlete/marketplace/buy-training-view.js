@@ -6,8 +6,7 @@ import { Rating, Typography } from "@mui/material";
 import Button from "../../reusable/button";
 import TrainingPreview from "../training/training-plans/training-preview";
 
-
-const BuyTrainingView = ({plan}) => {
+const BuyTrainingView = ({ plan }) => {
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -35,13 +34,17 @@ const BuyTrainingView = ({plan}) => {
           <div className={style.description}>
             <div>
               <h5>Plan description</h5>
-              <p>
-                {plan.description}
-              </p>
+              <p>{plan.description}</p>
             </div>
             <div>
               <div className={style.bottomSection}>
-                  <Link href={{pathname: `/athlete/marketplace/creator`, query:{creatorEmail: plan.creatorEmail, id:plan.id}}} style={{textDecoration: "none"}}>
+                <Link
+                  href={{
+                    pathname: `/athlete/marketplace/creator`,
+                    query: { creatorEmail: plan.creatorEmail, id: plan.id },
+                  }}
+                  style={{ textDecoration: "none" }}
+                >
                   <div className={style.userInfo}>
                     <Image
                       className={style.avatar}
@@ -63,11 +66,11 @@ const BuyTrainingView = ({plan}) => {
         </div>
         <div className={style.bottom}>
           <div className={style.trainings}>
-            {plan.workouts.map(workout => {
-              return(
-                  <div style={{ width: "33%" }}>
-                    <TrainingPreview workout={workout}/>
-                  </div>
+            {plan.workouts.map((workout) => {
+              return (
+                <div style={{ width: "33%" }} key={workout.id}>
+                  <TrainingPreview workout={workout} />
+                </div>
               );
             })}
           </div>

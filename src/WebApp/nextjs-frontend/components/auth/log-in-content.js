@@ -9,7 +9,7 @@ import Image from "next/image";
 import logo from "../../public/logo.png";
 import fetcher, { poster, signin } from "../../lib/rest-api";
 import Router from "next/router";
-import { errorHandler, handleError } from "../../lib/error-handler";
+import { handleError } from "../../lib/error-handler";
 import { tr } from "faker/lib/locales";
 import { Button, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
@@ -37,11 +37,9 @@ const LogInContent = () => {
           email: values.email,
           password: values.password,
           redirect: false,
-        }).then(({ ok, error }) => {
+        }).then(({ ok }) => {
           if (ok) {
             Router.push("/athlete/dashboard");
-          } else {
-            errorHandler(error, "test");
           }
         });
     },

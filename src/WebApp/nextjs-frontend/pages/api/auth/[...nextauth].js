@@ -6,14 +6,15 @@ import { poster, signin } from "../../../lib/rest-api";
 export const options = {
   providers: [
     CredentialsProvider({
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
       async authorize(credentials, req) {
-        if (credentials == null) throw new Error("Credentials cannot be null");
-        try {
-          const user = await signin(credentials);
-          return user;
-        } catch (error) {
-          errorHandler(error);
-        }
+        if (credentials == null) return null;
+        const user = await signin(credentials);
+        if (!user) return null;
+        return user;
       },
     }),
   ],

@@ -1,5 +1,5 @@
-import { handleError } from "./error-handler";
-import { handleSuccess } from "./success-handler";
+import handleError from "./error-handler";
+import handleSuccess from "./success-handler";
 
 const Url = "http://localhost:5099/api";
 // export const Url = "https://bgpjatk.azurewebsites.net/api";
