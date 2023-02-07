@@ -1,21 +1,16 @@
-import style from "./header.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { toast } from "react-toastify";
-import { getSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import ButtonsSection from "./buttons-section";
-import Image from "next/image";
-import logo from "../../public/logo.png";
-import fetcher, { poster, signin } from "../../lib/rest-api";
+import { signin } from "../../lib/rest-api";
 import Router from "next/router";
-import { handleError } from "../../lib/error-handler";
-import { tr } from "faker/lib/locales";
 import { Button, TextField } from "@mui/material";
 import { Stack } from "@mui/system";
 
 const validationSchema = Yup.object({
-  email: Yup.string().email().required("please provide and email"),
+  email: Yup.string().email().required("please provide an email"),
   password: Yup.string().required("password cannot be empty"),
 });
 
@@ -46,7 +41,7 @@ const LogInContent = () => {
   });
 
   return (
-    <div>
+    <>
       <form onSubmit={formik.handleSubmit}>
         <div className='mb-3'>
           <label htmlFor='formGroupExampleInput' className='form-label'>
@@ -92,18 +87,21 @@ const LogInContent = () => {
             )}
           </Stack>
         </div>
-        <Button type='submit' variant='contained' className='w-full'>
+        <Button
+          type='submit'
+          variant='contained'
+          className='w-full mt-4'
+          style={{ backgroundColor: "#98B3DB" }}
+        >
           Log in
         </Button>
-        {/* <ButtonsSection
-          topButtonText='Sign in'
-          bottomButtonText='Sign in with Google'
+        <ButtonsSection
           leftBottomSectionText='Dont have an account?'
           rightBottomSectionText='Sign up!'
-          className='submit'
-        /> */}
+          isLogin={true}
+        />
       </form>
-    </div>
+    </>
   );
 };
 

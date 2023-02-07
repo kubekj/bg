@@ -1,7 +1,7 @@
 import style from "../marketplace/marketplace-result-item.module.css";
 import { Rating, Typography } from "@mui/material";
 
-const MarketplaceResultItem = ({plan}) => {
+const MarketplaceResultItem = ({ plan }) => {
   return (
     <div className={style.container}>
       <div className={style.photo} />
@@ -16,7 +16,10 @@ const MarketplaceResultItem = ({plan}) => {
             value={plan.ratingAvg}
             disabled={true}
           />
-          <p style={{ margin: "0" }}>202 reviews</p>
+          <p style={{ margin: "0" }}>
+            {plan.ratingsApplied}
+            {plan.ratingsApplied === 1 ? ` review` : " reviews"}
+          </p>
         </div>
         <div style={{ display: "flex", marginTop: "1rem" }}>
           <div className={style.icon} />

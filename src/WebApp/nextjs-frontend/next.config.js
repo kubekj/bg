@@ -11,6 +11,15 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/athlete/dashboard",
+        permanent: true,
+      },
+    ];
+  },
   // images: {
   //   loader: "akamai",
   //   path: "/",
