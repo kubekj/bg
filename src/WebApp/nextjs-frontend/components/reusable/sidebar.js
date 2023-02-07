@@ -2,11 +2,11 @@ import style from "./left-pane.module.css";
 import Image from "next/image";
 import Button from "./button";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { poster } from "../../lib/rest-api";
+import { poster, putter } from "../../lib/rest-api";
 
 const routes = [
   "/athlete/dashboard",
@@ -23,8 +23,10 @@ const Sidebar = () => {
   const [currentTab, setCurrentTab] = useState(router.asPath);
 
   async function registerAsTrainer() {
-    await poster("users/trainer", {}, data.jwt);
-    data.user.role = "trainer";
+    if (data?.user.role !== "trainer") {
+      await putter("users/trainer", {}, data.jwt);
+      data.user.role = "trainer";
+    }
   }
 
   return (

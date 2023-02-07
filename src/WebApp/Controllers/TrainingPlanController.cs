@@ -46,7 +46,7 @@ public class TrainingPlanController : ApiController
         _editTrainingCommandHandler = editTrainingCommandHandler;
     }
     
-    [Authorize(Roles = "trainer")]
+    // [Authorize(Roles = "trainer")]
     [HttpPost("create")]
     public async Task<ActionResult> Post(CreateTrainingPlanCommand command)
     {
