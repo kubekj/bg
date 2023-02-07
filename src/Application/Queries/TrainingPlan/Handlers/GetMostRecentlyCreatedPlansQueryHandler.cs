@@ -17,7 +17,7 @@ public class GetMostRecentlyCreatedPlansQueryHandler : IQueryHandler<GetMostRece
     public async Task<IEnumerable<TrainingPlanDto>> HandleAsync(GetMostRecentlyCreatedPlansQuery query)
     {
         var trainingPlans = (await _trainingPlanRepository
-            .GetAllAsync(x => x.AuthorId == query.TrainerId))
+            .GetAllAsync(x => x.Author.Email == query.Email))
             .ToList()
             .OrderByDescending(x => x.CreatedAt)
             .Take(3);

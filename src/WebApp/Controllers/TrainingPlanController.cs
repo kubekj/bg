@@ -105,11 +105,11 @@ public class TrainingPlanController : ApiController
         return Ok(result);
     }
     
-    [HttpGet("most-recent-trainings/{id:guid}")]
-    public async Task<ActionResult> GetMostRecentTrainings(Guid id)
+    [HttpGet("most-recent-trainings/{email}")]
+    public async Task<ActionResult> GetMostRecentTrainings(string email)
     {
         var result = 
-            await _getMostRecentlyCreatedPlansQueryQueryHandler.HandleAsync(new GetMostRecentlyCreatedPlansQuery(id));
+            await _getMostRecentlyCreatedPlansQueryQueryHandler.HandleAsync(new GetMostRecentlyCreatedPlansQuery(email));
         return Ok(result);
     }
     
