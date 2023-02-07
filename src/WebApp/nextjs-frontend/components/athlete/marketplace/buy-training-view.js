@@ -64,7 +64,7 @@ const BuyTrainingView = ({ plan }) => {
               </div>
             </div>
           </div>
-          <h5 style={{ color: "#8098F9" }}>Workouts</h5>
+          <h5 style={{ color: "#8098F9" , marginBottom:"1rem" }}>Workouts</h5>
         </div>
         <div className={style.bottom}>
           <div className={style.trainings}>

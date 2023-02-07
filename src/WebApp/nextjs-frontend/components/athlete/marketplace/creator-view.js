@@ -3,8 +3,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../../reusable/button";
-import TrainingPreview from "../training/training-plans/training-preview";
 import { useRouter } from "next/router";
+import RecentPreview from "../training/training-plans/recent-preview";
 
 const CreatorView = ({ creatorDetails, recentPlans }) => {
   const router = useRouter();
@@ -71,15 +71,14 @@ const CreatorView = ({ creatorDetails, recentPlans }) => {
               <p>{creatorDetails.description}</p>
             </div>
           </div>
-          <h5 style={{ color: "#8098F9" }}>Workouts</h5>
+          <h5 style={{ color: "#8098F9" , marginBottom:"1rem"}}>Recently added plans</h5>
         </div>
         <div className={style.bottom}>
           <div className={style.trainings}>
-            {recentPlans.workouts.map((workout) => {
+            {recentPlans.map((plan) => {
               return (
-                  <div style={{ width: "30%" }} key={workout.id}>
-                    {/*<TrainingPreview workout={workout} />*/}
-                    <TrainingPreview  />
+                  <div style={{ width: "30%" }} key={plan.id}>
+                    <RecentPreview plan={plan} />
                   </div>
               );
             })}
