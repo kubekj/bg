@@ -6,7 +6,7 @@ import Button from "../../reusable/button";
 import TrainingPreview from "../training/training-plans/training-preview";
 import { useRouter } from "next/router";
 
-const CreatorView = ({ creatorDetails }) => {
+const CreatorView = ({ creatorDetails, recentPlans }) => {
   const router = useRouter();
 
   function getId() {
@@ -75,26 +75,14 @@ const CreatorView = ({ creatorDetails }) => {
         </div>
         <div className={style.bottom}>
           <div className={style.trainings}>
-            {/*<div style={{ width: "33%" }}>*/}
-            {/*  <Link*/}
-            {/*    href='/training-plan-details'*/}
-            {/*    style={{ textDecoration: "none" }}*/}
-            {/*  >*/}
-            {/*    <TrainingPreview backHref='/athlete-buy-training' />*/}
-            {/*  </Link>*/}
-            {/*</div>*/}
-            {/*<div style={{ width: "33%" }}>*/}
-            {/*  <TrainingPreview />*/}
-            {/*</div>*/}
-            {/*<div style={{ width: "33%" }}>*/}
-            {/*  <TrainingPreview />*/}
-            {/*</div>*/}
-            {/*<div style={{ width: "33%" }}>*/}
-            {/*  <TrainingPreview />*/}
-            {/*</div>*/}
-            {/*<div style={{ width: "33%" }}>*/}
-            {/*  <TrainingPreview />*/}
-            {/*</div>*/}
+            {recentPlans.workouts.map((workout) => {
+              return (
+                  <div style={{ width: "30%" }} key={workout.id}>
+                    {/*<TrainingPreview workout={workout} />*/}
+                    <TrainingPreview  />
+                  </div>
+              );
+            })}
           </div>
         </div>
       </div>

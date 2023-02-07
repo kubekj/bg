@@ -25,14 +25,15 @@ export async function getServerSideProps(context) {
     const creatorEmail = context.query.creatorEmail;
 
     const creatorDetails = await fetcher(`users/trainer-details/${creatorEmail}`, options);
+    //const recentPlans = await fetcher(`training-plans/most-recent-trainings/${creatorEmail}`, options);
 
     return {
         props: { jwt: session.jwt, creatorDetails: creatorDetails},
     };
 }
 
-const Creator = ({ jwt, creatorDetails }) => {
-    return <CreatorView creatorDetails={creatorDetails}/>
+const Creator = ({ jwt, creatorDetails, recentPlans }) => {
+    return <CreatorView creatorDetails={creatorDetails} />
 };
 
 export default Creator;

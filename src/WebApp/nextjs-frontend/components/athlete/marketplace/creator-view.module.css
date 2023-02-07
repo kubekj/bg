@@ -4,7 +4,8 @@
     margin-left: 2rem;
     margin-right: 2rem;
     flex-direction: column;
-    height: 100vh;
+    min-height: 95vh;
+    /*height: 100vh;*/
     flex: 1;
 }
 
@@ -46,11 +47,12 @@
     text-align: left;
 }
 .userInfo{
-    margin-left: 4rem;
+    /*margin-left: 4rem;*/
     margin-right: 2rem;
     display: flex;
     flex-direction: row;
     text-align: left;
+    align-items: center;
 }
 .avatar{
     border-radius: 50%;
@@ -60,10 +62,10 @@
 }
 .trainings{
     display: flex;
-    margin: 1rem;
-    width: 75%;
     flex-wrap: wrap;
     column-gap: 35px;
+    row-gap: 35px;
+    width: 100%;
 }
 .rating{
     display: flex;
