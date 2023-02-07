@@ -152,7 +152,7 @@ const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
     ],
   };
 
-  const toEat = 3000 - user.caloriesIntake;
+  const toEat = user.caloriesIntakeGoal - user.caloriesIntake;
   const data3 = {
     labels: ["Eaten", "To eat"],
     datasets: [
@@ -166,7 +166,7 @@ const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
     ],
   };
 
-  const toBuild = 90 - user.weight;
+  const toBuild = user.weightGoal - user.weight;
   const data4 = {
     labels: ["Built", "To build"],
     datasets: [
@@ -212,11 +212,11 @@ const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
             <Doughnut options={options2} data={data2} />
           </div>
           <div className={style.eachDonut}>
-            <h5 className={style.statTitle}>Calories intake: {user.caloriesIntake}/3000</h5>
+            <h5 className={style.statTitle}>Calories intake: {user.caloriesIntake}/{user.caloriesIntakeGoal}</h5>
             <Doughnut options={options2} data={data3} />
           </div>
           <div className={style.eachDonut}>
-            <h5 className={style.statTitle}>Body mass: {user.weight}/90</h5>
+            <h5 className={style.statTitle}>Body mass: {user.weight}/{user.weightGoal}</h5>
             <Doughnut options={options2} data={data4} />
           </div>
         </div>

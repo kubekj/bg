@@ -4,7 +4,8 @@ import React from "react";
 import Link from "next/link";
 
 const TodayWorkout = ({ current }) => {
-  //console.log(current);
+  // console.log("Current");
+  // console.log(current.code);
   return (
     <div className={style.container}>
       <div className={style.header}>
@@ -41,7 +42,8 @@ const TodayWorkout = ({ current }) => {
               </tr>
             </thead>
             <tbody className={style.tBody}>
-              {current?.exerciseDtos?.map((exercise) => {
+              {
+                current.exerciseDtos?.map((exercise) => {
                 return (
                   <tr key={exercise.id}>
                     <td className={style.tdRegular}>{exercise.name}</td>
