@@ -6,8 +6,18 @@ import TrainingPreview from "./training-preview";
 import Link from "next/link";
 import {Rating, Typography} from "@mui/material";
 import TrainingPlanPreview from "./training-preview-dialog";
+import {poster} from "../../../../lib/rest-api";
+import {useRouter} from "next/router";
 
-const ApplyTrainingView = ({plan}) => {
+const ApplyTrainingView = ({plan, jwt}) => {
+    const router  = useRouter();
+
+    const ratePlan = async (value) => {
+        await poster(`training-plans/rate/${plan.id}`,{rate: value}, jwt);
+
+        await router.replace(`/athlete/training/plan?id=${plan.id}`);
+    }
+
     return (
         <div className={style.container}>
             <div className={style.header}>
@@ -94,9 +104,10 @@ const ApplyTrainingView = ({plan}) => {
                             <Rating
                                 name='simple-controlled'
                                 value={plan.ratingAvg}
-                                // onChange={(event, newValue) => {
-                                //     setValue(newValue);
-                                // }}
+                                disabled={plan.alreadyRated}
+                                onChange={(event, newValue) => {
+                                    ratePlan(newValue);
+                                }}
                             />
                             <p style={{marginTop: "1rem"}}>{plan.ratingsApplied}
                                 {plan.ratingsApplied === 1 ? ` review` : " reviews"}</p>

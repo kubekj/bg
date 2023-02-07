@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
 }
 
 const AthleteTrainingInfo = ({ jwt, plan }) => {
-    return <ApplyTrainingView plan={plan}/>
+    return <ApplyTrainingView plan={plan} jwt={jwt}/>
 };
 
 export default AthleteTrainingInfo;
