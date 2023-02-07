@@ -5,7 +5,7 @@ import TrainerSidebar from "../../components/trainer/sidebar";
 const TrainerDashboard = () => {
   return (
     <div className={style.container}>
-      <div style={{ borderRight: "1px solid #D0D5DD", width: "350px" }}>
+      <div style={{ borderRight: "1px solid #D0D5DD", width: "325px" }}>
         <TrainerSidebar />
       </div>
       <TrainerDashboardView />

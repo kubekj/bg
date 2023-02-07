@@ -1,6 +1,8 @@
 .container{
     display: flex;
-    padding: 2rem;
+    /*padding: 2rem;*/
+    margin-left: 2rem;
+    margin-right: 2rem;
     flex-direction: column;
     height: 100vh;
     flex: 1;
@@ -61,6 +63,7 @@
     margin: 1rem;
     width: 75%;
     flex-wrap: wrap;
+    column-gap: 35px;
 }
 .rating{
     display: flex;

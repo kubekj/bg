@@ -1,8 +1,10 @@
 .container {
   display: flex;
-  padding: 2rem;
+  /*padding: 2rem;*/
+  margin-left: 2rem;
+  margin-right: 2rem;
   flex-direction: column;
-  height: 100vh;
+  /*height: 100vh;*/
 }
 .header {
   margin-top: 1rem;

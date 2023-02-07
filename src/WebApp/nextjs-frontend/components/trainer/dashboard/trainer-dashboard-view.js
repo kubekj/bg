@@ -8,7 +8,7 @@ const TrainerDashboardView = () => {
     return(
         <div className={style.container}>
             <div className={style.header}>
-                <h2 style={{marginBottom:"2rem"}}>Dashboard</h2>
+                <h2 style={{marginBottom:"1rem"}}>Dashboard</h2>
             </div>
             <div className={style.overview}>
                 <TrainerOverviewView />

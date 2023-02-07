@@ -25,6 +25,7 @@ const CreatorView = ({ creatorDetails }) => {
       </div>
       <div className={style.content}>
         <div className={style.midHeader}>
+          <div style={{marginBottom:"1rem"}}>
           <Link
             href={{
               pathname: `${getBack()}`,
@@ -42,6 +43,7 @@ const CreatorView = ({ creatorDetails }) => {
               extraStyleValue='#8098F9'
             />
           </Link>
+          </div>
         </div>
         <div>
           <div className={style.bottomSection}>

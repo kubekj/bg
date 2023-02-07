@@ -16,6 +16,7 @@ const ApplyTrainingView = ({plan}) => {
             </div>
             <div className={style.content}>
                 <div className={style.midHeader}>
+                    <div style={{marginBottom:"1rem"}}>
                     <Link href="/athlete/training/trainings">
                         <Button
                             iconSrc='/thumbnails/arrow-back-outline.svg'
@@ -27,6 +28,7 @@ const ApplyTrainingView = ({plan}) => {
                             extraStyleValue='#8098F9'
                         />
                     </Link>
+                    </div>
                     <h2>{plan.title}</h2>
                 </div>
                 <div className={style.details}>
@@ -71,15 +73,15 @@ const ApplyTrainingView = ({plan}) => {
                     <div className={style.trainings}>
                         {plan.workouts.map(workout => {
                             return (
-                                <div style={{width: "33%"}} key={workout.id}>
+                                <div style={{width: "30%"}} key={workout.id}>
                                     <TrainingPreview workout={workout}>
-                                        {/*<TrainingPlanPreview*/}
-                                        {/*    icon='/thumbnails/copy-outline.svg'*/}
-                                        {/*    backgroundColorValue='white'*/}
-                                        {/*    isHoveringColor='#D0D5DD'*/}
-                                        {/*    borderValue='none'*/}
-                                        {/*    workout={workout}*/}
-                                        {/*/>*/}
+                                        <TrainingPlanPreview
+                                            icon='/thumbnails/copy-outline.svg'
+                                            backgroundColorValue='white'
+                                            isHoveringColor='#D0D5DD'
+                                            borderValue='none'
+                                            workout={workout}
+                                        />
                                     </TrainingPreview>
                                 </div>
                             );
