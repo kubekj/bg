@@ -8,8 +8,7 @@
         <IsPackable>false</IsPackable>
         <SpaRoot>nextjs-frontend\</SpaRoot>
         <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
-<!--        <SpaProxyServerUrl>http://localhost:3000</SpaProxyServerUrl>-->
-        <SpaProxyServerUrl>https://bgweb.azurewebsites.net</SpaProxyServerUrl>
+       <SpaProxyServerUrl>http://localhost:3000</SpaProxyServerUrl>
         <SpaProxyLaunchCommand>yarn dev</SpaProxyLaunchCommand>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
