@@ -20,7 +20,13 @@ public class GetPersonalInfoQueryHandler : IQueryHandler<GetPersonalInfoQuery,Us
         var userInfo = await _userRepository.GetByIdAsync(query.UserId);
         var userLatestMeasurement = await _measurementRepository.GetForUserAsync(query.UserId);
 
+        double weight = userLatestMeasurement?.Weight ?? 0;
+        double weightGoal = userLatestMeasurement?.WeightGoal ?? 0;
+        double height = userLatestMeasurement?.Height ?? 0;
+        int caloriesIntake = userLatestMeasurement?.CaloriesIntake ?? 0;
+        int caloriesIntakeGoal = userLatestMeasurement?.CaloriesIntakeGoal ?? 0;
+
         return new UserDto(userInfo.FirstName,userInfo.LastName,userInfo.Email,userInfo.Bio,userInfo.PreferredLanguage,
-            userLatestMeasurement.Weight,userLatestMeasurement.WeightGoal,userLatestMeasurement.Height,userLatestMeasurement.CaloriesIntake,userLatestMeasurement.CaloriesIntakeGoal);
+            weight,weightGoal,height,caloriesIntake,caloriesIntakeGoal);
     }
 }

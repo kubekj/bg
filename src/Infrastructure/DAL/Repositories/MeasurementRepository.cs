@@ -20,7 +20,7 @@ internal sealed class MeasurementRepository : IMeasurementRepository
         return await _measurements.ToListAsync();
     }
 
-    public async Task<Measurement> GetForUserAsync(Guid userId) 
+    public async Task<Measurement?> GetForUserAsync(Guid userId) 
         => await _measurements
             .Where(m => m.UserId == userId)
             .OrderByDescending(m => m.DateProvided)
