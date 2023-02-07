@@ -20,6 +20,7 @@
     display: flex;
     justify-items: right;
     align-items: center;
+    margin-right: 1.5rem;
 }
 .buttonDetails{
     justify-items: right;

@@ -57,6 +57,7 @@ const HoursTrained = ({ doneTrainings }) => {
         </div>
       </div>
       <div className={style.bottomSection}>
+        <div>
         <Link href='/athlete/statistics'>
           <Button
             iconSrc='/thumbnails/thunder.svg'
@@ -67,6 +68,8 @@ const HoursTrained = ({ doneTrainings }) => {
             isHoveringColor='#D0D5DD'
           />
         </Link>
+        </div>
+        <div style={{marginLeft:"2rem"}}>
         <GoalModal
           icon='/thumbnails/square-add.svg'
           backgroundColorValue='#8098F9'
@@ -76,6 +79,7 @@ const HoursTrained = ({ doneTrainings }) => {
           extraStyleValue='white'
           goal={doneTrainings["item2"]}
         />
+          </div>
       </div>
     </div>
   );

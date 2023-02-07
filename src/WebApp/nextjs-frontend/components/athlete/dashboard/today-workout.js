@@ -43,7 +43,7 @@ const TodayWorkout = ({ current }) => {
             </thead>
             <tbody className={style.tBody}>
               {
-                current.exerciseDtos?.map((exercise) => {
+                current?.exerciseDtos?.map((exercise) => {
                 return (
                   <tr key={exercise.id}>
                     <td className={style.tdRegular}>{exercise.name}</td>

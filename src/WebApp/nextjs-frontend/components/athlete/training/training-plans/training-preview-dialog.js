@@ -61,7 +61,7 @@ function TrainingPlanPreview(props) {
           <div className='flex flex-col items-start p-10 gap-5 w-full'>
             <div className='flex flex-col justify-center gap-3 w-full'>
               <Typography id='modal-modal-title' variant='h3' component='h2'>
-                {workout.name}
+                {workout ? workout.name : "no data"}
               </Typography>
               <hr />
               <Grid container>
@@ -72,7 +72,7 @@ function TrainingPlanPreview(props) {
                   display='flex'
                   direction='column'
                 >
-                  {workout.exerciseDtos.map((exercise) => {
+                  {workout?.exerciseDtos.map((exercise) => {
                     return (
                       <div key={exercise.id} className='p-2'>
                         <Stack direction='row' spacing={2}>

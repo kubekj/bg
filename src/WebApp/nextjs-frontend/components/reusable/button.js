@@ -32,7 +32,6 @@ const Button = ({
         backgroundColor: isHovering
           ? `${isHoveringColor}`
           : `${backgroundColorValue}`,
-        marginRight: "1rem",
         [`${extraStyleType}`]: [`${extraStyleValue}`],
       }}
       onMouseEnter={handleMouseEnter}

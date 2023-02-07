@@ -76,18 +76,18 @@ const BuyTrainingView = ({ plan }) => {
           </div>
           <div className={style.rightBottom}>
             <div className={style.rating}>
-              <p>Rating</p>
+              <p style={{marginTop:"1rem"}}>Rating</p>
               <Typography component='legend' />
               <Rating
                 name='simple-controlled'
                 value={plan.ratingAvg}
                 disabled={true}
               />
-              <p>202 reviews</p>
-              {/*<b>{plan.ratingAvg}</b>*/}
+              <p style={{marginTop:"1rem"}}>{plan.ratingsApplied}
+              {plan.ratingsApplied === 1 ? ` review` : " reviews"}</p>
             </div>
             <div className={style.apply}>
-              <h5>{plan.price}</h5>
+              <h5 style={{textAlign:"center", marginRight:"1rem"}}>{plan.price}$</h5>
               <Button
                 iconSrc='/thumbnails/checkmark-outline.svg'
                 text='Buy plan'

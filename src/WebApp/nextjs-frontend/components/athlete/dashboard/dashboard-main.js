@@ -25,10 +25,10 @@ const DashboardMain = ({current, next, previous, weightBreakdown, doneTrainings}
                 <TodayWorkout current={current}/>
                 <div className={style.todayTomorrow}>
                     <div style={{marginBottom:"2rem"}}>
-                        <TomorrowTraining workout={next} title="Next"/>
+                        {next && <TomorrowTraining workout={next} title="Next"/>}
                     </div>
                     <div>
-                        <TomorrowTraining workout={previous} title="Previous"/>
+                        {previous &&<TomorrowTraining workout={previous} title="Previous"/>}
                     </div>
                 </div>
             </div>

@@ -79,7 +79,7 @@ const ApplyTrainingView = ({plan}) => {
           </div>
           <div className={style.rightBottom}>
             <div className={style.rating}>
-              <p>Rating</p>
+              <p style={{marginTop:"1rem"}}>Rating</p>
               {/*<Typography component="legend"/>*/}
               <Rating
                 name='simple-controlled'
@@ -88,8 +88,8 @@ const ApplyTrainingView = ({plan}) => {
                 //     setValue(newValue);
                 // }}
               />
-              <p>202 reviews</p>
-              <b>{plan.ratingAvg}</b>
+              <p style={{marginTop:"1rem"}}>{plan.ratingsApplied}
+                {plan.ratingsApplied === 1 ? ` review` : " reviews"}</p>
               <h5>Rate plan</h5>
             </div>
             <div className={style.apply}>

@@ -83,11 +83,13 @@
     width: 25%;
 }
 .apply{
+    flex-direction: column;
     padding-bottom: 3rem;
     padding-top: 3rem;
     padding-left: 1rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 2rem;
     border: 1px solid #D0D5DD;
     border-radius: 20px;
