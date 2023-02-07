@@ -1,8 +1,8 @@
 import handleError from "./error-handler";
 import handleSuccess from "./success-handler";
 
-const Url = "http://localhost:5099/api";
-// export const Url = "https://bgpjatk.azurewebsites.net/api";
+// const Url = "http://localhost:5099/api";
+const Url = "https://bgweb.azurewebsites.net/api";
 
 export default async function fetcher(endpoint, options = {}) {
   let response;
