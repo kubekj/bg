@@ -10,6 +10,11 @@ public class UserWorkoutSession
         IsDone = false;
     }
 
+    public void Edit(Guid workoutId)
+    {
+        WorkoutId = workoutId;
+    }
+
     public Guid UserId { get; private set; }
     public Guid WorkoutId { get; private set; }
     public UserWorkout UserWorkout { get; private set; }

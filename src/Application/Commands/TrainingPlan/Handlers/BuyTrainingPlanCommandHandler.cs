@@ -22,6 +22,8 @@ public class BuyTrainingPlanCommandHandler : ICommandHandler<BuyTrainingPlanComm
         _trainingPlanRepository = trainingPlanRepository;
     }
 
+    //If user have workouts / exercises already just skip
+    
     public async Task HandleAsync(BuyTrainingPlanCommand command)
     {
         var userTrainingPlans = await _userTrainingPlanRepository.GetAllAsync(x => x.UserId == command.UserId);
@@ -46,8 +48,8 @@ public class BuyTrainingPlanCommandHandler : ICommandHandler<BuyTrainingPlanComm
             await _userWorkoutRepository.AddAsync(new UserWorkout(tpw.WorkoutId, command.UserId));
         }
         
-        foreach (var tuple in userWorkouts)
-            await _userExerciseRepository.AddAsync(new UserExercise(tuple, command.UserId));
+        foreach (var exerciseId in userWorkouts)
+            await _userExerciseRepository.AddAsync(new UserExercise(exerciseId, command.UserId));
 
         await _userTrainingPlanRepository.AddAsync(new UserTrainingPlan(command.UserId,command.TrainingPlanId));
     }

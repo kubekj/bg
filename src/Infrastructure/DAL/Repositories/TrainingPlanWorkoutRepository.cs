@@ -17,4 +17,10 @@ internal sealed class TrainingPlanWorkoutRepository : ITrainingPlanWorkoutReposi
     {
         await _trainingPlanWorkouts.AddAsync(trainingPlanWorkout);
     }
+
+    public async Task RemoveAsync(TrainingPlanWorkout trainingPlanWorkout)
+    {
+        _trainingPlanWorkouts.Remove(trainingPlanWorkout);
+        await Task.CompletedTask;
+    }
 }

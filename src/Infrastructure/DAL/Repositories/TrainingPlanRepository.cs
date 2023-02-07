@@ -51,4 +51,9 @@ internal sealed class TrainingPlanRepository : ITrainingPlanRepository
             .FirstOrDefaultAsync(tp => tp.Id == trainingPlanId);
 
     public async Task AddAsync(TrainingPlan trainingPlan) => await _trainingPlans.AddAsync(trainingPlan);
+    public async Task UpdateAsync(TrainingPlan trainingPlan)
+    {
+        _trainingPlans.Update(trainingPlan);
+        await Task.CompletedTask;
+    }
 }

@@ -13,9 +13,9 @@ internal sealed class RatingRepository : IRatingRepository
         _ratings = bodyGuardDbContext.Ratings;
     }
 
-    public Task<Rating> GetRatingForPlan()
+    public async Task<Rating> GetRatingForPlan(Guid userId, Guid trainingPlanId)
     {
-        throw new NotImplementedException();
+        return await _ratings.FirstOrDefaultAsync(x => x.UserId ==  userId && x.TrainingPlanId == trainingPlanId);
     }
 
     public Task<IEnumerable<Rating>> GetAllRatingsForPlan()

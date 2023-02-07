@@ -13,4 +13,5 @@ public record TrainingPlanDto(
     int RatingsApplied,
     decimal Price,
     DateTime CreatedAt,
+    bool AlreadyRated,
     IEnumerable<WorkoutDto> Workouts);

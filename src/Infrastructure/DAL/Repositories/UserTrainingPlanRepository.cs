@@ -35,5 +35,14 @@ internal sealed class UserTrainingPlanRepository : IUserTrainingPlanRepository
             .ToListAsync();
     }
 
+    public async Task<UserTrainingPlan?> GetByIdAsync(Guid userId, Guid trainingPlanId) =>
+        await _userTrainingPlans
+            .Include(utp => utp.TrainingPlan)
+            .ThenInclude(x => x.TrainingPlanWorkouts)
+            .ThenInclude(tpw => tpw.Workout)
+            .ThenInclude(w => w.ExerciseWorkouts)
+            .ThenInclude(ew => ew.Exercise)
+            .FirstOrDefaultAsync(x => x.UserId == userId && x.TrainingPlanId == trainingPlanId);
+
     public async Task AddAsync(UserTrainingPlan userTrainingPlan) => await _userTrainingPlans.AddAsync(userTrainingPlan);
 }

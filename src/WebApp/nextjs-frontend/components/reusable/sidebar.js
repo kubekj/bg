@@ -6,6 +6,7 @@ import { signOut, useSession } from "next-auth/react";
 import { Avatar } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { poster } from "../../lib/rest-api";
 
 const routes = [
   "/athlete/dashboard",
@@ -20,6 +21,11 @@ const Sidebar = () => {
   const { data } = useSession();
   const router = useRouter();
   const [currentTab, setCurrentTab] = useState(router.asPath);
+
+  async function registerAsTrainer() {
+    await poster("users/trainer", {}, data.jwt);
+    data.user.role = "trainer";
+  }
 
   return (
     <div className={style.container}>
@@ -131,6 +137,7 @@ const Sidebar = () => {
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
+              onClick={registerAsTrainer}
             />
           </Link>
           <Link href='/athlete/settings'>

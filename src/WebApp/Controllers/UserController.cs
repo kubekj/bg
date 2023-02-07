@@ -62,7 +62,7 @@ public class UserController : ApiController
         return NoContent();
     }
     
-    [Authorize(Roles = "athlete")]
+    [Authorize]
     [HttpPut("trainer")]
     public async Task<ActionResult> RegisterAsTrainer()
     {

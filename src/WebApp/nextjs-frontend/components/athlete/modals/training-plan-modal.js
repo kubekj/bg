@@ -25,6 +25,12 @@ const skillLevels = ["Beginner", "Intermediate", "Advanced"];
 const noOfExercieses = [1, 2, 3, 4, 5, 6, 7];
 const baseWorkout = {};
 
+function convertForEdit(workouts) {
+  return workouts.map((workout) => {
+    workout.id;
+  });
+}
+
 const validationSchema = yup.object().shape({
   title: yup.string().required("Please provide a title for plan"),
   description: yup.string().required("Please describe the plan"),
@@ -60,7 +66,7 @@ function TrainingPlanModal(props) {
     initialValues: {
       title: plan ? plan.title : "",
       description: plan ? plan.description : "",
-      workouts: plan ? plan.workouts : [baseWorkout],
+      workouts: plan ? plan.workouts.map(({ id }) => id) : [baseWorkout],
       duration: plan ? plan.duration : "",
       price: plan ? plan.price : "",
       language: plan ? plan.language : "",
@@ -81,6 +87,7 @@ function TrainingPlanModal(props) {
   function onChangeWorkouts(e) {
     // update dynamic form
     const workouts = formik.values.workouts;
+    console.log(workouts);
     const numberOfWorkouts = e.target.value || 0;
     const previousNumber = parseInt(formik.values.noOfWorkouts || "0");
     if (previousNumber < numberOfWorkouts) {
@@ -203,10 +210,10 @@ function TrainingPlanModal(props) {
                     >
                       <Stack direction='row' spacing={2}>
                         <Stack direction='column' className='w-full '>
-                          <InputLabel>Select workout</InputLabel>
+                          <InputLabel>Workout</InputLabel>
                           <Select
                             name={`workouts.${i}`}
-                            value={workout.id}
+                            value={workout}
                             error={
                               formik.touched.workouts &&
                               Boolean(formik.errors.workouts)
