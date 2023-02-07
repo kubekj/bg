@@ -41,7 +41,7 @@ const BuyTrainingView = ({ plan }) => {
                 <Link
                   href={{
                     pathname: `/athlete/marketplace/creator`,
-                    query: { creatorEmail: plan.creatorEmail, id: plan.id },
+                    query: { creatorEmail: plan.creatorEmail, id: plan.id, goBack: `/athlete/marketplace/plan` }
                   }}
                   style={{ textDecoration: "none" }}
                 >

@@ -13,17 +13,21 @@ const CreatorView = ({ creatorDetails }) => {
     return router.query.id;
   }
 
+  function getBack(){
+    return router.query.goBack;
+  }
+
   return (
     <div className={style.container}>
       <div className={style.header}>
-        <h3>Marketplace</h3>
+        <h3>Creator</h3>
         <div className={style.mainImage} />
       </div>
       <div className={style.content}>
         <div className={style.midHeader}>
           <Link
             href={{
-              pathname: `/athlete/marketplace/plan`,
+              pathname: `${getBack()}`,
               query: { id: getId() },
             }}
             style={{ textDecoration: "none" }}
