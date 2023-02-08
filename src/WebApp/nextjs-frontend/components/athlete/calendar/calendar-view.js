@@ -14,12 +14,13 @@ const CalendarView = ({ workouts }) => {
   const handleClose = () => setOpen(false);
 
   const handleSelectedEvent = (event) => {
+    // setSelectedDate(event.date);
+    setSelectedDate(event.start);
     let workout = null;
     workout = workouts.map((w) => {
       if (w.workoutDto.id === event.id) {
         workout = w.workoutDto;
         setSelectedEvent(workout);
-        setSelectedDate(w.date);
         handleOpen();
       }
     });
