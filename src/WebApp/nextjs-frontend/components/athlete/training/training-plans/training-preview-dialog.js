@@ -3,6 +3,7 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import { Button, Dialog, Grid, InputLabel, TextField } from "@mui/material";
 import CustomButton from "../../../reusable/button";
+import DeleteModal from "../../../reusable/delete-modal";
 import { Stack } from "@mui/system";
 
 function TrainingPlanPreview(props) {
@@ -15,6 +16,8 @@ function TrainingPlanPreview(props) {
     text,
     extraStyleType,
     extraStyleValue,
+    canBeDeleted,
+    date,
   } = props;
   const [open, setOpen] = React.useState(isOpen);
   const handleOpen = () => setOpen(true);
@@ -146,6 +149,13 @@ function TrainingPlanPreview(props) {
 
           <div className='flex flex-col px-8 w-full items-center'>
             <div className='flex flex-row w-full gap-3 py-6'>
+              {canBeDeleted && (
+                <DeleteModal
+                  subtitle={`Remove workout session "${workout.name}"`}
+                  endpoint={`workouts/session/${workout.id}/${date}`}
+                  redirect='/athlete/calendar'
+                />
+              )}
               <Button
                 style={{
                   backgroundColor: "#8098F9",

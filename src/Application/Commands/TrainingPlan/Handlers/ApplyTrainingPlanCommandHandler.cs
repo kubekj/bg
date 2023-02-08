@@ -36,20 +36,23 @@ public class ApplyTrainingPlanCommandHandler : ICommandHandler<ApplyTrainingPlan
             .GetAllAsync(x => x.UserId == command.UserId)).ToList();
 
         var dateFrom = command.StartDate;
+        var dateTo = command.StartDate.AddDays(7 * userTrainingPlan.TrainingPlan.Duration);
 
         var workouts = userTrainingPlan.TrainingPlan.TrainingPlanWorkouts.Select(x => x.Workout).ToList();
         
         var dates = DetermineDates(dateFrom,(int)userTrainingPlan.TrainingPlan.Duration,workouts.Count());
-        
+
+        foreach (var uws in workoutSessions.Where(uws => uws.Date > dateFrom && uws.Date < dateTo))
+            await _userWorkoutSessionRepositoryRepository.RemoveAsync(uws);
+
         var counter = 0;
         foreach (var date in dates)
         {
             var existingUserSession = workoutSessions.FirstOrDefault(x => x.Date == date);
             
-            if (existingUserSession is not null)
+            if (existingUserSession is not null || existingUserSession?.Date < dateFrom)
             {
-                existingUserSession.Edit(workouts[counter].Id);
-                await _userWorkoutSessionRepositoryRepository.EditAsync(existingUserSession);
+                await _userWorkoutSessionRepositoryRepository.RemoveAsync(existingUserSession);
             }
             else
             {
@@ -68,7 +71,7 @@ public class ApplyTrainingPlanCommandHandler : ICommandHandler<ApplyTrainingPlan
     {
         var totalWorkouts = numOfWeeks * numOfWorkouts;
         var restDays = 7 - numOfWorkouts;
-        var startDate = DateTime.Today;
+        var startDate = from;
         var workoutDates = new List<DateTime>();
         
         for (var i = 0; i < totalWorkouts; i++)

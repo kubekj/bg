@@ -4,6 +4,13 @@ import Typography from "@mui/material/Typography";
 import { Button, Dialog, Grid, InputLabel, TextField } from "@mui/material";
 import CustomButton from "../../reusable/button";
 import { Stack } from "@mui/system";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
+import { useRouter } from "next/router";
+import { poster } from "../../../lib/rest-api";
+import { useSession } from "next-auth/react";
 
 function AssignPlanModal(props) {
   const {
@@ -17,6 +24,16 @@ function AssignPlanModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [startDate, setstartDate] = React.useState(null);
+  const [endDate, setEndDate] = React.useState(null);
+
+  const router = useRouter();
+  const { data } = useSession();
+
+  function addWeeks(date, weeks) {
+    date.setDate(date.getDate() + 7 * weeks);
+    setEndDate(date);
+  }
 
   return (
     <>
@@ -133,19 +150,26 @@ function AssignPlanModal(props) {
           <div className='flex flex-col px-6 py-2 w-full items-center'>
             <div className='flex flex-row w-full gap-3 py-6'>
               {/* Date picker */}
-              <Button
-                style={{
-                  backgroundColor: "#D0D5DD",
-                  color: "#000000",
-                  borderRadius: 10,
-                  border: "none",
-                }}
-                variant='outlined'
-                onClick={handleClose}
-                className={"w-1/2"}
-              >
-                Cancel
-              </Button>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label='Start date'
+                  orientation='landscape'
+                  minDate={new Date()}
+                  value={startDate}
+                  onChange={(newValue) => {
+                    const date = new Date(newValue);
+                    setstartDate(newValue);
+                    addWeeks(date, plan.duration);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <DatePicker
+                  label='End date'
+                  readOnly={true}
+                  value={endDate}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
               <Button
                 style={{
                   backgroundColor: "#8098F9",
@@ -154,6 +178,14 @@ function AssignPlanModal(props) {
                 variant='contained'
                 type='submit'
                 className='w-1/2'
+                onClick={async () => {
+                  await poster(
+                    `training-plans/apply/${plan.id}`,
+                    { startDate: new Date(startDate) },
+                    data.jwt
+                  );
+                  router.push("/athlete/calendar");
+                }}
               >
                 Apply
               </Button>
