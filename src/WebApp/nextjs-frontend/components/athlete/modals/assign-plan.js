@@ -31,7 +31,7 @@ function AssignPlanModal(props) {
   const { data } = useSession();
 
   function addWeeks(date, weeks) {
-    date.setDate(date.getDate() + 7 * weeks);
+    date.setDate(date.getDate() * weeks);
     setEndDate(date);
   }
 
