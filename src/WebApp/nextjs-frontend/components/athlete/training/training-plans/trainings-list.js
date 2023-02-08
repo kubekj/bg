@@ -2,7 +2,7 @@ import style from "./trainings-list.module.css";
 import React from "react";
 import DeleteModal from "../../../reusable/delete-modal";
 import { Stack } from "@mui/system";
-import { Pagination } from "@mui/material";
+import { Chip, Pagination } from "@mui/material";
 import TrainingPlanModal from "../../modals/training-plan-modal";
 import TrainingPlanPreview from "./training-preview-dialog";
 import Button from "../../../reusable/button";
@@ -59,7 +59,9 @@ const TrainingsList = ({ plans }) => {
                     <td className='text-xs p-4'>{plan.duration}</td>
                     <td className='text-xs p-4'>{plan.noOfWorkouts}</td>
                     <td className='text-xs p-4'>{plan.title}</td>
-                    <td className='text-xs p-4'>{plan.skillLevel}</td>
+                    <td className='text-xs p-4'>
+                      {renderSkillLevel(plan.skillLevel)}
+                    </td>
                     <td className='text-xs p-4'>{plan.creatorEmail}</td>
                     <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 grid justify-items-end'>
                       <Stack
@@ -98,5 +100,39 @@ const TrainingsList = ({ plans }) => {
     </div>
   );
 };
+
+function renderSkillLevel(skillLevel) {
+  if (skillLevel === "Beginner") {
+    return (
+      <Chip
+        label={skillLevel}
+        style={{
+          backgroundColor: "#EDFCF2",
+          color: "#3B7C0f",
+        }}
+      />
+    );
+  } else if (skillLevel === "Intermediate") {
+    return (
+      <Chip
+        label={skillLevel}
+        style={{
+          backgroundColor: "#EEF4FF",
+          color: "#6172F3",
+        }}
+      />
+    );
+  } else {
+    return (
+      <Chip
+        label={skillLevel}
+        style={{
+          backgroundColor: "#FFF1F3",
+          color: "#C01048",
+        }}
+      />
+    );
+  }
+}
 
 export default TrainingsList;

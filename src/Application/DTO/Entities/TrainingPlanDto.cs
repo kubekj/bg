@@ -14,4 +14,5 @@ public record TrainingPlanDto(
     decimal Price,
     DateTime CreatedAt,
     bool AlreadyRated,
+    string Status,
     IEnumerable<WorkoutDto> Workouts);

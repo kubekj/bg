@@ -17,6 +17,7 @@ public class TrainingPlanController : ApiController
     private readonly ICommandHandler<BuyTrainingPlanCommand> _buyTrainingCommandHandler;
     private readonly ICommandHandler<ApplyTrainingPlanCommand> _applyTrainingCommandHandler;
     private readonly ICommandHandler<EditTrainingPlanCommand> _editTrainingCommandHandler;
+    private readonly ICommandHandler<RemoveTrainingPlanCommand> _removeTrainingCommandHandler;
     private readonly IQueryHandler<GetAllTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllTrainingPlansQueryHandler;
     private readonly IQueryHandler<GetBoughtTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllBoughtTrainingPlansQueryHandler;
     private readonly IQueryHandler<GetCreatedTrainingPlansQuery,IEnumerable<TrainingPlanDto>> _getAllCreatedTrainingPlansQueryHandler;
@@ -32,7 +33,8 @@ public class TrainingPlanController : ApiController
         ICommandHandler<RateTrainingPlanCommand> rateTrainingCommandHandler, 
         ICommandHandler<BuyTrainingPlanCommand> buyTrainingCommandHandler, 
         ICommandHandler<ApplyTrainingPlanCommand> applyTrainingCommandHandler, 
-        ICommandHandler<EditTrainingPlanCommand> editTrainingCommandHandler)
+        ICommandHandler<EditTrainingPlanCommand> editTrainingCommandHandler, 
+        ICommandHandler<RemoveTrainingPlanCommand> removeTrainingCommandHandler)
     {
         _createTrainingCommandHandler = createTrainingCommandHandler;
         _getAllTrainingPlansQueryHandler = getAllTrainingPlansQueryHandler;
@@ -44,6 +46,7 @@ public class TrainingPlanController : ApiController
         _buyTrainingCommandHandler = buyTrainingCommandHandler;
         _applyTrainingCommandHandler = applyTrainingCommandHandler;
         _editTrainingCommandHandler = editTrainingCommandHandler;
+        _removeTrainingCommandHandler = removeTrainingCommandHandler;
     }
     
     // [Authorize(Roles = "trainer")]
@@ -129,5 +132,13 @@ public class TrainingPlanController : ApiController
         var result = 
             await _getAllBoughtTrainingPlansQueryHandler.HandleAsync(new GetBoughtTrainingPlansQuery(_userId));
         return Ok(result);
+    }
+    
+    [HttpDelete("{id:guid}")]
+    public async Task<ActionResult> MarkAsDeleted(Guid id)
+    {
+        _userId = Guid.Parse(HttpContext.User.Identity.Name);
+        await _removeTrainingCommandHandler.HandleAsync(new RemoveTrainingPlanCommand(id));
+        return NoContent();
     }
 }

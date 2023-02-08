@@ -57,7 +57,7 @@ function LatestPlans({ plans }) {
                   <tr key={plan.id}>
                     <td className='text-xs p-4'>{plan.title}</td>
                     <td className='text-xs p-4'>{plan.duration}</td>
-                    <td className='text-xs p-4'>{plan.noOfExercises}</td>
+                    <td className='text-xs p-4'>{plan.noOfWorkouts}</td>
                     <td className='text-xs p-4'>{plan.title}</td>
                     <td className='text-xs p-4'>{plan.skillLevel}</td>
                     <td className='text-xs p-4'>{plan.creatorEmail}</td>
