@@ -107,7 +107,7 @@ const ApplyTrainingView = ({ plan, jwt }) => {
               {/*<Typography component="legend"/>*/}
               <Rating
                 name='simple-controlled'
-                value={plan.ratingAvg}
+                value={!plan.alreadyRated ? 0 : plan.ratingAvg}
                 disabled={plan.alreadyRated}
                 onChange={(event, newValue) => {
                   ratePlan(newValue);
