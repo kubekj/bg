@@ -44,12 +44,20 @@ public class BuyTrainingPlanCommandHandler : ICommandHandler<BuyTrainingPlanComm
 
                 userWorkouts.Add(ew.ExerciseId);
             }
-            
+
+            var userWorkout = await _userWorkoutRepository.GetByIdAsync(command.UserId,tpw.WorkoutId);
+            if (userWorkout is not null)
+                continue;
             await _userWorkoutRepository.AddAsync(new UserWorkout(tpw.WorkoutId, command.UserId));
         }
-        
+
         foreach (var exerciseId in userWorkouts)
+        {
+            var userExercise = await _userExerciseRepository.GetByIdAsync(command.UserId,exerciseId);
+            if (userExercise is not null)
+                continue;
             await _userExerciseRepository.AddAsync(new UserExercise(exerciseId, command.UserId));
+        }
 
         await _userTrainingPlanRepository.AddAsync(new UserTrainingPlan(command.UserId,command.TrainingPlanId));
     }

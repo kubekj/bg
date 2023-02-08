@@ -7,7 +7,7 @@ const MarketplaceResultItem = ({ plan }) => {
       <div className={style.photo} />
       <div className={style.info}>
         <h5 style={{ color: "#3538CD", marginBottom: "1rem" }}>
-          You are in the right hands!
+          {plan.description}
         </h5>
         <h4>{plan.title}</h4>
         <div className={style.rating}>
@@ -23,7 +23,7 @@ const MarketplaceResultItem = ({ plan }) => {
         </div>
         <div style={{ display: "flex", marginTop: "1rem" }}>
           <div className={style.icon} />
-          <p>Polish</p>
+          <p>{plan.language}</p>
         </div>
       </div>
       <div className={style.price}>
