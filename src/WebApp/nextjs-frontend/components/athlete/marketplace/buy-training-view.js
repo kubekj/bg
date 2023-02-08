@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Rating, Typography } from "@mui/material";
 import Button from "../../reusable/button";
 import TrainingPreview from "../training/training-plans/training-preview";
+import BuyPlanModal from "../modals/buy-plan-modal";
 
 const BuyTrainingView = ({ plan }) => {
   return (
@@ -15,19 +16,19 @@ const BuyTrainingView = ({ plan }) => {
       </div>
       <div className={style.content}>
         <div className={style.midHeader}>
-          <div style={{marginBottom:"1rem"}}>
-          <Link href='/athlete/marketplace'>
-            <Button
-              iconSrc='/thumbnails/arrow-back-outline.svg'
-              text='Browse more plans'
-              borderValue='none'
-              backgroundColorValue='white'
-              isHoveringColor='#C7D7FE'
-              extraStyleType='color'
-              extraStyleValue='#8098F9'
-            />
-          </Link>
-            </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <Link href='/athlete/marketplace'>
+              <Button
+                iconSrc='/thumbnails/arrow-back-outline.svg'
+                text='Browse more plans'
+                borderValue='none'
+                backgroundColorValue='white'
+                isHoveringColor='#C7D7FE'
+                extraStyleType='color'
+                extraStyleValue='#8098F9'
+              />
+            </Link>
+          </div>
           <h2>{plan.title}</h2>
         </div>
         <div className={style.details}>
@@ -43,7 +44,11 @@ const BuyTrainingView = ({ plan }) => {
                 <Link
                   href={{
                     pathname: `/athlete/marketplace/creator`,
-                    query: { creatorEmail: plan.creatorEmail, id: plan.id, goBack: `/athlete/marketplace/plan` }
+                    query: {
+                      creatorEmail: plan.creatorEmail,
+                      id: plan.id,
+                      goBack: `/athlete/marketplace/plan`,
+                    },
                   }}
                   style={{ textDecoration: "none" }}
                 >
@@ -64,7 +69,7 @@ const BuyTrainingView = ({ plan }) => {
               </div>
             </div>
           </div>
-          <h5 style={{ color: "#8098F9" , marginBottom:"1rem" }}>Workouts</h5>
+          <h5 style={{ color: "#8098F9", marginBottom: "1rem" }}>Workouts</h5>
         </div>
         <div className={style.bottom}>
           <div className={style.trainings}>
@@ -78,19 +83,31 @@ const BuyTrainingView = ({ plan }) => {
           </div>
           <div className={style.rightBottom}>
             <div className={style.rating}>
-              <p style={{marginTop:"1rem"}}>Rating</p>
+              <p style={{ marginTop: "1rem" }}>Rating</p>
               <Typography component='legend' />
               <Rating
                 name='simple-controlled'
                 value={plan.ratingAvg}
                 disabled={true}
               />
-              <p style={{marginTop:"1rem"}}>{plan.ratingsApplied}
-              {plan.ratingsApplied === 1 ? ` review` : " reviews"}</p>
+              <p style={{ marginTop: "1rem" }}>
+                {plan.ratingsApplied}
+                {plan.ratingsApplied === 1 ? ` review` : " reviews"}
+              </p>
             </div>
             <div className={style.apply}>
-              <h5 style={{textAlign:"center", marginRight:"1rem"}}>{plan.price}$</h5>
-              <Button
+              <h5 style={{ textAlign: "center", marginRight: "1rem" }}>
+                {plan.price}$
+              </h5>
+              <BuyPlanModal
+                trainingPlan={plan}
+                borderValue='none'
+                backgroundColorValue='#8098F9'
+                isHoveringColor='#C7D7FE'
+                extraStyleType='color'
+                extraStyleValue='white'
+              ></BuyPlanModal>
+              {/* <Button
                 iconSrc='/thumbnails/checkmark-outline.svg'
                 text='Buy plan'
                 borderValue='none'
@@ -98,7 +115,7 @@ const BuyTrainingView = ({ plan }) => {
                 isHoveringColor='#C7D7FE'
                 extraStyleType='color'
                 extraStyleValue='white'
-              />
+              /> */}
             </div>
           </div>
         </div>
