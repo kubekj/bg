@@ -57,9 +57,9 @@ const Sidebar = () => {
               iconSrc='/thumbnails/bar-chart-outline.svg'
               text='Dashboard'
               backgroundColorValue={
-                currentTab === routes[0] ? "#D0D5DD" : "white"
+                currentTab === routes[0] ? "#C7D7FE" : "white"
               }
-              isHoveringColor='#D0D5DD'
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
@@ -71,9 +71,9 @@ const Sidebar = () => {
               iconSrc='/thumbnails/barbell-outline.svg'
               text='Trainings'
               backgroundColorValue={
-                currentTab === routes[1] ? "#D0D5DD" : "white"
+                currentTab === routes[1] ? "#C7D7FE" : "white"
               }
-              isHoveringColor='#D0D5DD'
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
@@ -85,9 +85,9 @@ const Sidebar = () => {
               iconSrc='/thumbnails/calendar-number-outline.svg'
               text='Calendar'
               backgroundColorValue={
-                currentTab === routes[2] ? "#D0D5DD" : "white"
+                currentTab === routes[2] ? "#C7D7FE" : "white"
               }
-              isHoveringColor='#D0D5DD'
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
@@ -99,9 +99,9 @@ const Sidebar = () => {
               iconSrc='/thumbnails/podium-outline.svg'
               text='Statistics'
               backgroundColorValue={
-                currentTab === routes[3] ? "#D0D5DD" : "white"
+                currentTab === routes[3] ? "#C7D7FE" : "white"
               }
-              isHoveringColor='#D0D5DD'
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
@@ -113,9 +113,9 @@ const Sidebar = () => {
               iconSrc='/thumbnails/bag-outline.svg'
               text='Marketplace'
               backgroundColorValue={
-                currentTab === routes[4] ? "#D0D5DD" : "white"
+                currentTab === routes[4] ? "#C7D7FE" : "white"
               }
-              isHoveringColor='#D0D5DD'
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
@@ -135,7 +135,7 @@ const Sidebar = () => {
                   : "Sign up as a Coach"
               }
               backgroundColorValue='white'
-              isHoveringColor='#D0D5DD'
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
@@ -147,9 +147,9 @@ const Sidebar = () => {
               iconSrc='/thumbnails/settings-outline.svg'
               text='Settings'
               backgroundColorValue={
-                currentTab === routes[5] ? "#D0D5DD" : "white"
+                currentTab === routes[5] ? "#C7D7FE" : "white"
               }
-              isHoveringColor='#D0D5DD'
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
@@ -170,7 +170,7 @@ const Sidebar = () => {
             extraStyleType='marginLeft'
             extraStyleValue='2rem'
             backgroundColorValue='white'
-            isHoveringColor='#D0D5DD'
+            isHoveringColor='#f75e63'
             borderValue='none'
             onClick={() => {
               signOut();

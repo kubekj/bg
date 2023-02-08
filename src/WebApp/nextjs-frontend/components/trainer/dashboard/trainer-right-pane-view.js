@@ -141,7 +141,7 @@ const TrainerRightPaneView = () => {
         <div className={style.userInfo}>
           <Image
             className={style.avatar}
-            src='/avatar.webp'
+            src='/william.avif'
             alt='dadas'
             width={30}
             height={30}
@@ -167,7 +167,7 @@ const TrainerRightPaneView = () => {
         <div className={style.userInfo}>
           <Image
             className={style.avatar}
-            src='/jaca.avif'
+            src='/einstein.avif'
             alt='dadas'
             width={30}
             height={30}

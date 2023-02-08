@@ -2,11 +2,21 @@ import style from "../reusable/left-pane.module.css";
 import Image from "next/image";
 import Button from "../reusable/button";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 import { Avatar } from "@mui/material";
+import {useRouter} from "next/router";
+import {useState} from "react";
+
+const routes = [
+  "/trainer/dashboard",
+  "/trainer/plans",
+  "/trainer/settings"
+];
 
 const TrainerSidebar = () => {
   const { data } = useSession();
+  const router = useRouter();
+  const [currentTab, setCurrentTab] = useState(router.asPath);
 
   return (
     <div className={style.container}>
@@ -25,22 +35,28 @@ const TrainerSidebar = () => {
             <Button
               iconSrc='/thumbnails/bar-chart-outline.svg'
               text='Dashboard'
-              backgroundColorValue='white'
-              isHoveringColor='#D0D5DD'
+              backgroundColorValue={
+                currentTab === routes[0] ? "#C7D7FE" : "white"
+              }
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
+              onClick={() => setCurrentTab(routes[0])}
             />
           </Link>
           <Link href='/trainer/plans'>
             <Button
               iconSrc='/thumbnails/layers-outline.svg'
               text='Plans'
-              backgroundColorValue='white'
-              isHoveringColor='#D0D5DD'
+              backgroundColorValue={
+                currentTab === routes[1] ? "#C7D7FE" : "white"
+              }
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
+              onClick={() => setCurrentTab(routes[1])}
             />
           </Link>
         </div>
@@ -52,7 +68,7 @@ const TrainerSidebar = () => {
               iconSrc='/thumbnails/log-in-outline.svg'
               text='Change to athlete view'
               backgroundColorValue='white'
-              isHoveringColor='#D0D5DD'
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
@@ -62,11 +78,14 @@ const TrainerSidebar = () => {
             <Button
               iconSrc='/thumbnails/settings-outline.svg'
               text='Settings'
-              backgroundColorValue='white'
-              isHoveringColor='#D0D5DD'
+              backgroundColorValue={
+                currentTab === routes[2] ? "#C7D7FE" : "white"
+              }
+              isHoveringColor='#C7D7FE'
               borderValue='none'
               extraStyleType='width'
               extraStyleValue='100%'
+              onClick={() => setCurrentTab(routes[2])}
             />
           </Link>
         </div>
@@ -85,8 +104,12 @@ const TrainerSidebar = () => {
             extraStyleType='marginLeft'
             extraStyleValue='2rem'
             backgroundColorValue='white'
-            isHoveringColor='#D0D5DD'
+            isHoveringColor='#f75e63'
             borderValue='none'
+            onClick={() => {
+              signOut();
+              router.push("/auth/login");
+            }}
           />
         </div>
       </div>
