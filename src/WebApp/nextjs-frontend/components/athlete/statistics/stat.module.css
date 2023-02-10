@@ -4,43 +4,21 @@
     flex-direction: column;
     justify-content: left;
     margin-left: 1rem;
+    width: 100%;
 }
 .header{
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
     margin-left: 1rem;
-}
-.header2{
-    display: flex;
-    flex-direction: column;
-    margin-left: 1rem;
-    margin-top: 1rem;
-}
-.mid{
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-
-}
-.bottom{
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    justify-content: left;
-    margin-top: 1rem;
-}
-.todayTomorrow{
-    display: flex;
-    flex: 1;
-    flex-direction: column;
+    border-bottom: 1px solid #D0D5DD;
 }
 
-/*=======================STATISTICS VIEW*/
 .content{
-    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: right;
+    margin-left: 0.5rem;
 }
 .barChart{
     display: flex;

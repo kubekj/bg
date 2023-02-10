@@ -195,15 +195,14 @@ const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
   };
 
   return (
-    <div className={style.container} style={{margin:"0", width:"80%", paddingLeft:"1rem", paddingRight:"1rem"}}>
-      <div className={style.header} style={{ marginBottom: 0, marginLeft:"1rem" }}>
+    <div className={style.container}>
+      <div className={style.header}>
         <h2>Statistics</h2>
         <p>
           Check out how are you doing compared to your previous achievements
         </p>
       </div>
-      <div style={{ borderBottom: "1px solid #D0D5DD", width: "100%" }} />
-      <div className={style.content} style={{ marginBottom: 0, marginLeft:"1rem", paddingRight:"1rem" }}>
+      <div className={style.content}>
         <div className={style.barChart}>
           <Bar options={options} data={data} />
         </div>
@@ -221,10 +220,11 @@ const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
             <Doughnut options={options2} data={data4} />
           </div>
         </div>
+        <div className={style.bottomChart}>
+          <Line options={optionsL} data={dataL} />
+        </div>
       </div>
-      <div className={style.bottomChart} style={{ marginBottom: 0, marginLeft:"1rem" }}>
-        <Line options={optionsL} data={dataL} />
-      </div>
+
     </div>
   );
 };
