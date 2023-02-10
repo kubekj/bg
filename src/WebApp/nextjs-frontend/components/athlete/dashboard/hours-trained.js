@@ -47,14 +47,14 @@ const HoursTrained = ({ doneTrainings }) => {
         </div>
       </div>
       <div className={style.midSection}>
-        <h5 className={style.statTitle}>
-          Trainings done: {doneTrainings["item1"]}/{doneTrainings["item2"]}
-        </h5>
-        <Doughnut options={options} data={data} />
-        <div className={style.underDonut}>
-          {/* <h5>You've almost reached your goal</h5>
-          <p>Keep up the great work</p> */}
-        </div>
+        {doneTrainings["item2"] ?
+            <React.Fragment>
+              <h5 className={style.statTitle}>Trainings done: {doneTrainings["item1"]}/{doneTrainings["item2"]}</h5>
+              <Doughnut options={options} data={data}/>
+            </React.Fragment>
+            :
+            <h5 className={style.statTitle}>No trainings goal set</h5>
+        }
       </div>
       <div className={style.bottomSection}>
         <div>

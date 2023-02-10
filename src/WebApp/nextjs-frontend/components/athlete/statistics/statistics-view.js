@@ -186,8 +186,8 @@ const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
     datasets: [
       {
         fill: true,
-        label: "Dataset 2",
-        data: labels.map(() => faker.datatype.number({ min: 8000, max: 10000 })),
+        label: "Weight load",
+        data: labels.map(() => doneTrainings["item1"] === 0 ? faker.datatype.number({ min: 2000, max: 5000 }) : null),
         borderColor: "#8098F9",
         backgroundColor: "#8098F9",
       },
@@ -208,16 +208,34 @@ const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
         </div>
         <div className={style.donutsSection}>
           <div className={style.eachDonut}>
-            <h5 className={style.statTitle}>Trainings done: {doneTrainings["item1"]}/{doneTrainings["item2"]}</h5>
-            <Doughnut options={options2} data={data2} />
+            {doneTrainings["item2"] ?
+                <React.Fragment>
+                <h5 className={style.statTitle}>Trainings done: {doneTrainings["item1"]}/{doneTrainings["item2"]}</h5>
+                <Doughnut options={options2} data={data2}/>
+                </React.Fragment>
+                :
+                <h5 className={style.statTitle}>No trainings goal set</h5>
+            }
           </div>
           <div className={style.eachDonut}>
-            <h5 className={style.statTitle}>Calories intake: {user.caloriesIntake}/{user.caloriesIntakeGoal}</h5>
-            <Doughnut options={options2} data={data3} />
-          </div>
+            { user.caloriesIntakeGoal !== 0 ?
+              <React.Fragment>
+                <h5 className={style.statTitle}>Calories intake: {user.caloriesIntake}/{user.caloriesIntakeGoal}</h5>
+                <Doughnut options={options2} data={data3} />
+              </React.Fragment>
+                :
+                <h5 className={style.statTitle}>No calories intake goal set</h5>
+            }
+              </div>
           <div className={style.eachDonut}>
+            { user.weightGoal !== 0 ?
+                <React.Fragment>
             <h5 className={style.statTitle}>Body mass: {user.weight}/{user.weightGoal}</h5>
             <Doughnut options={options2} data={data4} />
+                </React.Fragment>
+                :
+                <h5 className={style.statTitle}>No calories intake goal set</h5>
+            }
           </div>
         </div>
         <div className={style.bottomChart}>
