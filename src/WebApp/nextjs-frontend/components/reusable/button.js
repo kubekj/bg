@@ -11,6 +11,7 @@ const Button = ({
   backgroundColorValue,
   isHoveringColor,
   onClick,
+    color
 }) => {
   const [isHovering, setIsHovering] = useState(false);
 
@@ -27,6 +28,7 @@ const Button = ({
       type='button'
       className='btn btn-light'
       style={{
+        color: `${color ? color : "black"}`,
         border: `${borderValue}`,
         textAlign: "left",
         backgroundColor: isHovering

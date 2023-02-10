@@ -2,6 +2,8 @@ import style from "../marketplace/marketplace-main-view.module.css";
 import MarketplaceResultItem from "./marketplace-result-item";
 import Link from "next/link";
 import { Pagination } from "@mui/material";
+import Button from "../../reusable/button";
+import React from "react";
 
 const MarketplaceMainView = ({ plans }) => {
   return (
@@ -24,12 +26,28 @@ const MarketplaceMainView = ({ plans }) => {
             />
           </form>
           <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
-            <button className='btn btn-outline-dark me-md-2' type='button'>
-              Cancel
-            </button>
-            <button className='btn btn-primary' type='button'>
-              Search
-            </button>
+            {/*<button className='btn btn-outline-dark me-md-2' type='button'>*/}
+            {/*  Cancel*/}
+            {/*</button>*/}
+              <Button
+                  text='Cancel'
+                  extraStyleType='border'
+                  extraStyleValue='1px solid #D0D5DD'
+                  backgroundColorValue='white'
+                  isHoveringColor='#D0D5DD'
+              />
+            {/*<button className='btn btn-primary' type='button'  style={{backgroundColor:"#8098F9"}}>*/}
+            {/*  Search*/}
+            {/*</button>*/}
+              <Button
+                  iconSrc='/thumbnails/wsearch-outline.svg'
+                  text='Search'
+                  extraStyleType='border'
+                  extraStyleValue='1px solid #D0D5DD'
+                  backgroundColorValue='#8098F9'
+                  isHoveringColor='#C7D7FE'
+                  color="white"
+              />
           </div>
         </div>
       </div>
