@@ -25,11 +25,10 @@ public class TrainingPlan : Entity
         Ratings = new HashSet<Rating>();
     }
 
-    public TrainingPlan MarkAsDeleted(TrainingPlan trainingPlan)
+    public void MarkAsDeleted()
     {
-        trainingPlan.IsDeleted = true;
-        trainingPlan.Status = Status.Unpublished;
-        return trainingPlan;
+        IsDeleted = true;
+        Status = Status.Unpublished;
     }
 
     public Duration Duration { get; private set;}

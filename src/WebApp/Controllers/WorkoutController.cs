@@ -17,6 +17,7 @@ public class WorkoutController : ApiController
     private readonly ICommandHandler<EditWorkoutCommand> _editWorkoutCommandHandler;
     private readonly ICommandHandler<CreateWorkoutSessionCommand> _createWorkoutSessionCommandHandler;
     private readonly ICommandHandler<RemoveWorkoutCommand> _removeWorkoutCommandHandler;
+    private readonly ICommandHandler<RemoveWorkoutSessionCommand> _removeWorkoutSessionCommandHandler;
     private readonly IQueryHandler<GetWorkoutsQuery, IEnumerable<WorkoutDto>> _getWorkoutsQueryHandler;
     private readonly IQueryHandler<GetWorkoutQuery, WorkoutDto> _getWorkoutQueryHandler;
     private readonly IQueryHandler<GetCurrentWorkoutQuery,WorkoutDto> _getCurrentWorkoutQueryHandler;
@@ -34,7 +35,8 @@ public class WorkoutController : ApiController
         IQueryHandler<GetCurrentWorkoutQuery, WorkoutDto> getCurrentWorkoutQueryHandler, 
         IQueryHandler<GetPreviousWorkoutQuery, Tuple<WorkoutDto,DateTime>> getPreviousWorkoutQueryHandler, 
         IQueryHandler<GetNextWorkoutQuery, Tuple<WorkoutDto,DateTime>> getNextWorkoutQueryHandler, 
-        IQueryHandler<GetAllWorkoutSessionsQuery, IEnumerable<WorkoutSessionDto>> getAllWorkoutSessionsQuery)
+        IQueryHandler<GetAllWorkoutSessionsQuery, IEnumerable<WorkoutSessionDto>> getAllWorkoutSessionsQuery, 
+        ICommandHandler<RemoveWorkoutSessionCommand> removeWorkoutSessionCommandHandler)
     {
         _createWorkoutCommandHandler = createWorkoutCommandHandler;
         _editWorkoutCommandHandler = editWorkoutCommandHandler;
@@ -46,6 +48,7 @@ public class WorkoutController : ApiController
         _getPreviousWorkoutQueryHandler = getPreviousWorkoutQueryHandler;
         _getNextWorkoutQueryHandler = getNextWorkoutQueryHandler;
         _getAllWorkoutSessionsQuery = getAllWorkoutSessionsQuery;
+        _removeWorkoutSessionCommandHandler = removeWorkoutSessionCommandHandler;
     }
     
     [HttpDelete("{id:guid}")]
@@ -53,6 +56,14 @@ public class WorkoutController : ApiController
     {
         _userId = Guid.Parse(HttpContext.User.Identity.Name);
         await _removeWorkoutCommandHandler.HandleAsync(new RemoveWorkoutCommand(_userId,id));
+        return NoContent();
+    }
+    
+    [HttpDelete("session/{id:guid}/{date:DateTime}")]
+    public async Task<ActionResult> DeleteSession(DateTime date, Guid id)
+    {
+        _userId = Guid.Parse(HttpContext.User.Identity.Name);
+        await _removeWorkoutSessionCommandHandler.HandleAsync(new RemoveWorkoutSessionCommand(_userId,id,date));
         return NoContent();
     }
     

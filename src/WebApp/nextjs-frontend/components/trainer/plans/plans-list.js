@@ -103,7 +103,7 @@ const PlansList = (props) => {
                           ></TrainingPlanModal>
                           <DeleteModal
                             subtitle={`Remove plan "${plan.title}"`}
-                            endpoint={`/training-plans/${plan.id}`}
+                            endpoint={`training-plans/${plan.id}`}
                             redirect={"/trainer/plans"}
                           ></DeleteModal>
                         </Stack>

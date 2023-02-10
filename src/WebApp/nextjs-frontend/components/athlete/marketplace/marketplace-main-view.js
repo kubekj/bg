@@ -67,9 +67,11 @@ const MarketplaceMainView = ({ plans }) => {
           );
         })}
       </div>
-      <div className='flex flex-row items-center p-6 mx-auto'>
-        <Pagination></Pagination>
-      </div>
+      {plans.length > 0 && (
+        <div className='flex flex-row items-center p-6 mx-auto'>
+          <Pagination></Pagination>
+        </div>
+      )}
     </div>
   );
 };

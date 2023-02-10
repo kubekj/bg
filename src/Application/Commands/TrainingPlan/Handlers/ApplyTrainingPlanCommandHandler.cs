@@ -36,29 +36,32 @@ public class ApplyTrainingPlanCommandHandler : ICommandHandler<ApplyTrainingPlan
             .GetAllAsync(x => x.UserId == command.UserId)).ToList();
 
         var dateFrom = command.StartDate;
+        var dateTo = command.StartDate.AddDays(7 * userTrainingPlan.TrainingPlan.Duration);
 
         var workouts = userTrainingPlan.TrainingPlan.TrainingPlanWorkouts.Select(x => x.Workout).ToList();
         
         var dates = DetermineDates(dateFrom,(int)userTrainingPlan.TrainingPlan.Duration,workouts.Count());
-        
+
+        foreach (var uws in workoutSessions.Where(uws => uws.Date > dateFrom && uws.Date < dateTo))
+            await _userWorkoutSessionRepositoryRepository.RemoveAsync(uws);
+
         var counter = 0;
         foreach (var date in dates)
         {
             var existingUserSession = workoutSessions.FirstOrDefault(x => x.Date == date);
             
-            if (existingUserSession is not null)
-            {
-                existingUserSession.Edit(workouts[counter].Id);
-                await _userWorkoutSessionRepositoryRepository.EditAsync(existingUserSession);
-            }
-            else
-            {
-                if (await _userWorkoutRepository.GetByIdAsync(command.UserId,workouts[counter].Id) is null)
-                    await _userWorkoutRepository.AddAsync(new UserWorkout(workouts[counter].Id, command.UserId));
-                
-                await _userWorkoutSessionRepositoryRepository.AddAsync(new UserWorkoutSession(command.UserId,workouts[counter].Id,date));
-            }
-            
+            // if (existingUserSession is not null || existingUserSession?.Date < dateFrom)
+            // {
+            //     // await _userWorkoutSessionRepositoryRepository.RemoveAsync(existingUserSession);
+            //     continue;
+            // }
+            // else
+            if (await _userWorkoutRepository.GetByIdAsync(command.UserId, workouts[counter].Id) is null)
+                await _userWorkoutRepository.AddAsync(new UserWorkout(workouts[counter].Id, command.UserId));
+
+            await _userWorkoutSessionRepositoryRepository.AddAsync(new UserWorkoutSession(command.UserId,
+                workouts[counter].Id, date));
+
             counter++;
             if (counter == workouts.Count) counter = 0;
         }
@@ -68,12 +71,12 @@ public class ApplyTrainingPlanCommandHandler : ICommandHandler<ApplyTrainingPlan
     {
         var totalWorkouts = numOfWeeks * numOfWorkouts;
         var restDays = 7 - numOfWorkouts;
-        var startDate = DateTime.Today;
+        var startDate = from;
         var workoutDates = new List<DateTime>();
         
         for (var i = 0; i < totalWorkouts; i++)
         {
-            workoutDates.Add(startDate);
+            workoutDates.Add(startDate.AddDays(1));
 
             if (workoutDates.Count % numOfWorkouts == 0 && (workoutDates.Count > 0 && restDays > 0))
             {

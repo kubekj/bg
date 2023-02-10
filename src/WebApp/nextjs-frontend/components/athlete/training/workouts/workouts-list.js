@@ -4,7 +4,7 @@ import React from "react";
 import DeleteModal from "../../../reusable/delete-modal";
 import WorkoutModal from "../../modals/workout-modal";
 import { Stack } from "@mui/system";
-import { Pagination } from "@mui/material";
+import { Chip, Pagination } from "@mui/material";
 import TrainingPlanPreview from "../training-plans/training-preview-dialog";
 
 const WorkoutsList = ({ workouts, exercises }) => {
@@ -56,7 +56,15 @@ const WorkoutsList = ({ workouts, exercises }) => {
                 return (
                   <tr key={workout.id}>
                     <td className='text-xs p-4'>{workout.name}</td>
-                    <td className='text-xs p-4'>{workout.category}</td>
+                    <td className='text-xs p-4'>
+                      <Chip
+                        label={workout.category}
+                        style={{
+                          backgroundColor: "#EEF4FF",
+                          color: "#6172F3",
+                        }}
+                      />
+                    </td>
                     <td className='text-xs p-4'>
                       {workout.exerciseDtos.length}
                     </td>

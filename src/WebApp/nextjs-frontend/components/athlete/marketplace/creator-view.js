@@ -13,7 +13,7 @@ const CreatorView = ({ creatorDetails, recentPlans }) => {
     return router.query.id;
   }
 
-  function getBack(){
+  function getBack() {
     return router.query.goBack;
   }
 
@@ -25,24 +25,24 @@ const CreatorView = ({ creatorDetails, recentPlans }) => {
       </div>
       <div className={style.content}>
         <div className={style.midHeader}>
-          <div style={{marginBottom:"1rem"}}>
-          <Link
-            href={{
-              pathname: `${getBack()}`,
-              query: { id: getId() },
-            }}
-            style={{ textDecoration: "none" }}
-          >
-            <Button
-              iconSrc='/thumbnails/arrow-back-outline.svg'
-              text='Go back'
-              borderValue='none'
-              backgroundColorValue='white'
-              isHoveringColor='#C7D7FE'
-              extraStyleType='color'
-              extraStyleValue='#8098F9'
-            />
-          </Link>
+          <div style={{ marginBottom: "1rem" }}>
+            <Link
+              href={{
+                pathname: `${getBack()}`,
+                query: { id: getId() },
+              }}
+              style={{ textDecoration: "none" }}
+            >
+              <Button
+                iconSrc='/thumbnails/arrow-back-outline.svg'
+                text='Go back'
+                borderValue='none'
+                backgroundColorValue='white'
+                isHoveringColor='#C7D7FE'
+                extraStyleType='color'
+                extraStyleValue='#8098F9'
+              />
+            </Link>
           </div>
         </div>
         <div>
@@ -71,15 +71,17 @@ const CreatorView = ({ creatorDetails, recentPlans }) => {
               <p>{creatorDetails.description}</p>
             </div>
           </div>
-          <h5 style={{ color: "#8098F9" , marginBottom:"1rem"}}>Recently added plans</h5>
+          <h5 style={{ color: "#8098F9", marginBottom: "1rem" }}>
+            Recently added plans
+          </h5>
         </div>
         <div className={style.bottom}>
           <div className={style.trainings}>
             {recentPlans.map((plan) => {
               return (
-                  <div style={{ width: "30%" }} key={plan.id}>
-                    <RecentPreview plan={plan} />
-                  </div>
+                <div style={{ width: "30%" }} key={plan.id}>
+                  <RecentPreview plan={plan} />
+                </div>
               );
             })}
           </div>

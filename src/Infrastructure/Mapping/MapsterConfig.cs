@@ -38,6 +38,7 @@ public static class MapsterConfig
             .Map(src => src.CreatorEmail,dest => dest.Author.Email)
             .Map(src => src.RatingAvg, dest => dest.Ratings.Any() ? dest.Ratings.Average(x => x.Rate) : 0)
             .Map(src => src.RatingsApplied, dest => dest.Ratings.Any() ? dest.Ratings.Count() : 0)
+            .Map(src => src.Status, dest => dest.Status.ToString())
             .IgnoreNonMapped(false);
 
         TypeAdapterConfig<Exercise, ExerciseDto>

@@ -1,33 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Typography from "@mui/material/Typography";
 import { Button, Dialog, Grid, InputLabel, TextField } from "@mui/material";
-import CustomButton from "../../../reusable/button";
-import DeleteModal from "../../../reusable/delete-modal";
+import CustomButton from "../../reusable/button";
 import { Stack } from "@mui/system";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
+import { useRouter } from "next/router";
+import { poster } from "../../../lib/rest-api";
+import { useSession } from "next-auth/react";
 
-function TrainingPlanPreview(props) {
+function AssignPlanModal(props) {
   const {
-    isOpen,
-    workout,
+    plan,
     icon,
     backgroundColorValue,
     isHoveringColor,
-    text,
     extraStyleType,
     extraStyleValue,
-    canBeDeleted,
-    date,
   } = props;
-  const [open, setOpen] = React.useState(isOpen);
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [startDate, setstartDate] = React.useState(null);
+  const [endDate, setEndDate] = React.useState(null);
+
+  const router = useRouter();
+  const { data } = useSession();
+
+  function addWeeks(date, weeks) {
+    date.setDate(date.getDate() * weeks);
+    setEndDate(date);
+  }
 
   return (
     <>
       <CustomButton
         iconSrc={icon}
-        text={text}
+        text={"Apply plan"}
         backgroundColorValue={backgroundColorValue}
         borderValue='none'
         isHoveringColor={isHoveringColor}
@@ -40,7 +52,7 @@ function TrainingPlanPreview(props) {
           <div className='flex flex-col isolate w-full bg-gray-200 p-10 rounded-t-xl'>
             <div className='flex flex-row place-content-between w-full'>
               <Typography id='modal-modal-title' variant='h6' component='h2'>
-                Workout
+                Apply training plan
               </Typography>
 
               <Typography
@@ -58,15 +70,29 @@ function TrainingPlanPreview(props) {
               className='text-gray-600'
               sx={{ mt: 1 }}
             >
-              Training details provided below
+              Training plan details provided below
             </Typography>
           </div>
           <div className='flex flex-col items-start p-10 gap-5 w-full'>
             <div className='flex flex-col justify-center gap-3 w-full'>
               <Typography id='modal-modal-title' variant='h3' component='h2'>
-                {workout ? workout.name : "no data"}
+                {plan.title}
+              </Typography>
+              <Typography
+                id='modal-modal-description'
+                className='text-gray-700'
+                sx={{ mt: 1 }}
+              >
+                {plan.description}
               </Typography>
               <hr />
+              <Typography
+                id='modal-modal-description'
+                className='flex text-gray-700 justify-center text-xl'
+                sx={{ mt: 1 }}
+              >
+                The plan lasts {plan.duration} weeks
+              </Typography>
               <Grid container>
                 <Grid
                   item
@@ -75,14 +101,14 @@ function TrainingPlanPreview(props) {
                   display='flex'
                   direction='column'
                 >
-                  {workout?.exerciseDtos.map((exercise) => {
+                  {plan.workouts.map((workout) => {
                     return (
-                      <div key={exercise.id} className='p-2'>
+                      <div key={workout.id} className='p-2'>
                         <Stack direction='row' spacing={2}>
                           <Stack direction='column' className='w-full'>
-                            <InputLabel>Exercise</InputLabel>
+                            <InputLabel>Workout name</InputLabel>
                             <TextField
-                              placeholder={exercise.name}
+                              placeholder={workout.name}
                               disabled={true}
                               sx={{
                                 ".MuiInputBase-input.Mui-disabled": {
@@ -92,36 +118,10 @@ function TrainingPlanPreview(props) {
                               }}
                             ></TextField>
                           </Stack>
-                          <Stack direction='column'>
-                            <InputLabel>Sets</InputLabel>
+                          <Stack direction='column' className='w-1/3'>
+                            <InputLabel>No. of exercises</InputLabel>
                             <TextField
-                              placeholder={exercise.setDtos.length}
-                              disabled={true}
-                              sx={{
-                                ".MuiInputBase-input.Mui-disabled": {
-                                  WebkitTextFillColor: "#000",
-                                  color: "#000",
-                                },
-                              }}
-                            ></TextField>
-                          </Stack>
-                          <Stack direction='column'>
-                            <InputLabel>Reps</InputLabel>
-                            <TextField
-                              placeholder={exercise.setDtos[0].repetitions}
-                              disabled={true}
-                              sx={{
-                                ".MuiInputBase-input.Mui-disabled": {
-                                  WebkitTextFillColor: "#000",
-                                  color: "#000",
-                                },
-                              }}
-                            ></TextField>
-                          </Stack>
-                          <Stack direction='column'>
-                            <InputLabel>Weight</InputLabel>
-                            <TextField
-                              placeholder={exercise.setDtos[0].weight}
+                              placeholder={workout.exerciseDtos.length}
                               disabled={true}
                               sx={{
                                 ".MuiInputBase-input.Mui-disabled": {
@@ -147,25 +147,47 @@ function TrainingPlanPreview(props) {
             </div>
           </div>
 
-          <div className='flex flex-col px-8 w-full items-center'>
+          <div className='flex flex-col px-6 py-2 w-full items-center'>
             <div className='flex flex-row w-full gap-3 py-6'>
-              {canBeDeleted && (
-                <DeleteModal
-                  subtitle={`Remove workout session "${workout.name}"`}
-                  endpoint={`workouts/session/${workout.id}/${date}`}
-                  redirect='/athlete/calendar'
+              {/* Date picker */}
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label='Start date'
+                  orientation='landscape'
+                  minDate={new Date()}
+                  value={startDate}
+                  onChange={(newValue) => {
+                    const date = new Date(newValue);
+                    setstartDate(newValue);
+                    addWeeks(date, plan.duration);
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
                 />
-              )}
+                <DatePicker
+                  label='End date'
+                  readOnly={true}
+                  value={endDate}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
               <Button
                 style={{
                   backgroundColor: "#8098F9",
                   borderRadius: 10,
                 }}
                 variant='contained'
-                onClick={handleClose}
-                className='w-full'
+                type='submit'
+                className='w-1/2'
+                onClick={async () => {
+                  await poster(
+                    `training-plans/apply/${plan.id}`,
+                    { startDate: new Date(startDate) },
+                    data.jwt
+                  );
+                  router.push("/athlete/calendar");
+                }}
               >
-                Close
+                Apply
               </Button>
             </div>
           </div>
@@ -175,4 +197,4 @@ function TrainingPlanPreview(props) {
   );
 }
 
-export default TrainingPlanPreview;
+export default AssignPlanModal;

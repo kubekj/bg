@@ -35,9 +35,9 @@ internal sealed class UserWorkoutSessionRepository : IUserWorkoutSessionReposito
     }
 
     public async Task AddAsync(UserWorkoutSession userWorkoutSession) => await _workoutSessions.AddAsync(userWorkoutSession);
-    public async Task EditAsync(UserWorkoutSession userWorkoutSession)
+    public async Task RemoveAsync(UserWorkoutSession userWorkoutSession)
     {
-        _workoutSessions.Update(userWorkoutSession);
+        _workoutSessions.Remove(userWorkoutSession);
         await Task.CompletedTask;
     }
 }

@@ -3,7 +3,7 @@ import { Rating, Typography } from "@mui/material";
 
 const MarketplaceResultItem = ({ plan }) => {
   return (
-    <div className={style.container}>
+    <div className={`${style.container} text-black`}>
       <div className={style.photo} />
       <div className={style.info}>
         <h5 style={{ color: "#3538CD", marginBottom: "1rem" }}>
@@ -27,7 +27,10 @@ const MarketplaceResultItem = ({ plan }) => {
         </div>
       </div>
       <div className={style.price}>
-        <p style={{ margin: "0" }}>{plan.price} $</p>
+        <p style={{ margin: "0" }}>
+          {plan.price}
+          <span className='text-gray-600'> $ total</span>
+        </p>
       </div>
     </div>
   );

@@ -8,19 +8,20 @@ import { Button, Modal, Typography } from "@mui/material";
 
 const CalendarView = ({ workouts }) => {
   const [selectedEvent, setSelectedEvent] = useState(undefined);
+  const [selectedDate, setSelectedDate] = useState(undefined);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleSelectedEvent = (event) => {
+    // setSelectedDate(event.date);
+    setSelectedDate(event.start);
     let workout = null;
-    console.log(open);
     workout = workouts.map((w) => {
       if (w.workoutDto.id === event.id) {
         workout = w.workoutDto;
         setSelectedEvent(workout);
         handleOpen();
-        console.log(selectedEvent);
       }
     });
   };
@@ -37,8 +38,6 @@ const CalendarView = ({ workouts }) => {
       title: workout.workoutDto.name,
     });
   });
-
-
 
   return (
     <div className='App' style={{ marginLeft: "1rem", flex: "1" }}>
@@ -58,6 +57,8 @@ const CalendarView = ({ workouts }) => {
           <TrainingPlanPreview
             workout={selectedEvent}
             isOpen={open}
+            canBeDeleted={true}
+            date={selectedDate}
           ></TrainingPlanPreview>
         )}
       </div>

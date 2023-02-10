@@ -34,6 +34,7 @@ const BuyTrainingView = ({ plan }) => {
         <div className={style.details}>
           <h5>Length: {plan.duration} weeks</h5>
           <h5>Number of workouts: {plan.noOfWorkouts}</h5>
+          <h5>Skill level: {plan.skillLevel}</h5>
           <div className={style.description}>
             <div>
               <h5>Plan description</h5>
