@@ -1,5 +1,6 @@
-import style from "../dashboard/dashboard-main.module.css";
+//import style from "../dashboard/dashboard-main.module.css";
 //import style from "./statistics-view-module.css" //czemu to nie działa? xd
+import style from "./stat.module.css"
 import React from "react";
 import {
   Chart as ChartJS,
