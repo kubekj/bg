@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: left;
     margin-left: 1rem;
-    width: 100%;
+    /*width: 100%;*/
 }
 .header{
     display: flex;
@@ -16,9 +16,12 @@
 
 .content{
     display: flex;
+    flex: 1;
     flex-direction: column;
-    justify-content: right;
-    margin-left: 0.5rem;
+    justify-content: left;
+    width: 98%;
+    margin-left: 1%;
+
 }
 .barChart{
     display: flex;
