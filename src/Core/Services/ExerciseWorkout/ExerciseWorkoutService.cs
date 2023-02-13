@@ -42,14 +42,8 @@ public class ExerciseWorkoutService : IExerciseWorkoutService
             if (existingExercises.Contains(exerciseId))
             {
                 var existingExerciseSets = existingSets[exerciseId].ToList();
-                //update existing sets
-                foreach (var set in sets)
-                {
-                    var setToUpdate = existingExerciseSets.FirstOrDefault(s => s.Id == set.Id);
-                    if (setToUpdate is null) continue;
-                    var updatedSet = new Set(set.Id, set.Repetitions, set.Weight,setToUpdate.WorkoutId,setToUpdate.ExerciseId);
-                    await _setRepository.EditAsync(updatedSet);
-                }
+                foreach (var set in existingExerciseSets) await _setRepository.RemoveAsync(set);
+                foreach (var set in sets) await _setRepository.AddAsync(new Set(Guid.NewGuid(), set.Repetitions,set.Weight,workoutId,exerciseId));
             }
             else
             {

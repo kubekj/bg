@@ -22,9 +22,20 @@ internal sealed class SetRepository : ISetRepository
             .ToListAsync();
     }
 
-    public async Task EditAsync(Set set)
+    public async Task RemoveAsync(Set set)
     {
-        _sets.Update(set);
+        _sets.Remove(set);
         await Task.CompletedTask;
     }
+
+    public async Task AddAsync(Set set)
+    {
+        await _sets.AddAsync(set);
+    }
+
+    // public async Task EditAsync(Set set)
+    // {
+    //     _sets.Update(set);
+    //     await Task.CompletedTask;
+    // }
 }

@@ -29,34 +29,35 @@ const MarketplaceMainView = ({ plans }) => {
             {/*<button className='btn btn-outline-dark me-md-2' type='button'>*/}
             {/*  Cancel*/}
             {/*</button>*/}
-              <Button
-                  text='Cancel'
-                  extraStyleType='border'
-                  extraStyleValue='1px solid #D0D5DD'
-                  backgroundColorValue='white'
-                  isHoveringColor='#D0D5DD'
-              />
+            <Button
+              text='Cancel'
+              extraStyleType='border'
+              extraStyleValue='1px solid #D0D5DD'
+              backgroundColorValue='white'
+              isHoveringColor='#D0D5DD'
+            />
             {/*<button className='btn btn-primary' type='button'  style={{backgroundColor:"#8098F9"}}>*/}
             {/*  Search*/}
             {/*</button>*/}
-              <Button
-                  iconSrc='/thumbnails/wsearch-outline.svg'
-                  text='Search'
-                  extraStyleType='border'
-                  extraStyleValue='1px solid #D0D5DD'
-                  backgroundColorValue='#8098F9'
-                  isHoveringColor='#C7D7FE'
-                  color="white"
-              />
+            <Button
+              iconSrc='/thumbnails/wsearch-outline.svg'
+              text='Search'
+              extraStyleType='border'
+              extraStyleValue='1px solid #D0D5DD'
+              backgroundColorValue='#8098F9'
+              isHoveringColor='#C7D7FE'
+              color='white'
+            />
           </div>
         </div>
       </div>
       <div className={style.resultSection}>
-          {plans.length === 0 && (
-              <div className='flex flex-row items-center p-6 mx-auto'>
-                  Couldn't find any training plans at this moment, please try again later
-              </div>
-          )}
+        {plans.length === 0 && (
+          <div className='flex flex-row items-center p-6 mx-auto'>
+            Couldn't find any training plans at this moment, please try again
+            later
+          </div>
+        )}
         {plans.map((plan) => {
           return (
             <Link
