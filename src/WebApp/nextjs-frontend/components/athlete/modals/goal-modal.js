@@ -14,7 +14,7 @@ import { Select } from "@mui/material";
 import { Stack } from "@mui/system";
 
 const validationSchema = yup.object().shape({
-  goal: yup.number().required("Please set monthly goal").max(25),
+  goal: yup.number().required("Please set monthly goal").max(25).min(1),
 });
 
 function GoalModal(props) {

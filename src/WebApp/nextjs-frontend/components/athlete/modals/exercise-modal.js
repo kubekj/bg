@@ -54,6 +54,7 @@ function ExerciseModal(props) {
         ? await putter(`exercises/${exercise.id}`, values, data.jwt)
         : await poster("exercises/create", values, data.jwt);
       router.replace("/athlete/exercise");
+      formik.handleReset();
       handleClose();
     },
   });

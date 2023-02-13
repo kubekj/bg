@@ -106,6 +106,7 @@ function WorkoutModal(props) {
           )
         : await poster("workouts/create", convertForPost(values), data.jwt);
       router.replace("/athlete/workout");
+      formik.handleReset();
       handleClose();
     },
   });

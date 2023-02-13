@@ -7,7 +7,7 @@ using Core.Services.Workout;
 
 namespace Application.Commands.Workout.Handlers;
 
-public class EditWorkoutCommandHandler : ICommandHandler<EditWorkoutCommand>
+public class  EditWorkoutCommandHandler : ICommandHandler<EditWorkoutCommand>
 {
     private readonly IUserWorkoutRepository _userWorkoutRepository;
     private readonly IWorkoutRepository _workoutRepository;

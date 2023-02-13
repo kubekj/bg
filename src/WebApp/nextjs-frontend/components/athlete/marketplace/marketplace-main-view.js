@@ -52,6 +52,11 @@ const MarketplaceMainView = ({ plans }) => {
         </div>
       </div>
       <div className={style.resultSection}>
+          {plans.length === 0 && (
+              <div className='flex flex-row items-center p-6 mx-auto'>
+                  Couldn't find any training plans at this moment, please try again later
+              </div>
+          )}
         {plans.map((plan) => {
           return (
             <Link

@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
     // this defines a CORS policy called "default"
     options.AddPolicy("default", policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins("https://nextjs-frontend-kubekj.vercel.app")
             .AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod();
