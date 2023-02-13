@@ -1,6 +1,6 @@
 //import style from "../dashboard/dashboard-main.module.css";
 //import style from "./statistics-view-module.css" //czemu to nie działa? xd
-import style from "./stat.module.css"
+import style from "./stat.module.css";
 import React from "react";
 import {
   Chart as ChartJS,
@@ -85,7 +85,6 @@ const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
         },
       },
       x: {
-
         title: {
           display: true,
           text: "Month",
@@ -187,7 +186,11 @@ const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
       {
         fill: true,
         label: "Weight load",
-        data: labels.map(() => doneTrainings["item1"] === 0 ? faker.datatype.number({ min: 2000, max: 5000 }) : null),
+        data: labels.map(() =>
+          doneTrainings["item1"] === 0
+            ? faker.datatype.number({ min: 2000, max: 5000 })
+            : null
+        ),
         borderColor: "#8098F9",
         backgroundColor: "#8098F9",
       },
@@ -208,41 +211,48 @@ const StatisticsView = ({ weightBreakdown, doneTrainings, user }) => {
         </div>
         <div className={style.donutsSection}>
           <div className={style.eachDonut}>
-            {doneTrainings["item2"] ?
-                <React.Fragment>
-                <h5 className={style.statTitle}>Trainings done: {doneTrainings["item1"]}/{doneTrainings["item2"]}</h5>
-                <Doughnut options={options2} data={data2}/>
-                </React.Fragment>
-                :
-                <h5 className={style.statTitle}>No trainings goal set</h5>
-            }
+            {doneTrainings["item2"] ? (
+              <React.Fragment>
+                <h5 className={style.statTitle}>
+                  Trainings done: {doneTrainings["item1"]}/
+                  {doneTrainings["item2"]}
+                </h5>
+                <Doughnut options={options2} data={data2} />
+              </React.Fragment>
+            ) : (
+              <h5 className={style.statTitle}>No trainings goal set</h5>
+            )}
           </div>
           <div className={style.eachDonut}>
-            { user.caloriesIntakeGoal !== 0 ?
+            {user.caloriesIntakeGoal !== 0 ? (
               <React.Fragment>
-                <h5 className={style.statTitle}>Calories intake: {user.caloriesIntake}/{user.caloriesIntakeGoal}</h5>
+                <h5 className={style.statTitle}>
+                  Calories intake: {user.caloriesIntake}/
+                  {user.caloriesIntakeGoal}
+                </h5>
                 <Doughnut options={options2} data={data3} />
               </React.Fragment>
-                :
-                <h5 className={style.statTitle}>No calories intake goal set</h5>
-            }
-              </div>
+            ) : (
+              <h5 className={style.statTitle}>No calories intake goal set</h5>
+            )}
+          </div>
           <div className={style.eachDonut}>
-            { user.weightGoal !== 0 ?
-                <React.Fragment>
-            <h5 className={style.statTitle}>Body mass: {user.weight}/{user.weightGoal}</h5>
-            <Doughnut options={options2} data={data4} />
-                </React.Fragment>
-                :
-                <h5 className={style.statTitle}>No calories intake goal set</h5>
-            }
+            {user.weightGoal !== 0 ? (
+              <React.Fragment>
+                <h5 className={style.statTitle}>
+                  Body mass: {user.weight}/{user.weightGoal}
+                </h5>
+                <Doughnut options={options2} data={data4} />
+              </React.Fragment>
+            ) : (
+              <h5 className={style.statTitle}>No body mass goal set</h5>
+            )}
           </div>
         </div>
         <div className={style.bottomChart}>
           <Line options={optionsL} data={dataL} />
         </div>
       </div>
-
     </div>
   );
 };
