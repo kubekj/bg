@@ -98,15 +98,17 @@ function WorkoutModal(props) {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      workout
-        ? await putter(
-            `workouts/${workout.id}`,
-            convertForPost(values),
-            data.jwt
-          )
-        : await poster("workouts/create", convertForPost(values), data.jwt);
+      if (workout) {
+        await putter(
+          `workouts/${workout.id}`,
+          convertForPost(values),
+          data.jwt
+        );
+      } else {
+        await poster("workouts/create", convertForPost(values), data.jwt);
+        formik.handleReset();
+      }
       router.replace("/athlete/workout");
-      formik.handleReset();
       handleClose();
     },
   });

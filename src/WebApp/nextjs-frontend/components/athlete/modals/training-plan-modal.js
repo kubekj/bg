@@ -76,11 +76,14 @@ function TrainingPlanModal(props) {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      plan
-        ? await putter(`training-plans/${plan.id}`, values, data.jwt)
-        : await poster("training-plans/create", values, data.jwt);
+      if (plan) {
+        await putter(`training-plans/${plan.id}`, values, data.jwt);
+        router.replace("/trainer/plans");
+      } else {
+        await poster("training-plans/create", values, data.jwt);
+        formik.handleReset();
+      }
       router.replace("/trainer/plans");
-      formik.handleReset();
       handleClose();
     },
   });
