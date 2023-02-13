@@ -52,7 +52,7 @@ const TrainingsList = ({ plans }) => {
               </tr>
             </thead>
             <tbody className='divide-y divide-gray-200'>
-              {plans.map((plan) => {
+              {(plans && plans.length !==0) ? plans.map((plan) => {
                 return (
                   <tr key={plan.id}>
                     <td className='text-xs p-4'>{plan.title}</td>
@@ -89,7 +89,9 @@ const TrainingsList = ({ plans }) => {
                     </td>
                   </tr>
                 );
-              })}
+              }) :
+                  <React.Fragment />
+              }
             </tbody>
           </table>
         </div>

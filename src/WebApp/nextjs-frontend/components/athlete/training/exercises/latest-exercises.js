@@ -43,7 +43,7 @@ const LatestExercises = ({ exercises }) => {
               </tr>
             </thead>
             <tbody className='divide-y divide-gray-200'>
-              {exercises.map((exercise) => {
+              {(exercises && exercises.length !== 0) ? exercises.map((exercise) => {
                 return (
                   <tr key={exercise.id}>
                     <td className='text-xs p-4'>{exercise.name}</td>
@@ -51,7 +51,7 @@ const LatestExercises = ({ exercises }) => {
                     <td className='text-xs p-4'>{exercise.bodyPart}</td>
                   </tr>
                 );
-              })}
+              }): <React.Fragment />}
             </tbody>
           </table>
         </div>
