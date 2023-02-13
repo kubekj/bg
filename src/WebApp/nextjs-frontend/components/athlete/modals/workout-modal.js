@@ -52,7 +52,7 @@ function convertForDetails(exerciseDtos) {
 
   exerciseDtos.forEach((exercise) => {
     const sets = exercise.setDtos;
-    console.log(sets);
+    //console.log(sets);
     exercises.push({
       id: exercise.id,
       sets: sets.length,

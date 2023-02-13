@@ -87,8 +87,8 @@ const WeightBreakdown = ({weightBreakdown}) => {
     ],
   };
 
-  console.log(weightBreakdown);
-  console.log(apilabels);
+  // console.log(weightBreakdown);
+  // console.log(apilabels);
   return (
     <div className={style.container}>
       <div className={style.header}>

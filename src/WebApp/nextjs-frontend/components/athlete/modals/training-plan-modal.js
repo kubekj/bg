@@ -91,7 +91,7 @@ function TrainingPlanModal(props) {
   function onChangeWorkouts(e) {
     // update dynamic form
     const workouts = formik.values.workouts;
-    console.log(workouts);
+    //console.log(workouts);
     const numberOfWorkouts = e.target.value || 0;
     const previousNumber = parseInt(formik.values.noOfWorkouts || "0");
     if (previousNumber < numberOfWorkouts) {
