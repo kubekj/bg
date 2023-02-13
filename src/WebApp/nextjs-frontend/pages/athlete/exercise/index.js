@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-const ExercisePage = ({ exercises, jwt }) => {
+const ExercisePage = ({ exercises }) => {
   return <ExercisesList exercises={exercises} />;
 };
 

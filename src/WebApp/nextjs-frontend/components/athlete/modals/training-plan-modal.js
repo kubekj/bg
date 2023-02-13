@@ -19,7 +19,7 @@ import CustomButton from "../../reusable/button";
 import { Select } from "@mui/material";
 import { Stack } from "@mui/system";
 
-const statuses = ["Active", "Unpublished", "Published"];
+const statuses = ["Unpublished", "Published"];
 const languages = ["English", "Polish"];
 const skillLevels = ["Beginner", "Intermediate", "Advanced"];
 const noOfExercieses = [1, 2, 3, 4, 5, 6, 7];
@@ -76,9 +76,13 @@ function TrainingPlanModal(props) {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      plan
-        ? await putter(`training-plans/${plan.id}`, values, data.jwt)
-        : await poster("training-plans/create", values, data.jwt);
+      if (plan) {
+        await putter(`training-plans/${plan.id}`, values, data.jwt);
+        router.replace("/trainer/plans");
+      } else {
+        await poster("training-plans/create", values, data.jwt);
+        formik.handleReset();
+      }
       router.replace("/trainer/plans");
       handleClose();
     },

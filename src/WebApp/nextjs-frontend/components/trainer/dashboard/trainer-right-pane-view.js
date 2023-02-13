@@ -14,6 +14,8 @@ import { Line } from "react-chartjs-2";
 import faker from "faker";
 import Image from "next/image";
 
+const sales = [419.99, 49.99];
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -55,22 +57,19 @@ export const options = {
   },
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+const labels = ["January", "February", "March", "April", "May", "June"];
+const actualLabels = ["January", "February"];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: "Dataset 1",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 10000 })),
+      label: "Sales",
+      data: actualLabels.map(() =>
+        faker.datatype.number({ min: 0, max: 499.99 })
+      ),
       borderColor: "#C7D7FE",
       backgroundColor: "#C7D7FE",
-    },
-    {
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 10000 })),
-      borderColor: "rgba(53, 162, 235, 0.5)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
     },
   ],
 };
@@ -112,7 +111,7 @@ const TrainerRightPaneView = () => {
             <p>tadeusz.soplica@gmail.com</p>
           </div>
         </div>
-        <div className={style.userInfo}>
+        {/* <div className={style.userInfo}>
           <Image
             className={style.avatar}
             src='/avatar.webp'
@@ -176,7 +175,7 @@ const TrainerRightPaneView = () => {
             <h5>Albert Einstein</h5>
             <p>albert.einstein@gmail.com</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

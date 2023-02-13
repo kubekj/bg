@@ -1,13 +1,12 @@
 .container {
   display: flex;
-  /*padding: 2rem;*/
-  margin-left: 2rem;
-  margin-right: 2rem;
+  flex: 1;
   flex-direction: column;
-  /*height: 100vh;*/
+  justify-content: left;
+  margin-left: 1rem;
 }
 .header {
   margin-top: 1rem;
   border-bottom: 1px solid #d0d5dd;
-  width: 145vh;
+  /* width: 145vh; */
 }

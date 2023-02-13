@@ -34,7 +34,7 @@ internal sealed class UserExerciseRepository : IUserExerciseRepository
 
     public async Task RemoveAsync(Guid userId, Guid exerciseId)
     {
-        var userExercise = await _userExercises.FindAsync(new []{userId,exerciseId});
+        var userExercise = await _userExercises.FindAsync(userId,exerciseId);
         if (userExercise != null) _userExercises.Remove(userExercise);
     }
 }

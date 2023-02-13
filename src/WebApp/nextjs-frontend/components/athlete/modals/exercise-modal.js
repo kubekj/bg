@@ -50,9 +50,12 @@ function ExerciseModal(props) {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      exercise
-        ? await putter(`exercises/${exercise.id}`, values, data.jwt)
-        : await poster("exercises/create", values, data.jwt);
+      if (exercise) {
+        await putter(`exercises/${exercise.id}`, values, data.jwt);
+      } else {
+        await poster("exercises/create", values, data.jwt);
+        formik.handleReset();
+      }
       router.replace("/athlete/exercise");
       handleClose();
     },

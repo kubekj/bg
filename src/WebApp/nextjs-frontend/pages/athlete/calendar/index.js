@@ -24,12 +24,12 @@ export async function getServerSideProps(context) {
   const workouts = await fetcher("workouts/sessions", options);
 
   return {
-    props: { jwt: session.jwt, workouts: workouts },
+    props: { workouts: workouts },
   };
 }
 
-const AthleteCalendar = ({ jwt, workouts }) => {
-  return <CalendarView workouts={workouts}/>;
+const AthleteCalendar = ({ workouts }) => {
+  return <CalendarView workouts={workouts} />;
 };
 
 export default AthleteCalendar;

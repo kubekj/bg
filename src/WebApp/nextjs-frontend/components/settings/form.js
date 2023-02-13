@@ -197,32 +197,6 @@ const SettingsView = ({ user }) => {
           style={{ paddingTop: "1rem" }}
         >
           <span className='input-group-text w-48' id='addon-wrapping'>
-            Weight (kg)
-          </span>
-          <TextField
-            label='Weight'
-            name='weight'
-            value={formik.values.weight}
-            error={formik.touched.weight && Boolean(formik.errors.weight)}
-            className={
-              "w-full" +
-              `${
-                formik.touched.weight && formik.errors.weight
-                  ? "border-red-500"
-                  : ""
-              }`
-            }
-            onChange={formik.handleChange}
-          />
-          {formik.touched.weight && formik.errors.weight && (
-            <span className='text-red-500'>{formik.errors.weight}</span>
-          )}
-        </div>
-        <div
-          className='mx-auto flex flex-row gap-6'
-          style={{ paddingTop: "1rem" }}
-        >
-          <span className='input-group-text w-48' id='addon-wrapping'>
             Height (cm)
           </span>
           <TextField
@@ -283,17 +257,20 @@ const SettingsView = ({ user }) => {
                 formik.touched.caloriesIntakeGoal &&
                 Boolean(formik.errors.caloriesIntakeGoal)
               }
-              className={
-                "w-full" +
-                `${
-                  formik.touched.caloriesIntakeGoal &&
-                  formik.errors.caloriesIntakeGoal
-                    ? "border-red-500"
-                    : ""
-                }`
-              }
+              className={`w-full ${
+                formik.touched.caloriesIntakeGoal &&
+                formik.errors.caloriesIntakeGoal
+                  ? "border-red-500"
+                  : ""
+              }`}
               onChange={formik.handleChange}
             />
+            {formik.touched.caloriesIntakeGoal &&
+              formik.errors.caloriesIntakeGoal && (
+                <span className='text-red-500'>
+                  {formik.errors.caloriesIntakeGoal}
+                </span>
+              )}
           </div>
         </div>
         <div

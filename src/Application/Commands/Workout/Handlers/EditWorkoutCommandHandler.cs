@@ -7,10 +7,11 @@ using Core.Services.Workout;
 
 namespace Application.Commands.Workout.Handlers;
 
-public class EditWorkoutCommandHandler : ICommandHandler<EditWorkoutCommand>
+public class  EditWorkoutCommandHandler : ICommandHandler<EditWorkoutCommand>
 {
     private readonly IUserWorkoutRepository _userWorkoutRepository;
     private readonly IWorkoutRepository _workoutRepository;
+    private readonly IUserWorkoutSessionRepository _workoutSessionRepository;
 
     private readonly IWorkoutService _workoutService;
     private readonly IExerciseWorkoutService _exerciseWorkoutService;
@@ -18,12 +19,14 @@ public class EditWorkoutCommandHandler : ICommandHandler<EditWorkoutCommand>
     public EditWorkoutCommandHandler(IUserWorkoutRepository userWorkoutRepository,
         IWorkoutRepository workoutRepository, 
         IExerciseWorkoutService exerciseWorkoutService,
-        IWorkoutService workoutService)
+        IWorkoutService workoutService, 
+        IUserWorkoutSessionRepository workoutSessionRepository)
     {
         _userWorkoutRepository = userWorkoutRepository;
         _workoutRepository = workoutRepository;
         _exerciseWorkoutService = exerciseWorkoutService;
         _workoutService = workoutService;
+        _workoutSessionRepository = workoutSessionRepository;
     }
 
     public async Task HandleAsync(EditWorkoutCommand command)
@@ -51,12 +54,23 @@ public class EditWorkoutCommandHandler : ICommandHandler<EditWorkoutCommand>
             var copiedWorkout = userWorkout.Workout.CreateCopyForUser(command.Name,command.Category);
             await _workoutRepository.AddAsync(copiedWorkout);
 
+            var sessions = (await _workoutSessionRepository
+                .GetAllAsync(x => x.WorkoutId == userWorkout.WorkoutId && x.UserId == userWorkout.UserId)).ToList();
+            
             await _exerciseWorkoutService.HandleExerciseWithSetsCreation(copiedWorkout.Id,exercisesWithSets);
 
-            await _userWorkoutRepository.RemoveAsync(userWorkout.UserId,userWorkout.WorkoutId);
-            
             var newUserWorkout = new UserWorkout(copiedWorkout.Id, command.UserId);
             await _userWorkoutRepository.AddAsync(newUserWorkout);
+            
+            if (sessions.Any())
+                foreach (var session in sessions)
+                {
+                    await _workoutSessionRepository.RemoveAsync(session);
+                    await _workoutSessionRepository
+                        .AddAsync(new UserWorkoutSession(session.UserId, newUserWorkout.WorkoutId, session.Date));
+                }
+            
+            await _userWorkoutRepository.RemoveAsync(userWorkout.UserId,userWorkout.WorkoutId);
 
             return;
         }
