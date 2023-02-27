@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.ComTypes;
 using Core.SeedWork;
 using Core.ValueObjects.Common;
 using Core.ValueObjects.Workout;
@@ -16,7 +17,7 @@ public class Workout : Entity
     }
 
     public Workout CreateCopyForUser(string? name = default, string? category = default) => 
-        new(Guid.NewGuid(), name ?? Name, category ?? Category);
+        new(Guid.NewGuid(), name ?? Name.Value + " (copy)", category ?? Category);
 
     public WorkoutName Name { get; }
     public Category Category { get; }

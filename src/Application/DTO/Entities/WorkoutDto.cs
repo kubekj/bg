@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Application.DTO.Entities;
 
 public record WorkoutDto(Guid Id,

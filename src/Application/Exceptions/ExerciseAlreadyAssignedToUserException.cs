@@ -1,3 +1,4 @@
+using System;
 using Core.Exceptions;
 
 namespace Application.Exceptions;

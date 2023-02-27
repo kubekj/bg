@@ -1,3 +1,4 @@
+using System;
 using Application.Abstractions.Messaging.Command;
 
 namespace Application.Commands.Workout;

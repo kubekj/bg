@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Application.Abstractions.Messaging.Query;
 using Application.DTO.Entities;
 using Core.Repositories;

@@ -1,31 +1,29 @@
+using System.Linq;
+using System.Threading.Tasks;
 using Application.Abstractions.Messaging.Command;
 using Application.Exceptions;
 using Core.Entities;
 using Core.Repositories;
 using Core.Services.ExerciseWorkout;
-using Core.Services.Workout;
 
 namespace Application.Commands.Workout.Handlers;
 
-public class  EditWorkoutCommandHandler : ICommandHandler<EditWorkoutCommand>
+public class EditWorkoutCommandHandler : ICommandHandler<EditWorkoutCommand>
 {
     private readonly IUserWorkoutRepository _userWorkoutRepository;
     private readonly IWorkoutRepository _workoutRepository;
     private readonly IUserWorkoutSessionRepository _workoutSessionRepository;
 
-    private readonly IWorkoutService _workoutService;
     private readonly IExerciseWorkoutService _exerciseWorkoutService;
 
     public EditWorkoutCommandHandler(IUserWorkoutRepository userWorkoutRepository,
         IWorkoutRepository workoutRepository, 
         IExerciseWorkoutService exerciseWorkoutService,
-        IWorkoutService workoutService, 
         IUserWorkoutSessionRepository workoutSessionRepository)
     {
         _userWorkoutRepository = userWorkoutRepository;
         _workoutRepository = workoutRepository;
         _exerciseWorkoutService = exerciseWorkoutService;
-        _workoutService = workoutService;
         _workoutSessionRepository = workoutSessionRepository;
     }
 

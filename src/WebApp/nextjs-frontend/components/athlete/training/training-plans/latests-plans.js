@@ -52,20 +52,22 @@ function LatestPlans({ plans }) {
               </tr>
             </thead>
             <tbody className='divide-y divide-gray-200'>
-              {(plans && plans.length !==0) ? plans.map((plan) => {
-                return (
-                  <tr key={plan.id}>
-                    <td className='text-xs p-4'>{plan.title}</td>
-                    <td className='text-xs p-4'>{plan.duration}</td>
-                    <td className='text-xs p-4'>{plan.noOfWorkouts}</td>
-                    <td className='text-xs p-4'>{plan.title}</td>
-                    <td className='text-xs p-4'>{plan.skillLevel}</td>
-                    <td className='text-xs p-4'>{plan.creatorEmail}</td>
-                  </tr>
-                );
-              }) :
-              <React.Fragment />
-              }
+              {plans && plans.length !== 0 ? (
+                plans.map((plan) => {
+                  return (
+                    <tr key={plan.id}>
+                      <td className='text-xs p-4'>{plan.title}</td>
+                      <td className='text-xs p-4'>{plan.duration}</td>
+                      <td className='text-xs p-4'>{plan.noOfWorkouts}</td>
+                      <td className='text-xs p-4'>{plan.title}</td>
+                      <td className='text-xs p-4'>{plan.skillLevel}</td>
+                      <td className='text-xs p-4'>{plan.creatorEmail}</td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <React.Fragment />
+              )}
             </tbody>
           </table>
         </div>

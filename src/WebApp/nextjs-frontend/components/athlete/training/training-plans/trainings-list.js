@@ -52,46 +52,48 @@ const TrainingsList = ({ plans }) => {
               </tr>
             </thead>
             <tbody className='divide-y divide-gray-200'>
-              {(plans && plans.length !==0) ? plans.map((plan) => {
-                return (
-                  <tr key={plan.id}>
-                    <td className='text-xs p-4'>{plan.title}</td>
-                    <td className='text-xs p-4'>{plan.duration}</td>
-                    <td className='text-xs p-4'>{plan.noOfWorkouts}</td>
-                    <td className='text-xs p-4'>{plan.title}</td>
-                    <td className='text-xs p-4'>
-                      {renderSkillLevel(plan.skillLevel)}
-                    </td>
-                    <td className='text-xs p-4'>{plan.creatorEmail}</td>
-                    <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 grid justify-items-end'>
-                      <Stack
-                        direction='row'
-                        spacing={2}
-                        className='items-center'
-                      >
-                        <Link
-                          href={{
-                            pathname: `/athlete/training/plan`,
-                            query: { id: plan.id },
-                          }}
-                          style={{ textDecoration: "none" }}
+              {plans && plans.length !== 0 ? (
+                plans.map((plan) => {
+                  return (
+                    <tr key={plan.id}>
+                      <td className='text-xs p-4'>{plan.title}</td>
+                      <td className='text-xs p-4'>{plan.duration}</td>
+                      <td className='text-xs p-4'>{plan.noOfWorkouts}</td>
+                      <td className='text-xs p-4'>{plan.title}</td>
+                      <td className='text-xs p-4'>
+                        {renderSkillLevel(plan.skillLevel)}
+                      </td>
+                      <td className='text-xs p-4'>{plan.creatorEmail}</td>
+                      <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 grid justify-items-end'>
+                        <Stack
+                          direction='row'
+                          spacing={2}
+                          className='items-center'
                         >
-                          <Button
-                            iconSrc='/thumbnails/copy-outline.svg'
-                            borderValue='none'
-                            backgroundColorValue='#FFFFFF'
-                            isHoveringColor='#C7D7FE'
-                            extraStyleType='color'
-                            extraStyleValue='white'
-                          />
-                        </Link>
-                      </Stack>
-                    </td>
-                  </tr>
-                );
-              }) :
-                  <React.Fragment />
-              }
+                          <Link
+                            href={{
+                              pathname: `/athlete/training/plan`,
+                              query: { id: plan.id },
+                            }}
+                            style={{ textDecoration: "none" }}
+                          >
+                            <Button
+                              iconSrc='/thumbnails/copy-outline.svg'
+                              borderValue='none'
+                              backgroundColorValue='#FFFFFF'
+                              isHoveringColor='#C7D7FE'
+                              extraStyleType='color'
+                              extraStyleValue='white'
+                            />
+                          </Link>
+                        </Stack>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <React.Fragment />
+              )}
             </tbody>
           </table>
         </div>

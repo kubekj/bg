@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Application.Abstractions.Messaging.Query;
 
 public interface IQueryHandler<in TQuery, TResponse> where TQuery : IQuery<TResponse>

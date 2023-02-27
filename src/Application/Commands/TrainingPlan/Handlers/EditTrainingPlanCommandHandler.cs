@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Threading.Tasks;
 using Application.Abstractions.Messaging.Command;
 using Core.Entities;
 using Core.Repositories;
@@ -43,7 +45,7 @@ public class EditTrainingPlanCommandHandler : ICommandHandler<EditTrainingPlanCo
         
         var currentWorkouts = existingTrainingPlan.TrainingPlanWorkouts.Select(x => x.WorkoutId).ToList();
 
-        var workoutsToAdd = command.Workouts.Where(x => !currentWorkouts.Contains(x));
+        var workoutsToAdd = command.Workouts.Where(x => !currentWorkouts.Contains(x)).ToHashSet();
         var workoutsToRemove = existingTrainingPlan.TrainingPlanWorkouts.Where(x => !command.Workouts.Contains(x.WorkoutId));
         
         foreach (var workoutId in workoutsToAdd)

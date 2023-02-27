@@ -1,3 +1,4 @@
+using System;
 using Application.Abstractions.Messaging.Query;
 
 namespace Application.Queries.Statistics;

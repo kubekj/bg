@@ -12,7 +12,7 @@ internal sealed class TrainingPlanWorkoutRepository : ITrainingPlanWorkoutReposi
     {
         _trainingPlanWorkouts = context.TrainingPlanWorkouts;
     }
-    
+
     public async Task AddAsync(TrainingPlanWorkout trainingPlanWorkout)
     {
         await _trainingPlanWorkouts.AddAsync(trainingPlanWorkout);

@@ -63,54 +63,58 @@ const PlansList = (props) => {
                 </tr>
               </thead>
               <tbody className='divide-y divide-gray-200'>
-                {(plans && plans.length !== 0) ? plans.map((plan) => {
-                  return (
-                    <tr key={plan.id}>
-                      <td className='text-xs p-4'>{plan.title}</td>
-                      <td className='text-xs p-4'>{plan.duration}</td>
-                      <td className='text-xs p-4'>{plan.noOfWorkouts}</td>
-                      <td className='text-xs p-4'>{plan.language}</td>
-                      <td className='text-xs p-4'>
-                        {renderSkillLevel(plan.skillLevel)}
-                      </td>
-                      <td className='text-xs p-4'>{plan.price}</td>
-                      <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 grid justify-items-end'>
-                        <Stack
-                          direction='row'
-                          spacing={2}
-                          className='items-center'
-                        >
-                          <TrainingPlanModal
-                            icon='/thumbnails/copy-outline.svg'
-                            backgroundColorValue='white'
-                            isHoveringColor='#D0D5DD'
-                            borderValue='none'
-                            extraStyleType='color'
-                            extraStyleValue='white'
-                            plan={plan}
-                            workouts={workouts}
-                            isDetails={true}
-                          ></TrainingPlanModal>
-                          <TrainingPlanModal
-                            icon='/thumbnails/modify.svg'
-                            backgroundColorValue='white'
-                            isHoveringColor='#D0D5DD'
-                            borderValue='none'
-                            extraStyleType='color'
-                            extraStyleValue='white'
-                            plan={plan}
-                            workouts={workouts}
-                          ></TrainingPlanModal>
-                          <DeleteModal
-                            subtitle={`Remove plan "${plan.title}"`}
-                            endpoint={`training-plans/${plan.id}`}
-                            redirect={"/trainer/plans"}
-                          ></DeleteModal>
-                        </Stack>
-                      </td>
-                    </tr>
-                  );
-                }) : <React.Fragment />}
+                {plans && plans.length !== 0 ? (
+                  plans.map((plan) => {
+                    return (
+                      <tr key={plan.id}>
+                        <td className='text-xs p-4'>{plan.title}</td>
+                        <td className='text-xs p-4'>{plan.duration}</td>
+                        <td className='text-xs p-4'>{plan.noOfWorkouts}</td>
+                        <td className='text-xs p-4'>{plan.language}</td>
+                        <td className='text-xs p-4'>
+                          {renderSkillLevel(plan.skillLevel)}
+                        </td>
+                        <td className='text-xs p-4'>{plan.price}</td>
+                        <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 grid justify-items-end'>
+                          <Stack
+                            direction='row'
+                            spacing={2}
+                            className='items-center'
+                          >
+                            <TrainingPlanModal
+                              icon='/thumbnails/copy-outline.svg'
+                              backgroundColorValue='white'
+                              isHoveringColor='#D0D5DD'
+                              borderValue='none'
+                              extraStyleType='color'
+                              extraStyleValue='white'
+                              plan={plan}
+                              workouts={workouts}
+                              isDetails={true}
+                            ></TrainingPlanModal>
+                            <TrainingPlanModal
+                              icon='/thumbnails/modify.svg'
+                              backgroundColorValue='white'
+                              isHoveringColor='#D0D5DD'
+                              borderValue='none'
+                              extraStyleType='color'
+                              extraStyleValue='white'
+                              plan={plan}
+                              workouts={workouts}
+                            ></TrainingPlanModal>
+                            <DeleteModal
+                              subtitle={`Remove plan "${plan.title}"`}
+                              endpoint={`training-plans/${plan.id}`}
+                              redirect={"/trainer/plans"}
+                            ></DeleteModal>
+                          </Stack>
+                        </td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <React.Fragment />
+                )}
               </tbody>
             </table>
           </div>

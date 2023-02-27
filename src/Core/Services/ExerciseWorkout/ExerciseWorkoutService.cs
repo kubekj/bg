@@ -30,6 +30,9 @@ public class ExerciseWorkoutService : IExerciseWorkoutService
         var existingExercises = (await GetExercisesForWorkoutAsync(workoutId)).ToList();
         var existingSets = await GetSetsForWorkoutAsync(workoutId);
 
+        if (exerciseWithSets.Keys.Any(exerciseId => existingExercises.Any(x => x == exerciseId)))
+            return;
+
         var exercisesToDelete = existingExercises.Except(exerciseWithSets.Keys);
         foreach (var exerciseId in exercisesToDelete)
         {

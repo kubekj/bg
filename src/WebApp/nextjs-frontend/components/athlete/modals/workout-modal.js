@@ -56,8 +56,8 @@ function convertForDetails(exerciseDtos) {
     exercises.push({
       id: exercise.id,
       sets: sets.length,
-      repetitions: sets[0].repetitions,
-      weight: sets[0].weight,
+      repetitions: sets[0]?.repetitions ?? 0,
+      weight: sets[0]?.weight ?? 0,
     });
   });
   return exercises;

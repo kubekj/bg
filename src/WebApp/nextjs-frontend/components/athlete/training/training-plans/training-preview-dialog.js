@@ -108,7 +108,9 @@ function TrainingPlanPreview(props) {
                           <Stack direction='column'>
                             <InputLabel>Reps</InputLabel>
                             <TextField
-                              placeholder={exercise.setDtos[0].repetitions}
+                              placeholder={
+                                exercise.setDtos[0]?.repetitions ?? 0
+                              }
                               disabled={true}
                               sx={{
                                 ".MuiInputBase-input.Mui-disabled": {
@@ -121,7 +123,7 @@ function TrainingPlanPreview(props) {
                           <Stack direction='column'>
                             <InputLabel>Weight</InputLabel>
                             <TextField
-                              placeholder={exercise.setDtos[0].weight}
+                              placeholder={exercise.setDtos[0]?.weight ?? 0}
                               disabled={true}
                               sx={{
                                 ".MuiInputBase-input.Mui-disabled": {

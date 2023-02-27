@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Application.Abstractions.Messaging.Command;
 
 namespace Application.Commands.TrainingPlan;

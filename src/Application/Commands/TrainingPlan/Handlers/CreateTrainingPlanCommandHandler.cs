@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Application.Abstractions.Messaging.Command;
 using Application.Exceptions;
 using Core.Entities;
@@ -46,7 +49,11 @@ public class CreateTrainingPlanCommandHandler : ICommandHandler<CreateTrainingPl
             throw new TrainingPlanAlreadyExistsException(trainingPlan.Title);
 
         await _trainingPlanRepository.AddAsync(trainingPlan);
-        foreach (var workoutId in command.Workouts)
+        var workouts = new HashSet<Guid>();
+
+        foreach (var guid in command.Workouts) workouts.Add(guid);
+        
+        foreach (var workoutId in workouts)
             await _trainingPlanWorkoutRepository.AddAsync(new TrainingPlanWorkout(trainingId, workoutId));
     }
 }
