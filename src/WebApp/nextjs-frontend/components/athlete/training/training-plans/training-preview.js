@@ -1,15 +1,14 @@
 import style from "./training-preview.module.css"
 import React from "react";
-import TrainingPlanPreview from "./training-preview-dialog";
 
 const TrainingPreview = ({workout, children}) => {
 
-    return(
+    return (
         <div className={style.container}>
             <div className={style.header}>
                 <div className={style.info}>
                     <b>{workout ? workout.name : ""}</b>
-                    <p>{workout ? workout.category: ""}</p>
+                    <p>{workout ? workout.category : ""}</p>
                     <p>{workout ? workout.exerciseDtos.length : ""} exercises</p>
                 </div>
                 <div className={style.infoRight}>

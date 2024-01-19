@@ -4,7 +4,7 @@ import TrainerSidebar from "../../components/trainer/sidebar";
 import {getSession} from "next-auth/react";
 
 export async function getServerSideProps(context) {
-    const session = await getSession({ req: context.req });
+    const session = await getSession({req: context.req});
 
     if (!session) {
         return {
@@ -20,14 +20,14 @@ export async function getServerSideProps(context) {
 }
 
 const TrainerDashboard = () => {
-  return (
-    <div className={style.container}>
-      <div style={{ borderRight: "1px solid #D0D5DD", width: "325px" }}>
-        <TrainerSidebar />
-      </div>
-      <TrainerDashboardView />
-    </div>
-  );
+    return (
+        <div className={style.container}>
+            <div style={{borderRight: "1px solid #D0D5DD", width: "325px"}}>
+                <TrainerSidebar/>
+            </div>
+            <TrainerDashboardView/>
+        </div>
+    );
 };
 
 export default TrainerDashboard;

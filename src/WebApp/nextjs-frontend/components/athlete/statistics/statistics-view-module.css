@@ -1,11 +1,12 @@
-.container{
+.container {
     display: flex;
     flex: 1;
     flex-direction: column;
     justify-content: left;
     margin-left: 1rem;
 }
-.header{
+
+.header {
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;

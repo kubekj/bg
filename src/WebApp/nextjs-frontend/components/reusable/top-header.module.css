@@ -1,8 +1,9 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
 }
-.top{
+
+.top {
     display: flex;
     flex-direction: row;
     text-align: left;
@@ -11,7 +12,8 @@
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
 }
-.title{
+
+.title {
     display: flex;
     flex-direction: row;
     text-align: left;

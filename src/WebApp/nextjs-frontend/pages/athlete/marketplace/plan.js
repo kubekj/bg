@@ -1,11 +1,11 @@
 import Athlete from "../../../components/layouts/Athlete";
-import { getSession } from "next-auth/react";
+import {getSession} from "next-auth/react";
 import fetcher from "../../../lib/rest-api";
 import BuyTrainingView from "../../../components/athlete/marketplace/buy-training-view";
 
 
 export async function getServerSideProps(context) {
-    const session = await getSession({ req: context.req });
+    const session = await getSession({req: context.req});
 
     if (!session) {
         return {
@@ -27,11 +27,11 @@ export async function getServerSideProps(context) {
     const plan = await fetcher(`training-plans/${id}`, options);
 
     return {
-        props: { jwt: session.jwt, plan: plan},
+        props: {jwt: session.jwt, plan: plan},
     };
 }
 
-const AthleteMarketplaceTrainingInfo = ({ jwt, plan }) => {
+const AthleteMarketplaceTrainingInfo = ({jwt, plan}) => {
     return <BuyTrainingView plan={plan}/>
 };
 

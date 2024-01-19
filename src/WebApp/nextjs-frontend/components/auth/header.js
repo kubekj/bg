@@ -1,7 +1,4 @@
 import style from './header.module.css'
-import Image from 'next/image'
-import logo from '../../public/logo.png'
-import LogInContent from "./log-in-content";
 
 
 const Header = ({headerText, info}) => {

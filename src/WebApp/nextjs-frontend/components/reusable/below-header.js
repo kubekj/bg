@@ -2,7 +2,7 @@ import style from "./below-header.module.css"
 
 const BelowHeader = ({title, text}) => {
 
-    return(
+    return (
         <div className={style.container}>
             <div className={style.top}>
                 <div className={style.title}>

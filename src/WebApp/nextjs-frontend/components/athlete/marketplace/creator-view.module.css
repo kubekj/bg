@@ -1,96 +1,108 @@
 .container {
-  display: flex;
-  /*padding: 2rem;*/
-  margin-left: 2rem;
-  margin-right: 2rem;
-  flex-direction: column;
-  min-height: 95vh;
-  height: 100vh;
-  flex: 1;
+    display: flex;
+    /*padding: 2rem;*/
+    margin-left: 2rem;
+    margin-right: 2rem;
+    flex-direction: column;
+    min-height: 95vh;
+    height: 100vh;
+    flex: 1;
 }
 
 .header {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 40%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 40%;
 }
 
 .mainImage {
-  margin-top: 1rem;
-  background-image: url("../../../public/apply-training.png");
-  width: 100%;
-  height: 100%;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    margin-top: 1rem;
+    background-image: url("../../../public/apply-training.png");
+    width: 100%;
+    height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
+
 .content {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
+
 .midHeader {
-  margin-top: 1rem;
-  border-bottom: 1px solid #d0d5dd;
+    margin-top: 1rem;
+    border-bottom: 1px solid #d0d5dd;
 }
+
 .details {
-  margin-top: 2rem;
+    margin-top: 2rem;
 }
+
 .description {
-  display: flex;
+    display: flex;
 }
+
 .bottomSection {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: row;
-  text-align: left;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
 }
+
 .userInfo {
-  /*margin-left: 4rem;*/
-  margin-right: 2rem;
-  display: flex;
-  flex-direction: row;
-  text-align: left;
-  align-items: center;
+    /*margin-left: 4rem;*/
+    margin-right: 2rem;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
 }
+
 .avatar {
-  border-radius: 50%;
-  width: 10rem;
-  height: 10rem;
-  margin-right: 0.75rem;
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+    margin-right: 0.75rem;
 }
+
 .trainings {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 35px;
-  row-gap: 35px;
-  width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 35px;
+    row-gap: 35px;
+    width: 100%;
 }
+
 .rating {
-  display: flex;
-  text-align: center;
-  padding: 10px;
-  border: 1px solid #d0d5dd;
-  border-radius: 20px;
-  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+    display: flex;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #d0d5dd;
+    border-radius: 20px;
+    box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
     0px 1px 2px rgba(16, 24, 40, 0.06);
-  flex-direction: column;
+    flex-direction: column;
 }
+
 .bottom {
-  display: flex;
+    display: flex;
 }
+
 .rightBottom {
-  display: flex;
-  flex-direction: column;
-  width: 25%;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
 }
+
 .apply {
-  margin-top: 2rem;
-  border: 1px solid #d0d5dd;
-  padding: 2rem 2rem 2rem 10rem;
-  border-radius: 20px;
-  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+    margin-top: 2rem;
+    border: 1px solid #d0d5dd;
+    padding: 2rem 2rem 2rem 10rem;
+    border-radius: 20px;
+    box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
     0px 1px 2px rgba(16, 24, 40, 0.06);
-  flex-direction: column;
+    flex-direction: column;
 }

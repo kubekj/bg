@@ -1,15 +1,16 @@
-.header{
+.header {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.bottomSection{
+.bottomSection {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.imageTest{
+
+.imageTest {
     background-image: url("../../public/logo.png");
     height: 90px;
     width: 112px;

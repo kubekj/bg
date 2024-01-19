@@ -1,11 +1,11 @@
 import Athlete from "../../../components/layouts/Athlete";
-import { getSession } from "next-auth/react";
+import {getSession} from "next-auth/react";
 import fetcher from "../../../lib/rest-api";
 import CreatorView from "../../../components/athlete/marketplace/creator-view";
 
 
 export async function getServerSideProps(context) {
-    const session = await getSession({ req: context.req });
+    const session = await getSession({req: context.req});
 
     if (!session) {
         return {
@@ -28,11 +28,11 @@ export async function getServerSideProps(context) {
     const recentPlans = await fetcher(`training-plans/most-recent-trainings/${creatorEmail}`, options);
 
     return {
-        props: { jwt: session.jwt, creatorDetails: creatorDetails, recentPlans: recentPlans},
+        props: {jwt: session.jwt, creatorDetails: creatorDetails, recentPlans: recentPlans},
     };
 }
 
-const Creator = ({ jwt, creatorDetails, recentPlans }) => {
+const Creator = ({jwt, creatorDetails, recentPlans}) => {
     return <CreatorView creatorDetails={creatorDetails} recentPlans={recentPlans}/>
 };
 

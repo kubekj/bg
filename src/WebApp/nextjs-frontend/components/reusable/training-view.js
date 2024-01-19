@@ -54,7 +54,7 @@ const TrainingView = ({header, backHref, detailsHref, trainingName, applyButtonT
                 <div className={style.bottom}>
                     <div className={style.trainings}>
                         <div>
-                            <Link href={detailsHref} style={{textDecoration:"none"}}>
+                            <Link href={detailsHref} style={{textDecoration: "none"}}>
                                 <TrainingPreview/>
                             </Link>
                         </div>

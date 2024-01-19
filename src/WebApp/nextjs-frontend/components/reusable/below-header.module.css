@@ -1,14 +1,16 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     width: 100vh;
 }
-.top{
+
+.top {
     display: flex;
     text-align: left;
     padding: 1rem;
 }
-.title{
+
+.title {
     display: flex;
     text-align: left;
 }

@@ -2,9 +2,9 @@ import Button from "./button";
 
 const BottomButtonsSection = (
     {textL, textR, icoL, icoR, bgL, bgR, hovL, hovR, colorL, colorR}
-    ) => {
+) => {
 
-    return(
+    return (
         <div>
             <Button iconSrc={icoL}
                     text={textL}

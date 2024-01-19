@@ -1,12 +1,13 @@
 .container {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: left;
-  margin-left: 1rem;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: left;
+    margin-left: 1rem;
 }
+
 .header {
-  margin-top: 1rem;
-  border-bottom: 1px solid #d0d5dd;
-  /* width: 145vh; */
+    margin-top: 1rem;
+    border-bottom: 1px solid #d0d5dd;
+    /* width: 145vh; */
 }

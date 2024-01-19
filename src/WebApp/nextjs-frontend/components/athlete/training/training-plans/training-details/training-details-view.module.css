@@ -1,25 +1,29 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: left;
     justify-items: left;
     padding-left: 2rem;
 }
-.contentTable{
+
+.contentTable {
     padding: 1rem;
 }
-.tHead{
+
+.tHead {
     background-color: #F5F5F5;
     height: 3rem;
     text-align: center;
 }
-.thRegular{
+
+.thRegular {
     width: 14%;
     text-align: left;
     padding: 1.25rem;
     margin-left: 2rem;
 }
-.tdRegular{
+
+.tdRegular {
     padding-top: 1.5rem;
     width: 33%;
     text-align: left;
@@ -28,7 +32,8 @@
     border-bottom: 1px solid #D0D5DD;
     padding-left: 1rem;
 }
-.bottomSection{
+
+.bottomSection {
     display: flex;
     margin-left: 16rem;
     margin-top: 1rem;

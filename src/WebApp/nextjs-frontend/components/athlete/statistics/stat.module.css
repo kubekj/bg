@@ -1,4 +1,4 @@
-.container{
+.container {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -7,7 +7,8 @@
     min-height: 95vh;
     /*width: 100%;*/
 }
-.header{
+
+.header {
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
@@ -15,7 +16,7 @@
     border-bottom: 1px solid #D0D5DD;
 }
 
-.content{
+.content {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -23,7 +24,8 @@
     width: 99.5%;
 
 }
-.barChart{
+
+.barChart {
     display: flex;
     margin-top: 2rem;
     /*margin: 2rem 1rem 1rem 1rem;*/
@@ -33,19 +35,22 @@
     box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
     /*border-bottom: 1px solid #D0D5DD;*/
 }
-.donutsSection{
+
+.donutsSection {
     margin-top: 2rem;
     display: flex;
     justify-content: space-between;
 }
-.eachDonut{
+
+.eachDonut {
     width: 28%;
     border: 1px solid #D0D5DD;
     border-radius: 30px;
     padding: 1rem;
     box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
 }
-.bottomChart{
+
+.bottomChart {
     margin-top: 2rem;
     display: flex;
     border: 1px solid #D0D5DD;
@@ -53,7 +58,8 @@
     padding: 1rem;
     box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
 }
-.statTitle{
+
+.statTitle {
     margin-bottom: 1rem;
     text-align: center;
 }

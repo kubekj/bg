@@ -1,4 +1,4 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -7,21 +7,25 @@
     flex: 1;
     min-height: 95vh;
 }
-.header{
+
+.header {
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
     margin-left: 1rem;
     border-bottom: 1px solid #D0D5DD;
 }
-.mid{
+
+.mid {
     flex-direction: column;
     margin: 1rem;
 }
-.search{
+
+.search {
     display: flex;
 }
-.resultSection{
+
+.resultSection {
     display: flex;
     flex-direction: column;
 }
